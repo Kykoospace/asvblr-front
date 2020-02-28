@@ -1,0 +1,87 @@
+div#main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr;
+  height: 100%;
+}
+
+header#main-header {
+  background-color: #2b353e;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+}
+
+header img#logo {
+  height: 70%;
+  margin-right: 10px;
+}
+
+span#app-name {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+div#side-nav-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+nav#main-side-nav {
+  background-color: #fafafa;
+}
+
+ul.group {
+  border-bottom: 1px solid #dadada;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 10px;
+  list-style: none;
+  user-select: none;
+}
+
+ul.group:last-child {
+  border-bottom: none;
+  padding: 0px;
+}
+
+p.group-title {
+  margin: 0px;
+  padding: 10px 10px;
+  font-size: 18px;
+}
+
+li.group-item {
+
+}
+
+li.group-item a {
+  display: block;
+  text-decoration: none;
+  font-size: 15px;
+  color: inherit;
+  padding: 10px;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+li.group-item a:hover {
+  background-color: #f0f0f0;
+}
+
+li.group-item a.selected {
+  color: #00a69c;
+}
+
+li.group-item a i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+div#main-container {
+  background-color: white;
+  overflow: auto;
+}

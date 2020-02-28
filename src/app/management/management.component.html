@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<div id="main-layout">
+  <header id="main-header">
+    <img id="logo" src="./assets/images/logo_asso.png" alt="logo">
+    <span id="app-name">Volley-ball BLR</span>
+  </header>
+  <div id="side-nav-layout">
+    <nav id="main-side-nav">
+      <p-button>Inscription</p-button>
+      <ul class="group" *ngFor="let group of navItems">
+        <p class="group-title">{{ group.name }}</p>
+        <li class="group-item" *ngFor="let item of group.content">
+          <a [routerLink]="['./' + item.route]" routerLinkActive="selected">
+            <i [ngClass]="[item.icon]"></i>
+            <span>{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div id="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

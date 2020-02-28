@@ -7,6 +7,7 @@ import { HomeComponent } from './main/home/home.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { MainComponent } from './main/main.component';
 import { ManagementComponent } from './management/management.component';
+import { ButtonModule } from 'primeng';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ManagementComponent } from './management/management.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
