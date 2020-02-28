@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagementComponent implements OnInit {
 
-  private navItems = [
+  public navItems = [
     {
       name: 'Site web',
       content: [
