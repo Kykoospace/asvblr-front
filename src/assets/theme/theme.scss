@@ -1,0 +1,19 @@
+// Theme variables :
+@import "./variables/variables";
+
+// Web app layouts :
+@import "./main-site-layout";
+@import "./management-layout";
+
+// Prime NG elements :
+@import "./primeng/button";
+
+html {
+  height: 100%;
+
+  body {
+    font-family: 'Roboto';
+    margin: 0px;
+    height: 100%;
+  }
+}

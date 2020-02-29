@@ -1,0 +1,45 @@
+// ----------------------------------------
+// PRIME NG BUTTON STYLE :
+// ----------------------------------------
+.ui-button {
+  background-color: $global-button-primary-bkg-color;
+  color: $global-button-primary-font-color;
+  border-radius: $global-border-radius;
+  border: none;
+  padding: $global-button-padding !important;
+  font-size: 14px;
+  box-sizing: border-box;
+
+  &.secondary {
+    background-color: $global-button-secondary-bkg-color;
+    color: $global-button-secondary-font-color;
+  }
+
+  &.success {
+    background-color: $global-button-success-bkg-color;
+    color: $global-button-success-font-color;
+  }
+
+  &.info {
+    background-color: $global-button-info-bkg-color;
+    color: $global-button-info-font-color;
+  }
+
+  &.warning {
+    background-color: $global-button-warning-bkg-color;
+    color: $global-button-warning-font-color;
+  }
+
+  &.danger {
+    background-color: $global-button-danger-bkg-color;
+    color: $global-button-danger-font-color;
+  }
+
+  .ui-button-icon {
+
+  }
+
+  .ui-button-text {
+
+  }
+}

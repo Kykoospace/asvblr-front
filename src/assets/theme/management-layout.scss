@@ -1,0 +1,105 @@
+// Import variables :
+@import "./variables/management-layout";
+
+
+// ----------------------------------------
+// MANAGEMENT LAYOUT VARIABLES :
+// ----------------------------------------
+
+div#management-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: $management-layout-header-height 1fr;
+  height: 100%;
+
+  // Header :
+  header#management-layout-header {
+    background-color: $management-layout-header-bkg-color;
+    color: $management-layout-header-font-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $management-layout-header-padding;
+
+    img#management-layout-header-logo {
+      height: $management-layout-header-logo-size;
+      margin-right: 10px;
+    }
+
+    span#management-layout-header-text {
+      font-size: $management-layout-header-font-size;
+    }
+  }
+
+  // Side nav and main content :
+  div#management-layout-sidenav-layout {
+    display: grid;
+    grid-template-columns: $management-layout-nav-width 1fr;
+
+    // Nav :
+    nav#management-layout-sidenav {
+      background-color: $management-layout-nav-bkg-color;
+      color: $management-layout-nav-font-color;
+
+      ul.management-layout-sidenav-group {
+        border-bottom: 1px solid $management-layout-nav-group-border-color;
+        margin: 0px;
+        padding: 0px;
+        padding-bottom: $management-layout-nav-group-spacing;
+        list-style: none;
+        user-select: none;
+
+        &:last-child {
+          border-bottom: none;
+          padding: inherit;
+        }
+
+        p.management-layout-sidenav-group-title {
+          margin: inherit;
+          padding: $management-layout-nav-group-title-padding;
+          font-size: $management-layout-nav-group-font-size;
+        }
+
+        li.management-layout-sidenav-group-item {
+          background-color: $management-layout-nav-group-item-bkg-color;
+
+          a {
+            display: block;
+            text-decoration: inherit;
+            font-size: $management-layout-nav-group-item-font-size;
+            color: $management-layout-nav-group-item-font-color;
+            padding: $management-layout-nav-group-item-padding;
+            padding-left: $management-layout-nav-group-item-indentation;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $management-layout-nav-group-item-hover-bkg-color;
+              color: $management-layout-nav-group-item-hover-font-color;
+            }
+
+            &.management-layout-sidenav-group-item-selected {
+              background-color: $management-layout-nav-group-item-selected-bkg-color;
+              color: $management-layout-nav-group-item-selected-font-color;
+            }
+
+            i {
+              margin-right: 10px;
+              width: $management-layout-nav-group-item-icon-size;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    // Main content :
+    div#management-layout-main-container {
+      background-color: $management-layout-main-content-bkg-color;
+      color: $management-layout-main-content-font-color;
+      font-size: $management-layout-main-content-font-size;
+      overflow: auto;
+    }
+  }
+}
+
+
