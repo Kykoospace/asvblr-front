@@ -3,9 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './main/home/home.component';
-import { StatsComponent } from './management/stats/stats.component';
+
 import { MainComponent } from './main/main.component';
+import { HomeComponent } from './main/home/home.component';
+import { ClubComponent } from './main/club/club.component';
+import { SubscriptionComponent } from './main/subscription/subscription.component';
+import { GalleryComponent } from './main/gallery/gallery.component';
+import { ContactComponent } from './main/contact/contact.component';
+
 import { ManagementComponent } from './management/management.component';
 import { ButtonModule } from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
@@ -18,6 +23,7 @@ import { TeamsComponent } from './management/teams/teams.component';
 import { LicenceComponent } from './management/licence/licence.component';
 import { JerseyComponent } from './management/jersey/jersey.component';
 import { OfficeComponent } from './management/office/office.component';
+import { StatsComponent } from './management/stats/stats.component';
 import { CoachesComponent } from './management/coaches/coaches.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
@@ -27,9 +33,12 @@ import { HelpComponent } from './management/help/help.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    StatsComponent,
     MainComponent,
+    HomeComponent,
+    ClubComponent,
+    SubscriptionComponent,
+    GalleryComponent,
+    ContactComponent,
     ManagementComponent,
     ArticlesComponent,
     InformationsComponent,
@@ -41,6 +50,7 @@ import { HelpComponent } from './management/help/help.component';
     LicenceComponent,
     JerseyComponent,
     OfficeComponent,
+    StatsComponent,
     CoachesComponent,
     SeasonsComponent,
     UsersComponent,
