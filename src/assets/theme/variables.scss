@@ -1,0 +1,88 @@
+// ----------------------------------------
+// MAIN COLORS :
+// ----------------------------------------
+
+// Theme main pallet :
+$global-bkg-color: #ffffff;
+$global-bkg-darker-color: #f5f5f5;
+$global-dark-color: #2b353e;
+$global-accent-color: #00a69c;
+
+$global-bkg-active-color: #f0f0f0;
+$global-bkg-darker-active-color: #eaeaea;
+$global-dark-active-color: #35424d;
+$global-accent-active-color: #009c91;
+
+
+// Action colors :
+$global-success-color: #00a600;
+$global-info-color: #a6a6a6;
+$global-warning-color: #a6a600;
+$global-danger-color: #a60000;
+
+$global-success-active-color: #009c00;
+$global-info-active-color: #9c9c9c;
+$global-warning-active-color: #9c9c00;
+$global-danger-active-color: #9c0000;
+
+
+// Font :
+$global-font-color: #303030;
+$global-contrast-font-color: #f0f0f0;
+$global-primary-font-active-color: #000000;
+$global-contrast-font-active-color: #ffffff;
+
+$global-border-color: #dadada;
+
+
+// ----------------------------------------
+// MAIN VALUES :
+// ----------------------------------------
+
+// Font :
+$global-font: 'Roboto';
+$global-font-size: 16px;
+$global-font-size-small: 14px;
+$global-font-size-large: 20px;
+$global-font-size-giant: 30px;
+$global-font-size-title: 24px;
+$global-font-icon-size: 1.2em;
+
+// Layout :
+$global-spacing: 12px;
+$global-spacing-small: 6px;
+$global-spacing-large: 24px;
+
+// Elements :
+$global-border-radius: 3px;
+$global-container-padding: 12px 12px;
+$global-element-padding: 6px 9px;
+$global-element-padding-large: 9px 12px;
+$global-element-padding-giant: 16px 24px;
+$global-element-padding-title: 12px 16px;
+
+
+// ----------------------------------------
+// ELEMENTS
+// ----------------------------------------
+
+// Buttons :
+$global-button-padding: 5px;
+
+$global-button-primary-bkg-color: $global-accent-color;
+$global-button-primary-font-color: #ffffff;
+
+$global-button-secondary-bkg-color: $global-info-color;
+$global-button-secondary-font-color: #000000;
+
+$global-button-success-bkg-color: $global-success-color;
+$global-button-success-font-color: #000000;
+
+$global-button-info-bkg-color: $global-info-color;
+$global-button-info-font-color: #000000;
+
+$global-button-warning-bkg-color: $global-warning-color;
+$global-button-warning-font-color: #000000;
+
+$global-button-danger-bkg-color: $global-danger-color;
+$global-button-danger-font-color: #000000;

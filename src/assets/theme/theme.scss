@@ -1,18 +1,21 @@
 // Theme variables :
-@import "./variables/variables";
+@import "variables";
 
 // Web app layouts :
-@import "./main-site-layout";
-@import "./management-layout";
+@import "main-theme/main-site-layout";
+@import "management-theme/management-layout";
 
-// Prime NG elements :
-@import "./primeng/button";
+
+// ----------------------------------------
+// GLOBAL STRUCTURE :
+// ----------------------------------------
 
 html {
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
 
   body {
-    font-family: 'Roboto';
+    font-family: $global-font;
     margin: 0px;
     height: 100%;
   }

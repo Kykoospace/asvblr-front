@@ -12,7 +12,7 @@ import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 
 import { ManagementComponent } from './management/management.component';
-import { ButtonModule } from 'primeng';
+import {ButtonModule, InputTextModule, MegaMenuModule, TableModule, TabMenuModule, ToolbarModule} from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
 import { InformationsComponent } from './management/informations/informations.component';
 import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
@@ -29,6 +29,7 @@ import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -59,8 +60,14 @@ import { HelpComponent } from './management/help/help.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    ButtonModule
+    ButtonModule,
+    TableModule,
+    InputTextModule,
+    TabMenuModule,
+    ToolbarModule,
+    MegaMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

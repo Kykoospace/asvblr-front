@@ -1,7 +1,35 @@
-<header>
-  <span>Association Volley-ball Bourg-la-Reine</span>
-</header>
-<nav>
+<div id="main-site-layout">
+  <header
+    id="main-site-layout-header"
+    class="main-site-layout-section main-site-layout-section-accent"
+  >
+    <img
+      id="main-site-layout-header-logo"
+      src="./assets/images/logo_asso.png"
+      alt="Logo"
+    >
+    <div id="main-site-layout-title-section">
+      <span id="main-site-layout-title">Association Sportive de Bourg-la-Reine</span>
+      <span id="main-site-layout-subtitle">Le club Volley-ball</span>
+    </div>
+  </header>
+  <nav
+    id="main-site-layout-nav"
+    class="main-site-layout-section main-site-layout-section-dark"
+  >
+    <p-megaMenu [model]="navItems"></p-megaMenu>
+  </nav>
+  <div
+    id="main-site-layout-main-content"
+  >
+    <router-outlet></router-outlet>
+  </div>
+  <footer
+    id="main-site-layout-footer"
+    class="main-site-layout-section main-site-layout-section-secondary"
+  >
+    Footer
+  </footer>
+</div>
 
-</nav>
-<router-outlet></router-outlet>
+

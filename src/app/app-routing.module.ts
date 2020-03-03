@@ -22,13 +22,21 @@ import { StatsComponent } from './management/stats/stats.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
+import {ClubComponent} from "./main/club/club.component";
+import {GalleryComponent} from "./main/gallery/gallery.component";
+import {ContactComponent} from "./main/contact/contact.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', component: MainComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'club', component: ClubComponent },
+      { path: 'teams', component: TeamsComponent },
+      { path: 'subscription', component: SubscriptionsComponent },
+      { path: 'gallery', component: GalleryComponent },
+      { path: 'contact', component: ContactComponent }
     ]
   },
   { path: 'management', component: ManagementComponent,

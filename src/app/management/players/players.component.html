@@ -1,1 +1,40 @@
-<p>players works!</p>
+<div class="module-container p-grid">
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-left">
+      <p-button type="button" label="Éditer la fiche" icon="fas fa-edit"></p-button>
+    </div>
+  </p-toolbar>
+  <p-table
+      #table
+      class="p-col-12"
+      [value]="players"
+      [paginator]="true"
+      [rows]="mawRowCount"
+      [rowsPerPageOptions]="['15', '25', '50']"
+      [globalFilterFields]="['firstName', 'lastName', 'birthDate', 'team', 'subscription']"
+      (onRowSelect)="selectPlayer($event)"
+      selectionMode="single"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let column of columns" [pSortableColumn]="column.field">
+          {{column.header}}
+        </th>
+      </tr>
+      <tr>
+        <th *ngFor="let column of columns">
+          <input pInputText type="text" (input)="table.filter($event.target.value, column.field, column.filterMatchMode)">
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr [pSelectableRowDblClick]="rowData">
+        <td *ngFor="let column of columns">
+          {{ rowData[column.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+

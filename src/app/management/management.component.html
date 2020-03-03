@@ -10,7 +10,7 @@
         *ngFor="let group of navItems"
       >
         <p class="management-layout-sidenav-group-title">
-          {{ group.name }}
+          {{ group.label }}
         </p>
 
         <li
@@ -23,7 +23,7 @@
           >
             <i [ngClass]="[item.icon]"></i>
             <span>
-              {{ item.name }}
+              {{ item.label }}
             </span>
           </a>
         </li>

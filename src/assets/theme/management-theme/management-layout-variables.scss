@@ -1,0 +1,54 @@
+// ----------------------------------------
+// HEADER :
+// ----------------------------------------
+
+// Header :
+$management-layout-header-height: 60px;
+$management-layout-header-padding: $global-element-padding-title;
+$management-layout-header-bkg-color: $global-dark-color;
+$management-layout-header-font-color: $global-contrast-font-active-color;
+$management-layout-header-font-size: $global-font-size-title;
+$management-layout-header-logo-size: 100%;
+$management-layout-header-logo-spacing: $global-spacing;
+
+
+// ----------------------------------------
+// NAVIGATION :
+// ----------------------------------------
+
+// Nav :
+$management-layout-nav-width: 250px;
+$management-layout-nav-bkg-color: $global-bkg-darker-color;
+$management-layout-nav-font-color: $global-font-color;
+
+// Nav group :
+$management-layout-nav-group-bkg-color: inherit;
+$management-layout-nav-group-font-color: inherit;
+$management-layout-nav-group-font-size: $global-font-size;
+$management-layout-nav-group-border-color: $global-border-color;
+$management-layout-nav-group-spacing: $global-spacing;
+$management-layout-nav-group-title-padding: $global-element-padding-title;
+
+// Nav group item :
+$management-layout-nav-group-item-padding: $global-element-padding-large;
+$management-layout-nav-group-item-indentation: $global-spacing-large;
+$management-layout-nav-group-item-bkg-color: inherit;
+$management-layout-nav-group-item-font-color: $global-font-color;
+$management-layout-nav-group-item-font-size: $global-font-size-small;
+$management-layout-nav-group-item-hover-bkg-color: $global-bkg-darker-active-color;
+$management-layout-nav-group-item-hover-font-color: inherit;
+$management-layout-nav-group-item-selected-bkg-color: inherit;
+$management-layout-nav-group-item-selected-font-color: $global-accent-color;
+$management-layout-nav-group-item-icon-size: $global-font-icon-size;
+$management-layout-nav-group-item-icon-spacing: $global-spacing;
+
+
+// ----------------------------------------
+// MAIN CONTENT :
+// ----------------------------------------
+
+// Main content :
+$management-layout-main-content-bkg-color: $global-bkg-color;
+$management-layout-main-content-padding: $global-container-padding;
+$management-layout-main-content-font-color: $global-font-color;
+$management-layout-main-content-font-size: $global-font-size;

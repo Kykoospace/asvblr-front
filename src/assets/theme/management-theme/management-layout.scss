@@ -1,5 +1,5 @@
 // Import variables :
-@import "./variables/management-layout";
+@import "management-layout-variables";
 
 
 // ----------------------------------------
@@ -8,22 +8,25 @@
 
 div#management-layout {
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: $management-layout-header-height 1fr;
+  grid-template-columns: 1fr;
+
   height: 100%;
+  max-height: 100%;
 
   // Header :
   header#management-layout-header {
-    background-color: $management-layout-header-bkg-color;
-    color: $management-layout-header-font-color;
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    background-color: $management-layout-header-bkg-color;
+    color: $management-layout-header-font-color;
     padding: $management-layout-header-padding;
 
     img#management-layout-header-logo {
       height: $management-layout-header-logo-size;
-      margin-right: 10px;
+      margin-right: $management-layout-header-logo-spacing;
     }
 
     span#management-layout-header-text {
@@ -34,15 +37,26 @@ div#management-layout {
   // Side nav and main content :
   div#management-layout-sidenav-layout {
     display: grid;
+    grid-template-rows: 1fr;
     grid-template-columns: $management-layout-nav-width 1fr;
+
+    height: 100%;
+    overflow: hidden;
+
+    > * {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+    }
 
     // Nav :
     nav#management-layout-sidenav {
       background-color: $management-layout-nav-bkg-color;
       color: $management-layout-nav-font-color;
 
+      // Nav group :
       ul.management-layout-sidenav-group {
-        border-bottom: 1px solid $management-layout-nav-group-border-color;
+        border-bottom: 3px solid $management-layout-nav-group-border-color;
         margin: 0px;
         padding: 0px;
         padding-bottom: $management-layout-nav-group-spacing;
@@ -60,17 +74,21 @@ div#management-layout {
           font-size: $management-layout-nav-group-font-size;
         }
 
+        // Nav group item :
         li.management-layout-sidenav-group-item {
-          background-color: $management-layout-nav-group-item-bkg-color;
 
           a {
+            background-color: $management-layout-nav-group-item-bkg-color;
             display: block;
-            text-decoration: inherit;
+
             font-size: $management-layout-nav-group-item-font-size;
             color: $management-layout-nav-group-item-font-color;
+            text-decoration: inherit;
+
+            cursor: pointer;
+
             padding: $management-layout-nav-group-item-padding;
             padding-left: $management-layout-nav-group-item-indentation;
-            cursor: pointer;
 
             &:hover {
               background-color: $management-layout-nav-group-item-hover-bkg-color;
@@ -83,9 +101,9 @@ div#management-layout {
             }
 
             i {
-              margin-right: 10px;
-              width: $management-layout-nav-group-item-icon-size;
               text-align: center;
+              width: $management-layout-nav-group-item-icon-size;
+              margin-right: $management-layout-nav-group-item-icon-spacing;
             }
           }
         }
@@ -97,7 +115,9 @@ div#management-layout {
       background-color: $management-layout-main-content-bkg-color;
       color: $management-layout-main-content-font-color;
       font-size: $management-layout-main-content-font-size;
-      overflow: auto;
+
+      box-sizing: border-box;
+      padding: $management-layout-main-content-padding;
     }
   }
 }
