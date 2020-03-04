@@ -2,11 +2,19 @@
 // MAIN COLORS :
 // ----------------------------------------
 
+// Color pallet :
+$global-pallet-color-1: #00a69c;
+$global-pallet-color-2: #004e64;
+$global-pallet-color-3: #b9e3c6;
+$global-pallet-color-4: #706c61;
+$global-pallet-color-5: #899e8b;
+
+
 // Theme main pallet :
 $global-bkg-color: #ffffff;
 $global-bkg-darker-color: #f5f5f5;
 $global-dark-color: #2b353e;
-$global-accent-color: #00a69c;
+$global-accent-color: $global-pallet-color-1;
 
 $global-bkg-active-color: #f0f0f0;
 $global-bkg-darker-active-color: #eaeaea;
@@ -61,28 +69,3 @@ $global-element-padding-large: 9px 12px;
 $global-element-padding-giant: 16px 24px;
 $global-element-padding-title: 12px 16px;
 
-
-// ----------------------------------------
-// ELEMENTS
-// ----------------------------------------
-
-// Buttons :
-$global-button-padding: 5px;
-
-$global-button-primary-bkg-color: $global-accent-color;
-$global-button-primary-font-color: #ffffff;
-
-$global-button-secondary-bkg-color: $global-info-color;
-$global-button-secondary-font-color: #000000;
-
-$global-button-success-bkg-color: $global-success-color;
-$global-button-success-font-color: #000000;
-
-$global-button-info-bkg-color: $global-info-color;
-$global-button-info-font-color: #000000;
-
-$global-button-warning-bkg-color: $global-warning-color;
-$global-button-warning-font-color: #000000;
-
-$global-button-danger-bkg-color: $global-danger-color;
-$global-button-danger-font-color: #000000;

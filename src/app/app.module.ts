@@ -12,7 +12,15 @@ import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 
 import { ManagementComponent } from './management/management.component';
-import {ButtonModule, InputTextModule, MegaMenuModule, TableModule, TabMenuModule, ToolbarModule} from 'primeng';
+import {
+  ButtonModule,
+  GalleriaModule,
+  InputTextModule,
+  MegaMenuModule,
+  TableModule,
+  TabMenuModule,
+  ToolbarModule
+} from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
 import { InformationsComponent } from './management/informations/informations.component';
 import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
@@ -67,7 +75,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     InputTextModule,
     TabMenuModule,
     ToolbarModule,
-    MegaMenuModule
+    MegaMenuModule,
+    GalleriaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

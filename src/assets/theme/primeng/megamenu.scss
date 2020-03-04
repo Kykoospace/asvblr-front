@@ -1,0 +1,66 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// MEGAMENU :
+// ----------------------------------------
+
+.ui-megamenu {
+  background-color: transparent;
+  padding: 0px !important;
+  .ui-menuitem {
+
+    .ui-menuitem-link {
+      padding: $global-element-padding-title;
+      color: $global-contrast-font-color;
+      font-size: $global-font-size;
+
+      &:hover {
+        background-color: $global-dark-active-color;
+        color: $global-contrast-font-active-color;
+      }
+
+      .ui-menuitem-icon {
+        margin-right: $global-spacing;
+      }
+    }
+  }
+
+  .ui-megamenu-panel {
+    background-color: $global-dark-color;
+    top: inherit !important;
+    padding: 0;
+    box-shadow: inherit;
+    border-bottom-left-radius: $global-border-radius;
+    border-bottom-right-radius: $global-border-radius;
+
+    .ui-megamenu-submenu {
+      padding: $global-container-padding;
+      color: $global-contrast-font-active-color;
+
+      .ui-megamenu-submenu-header {
+        padding: $global-element-padding-large;
+        color: $global-accent-color;
+      }
+
+      .ui-menuitem {
+        font-size: $global-font-size;
+        color: $global-contrast-font-color;
+
+        .ui-menuitem-link {
+          padding: $global-element-padding;
+          color: $global-contrast-font-color;
+          border-radius: $global-border-radius;
+
+          &:hover {
+            background-color: $global-dark-active-color;
+            color: $global-contrast-font-active-color;
+          }
+
+          .ui-menuitem-text {
+            font-size: $global-font-size;
+          }
+        }
+      }
+    }
+  }
+}

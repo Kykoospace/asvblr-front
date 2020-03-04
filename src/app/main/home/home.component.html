@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div id="home-container">
+  <div
+    class="main-site-layout-section"
+  >
+    <p-galleria [images]="images" [showCaption]="true" [panelWidth]="1000" [panelHeight]="500"></p-galleria>
+  </div>
+
+  <div
+    class="main-site-layout-section"
+    [ngClass]="{'main-site-layout-section-secondary': i % 2 == 0}"
+    *ngFor="let article of articles; let i = index"
+  >
+    <div class="home-article-container">
+      <h1>{{ article.title }}</h1>
+      <p>{{ article.text }}</p>
+      <p>{{ article.date }}</p>
+    </div>
+  </div>
+</div>
+

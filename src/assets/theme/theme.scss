@@ -1,9 +1,17 @@
+// ----------------------------------------
+// IMPORTING :
+// ----------------------------------------
+
 // Theme variables :
 @import "variables";
 
 // Web app layouts :
 @import "main-theme/main-site-layout";
 @import "management-theme/management-layout";
+
+// PrimeNG :
+@import "primeng/megamenu";
+@import "primeng/galleria";
 
 
 // ----------------------------------------
