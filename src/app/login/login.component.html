@@ -1,0 +1,23 @@
+<div id="login-layout">
+  <div id="login-layout-background">
+    <div id="login-layout-main-content">
+      <form [formGroup]="loginForm">
+        <input
+          formControlName="login"
+          class="login-layout-main-content-field"
+          placeholder="Identifiant"
+          type="text"
+          required
+        >
+        <input
+          formControlName="password"
+          class="login-layout-main-content-field"
+          placeholder="Mot de passe"
+          type="password"
+          required
+        >
+        <button id="login-layout-main-content-connection-button">Connexion</button>
+      </form>
+    </div>
+  </div>
+</div>

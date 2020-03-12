@@ -37,7 +37,9 @@ import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     SeasonsComponent,
     UsersComponent,
     SettingsComponent,
-    HelpComponent
+    HelpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -76,9 +79,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     TabMenuModule,
     ToolbarModule,
     MegaMenuModule,
-    GalleriaModule
+    GalleriaModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

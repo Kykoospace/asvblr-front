@@ -1,0 +1,50 @@
+// ----------------------------------------
+// HEADER :
+// ----------------------------------------
+
+// Header :
+$main-site-layout-header-padding: $global-spacing-large 0px;
+$main-site-layout-header-logo-size: 100px;
+$main-site-layout-header-logo-margin: $global-spacing-large;
+$main-site-layout-title-font-color: $global-contrast-font-active-color;
+$main-site-layout-title-font-size: $global-font-size-giant;
+$main-site-layout-subtitle-font-size: $global-font-size-title;
+
+
+// ----------------------------------------
+// NAVIGATION :
+// ----------------------------------------
+
+// Nav :
+$main-site-layout-nav-padding: 0px 0px 0px 0px;
+
+
+// ----------------------------------------
+// MAIN CONTENT :
+// ----------------------------------------
+
+// Main content :
+$main-site-layout-main-content-padding: 0px 0px 0px 0px;
+
+
+// ----------------------------------------
+// FOOTER :
+// ----------------------------------------
+
+// Footer :
+$main-site-layout-footer-padding: $global-spacing-large 0px;
+
+
+// ----------------------------------------
+// SECTIONS :
+// ----------------------------------------
+
+// Sections :
+$main-site-layout-section-margin: 0px;
+$main-site-layout-section-padding: 0px calc(100% / 2 - 500px);
+
+// Sections colors :
+$main-site-layout-section-bkg-primary: $global-bkg-color;
+$main-site-layout-section-bkg-secondary: $global-bkg-darker-color;
+$main-site-layout-section-bkg-accent: $global-accent-color;
+$main-site-layout-section-bkg-dark: $global-dark-color;

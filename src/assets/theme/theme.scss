@@ -6,8 +6,9 @@
 @import "variables";
 
 // Web app layouts :
-@import "main-theme/main-site-layout";
-@import "management-theme/management-layout";
+@import "main-layout/main-site-layout";
+@import "management-layout/management-layout";
+@import "login-layout/login-layout";
 
 // PrimeNG :
 @import "primeng/megamenu";

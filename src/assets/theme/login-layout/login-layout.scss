@@ -1,0 +1,57 @@
+// Import variables
+@import "login-layout-variables";
+
+
+// ----------------------------------------
+// LOGIN LAYOUT VARIABLES :
+// ----------------------------------------
+
+#login-layout {
+  height: 100%;
+  background: url("src/assets/images/login-background.jpg") no-repeat center;
+  background-size: cover;
+
+  #login-layout-background {
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #login-layout-main-content {
+      width: 300px;
+      background-color: $global-bkg-darker-color;
+      padding: $global-container-padding;
+      border-radius: $global-border-radius;
+
+      input.login-layout-main-content-field {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: $global-font-size;
+        border-radius: $global-border-radius;
+        border: 1px solid $global-border-color;
+        padding: $global-element-padding-large;
+        margin-bottom: $global-spacing;
+      }
+
+      #login-layout-main-content-connection-button {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: $global-font-size;
+        color: $global-contrast-font-color;
+        background-color: $global-accent-color;
+        border-radius: $global-border-radius;
+        border: none;
+        padding: $global-element-padding-large;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $global-accent-active-color;
+        }
+      }
+    }
+  }
+}

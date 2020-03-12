@@ -1,0 +1,73 @@
+// Import variables
+@import "main-site-layout-variables";
+
+
+// ----------------------------------------
+// MAIN SITE LAYOUT VARIABLES :
+// ----------------------------------------
+
+div#main-site-layout {
+  height: 100%;
+
+  header#main-site-layout-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $main-site-layout-header-padding;
+
+    img#main-site-layout-header-logo {
+      width: $main-site-layout-header-logo-size;
+      margin-right: $main-site-layout-header-logo-margin;
+    }
+
+    div#main-site-layout-title-section {
+      display: flex;
+      flex-direction: column;
+
+      color: $main-site-layout-title-font-color;
+
+      span#main-site-layout-title {
+        font-size: $main-site-layout-title-font-size;
+      }
+
+      span#main-site-layout-subtitle {
+        font-size: $main-site-layout-subtitle-font-size;
+      }
+    }
+  }
+
+  nav#main-site-layout-nav {
+    padding: $main-site-layout-nav-padding;
+  }
+
+  div#main-site-layout-main-content {
+    padding: $main-site-layout-main-content-padding;
+  }
+
+  footer#main-site-layout-footer {
+    clear: both;
+    padding: $main-site-layout-footer-padding;
+  }
+
+  .main-site-layout-section {
+    box-sizing: border-box;
+    margin: $main-site-layout-section-margin;
+    padding: $main-site-layout-section-padding;
+
+    &.main-site-layout-section-primary {
+      background-color: $main-site-layout-section-bkg-primary;
+    }
+
+    &.main-site-layout-section-secondary {
+      background-color: $main-site-layout-section-bkg-secondary;
+    }
+
+    &.main-site-layout-section-accent {
+      background-color: $main-site-layout-section-bkg-accent;
+    }
+
+    &.main-site-layout-section-dark {
+      background-color: $main-site-layout-section-bkg-dark;
+    }
+  }
+}

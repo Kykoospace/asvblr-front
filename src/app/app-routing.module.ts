@@ -5,6 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 // Components import :
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
+import { ClubComponent } from './main/club/club.component';
+import { TeamsComponent
+    as TeamsMainComponent } from './main/teams/teams.component';
+import { GalleryComponent } from './main/gallery/gallery.component';
+import { ContactComponent } from './main/contact/contact.component';
+import { SubscriptionComponent } from './main/subscription/subscription.component';
+
+import { LoginComponent } from './login/login.component';
+
 import { ManagementComponent } from './management/management.component';
 import { ArticlesComponent } from './management/articles/articles.component';
 import { InformationsComponent } from './management/informations/informations.component';
@@ -12,7 +21,8 @@ import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.componen
 import { SchedulesComponent } from './management/schedules/schedules.component';
 import { SubscriptionsComponent } from './management/subscriptions/subscriptions.component';
 import { PlayersComponent } from './management/players/players.component';
-import { TeamsComponent } from './management/teams/teams.component';
+import { TeamsComponent
+    as TeamsManagementComponent } from './management/teams/teams.component';
 import { LicenceComponent } from './management/licence/licence.component';
 import { JerseyComponent } from './management/jersey/jersey.component';
 import { OfficeComponent } from './management/office/office.component';
@@ -22,9 +32,10 @@ import { StatsComponent } from './management/stats/stats.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
-import {ClubComponent} from "./main/club/club.component";
-import {GalleryComponent} from "./main/gallery/gallery.component";
-import {ContactComponent} from "./main/contact/contact.component";
+
+// Guards import :
+import { LoginGuard } from './shared/guards/login/login.guard';
+import { PermissionGuard } from './shared/guards/permission/permission.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -33,13 +44,14 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'club', component: ClubComponent },
-      { path: 'teams', component: TeamsComponent },
-      { path: 'subscription', component: SubscriptionsComponent },
+      { path: 'teams', component: TeamsMainComponent },
       { path: 'gallery', component: GalleryComponent },
-      { path: 'contact', component: ContactComponent }
+      { path: 'contact', component: ContactComponent },
+      { path: 'subscription', component: SubscriptionComponent }
     ]
   },
-  { path: 'management', component: ManagementComponent,
+  { path: 'login', component: LoginComponent },
+  { path: 'management', component: ManagementComponent, canActivate: [ LoginGuard, PermissionGuard ],
     children: [
       { path: '', redirectTo: 'stats', pathMatch: 'full' },
       { path: 'articles', component: ArticlesComponent },
@@ -48,7 +60,7 @@ const routes: Routes = [
       { path: 'schedules', component: SchedulesComponent },
       { path: 'subscriptions', component: SubscriptionsComponent },
       { path: 'players', component: PlayersComponent },
-      { path: 'teams', component: TeamsComponent },
+      { path: 'teams', component: TeamsManagementComponent },
       { path: 'licence', component: LicenceComponent },
       { path: 'jersey', component: JerseyComponent },
       { path: 'office', component: OfficeComponent },
@@ -63,7 +75,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule { }
