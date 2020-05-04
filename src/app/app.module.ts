@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +17,11 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
+  CalendarModule,
   GalleriaModule,
   InputTextModule,
   MegaMenuModule,
+  RadioButtonModule,
   TableModule,
   TabMenuModule,
   ToolbarModule
@@ -39,7 +44,6 @@ import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,6 +74,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     LoginComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -80,9 +85,13 @@ import {ReactiveFormsModule} from '@angular/forms';
     ToolbarModule,
     MegaMenuModule,
     GalleriaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RadioButtonModule,
+    CalendarModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+  ],
   bootstrap: [
     AppComponent
   ]

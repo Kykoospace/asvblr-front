@@ -3,7 +3,7 @@
     <div id="login-layout-main-content">
       <form [formGroup]="loginForm">
         <input
-          formControlName="login"
+          formControlName="username"
           class="login-layout-main-content-field"
           placeholder="Identifiant"
           type="text"
@@ -16,7 +16,12 @@
           type="password"
           required
         >
-        <button id="login-layout-main-content-connection-button">Connexion</button>
+        <button
+          id="login-layout-main-content-connection-button"
+          (click)="signIn()"
+        >
+          Connexion
+        </button>
       </form>
     </div>
   </div>

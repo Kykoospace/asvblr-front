@@ -69,5 +69,10 @@ div#main-site-layout {
     &.main-site-layout-section-dark {
       background-color: $main-site-layout-section-bkg-dark;
     }
+
+    .main-site-layout-section-content {
+      box-sizing: border-box;
+      padding: $main-site-layout-section-content-padding;
+    }
   }
 }

@@ -51,7 +51,9 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'management', component: ManagementComponent, canActivate: [ LoginGuard, PermissionGuard ],
+  { path: 'management', component: ManagementComponent,
+    canActivate: [ LoginGuard, PermissionGuard ],
+    canActivateChild: [ LoginGuard, PermissionGuard ],
     children: [
       { path: '', redirectTo: 'stats', pathMatch: 'full' },
       { path: 'articles', component: ArticlesComponent },

@@ -1,0 +1,46 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// GRID :
+// ----------------------------------------
+
+.p-grid {
+  display: grid;
+
+  .p-col-1 {
+    width:8.3333%
+  }
+  .p-col-2 {
+    width:16.6667%
+  }
+  .p-col-3 {
+    width:25%
+  }
+  .p-col-4 {
+    width:33.3333%
+  }
+  .p-col-5 {
+    width:41.6667%
+  }
+  .p-col-6 {
+    width:50%
+  }
+  .p-col-7 {
+    width:58.3333%
+  }
+  .p-col-8 {
+    width:66.6667%
+  }
+  .p-col-9 {
+    width:75%
+  }
+  .p-col-10 {
+    width:83.3333%
+  }
+  .p-col-11 {
+    width:91.6667%
+  }
+  .p-col-12 {
+    width:100%
+  }
+}

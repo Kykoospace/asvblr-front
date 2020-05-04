@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../shared/services/api/auth/auth.service';
 
 @Component({
   selector: 'app-management',
@@ -46,9 +47,15 @@ export class ManagementComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+  }
+
+  public logout(): void {
+    this.authService.signOut();
   }
 
 }
