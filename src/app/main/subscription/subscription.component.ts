@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TeamService} from '../../shared/services/api/team/team.service';
 import PaymentMode from '../../shared/models/entities/PaymentMode';
 import {ManagementService} from '../../shared/services/api/management/management.service';
+import Subscription from '../../shared/models/entities/Subscription';
 
 @Component({
   selector: 'app-subscription',
@@ -11,7 +12,8 @@ import {ManagementService} from '../../shared/services/api/management/management
 })
 export class SubscriptionComponent implements OnInit {
 
-  paymentModes: PaymentMode[];
+  paymentModesOptions = [];
+  categoryOptions= [];
 
   subscriptionForm: FormGroup;
 
@@ -39,13 +41,31 @@ export class SubscriptionComponent implements OnInit {
 
     this.managementService.getAllPaymentModes()
       .subscribe(paymentModes => {
-        this.paymentModes = paymentModes;
+        paymentModes.forEach(paymentMode => {
+          this.paymentModesOptions.push({
+            label: paymentMode.name,
+            value: paymentMode.id
+          });
+        });
+      });
+
+    this.teamService.getAllCategories()
+      .subscribe(categories => {
+        categories.forEach(category => {
+          this.categoryOptions.push({
+            label: category.name,
+            value: category.id
+          });
+        });
       });
   }
 
   ngOnInit(): void { }
 
   public sendSubscription() {
+    let subscription: Subscription = this.subscriptionForm.value;
+    subscription.season = 1;
+    console.log(subscription);
     this.teamService.createSubscription(this.subscriptionForm.value)
       .subscribe(subscription => {
         console.log('Inscription faite');

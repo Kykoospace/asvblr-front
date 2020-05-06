@@ -23,7 +23,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(TeamService.API_URL + 'subscriptions');
+    return this.http.get<Subscription[]>(TeamService.API_URL + 'subscriptions/');
   }
 
   public getSubscriptionsBySeason(seasonId: number): Observable<Subscription[]> {
@@ -77,7 +77,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(TeamService.API_URL + 'categories');
+    return this.http.get<Category[]>(TeamService.API_URL + 'categories/');
   }
 
   public getCategory(categoryId: number): Observable<Category> {

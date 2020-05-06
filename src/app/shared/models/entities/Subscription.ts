@@ -19,9 +19,9 @@ export default interface Subscription {
   // TODO : demander modif du nom "insurance" en "insuranceRequested" côté API
   insuranceRequested: boolean;
   player: Player;
-  season: Season;
-  category: Category;
-  paymentMode: PaymentMode;
+  season: number;
+  category: number;
+  paymentMode: number;
   cni: Document;
   identityPhoto: Document;
   medicalCertificate: Document;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -73,9 +74,15 @@ export class MainComponent implements OnInit {
   ]
 
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  public accessMemberArea() {
+    this.router.navigate(['management']);
   }
 
 }

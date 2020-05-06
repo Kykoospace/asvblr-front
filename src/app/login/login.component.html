@@ -1,7 +1,24 @@
 <div id="login-layout">
   <div id="login-layout-background">
+    <a
+      id="login-layout-return-link"
+      [routerLink]="['/main']"
+    >
+      <i id="login-layout-return-link-icon" class="pi pi-chevron-left"></i>
+      <span>Retour au site</span>
+    </a>
     <div id="login-layout-main-content">
       <form [formGroup]="loginForm">
+        <p
+          class="login-layout-main-content-error-message"
+          *ngIf="loginErrorToggle">
+          {{ loginErrorMessage }}
+        </p>
+        <p
+          class="login-layout-main-content-error-message"
+          *ngIf="formErrorUsernameToggle">
+          {{ formErrorUsernameMessage }}
+        </p>
         <input
           formControlName="username"
           class="login-layout-main-content-field"
@@ -9,6 +26,11 @@
           type="text"
           required
         >
+        <p
+          class="login-layout-main-content-error-message"
+          *ngIf="formErrorPasswordToggle">
+          {{ formErrorPasswordMessage }}
+        </p>
         <input
           formControlName="password"
           class="login-layout-main-content-field"

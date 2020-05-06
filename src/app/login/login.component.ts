@@ -11,6 +11,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loginErrorToggle = false;
+  loginErrorMessage = 'Identifiants incorrects';
+  formErrorUsernameToggle = false;
+  formErrorUsernameMessage = 'Identifiant manquant';
+  formErrorPasswordToggle = false;
+  formErrorPasswordMessage = 'Mot de passe manquant';
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +33,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   public signIn() {
+    this.loginErrorToggle = false;
+    this.formErrorUsernameToggle = false;
+    this.formErrorPasswordToggle = false;
+
     if (this.loginForm.valid) {
       this.authService.signIn(
         this.loginForm.controls.username.value,
@@ -35,8 +45,18 @@ export class LoginComponent implements OnInit {
         auth => {
           const nextUrl = this.route.snapshot.paramMap.get('returnUrl') || 'management';
           this.router.navigate([nextUrl]);
+        },
+        err => {
+          this.loginErrorToggle = true;
         }
       );
+    } else {
+      if (this.loginForm.value.username === '') {
+        this.formErrorUsernameToggle = true;
+      }
+      if (this.loginForm.value.password === '') {
+        this.formErrorPasswordToggle = true;
+      }
     }
   }
 }

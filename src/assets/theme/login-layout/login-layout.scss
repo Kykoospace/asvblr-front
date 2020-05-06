@@ -11,6 +11,20 @@
   background: url("src/assets/images/login-background.jpg") no-repeat center;
   background-size: cover;
 
+  #login-layout-return-link {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: $global-contrast-font-color;
+    font-size: $global-font-size-large;
+    text-decoration: none;
+    padding: $global-element-padding;
+
+    #login-layout-return-link-icon {
+      vertical-align: middle;
+    }
+  }
+
   #login-layout-background {
     height: 100%;
     background-color: rgba(0, 0, 0, .6);
@@ -24,6 +38,12 @@
       background-color: $global-bkg-darker-color;
       padding: $global-container-padding;
       border-radius: $global-border-radius;
+
+      .login-layout-main-content-error-message {
+        color: $global-danger-color;
+        margin: 0px;
+        margin-bottom: $global-spacing;
+      }
 
       input.login-layout-main-content-field {
         display: block;

@@ -1,0 +1,15 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// GALLERIA :
+// ----------------------------------------
+
+.ui-dropdown {
+  color: black;
+  .ui-dropdown-items-wrapper {
+    background-color: white;
+    .ui-dropdown-item {
+      color: black;
+    }
+  }
+}

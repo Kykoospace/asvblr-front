@@ -25,9 +25,9 @@
         <br>
         <input type="text" pInputText formControlName="phoneNumber"/><span>Numéro de téléphone</span>
         <br>
-        <input type="text" pInputText formControlName="idCategory"/><span>Catégorie demandée</span>
+        <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown><span>Catégorie demandée</span>
         <br>
-        <p-dropdown [options]="paymentModes" formControlName="paymentMode"></p-dropdown><span>Type de paiement</span>
+        <p-dropdown [options]="paymentModesOptions" formControlName="idPaymentMode"></p-dropdown><span>Type de paiement</span>
         <br>
         <input type="checkbox" pInputText formControlName="insurance"/><span>Souhaitez-vous prendre une assurance ?</span>
         <br>

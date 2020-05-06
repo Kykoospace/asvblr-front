@@ -20,7 +20,7 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getAllPaymentModes(): Observable<PaymentMode[]> {
-    return this.http.get<PaymentMode[]>(ManagementService.API_URL + 'paymentModes');
+    return this.http.get<PaymentMode[]>(ManagementService.API_URL + 'paymentModes/');
   }
 
   public getPaymentMode(paymentModeId: number): Observable<PaymentMode> {
