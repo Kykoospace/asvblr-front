@@ -17,7 +17,7 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
-  CalendarModule,
+  CalendarModule, DropdownModule,
   GalleriaModule,
   InputTextModule,
   MegaMenuModule,
@@ -87,7 +87,8 @@ import { LoginComponent } from './login/login.component';
     GalleriaModule,
     ReactiveFormsModule,
     RadioButtonModule,
-    CalendarModule
+    CalendarModule,
+    DropdownModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },

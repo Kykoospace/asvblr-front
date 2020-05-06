@@ -13,7 +13,7 @@
         <br>
         <p-calendar formControlName="birthDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2050" dateFormat="dd/mm/yy"></p-calendar><span>Date de naissance</span>
         <br>
-        <input type="text" pInputText formControlName="birthContry"/><span>Pays de naissance</span>
+        <input type="text" pInputText formControlName="birthCountry"/><span>Pays de naissance</span>
         <br>
         <input type="text" pInputText formControlName="address"/><span>Adresse</span>
         <br>
@@ -25,11 +25,13 @@
         <br>
         <input type="text" pInputText formControlName="phoneNumber"/><span>Numéro de téléphone</span>
         <br>
-        <input type="text" pInputText formControlName="idCategory"/><span>Catégorie</span>
+        <input type="text" pInputText formControlName="idCategory"/><span>Catégorie demandée</span>
         <br>
-        <input type="text" pInputText formControlName="idPaymentMode"/><span>Type de paiement</span>
+        <p-dropdown [options]="paymentModes" formControlName="paymentMode"></p-dropdown><span>Type de paiement</span>
         <br>
-        <input type="text" pInputText formControlName="insurance"/><span>Prendre une assurance</span>
+        <input type="checkbox" pInputText formControlName="insurance"/><span>Souhaitez-vous prendre une assurance ?</span>
+        <br>
+        <button (click)="sendSubscription()">Envoyer l'inscription</button>
       </form>
     </div>
   </div>

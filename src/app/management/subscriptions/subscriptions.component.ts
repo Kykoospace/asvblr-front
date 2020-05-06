@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamService } from '../../shared/services/api/team/team.service';
+import Subscription from '../../shared/models/entities/Subscription';
 
 @Component({
   selector: 'app-subscriptions',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionsComponent implements OnInit {
 
-  constructor() { }
+  subscriptions: Subscription[];
 
-  ngOnInit(): void {
+  constructor(
+    private teamService: TeamService
+  ) {
+    this.teamService.getAllSubscriptions()
+      .subscribe(subscriptions => {
+        this.subscriptions = subscriptions;
+      });
   }
+
+  ngOnInit(): void { }
 
 }
