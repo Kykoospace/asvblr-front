@@ -22,10 +22,7 @@ export class AuthService {
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
   ) {
-    this.configService.getConfig()
-      .subscribe(config => {
-        this.apiBaseUrl = config.apiBaseUrl;
-      });
+    this.apiBaseUrl = this.configService.getApiBaseUrl();
   }
 
   public signIn(username: string, password: string): Observable<SignInResponse> {

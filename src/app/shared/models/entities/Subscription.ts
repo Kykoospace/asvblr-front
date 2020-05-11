@@ -2,23 +2,41 @@ import Document from './Document';
 
 export default interface Subscription {
   id: number;
+
   firstName: string;
   lastName: string;
   gender: boolean;
-  address: string;
-  postCode: number;
-  city: string;
   email: string;
-  phoneNumber: number;
+  phoneNumber: string;
   birthDate: Date;
   birthCountry: string;
-  insuranceRequested: boolean;
-  idPlayer: number;
-  idSeason: number;
+
+  address: string;
+  postcode: number;
+  city: string;
+
   idCategory: number;
-  idPaymentMode: number;
+
+  equipment: boolean;
+  requestedJerseyNumber: number;
+  topSize: string;
+  pantsSize: string;
+
+  insuranceRequested: boolean;
+  coach: boolean;
+  referee: boolean;
+
   cni: Document;
   identityPhoto: Document;
   medicalCertificate: Document;
-  formLicence: Document;
+
+  idPaymentMode: number;
+
+  // TODO: feature in progress
+  // comment: string;
+
+  // Internal feature :
+  idPlayer: number;
+  idSeason: number;
+  confirmed: boolean;
 }

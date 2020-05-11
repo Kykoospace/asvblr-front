@@ -1,0 +1,18 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// INPUTTEXT :
+// ----------------------------------------
+
+.ui-inputtext {
+  border: 1px solid $prime-ng-input-border-color;
+  border-radius: $prime-ng-input-border-radius;
+  padding: $prime-ng-input-padding !important;
+  font-size: $prime-ng-input-font-size;
+  color: $prime-ng-input-font-color;
+  width: 100%;
+
+  &:focus {
+    border-color: $prime-ng-input-focus-border-color;
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import Config from '../../models/Config/Config';
+import Config from '../../models/config/Config';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class ConfigService {
 
-  private confFileUrl = 'assets/config/config.json';
+  public apiBaseUrl: string;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor() { }
 
-  public getConfig(): Observable<Config> {
-    return this.http.get<Config>(this.confFileUrl);
+  public getApiBaseUrl(): string {
+    return this.apiBaseUrl;
   }
+
+
 }

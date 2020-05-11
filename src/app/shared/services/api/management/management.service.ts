@@ -15,10 +15,7 @@ export class ManagementService {
     private configService: ConfigService,
     private http: HttpClient
   ) {
-    this.configService.getConfig()
-      .subscribe(config => {
-        this.apiBaseUrl = config.apiBaseUrl;
-      });
+    this.apiBaseUrl = this.configService.getApiBaseUrl();
   }
 
   // ------------------------------------------------
@@ -26,10 +23,10 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getAllPaymentModes(): Observable<PaymentMode[]> {
-    return this.http.get<PaymentMode[]>(this.apiBaseUrl + 'paymentModes/');
+    return this.http.get<PaymentMode[]>(this.apiBaseUrl + 'payment-modes');
   }
 
   public getPaymentMode(paymentModeId: number): Observable<PaymentMode> {
-    return this.http.get<PaymentMode>(this.apiBaseUrl + 'paymentModes/' + paymentModeId);
+    return this.http.get<PaymentMode>(this.apiBaseUrl + 'payment-modes/' + paymentModeId);
   }
 }

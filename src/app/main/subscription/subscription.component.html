@@ -3,34 +3,119 @@
     <div class="main-site-layout-section-content">
       <h1>Rejoignez-nous !</h1>
       <form [formGroup]="subscriptionForm">
-        <input type="text" pInputText formControlName="lastName"/><span>Nom de famille</span>
-        <br>
-        <input type="text" pInputText formControlName="firstName"/><span>Prénom</span>
-        <br>
-        <p-radioButton name="gender" value="false" label="Homme" formControlName="gender"></p-radioButton>
-        <p-radioButton name="gender" value="true" label="Femme" formControlName="gender"></p-radioButton>
-        <span>Sexe</span>
-        <br>
-        <p-calendar formControlName="birthDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2050" dateFormat="dd/mm/yy"></p-calendar><span>Date de naissance</span>
-        <br>
-        <input type="text" pInputText formControlName="birthCountry"/><span>Pays de naissance</span>
-        <br>
-        <input type="text" pInputText formControlName="address"/><span>Adresse</span>
-        <br>
-        <input type="text" pInputText formControlName="postcode"/><span>Code postal</span>
-        <br>
-        <input type="text" pInputText formControlName="city"/><span>Ville</span>
-        <br>
-        <input type="text" pInputText formControlName="email"/><span>E-mail</span>
-        <br>
-        <input type="text" pInputText formControlName="phoneNumber"/><span>Numéro de téléphone</span>
-        <br>
-        <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown><span>Catégorie demandée</span>
-        <br>
-        <p-dropdown [options]="paymentModesOptions" formControlName="idPaymentMode"></p-dropdown><span>Type de paiement</span>
-        <br>
-        <input type="checkbox" pInputText formControlName="insurance"/><span>Souhaitez-vous prendre une assurance ?</span>
-        <br>
+        <div class="p-grid">
+          <!-- FIRSTNAME -->
+          <div class="p-col-4">
+            <input formControlName="firstName" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Prénom</label>
+
+          <!-- LASTNAME -->
+          <div class="p-col-4">
+            <input formControlName="lastName" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Nom de famille</label>
+
+          <!-- GENDER -->
+          <div class="p-col-4">
+            <input formControlName="gender" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Sexe</label>
+
+          <!-- EMAIL -->
+          <div class="p-col-4">
+            <input formControlName="email" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Email</label>
+
+          <!-- BIRTHDATE -->
+          <div class="p-col-4">
+            <input formControlName="city" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Date de naissance</label>
+
+          <!-- BIRTHCOUNTRY -->
+          <div class="p-col-4">
+            <input formControlName="city" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Pays de naissance</label>
+
+          <!-- ADDRESS -->
+          <div class="p-col-4">
+            <input formControlName="address" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Adresse</label>
+
+          <!-- PHONENUMBER -->
+          <div class="p-col-4">
+            <input formControlName="phoneNumber" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Numéro de téléphone</label>
+
+          <!-- POSTCODE -->
+          <div class="p-col-4">
+            <input formControlName="postcode" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Code postal</label>
+
+          <!-- CITY -->
+          <div class="p-col-4">
+            <input formControlName="city" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Ville</label>
+
+
+
+          <!-- INSURANCE -->
+          <div class="p-col-4">
+            <input formControlName="insurance" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Souhaitez-vous prendre l'assurance supplémentaire ?</label>
+
+          <!-- EQUIPMENT -->
+          <div class="p-col-4">
+            <input formControlName="equipment" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Souhaitez-vous acheter un tenue au couleurs de votre équipe ?</label>
+
+          <!-- REQUESTEDJERSEYNUMBER -->
+          <div class="p-col-4">
+            <input formControlName="requestedJerseyNumber" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Votre taille de haut</label>
+
+          <!-- TOPSIZE -->
+          <div class="p-col-4">
+            <input formControlName="topSize" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Votre taille de haut</label>
+
+          <!-- PANTSIZE -->
+          <div class="p-col-4">
+            <input formControlName="pantSize" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Votre taille de pantalon</label>
+
+
+
+          <!-- COACH -->
+          <div class="p-col-4">
+            <input formControlName="coach" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Êtes-vous un(e) entraîneur(se) ?</label>
+
+          <!-- REFEREE -->
+          <div class="p-col-4">
+            <input formControlName="referee" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Êtes-vous un(e) arbitre ?</label>
+
+          <!-- COMMENT -->
+          <div class="p-col-4">
+            <input formControlName="comment" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">Avez-vous autre chose à nous dire ?</label>
+        </div>
         <button (click)="sendSubscription()">Envoyer l'inscription</button>
       </form>
     </div>

@@ -18,10 +18,7 @@ export class TeamService {
     private configService: ConfigService,
     private http: HttpClient
   ) {
-    this.configService.getConfig()
-      .subscribe(config => {
-        this.apiBaseUrl = config.apiBaseUrl;
-      });
+    this.apiBaseUrl = configService.getApiBaseUrl();
   }
 
   // ------------------------------------------------
@@ -83,7 +80,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiBaseUrl + 'categories/');
+    return this.http.get<Category[]>(this.apiBaseUrl + 'categories');
   }
 
   public getCategory(categoryId: number): Observable<Category> {

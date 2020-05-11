@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,8 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
-  CalendarModule, DropdownModule,
+  CalendarModule,
+  DropdownModule,
   GalleriaModule,
   InputTextModule,
   MegaMenuModule,
@@ -44,6 +45,25 @@ import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+
+import { ConfigService } from './shared/services/config/config.service';
+import { catchError, map } from 'rxjs/operators';
+
+function loadConfiguration(
+  http: HttpClient,
+  configService: ConfigService
+) {
+  return (): Promise<boolean> => {
+    return new Promise<boolean>((resolve: (a: boolean) => void): void => {
+      http.get<any>('assets/config/config.json')
+        .pipe(
+          map(config => {
+            configService.apiBaseUrl = config.apiBaseUrl;
+            resolve(true);
+          })).subscribe();
+    });
+  };
+}
 
 @NgModule({
   declarations: [
@@ -91,7 +111,15 @@ import { LoginComponent } from './login/login.component';
     DropdownModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfiguration,
+      deps: [
+        HttpClient,
+        ConfigService
+      ],
+      multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [
     AppComponent
