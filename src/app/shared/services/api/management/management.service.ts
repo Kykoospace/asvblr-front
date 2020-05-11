@@ -2,28 +2,34 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import PaymentMode from '../../../models/entities/PaymentMode';
+import {ConfigService} from '../../config/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagementService {
 
-  // TODO : mettre cette constante dans un fichier de configuration
-  private static API_URL = 'http://127.0.0.1:8080/api/';
+  private apiBaseUrl: string;
 
   constructor(
+    private configService: ConfigService,
     private http: HttpClient
-  ) { }
+  ) {
+    this.configService.getConfig()
+      .subscribe(config => {
+        this.apiBaseUrl = config.apiBaseUrl;
+      });
+  }
 
   // ------------------------------------------------
   // PaymentMode routes :
   // ------------------------------------------------
 
   public getAllPaymentModes(): Observable<PaymentMode[]> {
-    return this.http.get<PaymentMode[]>(ManagementService.API_URL + 'paymentModes/');
+    return this.http.get<PaymentMode[]>(this.apiBaseUrl + 'paymentModes/');
   }
 
   public getPaymentMode(paymentModeId: number): Observable<PaymentMode> {
-    return this.http.get<PaymentMode>(ManagementService.API_URL + 'paymentModes/' + paymentModeId);
+    return this.http.get<PaymentMode>(this.apiBaseUrl + 'paymentModes/' + paymentModeId);
   }
 }

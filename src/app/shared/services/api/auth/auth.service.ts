@@ -14,7 +14,6 @@ import User from '../../../models/entities/User';
 })
 export class AuthService {
 
-  // TODO : mettre cette constante dans un fichier de configuration
   private apiBaseUrl: string;
 
   constructor(

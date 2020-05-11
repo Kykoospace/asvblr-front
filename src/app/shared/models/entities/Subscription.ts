@@ -12,7 +12,6 @@ export default interface Subscription {
   phoneNumber: number;
   birthDate: Date;
   birthCountry: string;
-  // TODO : demander modif du nom "insurance" en "insuranceRequested" côté API
   insuranceRequested: boolean;
   idPlayer: number;
   idSeason: number;

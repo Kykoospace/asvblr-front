@@ -12,7 +12,6 @@ import {ConfigService} from '../../config/config.service';
 })
 export class TeamService {
 
-  // TODO : mettre cette constante dans un fichier de configuration
   private apiBaseUrl: string;
 
   constructor(
