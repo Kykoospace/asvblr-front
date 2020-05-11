@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../shared/services/api/auth/auth.service';
+import User from '../shared/models/entities/User';
 
 @Component({
   selector: 'app-management',
@@ -47,15 +48,22 @@ export class ManagementComponent implements OnInit {
     }
   ];
 
+  public loggedUser: User;
+
   constructor(
     private authService: AuthService
-  ) { }
-
-  ngOnInit() {
+  ) {
+    this.loggedUser = this.authService.getLoggedUser();
   }
+
+  ngOnInit() { }
 
   public logout(): void {
     this.authService.signOut();
+  }
+
+  public getUserConnectionLabel() {
+    return this.loggedUser.firstName + ' ' + this.loggedUser.lastName.toUpperCase();
   }
 
 }

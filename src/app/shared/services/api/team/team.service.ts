@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import Subscription from '../../../models/entities/Subscription';
 import Category from '../../../models/entities/Category';
 import Season from '../../../models/entities/Season';
+import {ConfigService} from '../../config/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,38 +13,44 @@ import Season from '../../../models/entities/Season';
 export class TeamService {
 
   // TODO : mettre cette constante dans un fichier de configuration
-  private static API_URL = 'http://127.0.0.1:8080/api/';
+  private apiBaseUrl: string;
 
   constructor(
+    private configService: ConfigService,
     private http: HttpClient
-  ) { }
+  ) {
+    this.configService.getConfig()
+      .subscribe(config => {
+        this.apiBaseUrl = config.apiBaseUrl;
+      });
+  }
 
   // ------------------------------------------------
   // Subscription routes :
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(TeamService.API_URL + 'subscriptions/');
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions/');
   }
 
   public getSubscriptionsBySeason(seasonId: number): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(TeamService.API_URL + 'seasons/' + seasonId + '/subscriptions');
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'seasons/' + seasonId + '/subscriptions');
   }
 
   public getSubscription(subscriptionId: number): Observable<Subscription> {
-    return this.http.get<Subscription>(TeamService.API_URL + 'subscriptions/' + subscriptionId);
+    return this.http.get<Subscription>(this.apiBaseUrl + 'subscriptions/' + subscriptionId);
   }
 
   public createSubscription(subscription: Subscription): Observable<Subscription> {
-    return this.http.post<Subscription>(TeamService.API_URL + 'subscriptions/create', { subscription });
+    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions/create', { subscription });
   }
 
   public updateSubscription(subscription: Subscription): Observable<Subscription> {
-    return this.http.patch<Subscription>(TeamService.API_URL + 'subscriptions/update' + subscription.id, { subscription });
+    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/update' + subscription.id, { subscription });
   }
 
   public deleteSubscription(subscriptionId: number): void {
-    this.http.delete<Subscription[]>(TeamService.API_URL + 'subscriptions/delete/' + subscriptionId);
+    this.http.delete<Subscription[]>(this.apiBaseUrl + 'subscriptions/delete/' + subscriptionId);
   }
 
 
@@ -52,23 +59,23 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllSeasons(): Observable<Season[]> {
-    return this.http.get<Season[]>(TeamService.API_URL + 'seasons');
+    return this.http.get<Season[]>(this.apiBaseUrl + 'seasons');
   }
 
   public getSeason(seasonId: number): Observable<Season> {
-    return this.http.get<Season>(TeamService.API_URL + 'seasons/' + seasonId);
+    return this.http.get<Season>(this.apiBaseUrl + 'seasons/' + seasonId);
   }
 
   public createSeason(season: Season): Observable<Season> {
-    return this.http.post<Season>(TeamService.API_URL + 'seasons/create', { season });
+    return this.http.post<Season>(this.apiBaseUrl + 'seasons/create', { season });
   }
 
   public updateSeason(season: Season): Observable<Season> {
-    return this.http.post<Season>(TeamService.API_URL + 'seasons/update/' + season.id, { season });
+    return this.http.post<Season>(this.apiBaseUrl + 'seasons/update/' + season.id, { season });
   }
 
   public deleteSeason(seasonId: number): void {
-    this.http.delete(TeamService.API_URL + 'seasons/delete/' + seasonId);
+    this.http.delete(this.apiBaseUrl + 'seasons/delete/' + seasonId);
   }
 
 
@@ -77,10 +84,10 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(TeamService.API_URL + 'categories/');
+    return this.http.get<Category[]>(this.apiBaseUrl + 'categories/');
   }
 
   public getCategory(categoryId: number): Observable<Category> {
-    return this.http.get<Category>(TeamService.API_URL + 'categories/' + categoryId);
+    return this.http.get<Category>(this.apiBaseUrl + 'categories/' + categoryId);
   }
 }

@@ -3,16 +3,11 @@ import { TokenStorageService } from '../../token-storage/token-storage.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
-interface SignInResponse {
-  id: number;
-  username: string;
-  email: string;
-  roles: string[];
-  type: string;
-  token: string;
-}
+import { ConfigService } from '../../config/config.service';
+import SignInResponse from '../../../models/responses/SignInResponse';
+import User from '../../../models/entities/User';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +15,29 @@ interface SignInResponse {
 export class AuthService {
 
   // TODO : mettre cette constante dans un fichier de configuration
-  private static API_URL = 'http://127.0.0.1:8080/api/';
+  private apiBaseUrl: string;
 
   constructor(
+    private configService: ConfigService,
     private router: Router,
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
-  ) { }
+  ) {
+    this.configService.getConfig()
+      .subscribe(config => {
+        this.apiBaseUrl = config.apiBaseUrl;
+      });
+  }
 
   public signIn(username: string, password: string): Observable<SignInResponse> {
     return this.http
       .post<SignInResponse>(
-        AuthService.API_URL + 'auth/signin',
+        this.apiBaseUrl + 'auth/signin',
         { username, password }
         )
       .pipe(
         map(auth => {
-          this.tokenStorageService.storeToken(auth.token);
+          this.tokenStorageService.storeToken(auth);
           return auth;
         })
       );
@@ -49,5 +50,9 @@ export class AuthService {
 
   public isSignedIn(): boolean {
     return this.tokenStorageService.isTokenStored();
+  }
+
+  public getLoggedUser(): User {
+    return this.tokenStorageService.getUser();
   }
 }

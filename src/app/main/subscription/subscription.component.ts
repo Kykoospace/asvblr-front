@@ -62,14 +62,6 @@ export class SubscriptionComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public sendSubscription() {
-    let subscription: Subscription = this.subscriptionForm.value;
-    subscription.season = 1;
-    console.log(subscription);
-    this.teamService.createSubscription(this.subscriptionForm.value)
-      .subscribe(subscription => {
-        console.log('Inscription faite');
-      });
-  }
+  public sendSubscription() { }
 
 }

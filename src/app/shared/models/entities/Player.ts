@@ -1,5 +1,3 @@
-import User from './User';
-
 export default interface Player {
   id: number;
   firstName: string;
@@ -12,5 +10,5 @@ export default interface Player {
   phoneNumber: number;
   birthDate: Date;
   birthCountry: string;
-  user: User;
+  idUser: number;
 }

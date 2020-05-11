@@ -30,7 +30,23 @@ div#management-layout {
     }
 
     span#management-layout-header-text {
-      font-size: $management-layout-header-font-size;
+      font-size: $management-layout-header-text-font-size;
+    }
+
+    div#management-layout-header-user {
+      border: 1px solid transparent;
+      border-radius: $management-layout-header-user-border-radius;
+      font-size: $management-layout-header-user-font-size;
+      padding: $global-element-padding;
+
+      cursor: pointer;
+
+      position: absolute;
+      right: $global-spacing;
+
+      &:hover {
+        border-color: $management-layout-header-user-border-color;
+      }
     }
   }
 

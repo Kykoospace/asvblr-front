@@ -1,7 +1,3 @@
-import Player from './Player';
-import Season from './Season';
-import Category from './Category';
-import PaymentMode from './PaymentMode';
 import Document from './Document';
 
 export default interface Subscription {
@@ -18,10 +14,10 @@ export default interface Subscription {
   birthCountry: string;
   // TODO : demander modif du nom "insurance" en "insuranceRequested" côté API
   insuranceRequested: boolean;
-  player: Player;
-  season: number;
-  category: number;
-  paymentMode: number;
+  idPlayer: number;
+  idSeason: number;
+  idCategory: number;
+  idPaymentMode: number;
   cni: Document;
   identityPhoto: Document;
   medicalCertificate: Document;
