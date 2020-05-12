@@ -63,6 +63,7 @@ export class ManagementComponent implements OnInit {
     ];
 
     this.userMenu = [
+      { label: 'Retour au site', icon: 'pi pi-fw pi-home', routerLink: ['/main'] },
       { label: 'Compte utilisateur', icon: 'pi pi-fw pi-user-edit' },
       { label: 'Fiche de joueur', icon: 'pi pi-fw pi-user' },
       { label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/login/sign-out'] }
