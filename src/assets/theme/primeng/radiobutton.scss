@@ -1,0 +1,14 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// RADIO BUTTON :
+// ----------------------------------------
+
+.ui-radiobutton {
+  border: 1px solid $prime-ng-input-border-color;
+  border-radius: 100%;
+
+  &:hover {
+    border-color: $prime-ng-input-focus-color;
+  }
+}

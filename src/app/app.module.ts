@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,12 +17,12 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
-  CalendarModule,
+  CalendarModule, CheckboxModule,
   DropdownModule,
-  GalleriaModule,
+  GalleriaModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule,
-  RadioButtonModule,
+  MegaMenuModule, MenuModule,
+  RadioButtonModule, SpinnerModule,
   TableModule,
   TabMenuModule,
   ToolbarModule
@@ -44,10 +44,11 @@ import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login/login.component';
+import { LogoutComponent } from './login/logout/logout.component';
 
 import { ConfigService } from './shared/services/config/config.service';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 function loadConfiguration(
   http: HttpClient,
@@ -91,7 +92,8 @@ function loadConfiguration(
     UsersComponent,
     SettingsComponent,
     HelpComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     HttpClientModule,
@@ -108,7 +110,11 @@ function loadConfiguration(
     ReactiveFormsModule,
     RadioButtonModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    CheckboxModule,
+    SpinnerModule,
+    InputTextareaModule,
+    MenuModule
   ],
   providers: [
     {

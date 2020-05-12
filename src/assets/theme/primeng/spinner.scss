@@ -1,0 +1,23 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// SPINNER :
+// ----------------------------------------
+
+.ui-spinner {
+  border-radius: $prime-ng-input-border-radius;
+  border-color: $prime-ng-input-border-color;
+  overflow: hidden;
+  width: 100%;
+
+  .ui-spinner-up, .ui-spinner-down {
+    background: inherit;
+    border: inherit;
+    color: $prime-ng-input-font-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $prime-ng-input-focus-color
+    }
+  }
+}

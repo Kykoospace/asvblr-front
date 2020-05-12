@@ -36,9 +36,7 @@ div#management-layout {
     div#management-layout-header-user {
       border: 1px solid transparent;
       border-radius: $management-layout-header-user-border-radius;
-      font-size: $management-layout-header-user-font-size;
       padding: $global-element-padding;
-
       cursor: pointer;
 
       position: absolute;
@@ -46,6 +44,15 @@ div#management-layout {
 
       &:hover {
         border-color: $management-layout-header-user-border-color;
+      }
+
+      i {
+        margin-right: $management-layout-header-user-icon-margin;
+        vertical-align: center;
+      }
+
+      #management-layout-header-user-label {
+        font-size: $management-layout-header-user-font-size;
       }
     }
   }

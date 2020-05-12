@@ -2,121 +2,140 @@
   <div class="main-site-layout-section">
     <div class="main-site-layout-section-content">
       <h1>Rejoignez-nous !</h1>
-      <form [formGroup]="subscriptionForm">
+      <form [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
         <div class="p-grid">
           <!-- FIRSTNAME -->
           <div class="p-col-4">
             <input formControlName="firstName" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Prénom</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.firstName }}</label>
 
           <!-- LASTNAME -->
           <div class="p-col-4">
             <input formControlName="lastName" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Nom de famille</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.lastName }}</label>
 
           <!-- GENDER -->
-          <div class="p-col-4">
-            <input formControlName="gender" type="text" pInputText />
+          <div class="p-col-2">
+            <p-radioButton name="gender" value="true" formControlName="gender" label="Homme"></p-radioButton>
           </div>
-          <label class="global-form-label p-col-8">Sexe</label>
+          <div class="p-col-2">
+            <p-radioButton name="gender" value="false" formControlName="gender" label="Femme"></p-radioButton>
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.gender }}</label>
+
+          <!-- BIRTHDATE -->
+          <div class="p-col-4">
+            <input formControlName="birthDate" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.birthDate }}</label>
+
+          <!-- BIRTHCOUNTRY -->
+          <div class="p-col-4">
+            <input formControlName="birthCountry" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.birthCountry }}</label>
 
           <!-- EMAIL -->
           <div class="p-col-4">
             <input formControlName="email" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Email</label>
-
-          <!-- BIRTHDATE -->
-          <div class="p-col-4">
-            <input formControlName="city" type="text" pInputText />
-          </div>
-          <label class="global-form-label p-col-8">Date de naissance</label>
-
-          <!-- BIRTHCOUNTRY -->
-          <div class="p-col-4">
-            <input formControlName="city" type="text" pInputText />
-          </div>
-          <label class="global-form-label p-col-8">Pays de naissance</label>
-
-          <!-- ADDRESS -->
-          <div class="p-col-4">
-            <input formControlName="address" type="text" pInputText />
-          </div>
-          <label class="global-form-label p-col-8">Adresse</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.email }}</label>
 
           <!-- PHONENUMBER -->
           <div class="p-col-4">
             <input formControlName="phoneNumber" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Numéro de téléphone</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.phoneNumber }}</label>
+
+
+
+          <!-- ADDRESS -->
+          <div class="p-col-4">
+            <input formControlName="address" type="text" pInputText />
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.address }}</label>
 
           <!-- POSTCODE -->
           <div class="p-col-4">
             <input formControlName="postcode" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Code postal</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.postCode }}</label>
 
           <!-- CITY -->
           <div class="p-col-4">
             <input formControlName="city" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Ville</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.city }}</label>
+
+
+
+          <!-- CATEGORY -->
+          <div class="p-col-4">
+            <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown>
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.idCategory }}</label>
+
+          <!-- PAYMENT MODE -->
+          <div class="p-col-4">
+            <p-dropdown [options]="paymentModesOptions" formControlName="idPaymentMode"></p-dropdown>
+          </div>
+          <label class="global-form-label p-col-8">{{ formLabelValues.idPaymentMode }}</label>
 
 
 
           <!-- INSURANCE -->
           <div class="p-col-4">
-            <input formControlName="insurance" type="text" pInputText />
+            <input type="checkbox" formControlName="insuranceRequested"/>
           </div>
-          <label class="global-form-label p-col-8">Souhaitez-vous prendre l'assurance supplémentaire ?</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.insuranceRequested }}</label>
 
           <!-- EQUIPMENT -->
           <div class="p-col-4">
-            <input formControlName="equipment" type="text" pInputText />
+            <input type="checkbox" formControlName="equipment"/>
           </div>
-          <label class="global-form-label p-col-8">Souhaitez-vous acheter un tenue au couleurs de votre équipe ?</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.equipment }}</label>
 
-          <!-- REQUESTEDJERSEYNUMBER -->
+          <!-- REQUESTED JERSE NUMBER -->
           <div class="p-col-4">
-            <input formControlName="requestedJerseyNumber" type="text" pInputText />
+            <p-spinner formControlName="requestedJerseyNumber" [min]="0" [max]="40"></p-spinner>
           </div>
-          <label class="global-form-label p-col-8">Votre taille de haut</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.requestedJerseyNumber }}</label>
 
           <!-- TOPSIZE -->
           <div class="p-col-4">
             <input formControlName="topSize" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Votre taille de haut</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.topSize }}</label>
 
           <!-- PANTSIZE -->
           <div class="p-col-4">
             <input formControlName="pantSize" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">Votre taille de pantalon</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.pantSize }}</label>
 
 
 
           <!-- COACH -->
           <div class="p-col-4">
-            <input formControlName="coach" type="text" pInputText />
+            <input type="checkbox" formControlName="coach"/>
           </div>
-          <label class="global-form-label p-col-8">Êtes-vous un(e) entraîneur(se) ?</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.coach }}</label>
 
           <!-- REFEREE -->
           <div class="p-col-4">
-            <input formControlName="referee" type="text" pInputText />
+            <input type="checkbox" formControlName="referee"/>
           </div>
-          <label class="global-form-label p-col-8">Êtes-vous un(e) arbitre ?</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.referee }}</label>
 
           <!-- COMMENT -->
           <div class="p-col-4">
-            <input formControlName="comment" type="text" pInputText />
+            <textarea formControlName="comment" pInputTextarea></textarea>
           </div>
-          <label class="global-form-label p-col-8">Avez-vous autre chose à nous dire ?</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.comment }}</label>
         </div>
-        <button (click)="sendSubscription()">Envoyer l'inscription</button>
+        <button type="submit">Envoyer l'inscription</button>
       </form>
     </div>
   </div>

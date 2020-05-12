@@ -26,7 +26,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions/');
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions');
   }
 
   public getSubscriptionsBySeason(seasonId: number): Observable<Subscription[]> {
@@ -37,16 +37,16 @@ export class TeamService {
     return this.http.get<Subscription>(this.apiBaseUrl + 'subscriptions/' + subscriptionId);
   }
 
-  public createSubscription(subscription: Subscription): Observable<Subscription> {
-    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions/create', { subscription });
+  public createSubscription(subscription: any): Observable<Subscription> {
+    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions', { subscription });
   }
 
   public updateSubscription(subscription: Subscription): Observable<Subscription> {
-    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/update' + subscription.id, { subscription });
+    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions' + subscription.id, { subscription });
   }
 
   public deleteSubscription(subscriptionId: number): void {
-    this.http.delete<Subscription[]>(this.apiBaseUrl + 'subscriptions/delete/' + subscriptionId);
+    this.http.delete<Subscription[]>(this.apiBaseUrl + 'subscriptions/' + subscriptionId);
   }
 
 

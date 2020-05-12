@@ -1,0 +1,31 @@
+@import "primeng-variables";
+
+// ----------------------------------------
+// MENU :
+// ----------------------------------------
+
+.ui-menu {
+  border: 1px solid $prime-ng-menu-border-color;
+  border-radius: $prime-ng-menu-border-radius;
+  background-color: $prime-ng-menu-bkg-color;
+  padding: 0px !important;
+
+  .ui-menulist {
+    padding: 0px;
+    overflow: hidden;
+  }
+
+  .ui-menuitem {
+    padding: $prime-ng-menu-item-padding;
+    color: $prime-ng-menu-item-font-color;
+    margin: 0px !important;
+
+    &:hover {
+      background-color: $prime-ng-menu-item-hover-bkg-color;
+    }
+
+    .ui-menuitem-link {
+      color: $prime-ng-menu-item-font-color;
+    }
+  }
+}

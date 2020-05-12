@@ -2,13 +2,22 @@
 // PRIMENG VARIABLES :
 // ----------------------------------------
 
+// Menu :
+$prime-ng-menu-border-color: $global-border-color;
+$prime-ng-menu-border-radius: $global-border-radius;
+$prime-ng-menu-bkg-color: $global-bkg-darker-color;
+
+$prime-ng-menu-item-padding: $global-element-padding;
+$prime-ng-menu-item-font-color: $global-font-color;
+$prime-ng-menu-item-hover-bkg-color: $global-bkg-darker-active-color;
+
 // Input :
 $prime-ng-input-border-radius: $global-border-radius;
 $prime-ng-input-border-color: $global-border-color;
 $prime-ng-input-padding: $global-element-padding;
 $prime-ng-input-font-size: $global-font-size;
 $prime-ng-input-font-color: $global-font-color;
-$prime-ng-input-focus-border-color: $global-accent-color;
+$prime-ng-input-focus-color: $global-accent-color;
 
 // FlexGrid :
 $prime-ng-flexgrid-item-space-between: $global-element-padding;

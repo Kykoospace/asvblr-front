@@ -12,7 +12,7 @@ export default interface Subscription {
   birthCountry: string;
 
   address: string;
-  postcode: number;
+  postCode: number;
   city: string;
 
   idCategory: number;
@@ -26,6 +26,7 @@ export default interface Subscription {
   coach: boolean;
   referee: boolean;
 
+  // TODO: maj nomenclature
   cni: Document;
   identityPhoto: Document;
   medicalCertificate: Document;

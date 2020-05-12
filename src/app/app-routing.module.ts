@@ -12,7 +12,7 @@ import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { SubscriptionComponent } from './main/subscription/subscription.component';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login/login.component';
 
 import { ManagementComponent } from './management/management.component';
 import { ArticlesComponent } from './management/articles/articles.component';
@@ -36,6 +36,7 @@ import { HelpComponent } from './management/help/help.component';
 // Guards import :
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
+import {LogoutComponent} from './login/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -50,7 +51,13 @@ const routes: Routes = [
       { path: 'subscription', component: SubscriptionComponent }
     ]
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'login',
+    children: [
+      { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
+      { path: 'sign-in', component: LoginComponent },
+      { path: 'sign-out', component: LogoutComponent }
+    ]
+  },
   { path: 'management', component: ManagementComponent,
     canActivate: [ LoginGuard, PermissionGuard ],
     canActivateChild: [ LoginGuard, PermissionGuard ],

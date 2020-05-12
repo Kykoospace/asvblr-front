@@ -6,22 +6,34 @@
 // LOGIN LAYOUT VARIABLES :
 // ----------------------------------------
 
+// TODO : mettre les variables dans le fichier login-layout-variables
+
 #login-layout {
   height: 100%;
   background: url("src/assets/images/login-background.jpg") no-repeat center;
   background-size: cover;
 
   #login-layout-return-link {
-    position: absolute;
-    left: 0px;
-    top: 0px;
+    border: 1px solid transparent;
+    border-radius: $global-border-radius;
     color: $global-contrast-font-color;
-    font-size: $global-font-size-large;
     text-decoration: none;
     padding: $global-element-padding;
 
+    position: absolute;
+    left: $global-spacing;
+    top: $global-spacing;
+
+    &:hover {
+      border-color: $global-border-color;
+    }
+
     #login-layout-return-link-icon {
-      vertical-align: middle;
+      margin-right: $global-spacing;
+    }
+
+    #login-layout-return-link-label {
+      font-size: $global-font-size-large;
     }
   }
 

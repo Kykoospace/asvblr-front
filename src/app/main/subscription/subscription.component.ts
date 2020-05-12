@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TeamService} from '../../shared/services/api/team/team.service';
-import PaymentMode from '../../shared/models/entities/PaymentMode';
-import {ManagementService} from '../../shared/services/api/management/management.service';
-import Subscription from '../../shared/models/entities/Subscription';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TeamService } from '../../shared/services/api/team/team.service';
+import { ManagementService } from '../../shared/services/api/management/management.service';
 
 @Component({
   selector: 'app-subscription',
@@ -12,23 +10,24 @@ import Subscription from '../../shared/models/entities/Subscription';
 })
 export class SubscriptionComponent implements OnInit {
 
-  public static formLabelValues = {
+  public formLabelValues = {
     address: 'Adresse',
     birthCountry: 'Pays de naissance',
     birthDate: 'Date de naissance',
     city: 'Ville',
     coach: 'Êtes-vous un(e) coach ?',
+    comment: 'Avez-vous autre chose à nous dire ?',
     email: 'Email',
     equipment: 'Souhaitez-vous acheter un tenue au couleurs de votre équipe ?',
     firstName: 'Prénom',
     gender: 'Sexe',
     idCategory: 'Catégorie de niveau souhaitée',
     idPaymentMode: 'Mode de paiement',
-    insurance: 'Souhaitez-vous prendre l\'assurance supplémentaire ?',
+    insuranceRequested: 'Souhaitez-vous prendre l\'assurance supplémentaire ?',
     lastName: 'Nom de famille',
-    pantsSize: 'Taille de pantalon',
-    phoneNumber: 'Nméro de téléphone',
-    postcode: 'Code postal',
+    pantSize: 'Taille de pantalon',
+    phoneNumber: 'Numéro de téléphone',
+    postCode: 'Code postal',
     referee: 'Êtes-vous un(e) arbitre ?',
     requestedJerseyNumber: 'Numéro de maillot souhaité',
     topSize: 'Taille de haut'
@@ -45,27 +44,26 @@ export class SubscriptionComponent implements OnInit {
     private managementService: ManagementService
   ) {
     this.subscriptionForm = this.formBuilder.group({
-      firstName: this.formBuilder.control('', [ Validators.required ]),
-      lastName: this.formBuilder.control('', [ Validators.required ]),
-      gender: this.formBuilder.control('', [ Validators.required ]),
-      email: this.formBuilder.control('', [ Validators.required ]),
-      phoneNumber: this.formBuilder.control('', [ Validators.required ]),
-      birthDate: this.formBuilder.control('', [ Validators.required ]),
-      birthCountry: this.formBuilder.control('', [ Validators.required ]),
-      address: this.formBuilder.control('', [ Validators.required ]),
-      postcode: this.formBuilder.control('', [ Validators.required ]),
-      city: this.formBuilder.control('', [ Validators.required ]),
-      equipment: this.formBuilder.control('', [ Validators.required ]),
-      requestedJerseyNumber: this.formBuilder.control('', [ Validators.required ]),
-      topSize: this.formBuilder.control('', [ Validators.required ]),
-      pantSize: this.formBuilder.control('', [ Validators.required ]),
-      idCategory: this.formBuilder.control('', [ Validators.required ]),
-      idPaymentMode: this.formBuilder.control('', [ Validators.required ]),
-      idSeason: this.formBuilder.control('', [ Validators.required ]),
-      insurance: this.formBuilder.control('', [ Validators.required ]),
-      referee: this.formBuilder.control('', [ Validators.required ]),
-      coach: this.formBuilder.control('', [ Validators.required ]),
-      comment: this.formBuilder.control(''),
+      firstName: ['', [ Validators.required ]],
+      lastName: ['', [ Validators.required ]],
+      gender: [false],
+      email: ['', [ Validators.required ]],
+      phoneNumber: ['', [ Validators.required ]],
+      birthDate: ['', [ Validators.required ]],
+      birthCountry: ['', [ Validators.required ]],
+      address: ['', [ Validators.required ]],
+      postcode: ['', [ Validators.required ]],
+      city: ['', [ Validators.required ]],
+      equipment: [false],
+      requestedJerseyNumber: ['', [ Validators.required ]],
+      topSize: ['', [ Validators.required ]],
+      pantSize: ['', [ Validators.required ]],
+      idCategory: [1, [ Validators.required ]],
+      idPaymentMode: [1, [ Validators.required ]],
+      insuranceRequested: [false],
+      referee: [true],
+      coach: [false],
+      comment: [''],
     });
 
     console.log('Get all payment modes');
@@ -93,6 +91,10 @@ export class SubscriptionComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public sendSubscription() { }
+  public sendSubscription() {
+    const newSub = this.subscriptionForm.value;
+    newSub.idSeason = 1;
+    console.log(newSub);
+  }
 
 }

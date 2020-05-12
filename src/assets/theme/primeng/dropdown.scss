@@ -5,11 +5,27 @@
 // ----------------------------------------
 
 .ui-dropdown {
-  color: black;
+  border: 1px solid $prime-ng-input-border-color;
+  border-radius: $prime-ng-input-border-radius;
+  color: $prime-ng-input-font-color;
+  width: 100%;
+
   .ui-dropdown-items-wrapper {
-    background-color: white;
-    .ui-dropdown-item {
-      color: black;
+    background-color: $global-bkg-color;
+    border: 1px solid $prime-ng-input-border-color;
+    overflow: hidden !important;
+
+    .ui-dropdown-list {
+      padding: 0px;
+
+      .ui-dropdown-item {
+        color: $prime-ng-input-font-color;
+        margin: 0px;
+
+        &:hover {
+          background-color: $global-bkg-active-color;
+        }
+      }
     }
   }
 }
