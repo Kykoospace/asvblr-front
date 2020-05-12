@@ -7,16 +7,42 @@ $prime-ng-menu-border-radius: $global-border-radius;
 $prime-ng-menu-bkg-color: $global-bkg-darker-color;
 
 $prime-ng-menu-item-padding: $global-element-padding;
-$prime-ng-menu-item-font-color: $global-font-color;
+$prime-ng-menu-item-font-color: $global-primary-font-color;
 $prime-ng-menu-item-hover-bkg-color: $global-bkg-darker-active-color;
+
+
+// Table :
+$prime-ng-table-border-color: $global-border-color;
+$prime-ng-table-border-radius: $global-border-radius;
+$prime-ng-table-header-padding: $global-element-padding-large;
+$prime-ng-table-header-font-color: $global-primary-font-color;
+$prime-ng-table-row-bkg-color-secondary: $global-bkg-darker-color;
+$prime-ng-table-row-bkg-color-hover: $global-bkg-darker-active-color;
+$prime-ng-table-row-cell-padding: $global-element-padding;
+$prime-ng-table-paginator-dropdown-bkg-color: $global-bkg-darker-color;
+$prime-ng-table-paginator-button-padding: $global-element-padding;
+$prime-ng-table-paginator-button-hover-bkg-color: $global-bkg-active-color;
+$prime-ng-table-paginator-button-font-color: $global-primary-font-color;
+$prime-ng-table-paginator-button-disabled-font-color: $global-disabled-font-color;
+
 
 // Input :
 $prime-ng-input-border-radius: $global-border-radius;
 $prime-ng-input-border-color: $global-border-color;
 $prime-ng-input-padding: $global-element-padding;
 $prime-ng-input-font-size: $global-font-size;
-$prime-ng-input-font-color: $global-font-color;
+$prime-ng-input-font-color: $global-primary-font-color;
 $prime-ng-input-focus-color: $global-accent-color;
+
+
+// Calendar :
+$prime-ng-calendar-datepicker-bkg-color: $global-bkg-darker-color;
+$prime-ng-calendar-datepicker-button-border-radius: $global-border-radius;
+$prime-ng-calendar-datepicker-button-hover-color: $global-bkg-darker-active-color;
+$prime-ng-calendar-datepicker-button-active-color: $global-accent-color;
+$prime-ng-calendar-datepicker-button-active-font-color: $global-contrast-font-active-color;
+$prime-ng-calendar-datepicker-button-disabled-font-color: $global-disabled-font-color;
+
 
 // FlexGrid :
 $prime-ng-flexgrid-item-space-between: $global-element-padding;

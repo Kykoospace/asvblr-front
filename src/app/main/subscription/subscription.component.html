@@ -2,6 +2,13 @@
   <div class="main-site-layout-section">
     <div class="main-site-layout-section-content">
       <h1>Rejoignez-nous !</h1>
+      <p>
+        Remplissez ce formulaire d'inscription afin de rejoindre notre super club !
+      </p>
+      <p>
+        Vous recevrez un mail de confirmation sous peu, et nous compléterons au plus vite votre inscription afin de pouvoir vous compter dans nos équipes. Pour toute question, n'hésitez pas à nous
+        <a [routerLink]="['/main/contact']">joindre</a>.
+      </p>
       <form [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
         <div class="p-grid">
           <!-- FIRSTNAME -->
@@ -27,7 +34,7 @@
 
           <!-- BIRTHDATE -->
           <div class="p-col-4">
-            <input formControlName="birthDate" type="text" pInputText />
+            <p-calendar formControlName="birthDate" [locale]="calendarLanguage" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:{{ maxBirthDateValue.getFullYear() }}" [minDate]="minBirthDateValue" [maxDate]="maxBirthDateValue" dateFormat="dd/mm/yy"></p-calendar>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.birthDate }}</label>
 
@@ -50,7 +57,6 @@
           <label class="global-form-label p-col-8">{{ formLabelValues.phoneNumber }}</label>
 
 
-
           <!-- ADDRESS -->
           <div class="p-col-4">
             <input formControlName="address" type="text" pInputText />
@@ -70,7 +76,6 @@
           <label class="global-form-label p-col-8">{{ formLabelValues.city }}</label>
 
 
-
           <!-- CATEGORY -->
           <div class="p-col-4">
             <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown>
@@ -82,7 +87,6 @@
             <p-dropdown [options]="paymentModesOptions" formControlName="idPaymentMode"></p-dropdown>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.idPaymentMode }}</label>
-
 
 
           <!-- INSURANCE -->
@@ -97,9 +101,9 @@
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.equipment }}</label>
 
-          <!-- REQUESTED JERSE NUMBER -->
+          <!-- REQUESTED JERSEY NUMBER -->
           <div class="p-col-4">
-            <p-spinner formControlName="requestedJerseyNumber" [min]="0" [max]="40"></p-spinner>
+            <p-spinner formControlName="requestedJerseyNumber" [min]="1" [max]="40"></p-spinner>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.requestedJerseyNumber }}</label>
 
@@ -114,7 +118,6 @@
             <input formControlName="pantSize" type="text" pInputText />
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.pantSize }}</label>
-
 
 
           <!-- COACH -->

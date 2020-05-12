@@ -1,0 +1,35 @@
+
+
+
+.ui-calendar {
+  width: 100%;
+
+  .ui-datepicker {
+    background-color: $prime-ng-calendar-datepicker-bkg-color;
+    border-radius: $prime-ng-input-border-radius;
+
+    .ui-datepicker-calendar {
+      td {
+        border-radius: $prime-ng-calendar-datepicker-button-border-radius;
+        overflow: hidden;
+
+        a {
+          cursor: pointer;
+
+          &:hover {
+            background-color: $prime-ng-calendar-datepicker-button-hover-color;
+          }
+
+          &.ui-state-active {
+            background-color: $prime-ng-calendar-datepicker-button-active-color;
+            color: $prime-ng-calendar-datepicker-button-active-font-color;
+          }
+        }
+
+        span {
+          color: $prime-ng-calendar-datepicker-button-disabled-font-color;
+        }
+      }
+    }
+  }
+}

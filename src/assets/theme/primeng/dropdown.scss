@@ -10,6 +10,10 @@
   color: $prime-ng-input-font-color;
   width: 100%;
 
+  &.ui-state-focus {
+    border-color: #00a69c;
+  }
+
   .ui-dropdown-items-wrapper {
     background-color: $global-bkg-color;
     border: 1px solid $prime-ng-input-border-color;

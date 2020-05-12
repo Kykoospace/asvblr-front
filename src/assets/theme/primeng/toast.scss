@@ -1,0 +1,29 @@
+
+
+
+.ui-toast-message {
+  border-radius: $global-border-radius;
+  color: $global-contrast-font-color;
+  padding: $global-element-padding;
+  font-size: $global-font-size;
+
+  &.ui-toast-message-info {
+    background-color: $global-info-color;
+  }
+
+  &.ui-toast-message-success {
+    background-color: $global-success-color;
+  }
+
+  &.ui-toast-message-warn {
+    background-color: $global-warning-color;
+  }
+
+  &.ui-toast-message-error {
+    background-color: $global-danger-color;
+  }
+
+  .ui-toast-summary {
+    font-size: $global-font-size-large;
+  }
+}

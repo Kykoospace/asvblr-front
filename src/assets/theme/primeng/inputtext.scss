@@ -12,6 +12,7 @@
   color: $prime-ng-input-font-color;
   width: 100%;
   resize: none;
+  font-family: $global-font !important;
 
   &:focus {
     border-color: $prime-ng-input-focus-color;

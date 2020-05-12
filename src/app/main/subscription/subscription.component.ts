@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TeamService } from '../../shared/services/api/team/team.service';
 import { ManagementService } from '../../shared/services/api/management/management.service';
+import {MessageService} from 'primeng';
 
 @Component({
   selector: 'app-subscription',
@@ -18,7 +19,7 @@ export class SubscriptionComponent implements OnInit {
     coach: 'Êtes-vous un(e) coach ?',
     comment: 'Avez-vous autre chose à nous dire ?',
     email: 'Email',
-    equipment: 'Souhaitez-vous acheter un tenue au couleurs de votre équipe ?',
+    equipment: 'Souhaitez-vous acheter un tenue aux couleurs de votre équipe ?',
     firstName: 'Prénom',
     gender: 'Sexe',
     idCategory: 'Catégorie de niveau souhaitée',
@@ -33,15 +34,29 @@ export class SubscriptionComponent implements OnInit {
     topSize: 'Taille de haut'
   };
 
-  paymentModesOptions = [];
-  categoryOptions = [];
+  public paymentModesOptions = [];
+  public categoryOptions = [];
 
-  subscriptionForm: FormGroup;
+  public calendarLanguage = {
+    firstDayOfWeek: 1,
+    dayNames: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+    dayNamesShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+    dayNamesMin: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+    monthNames: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+    monthNamesShort: [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+    today: 'Aujourd\'hui',
+    clear: 'Effacer'
+  };
+  public minBirthDateValue = new Date('01/01/1900');
+  public maxBirthDateValue = new Date();
+
+  public subscriptionForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private teamService: TeamService,
-    private managementService: ManagementService
+    private managementService: ManagementService,
+    private messageService: MessageService
   ) {
     this.subscriptionForm = this.formBuilder.group({
       firstName: ['', [ Validators.required ]],
@@ -92,9 +107,18 @@ export class SubscriptionComponent implements OnInit {
   ngOnInit(): void { }
 
   public sendSubscription() {
-    const newSub = this.subscriptionForm.value;
-    newSub.idSeason = 1;
-    console.log(newSub);
+    if (this.subscriptionForm.valid) {
+      const newSub = this.subscriptionForm.value;
+      newSub.idSeason = 1;
+      console.log(newSub);
+    } else {
+      console.log('Toast');
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulaire invalide',
+        detail: 'Veuillez renseigner tous les champs'
+      });
+    }
   }
 
 }

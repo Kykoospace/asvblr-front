@@ -1,0 +1,57 @@
+
+
+.ui-table {
+  border: 1px solid $prime-ng-table-border-color;
+  border-radius: $prime-ng-table-border-radius;
+
+  .ui-table-thead {
+    > tr {
+      > th {
+        color: $prime-ng-table-header-font-color;
+        padding: $prime-ng-table-header-padding !important;
+      }
+    }
+  }
+
+  .ui-table-tbody {
+    > tr {
+
+      &:nth-child(2n) {
+        background-color: $prime-ng-table-row-bkg-color-secondary;
+      }
+
+      &:hover {
+        background-color: $prime-ng-table-row-bkg-color-hover;
+      }
+
+      > td {
+        padding: $prime-ng-table-row-cell-padding !important;
+      }
+    }
+  }
+
+  .ui-paginator {
+    .ui-paginator-element {
+      color: $prime-ng-table-paginator-button-font-color;
+
+      &:hover {
+        background-color: $prime-ng-table-paginator-button-hover-bkg-color;
+
+        &.ui-state-disabled {
+          background-color: inherit;
+        }
+      }
+
+      &.ui-state-disabled {
+        color: $prime-ng-table-paginator-button-disabled-font-color;
+      }
+    }
+
+    .ui-dropdown {
+      background-color: $prime-ng-table-paginator-dropdown-bkg-color;
+      border: inherit;
+      width: inherit;
+      text-align: left;
+    }
+  }
+}

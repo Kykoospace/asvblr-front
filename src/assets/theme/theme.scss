@@ -13,14 +13,17 @@
 // PrimeNG :
 @import "primeng/menu";
 @import "primeng/megamenu";
+@import "primeng/table";
 @import "primeng/galleria";
 @import "primeng/dropdown";
 @import "primeng/inputtext";
+@import "primeng/calendar";
 @import "primeng/checkbox";
 @import "primeng/radiobutton";
 @import "primeng/spinner";
 @import "primeng/flexgrid";
 @import "primeng/textarea";
+@import "primeng/toast";
 
 
 // ----------------------------------------
@@ -43,6 +46,10 @@ html {
 // COMMON ITEMS :
 // ----------------------------------------
 
-.global-form-label {
-  height: 100%;
+a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

@@ -24,7 +24,7 @@ $management-layout-header-user-icon-margin: $global-spacing;
 // Nav :
 $management-layout-nav-width: 250px;
 $management-layout-nav-bkg-color: $global-bkg-darker-color;
-$management-layout-nav-font-color: $global-font-color;
+$management-layout-nav-font-color: $global-primary-font-color;
 
 // Nav group :
 $management-layout-nav-group-bkg-color: inherit;
@@ -38,7 +38,7 @@ $management-layout-nav-group-title-padding: $global-element-padding-title;
 $management-layout-nav-group-item-padding: $global-element-padding-large;
 $management-layout-nav-group-item-indentation: $global-spacing-large;
 $management-layout-nav-group-item-bkg-color: inherit;
-$management-layout-nav-group-item-font-color: $global-font-color;
+$management-layout-nav-group-item-font-color: $global-primary-font-color;
 $management-layout-nav-group-item-font-size: $global-font-size-small;
 $management-layout-nav-group-item-hover-bkg-color: $global-bkg-darker-active-color;
 $management-layout-nav-group-item-hover-font-color: inherit;
@@ -55,5 +55,5 @@ $management-layout-nav-group-item-icon-spacing: $global-spacing;
 // Main content :
 $management-layout-main-content-bkg-color: $global-bkg-color;
 $management-layout-main-content-padding: $global-container-padding;
-$management-layout-main-content-font-color: $global-font-color;
+$management-layout-main-content-font-color: $global-primary-font-color;
 $management-layout-main-content-font-size: $global-font-size;

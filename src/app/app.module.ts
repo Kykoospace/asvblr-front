@@ -21,10 +21,10 @@ import {
   DropdownModule,
   GalleriaModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule, MenuModule,
+  MegaMenuModule, MenuModule, MessageService,
   RadioButtonModule, SpinnerModule,
   TableModule,
-  TabMenuModule,
+  TabMenuModule, ToastModule,
   ToolbarModule
 } from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
@@ -114,7 +114,8 @@ function loadConfiguration(
     CheckboxModule,
     SpinnerModule,
     InputTextareaModule,
-    MenuModule
+    MenuModule,
+    ToastModule
   ],
   providers: [
     {
@@ -125,7 +126,8 @@ function loadConfiguration(
         ConfigService
       ],
       multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    MessageService
   ],
   bootstrap: [
     AppComponent
