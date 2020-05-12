@@ -5,10 +5,10 @@
 // ----------------------------------------
 
 .ui-menu {
-  border: 1px solid $prime-ng-menu-border-color;
   border-radius: $prime-ng-menu-border-radius;
   background-color: $prime-ng-menu-bkg-color;
   padding: 0px !important;
+  overflow: hidden;
 
   .ui-menulist {
     padding: 0px;
