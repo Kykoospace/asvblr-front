@@ -1,14 +1,23 @@
 
 
 .ui-table {
-  border: 1px solid $prime-ng-table-border-color;
-  border-radius: $prime-ng-table-border-radius;
+  // border: 1px solid $prime-ng-table-border-color;
+  // border-radius: $prime-ng-table-border-radius;
+
+  .ui-table-caption {
+    padding: 0px;
+    margin-bottom: $prime-ng-table-caption-spacing;
+  }
 
   .ui-table-thead {
     > tr {
       > th {
         color: $prime-ng-table-header-font-color;
         padding: $prime-ng-table-header-padding !important;
+
+        &.ui-state-highlight {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -17,15 +26,25 @@
     > tr {
 
       &:nth-child(2n) {
-        background-color: $prime-ng-table-row-bkg-color-secondary;
+        background-color: $prime-ng-table-row-secondary-bkg-color;
       }
 
       &:hover {
-        background-color: $prime-ng-table-row-bkg-color-hover;
+        background-color: $prime-ng-table-row-hover-bkg-color;
+      }
+
+      &.ui-state-highlight {
+        color: $prime-ng-table-row-selected-font-color;
+        background-color: $prime-ng-table-row-selected-bkg-color;
+      }
+
+      &.ui-selectable-row {
+        cursor: pointer;
       }
 
       > td {
         padding: $prime-ng-table-row-cell-padding !important;
+        user-select: none;
       }
     }
   }
@@ -44,6 +63,11 @@
 
       &.ui-state-disabled {
         color: $prime-ng-table-paginator-button-disabled-font-color;
+      }
+
+      &.ui-state-active {
+        font-weight: bold;
+        text-decoration: underline;
       }
     }
 

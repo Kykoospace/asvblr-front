@@ -1,0 +1,24 @@
+
+
+.ui-selectbutton {
+
+  .ui-button {
+    background-color: $prime-ng-button-info-bkg-color;
+    color: $prime-ng-button-info-font-color;
+
+    &:first-child {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+
+    &.ui-state-active {
+      background-color: $prime-ng-button-bkg-color;
+      color: $prime-ng-button-font-color;
+    }
+  }
+}

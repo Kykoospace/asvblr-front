@@ -4,20 +4,52 @@
 
 // Menu :
 $prime-ng-menu-border-radius: $global-border-radius;
-$prime-ng-menu-bkg-color: $global-bkg-darker-color;
+$prime-ng-menu-bkg-color: $global-bkg-color;
 
 $prime-ng-menu-item-padding: $global-element-padding;
 $prime-ng-menu-item-font-color: $global-primary-font-color;
-$prime-ng-menu-item-hover-bkg-color: $global-bkg-darker-active-color;
+$prime-ng-menu-item-hover-bkg-color: $global-bkg-active-color;
+
+
+// Button :
+$prime-ng-button-padding: $global-element-padding-small;
+$prime-ng-button-border-radius: $global-border-radius;
+$prime-ng-button-font-size: $global-font-size-small;
+$prime-ng-button-bkg-color: $global-accent-color;
+$prime-ng-button-active-bkg-color: $global-accent-active-color;
+$prime-ng-button-font-color: $global-contrast-font-color;
+
+$prime-ng-button-secondary-bkg-color: $global-info-color;
+$prime-ng-button-secondary-active-bkg-color: $global-info-active-color;
+$prime-ng-button-secondary-font-color: $global-primary-font-color;
+
+$prime-ng-button-success-bkg-color: $global-success-color;
+$prime-ng-button-success-active-bkg-color: $global-success-active-color;
+$prime-ng-button-success-font-color: $global-primary-font-color;
+
+$prime-ng-button-info-bkg-color: $global-info-color;
+$prime-ng-button-info-active-bkg-color: $global-info-active-color;
+$prime-ng-button-info-font-color: $global-primary-font-color;
+
+$prime-ng-button-warning-bkg-color: $global-warning-color;
+$prime-ng-button-warning-active-bkg-color: $global-warning-active-color;
+$prime-ng-button-warning-font-color: $global-primary-font-color;
+
+$prime-ng-button-danger-bkg-color: $global-danger-color;
+$prime-ng-button-danger-active-bkg-color: $global-danger-active-color;
+$prime-ng-button-danger-font-color: $global-contrast-font-color;
 
 
 // Table :
 $prime-ng-table-border-color: $global-border-color;
 $prime-ng-table-border-radius: $global-border-radius;
+$prime-ng-table-caption-spacing: $global-spacing-large;
 $prime-ng-table-header-padding: $global-element-padding-large;
 $prime-ng-table-header-font-color: $global-primary-font-color;
-$prime-ng-table-row-bkg-color-secondary: $global-bkg-darker-color;
-$prime-ng-table-row-bkg-color-hover: $global-bkg-darker-active-color;
+$prime-ng-table-row-secondary-bkg-color: $global-bkg-darker-color;
+$prime-ng-table-row-hover-bkg-color: $global-bkg-darker-active-color;
+$prime-ng-table-row-selected-font-color: $global-contrast-font-active-color;
+$prime-ng-table-row-selected-bkg-color: $global-accent-color;
 $prime-ng-table-row-cell-padding: $global-element-padding;
 $prime-ng-table-paginator-dropdown-bkg-color: $global-bkg-darker-color;
 $prime-ng-table-paginator-button-padding: $global-element-padding;
@@ -36,7 +68,7 @@ $prime-ng-input-focus-color: $global-accent-color;
 
 
 // Calendar :
-$prime-ng-calendar-datepicker-bkg-color: $global-bkg-darker-color;
+$prime-ng-calendar-datepicker-bkg-color: $global-bkg-color;
 $prime-ng-calendar-datepicker-button-border-radius: $global-border-radius;
 $prime-ng-calendar-datepicker-button-hover-color: $global-bkg-darker-active-color;
 $prime-ng-calendar-datepicker-button-active-color: $global-accent-color;
@@ -45,4 +77,4 @@ $prime-ng-calendar-datepicker-button-disabled-font-color: $global-disabled-font-
 
 
 // FlexGrid :
-$prime-ng-flexgrid-item-space-between: $global-element-padding;
+$prime-ng-flexgrid-item-space-between: $global-spacing;

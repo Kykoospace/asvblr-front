@@ -23,15 +23,15 @@ $global-accent-active-color: #009c91;
 
 
 // Action colors :
-$global-success-color: #00a600;
-$global-info-color: #a6a6a6;
-$global-warning-color: #a69000;
+$global-success-color: #9ad09a;
+$global-info-color: #e0e0e0;
+$global-warning-color: #d0a600;
 $global-danger-color: #a60000;
 
-$global-success-active-color: #009c00;
-$global-info-active-color: #9c9c9c;
-$global-warning-active-color: #9c8000;
-$global-danger-active-color: #9c0000;
+$global-success-active-color: #90ca90;
+$global-info-active-color: #dadada;
+$global-warning-active-color: #caa000;
+$global-danger-active-color: #9a0000;
 
 
 // Font :
@@ -66,6 +66,7 @@ $global-spacing-large: 24px;
 $global-border-radius: 3px;
 $global-container-padding: 12px 12px;
 $global-element-padding: 6px 9px;
+$global-element-padding-small: 3px 6px;
 $global-element-padding-large: 9px 12px;
 $global-element-padding-giant: 16px 24px;
 $global-element-padding-title: 12px 16px;

@@ -1,5 +1,3 @@
-import Document from './Document';
-
 export default interface Subscription {
   id: number;
 
@@ -9,34 +7,34 @@ export default interface Subscription {
   email: string;
   phoneNumber: string;
   birthDate: Date;
-  birthCountry: string;
+  nationality: string;
 
   address: string;
-  postCode: number;
+  postcode: number;
   city: string;
 
   idCategory: number;
 
   equipment: boolean;
   requestedJerseyNumber: number;
-  topSize: string;
-  pantsSize: string;
+  idTopSize: number;
+  idPantsSize: number;
 
   insuranceRequested: boolean;
   coach: boolean;
   referee: boolean;
 
-  // TODO: maj nomenclature
-  cni: Document;
-  identityPhoto: Document;
-  medicalCertificate: Document;
+  idCNI: number;
+  idIdentityPhoto: number;
+  idMedicalCertificate: number;
 
   idPaymentMode: number;
 
-  // TODO: feature in progress
-  // comment: string;
+  comment: string;
 
   // Internal feature :
+  creationDate: Date;
+  validationDate: Date;
   idPlayer: number;
   idSeason: number;
   confirmed: boolean;

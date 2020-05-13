@@ -1,0 +1,19 @@
+
+
+.ui-toolbar {
+  padding: 0px !important;
+
+  .ui-toolbar-group-left {
+    > * {
+      margin-right: $global-spacing;
+    }
+  }
+
+  .ui-toolbar-group-right {
+    display: block;
+    float: right;
+    > * {
+      margin-left: $global-spacing;
+    }
+  }
+}

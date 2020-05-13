@@ -7,13 +7,14 @@
   .ui-datepicker {
     background-color: $prime-ng-calendar-datepicker-bkg-color;
     border-radius: $prime-ng-input-border-radius;
+    min-width: 25em !important;
 
     .ui-datepicker-calendar {
       td {
-        border-radius: $prime-ng-calendar-datepicker-button-border-radius;
-        overflow: hidden;
+        padding: 12px 6px;
 
         a {
+          border-radius: $prime-ng-calendar-datepicker-button-border-radius;
           cursor: pointer;
 
           &:hover {

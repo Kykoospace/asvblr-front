@@ -13,7 +13,7 @@ export class SubscriptionComponent implements OnInit {
 
   public formLabelValues = {
     address: 'Adresse',
-    birthCountry: 'Pays de naissance',
+    nationality: 'Nationalité',
     birthDate: 'Date de naissance',
     city: 'Ville',
     coach: 'Êtes-vous un(e) coach ?',
@@ -26,16 +26,17 @@ export class SubscriptionComponent implements OnInit {
     idPaymentMode: 'Mode de paiement',
     insuranceRequested: 'Souhaitez-vous prendre l\'assurance supplémentaire ?',
     lastName: 'Nom de famille',
-    pantSize: 'Taille de pantalon',
+    idPantsSize: 'Taille de pantalon',
     phoneNumber: 'Numéro de téléphone',
-    postCode: 'Code postal',
+    postcode: 'Code postal',
     referee: 'Êtes-vous un(e) arbitre ?',
     requestedJerseyNumber: 'Numéro de maillot souhaité',
-    topSize: 'Taille de haut'
+    idTopSize: 'Taille de haut'
   };
 
   public paymentModesOptions = [];
   public categoryOptions = [];
+  public clothingSizesOptions = [];
 
   public calendarLanguage = {
     firstDayOfWeek: 1,
@@ -61,27 +62,26 @@ export class SubscriptionComponent implements OnInit {
     this.subscriptionForm = this.formBuilder.group({
       firstName: ['', [ Validators.required ]],
       lastName: ['', [ Validators.required ]],
-      gender: [false],
+      gender: [null, [ Validators.required ]],
       email: ['', [ Validators.required ]],
-      phoneNumber: ['', [ Validators.required ]],
+      phoneNumber: [''],
       birthDate: ['', [ Validators.required ]],
-      birthCountry: ['', [ Validators.required ]],
+      nationality: ['', [ Validators.required ]],
       address: ['', [ Validators.required ]],
       postcode: ['', [ Validators.required ]],
       city: ['', [ Validators.required ]],
       equipment: [false],
       requestedJerseyNumber: ['', [ Validators.required ]],
-      topSize: ['', [ Validators.required ]],
-      pantSize: ['', [ Validators.required ]],
-      idCategory: [1, [ Validators.required ]],
-      idPaymentMode: [1, [ Validators.required ]],
+      idTopSize: ['', [ Validators.required ]],
+      idPantsSize: ['', [ Validators.required ]],
+      idCategory: ['', [ Validators.required ]],
+      idPaymentMode: ['' , [ Validators.required ]],
       insuranceRequested: [false],
-      referee: [true],
+      referee: [false],
       coach: [false],
       comment: [''],
     });
 
-    console.log('Get all payment modes');
     this.managementService.getAllPaymentModes()
       .subscribe(paymentModes => {
         paymentModes.forEach(paymentMode => {
@@ -92,13 +92,22 @@ export class SubscriptionComponent implements OnInit {
         });
       });
 
-    console.log('Get all categories');
     this.teamService.getAllCategories()
       .subscribe(categories => {
         categories.forEach(category => {
           this.categoryOptions.push({
             label: category.name,
             value: category.id
+          });
+        });
+      });
+
+    this.teamService.getAllClothingSizes()
+      .subscribe(clothingSizes => {
+        clothingSizes.forEach(clothingSize => {
+          this.clothingSizesOptions.push({
+            label: clothingSize.name,
+            value: clothingSize.id
           });
         });
       });
@@ -109,16 +118,15 @@ export class SubscriptionComponent implements OnInit {
   public sendSubscription() {
     if (this.subscriptionForm.valid) {
       const newSub = this.subscriptionForm.value;
-      newSub.idSeason = 1;
-      console.log(newSub);
-    } else {
-      console.log('Toast');
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Formulaire invalide',
-        detail: 'Veuillez renseigner tous les champs'
-      });
+      newSub.idSeason = 25;
+
+      this.teamService.createSubscription(newSub)
+        .subscribe(sub => {
+            console.log('Nouvelle inscription', sub);
+          },
+          err => {
+            console.error(err);
+          });
     }
   }
-
 }

@@ -25,24 +25,24 @@
 
           <!-- GENDER -->
           <div class="p-col-2">
-            <p-radioButton name="gender" value="true" formControlName="gender" label="Homme"></p-radioButton>
+            <p-radioButton name="gender" [value]="true" formControlName="gender" label="Homme"></p-radioButton>
           </div>
           <div class="p-col-2">
-            <p-radioButton name="gender" value="false" formControlName="gender" label="Femme"></p-radioButton>
+            <p-radioButton name="gender" [value]="false" formControlName="gender" label="Femme"></p-radioButton>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.gender }}</label>
 
           <!-- BIRTHDATE -->
           <div class="p-col-4">
-            <p-calendar formControlName="birthDate" [locale]="calendarLanguage" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:{{ maxBirthDateValue.getFullYear() }}" [minDate]="minBirthDateValue" [maxDate]="maxBirthDateValue" dateFormat="dd/mm/yy"></p-calendar>
+            <p-calendar formControlName="birthDate" [readonlyInput]="true" [locale]="calendarLanguage" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:{{ maxBirthDateValue.getFullYear() }}" [minDate]="minBirthDateValue" [maxDate]="maxBirthDateValue" dateFormat="dd/mm/yy"></p-calendar>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.birthDate }}</label>
 
           <!-- BIRTHCOUNTRY -->
           <div class="p-col-4">
-            <input formControlName="birthCountry" type="text" pInputText />
+            <input formControlName="nationality" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">{{ formLabelValues.birthCountry }}</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.nationality }}</label>
 
           <!-- EMAIL -->
           <div class="p-col-4">
@@ -65,9 +65,9 @@
 
           <!-- POSTCODE -->
           <div class="p-col-4">
-            <input formControlName="postcode" type="text" pInputText />
+            <input formControlName="postcode" type="number" pInputText />
           </div>
-          <label class="global-form-label p-col-8">{{ formLabelValues.postCode }}</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.postcode }}</label>
 
           <!-- CITY -->
           <div class="p-col-4">
@@ -109,15 +109,15 @@
 
           <!-- TOPSIZE -->
           <div class="p-col-4">
-            <input formControlName="topSize" type="text" pInputText />
+            <p-dropdown [options]="clothingSizesOptions" formControlName="idTopSize"></p-dropdown>
           </div>
-          <label class="global-form-label p-col-8">{{ formLabelValues.topSize }}</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.idTopSize }}</label>
 
           <!-- PANTSIZE -->
           <div class="p-col-4">
-            <input formControlName="pantSize" type="text" pInputText />
+            <p-dropdown [options]="clothingSizesOptions" formControlName="idPantsSize"></p-dropdown>
           </div>
-          <label class="global-form-label p-col-8">{{ formLabelValues.pantSize }}</label>
+          <label class="global-form-label p-col-8">{{ formLabelValues.idPantsSize }}</label>
 
 
           <!-- COACH -->

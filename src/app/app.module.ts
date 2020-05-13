@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {APP_INITIALIZER, Inject, LOCALE_ID, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import localeFr from '@angular/common/locales/fr';
+import { map } from 'rxjs/operators';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +13,8 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
 import { ClubComponent } from './main/club/club.component';
-import { SubscriptionComponent } from './main/subscription/subscription.component';
+import { SubscriptionComponent
+    as SubscriptionMainComponent} from './main/subscription/subscription.component';
 import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 
@@ -22,7 +26,7 @@ import {
   GalleriaModule, InputTextareaModule,
   InputTextModule,
   MegaMenuModule, MenuModule, MessageService,
-  RadioButtonModule, SpinnerModule,
+  RadioButtonModule, SelectButtonModule, SpinnerModule,
   TableModule,
   TabMenuModule, ToastModule,
   ToolbarModule
@@ -32,6 +36,8 @@ import { InformationsComponent } from './management/informations/informations.co
 import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
 import { SchedulesComponent } from './management/schedules/schedules.component';
 import { SubscriptionsComponent } from './management/subscriptions/subscriptions.component';
+import { SubscriptionComponent
+    as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
 import { PlayersComponent } from './management/players/players.component';
 import { TeamsComponent } from './management/teams/teams.component';
 import { LicenceComponent } from './management/licence/licence.component';
@@ -48,7 +54,8 @@ import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './login/logout/logout.component';
 
 import { ConfigService } from './shared/services/config/config.service';
-import { map } from 'rxjs/operators';
+
+registerLocaleData(localeFr);
 
 function loadConfiguration(
   http: HttpClient,
@@ -72,7 +79,7 @@ function loadConfiguration(
     MainComponent,
     HomeComponent,
     ClubComponent,
-    SubscriptionComponent,
+    SubscriptionMainComponent,
     GalleryComponent,
     ContactComponent,
     ManagementComponent,
@@ -93,7 +100,8 @@ function loadConfiguration(
     SettingsComponent,
     HelpComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    SubscriptionManagementComponent
   ],
   imports: [
     HttpClientModule,
@@ -115,9 +123,12 @@ function loadConfiguration(
     SpinnerModule,
     InputTextareaModule,
     MenuModule,
-    ToastModule
+    ToastModule,
+    SelectButtonModule,
+    FormsModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
       provide: APP_INITIALIZER,
       useFactory: loadConfiguration,
@@ -133,4 +144,10 @@ function loadConfiguration(
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    @Inject(LOCALE_ID) locale: string
+  ) {
+    console.log(locale);
+  }
+}

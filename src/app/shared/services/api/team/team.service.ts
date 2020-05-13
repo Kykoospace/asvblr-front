@@ -1,18 +1,24 @@
+// Angular import :
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// Service import :
+import { ConfigService } from '../../config/config.service';
+
+// Entities import :
 import Subscription from '../../../models/entities/Subscription';
 import Category from '../../../models/entities/Category';
 import Season from '../../../models/entities/Season';
-import {ConfigService} from '../../config/config.service';
+import ClothingSize from '../../../models/entities/ClothingSize';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  private apiBaseUrl: string;
+  private readonly apiBaseUrl: string;
 
   constructor(
     private configService: ConfigService,
@@ -21,12 +27,23 @@ export class TeamService {
     this.apiBaseUrl = configService.getApiBaseUrl();
   }
 
+
   // ------------------------------------------------
   // Subscription routes :
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions');
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions')
+      .pipe(
+        map((subs: Subscription[]) => {
+          subs.forEach(sub => {
+            sub.birthDate = new Date(sub.birthDate);
+            sub.creationDate = new Date(sub.creationDate);
+            sub.validationDate = new Date(sub.validationDate);
+          });
+          return subs;
+        })
+      );
   }
 
   public getSubscriptionsBySeason(seasonId: number): Observable<Subscription[]> {
@@ -38,7 +55,7 @@ export class TeamService {
   }
 
   public createSubscription(subscription: any): Observable<Subscription> {
-    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions', { subscription });
+    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions', subscription);
   }
 
   public updateSubscription(subscription: Subscription): Observable<Subscription> {
@@ -85,5 +102,18 @@ export class TeamService {
 
   public getCategory(categoryId: number): Observable<Category> {
     return this.http.get<Category>(this.apiBaseUrl + 'categories/' + categoryId);
+  }
+
+
+  // ------------------------------------------------
+  // Clothing sizes routes :
+  // ------------------------------------------------
+
+  public getAllClothingSizes(): Observable<ClothingSize[]> {
+    return this.http.get<ClothingSize[]>(this.apiBaseUrl + 'clothing-sizes');
+  }
+
+  public getClothingSize(categoryId: number): Observable<ClothingSize> {
+    return this.http.get<ClothingSize>(this.apiBaseUrl + 'clothing-sizes/' + categoryId);
   }
 }

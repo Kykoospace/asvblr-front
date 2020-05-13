@@ -1,0 +1,65 @@
+
+
+
+.ui-button-secondary .ui-button {
+  background-color: $prime-ng-button-secondary-bkg-color;
+  color: $prime-ng-button-secondary-font-color;
+
+  &:active {
+    background-color: $prime-ng-button-secondary-active-bkg-color;
+  }
+}
+
+.ui-button-success .ui-button {
+  background-color: $prime-ng-button-success-bkg-color;
+  color: $prime-ng-button-success-font-color;
+
+  &:active {
+    background-color: $prime-ng-button-success-active-bkg-color;
+  }
+}
+
+.ui-button-info .ui-button {
+  background-color: $prime-ng-button-info-bkg-color;
+  color: $prime-ng-button-info-font-color;
+
+  &:active {
+    background-color: $prime-ng-button-info-active-bkg-color;
+  }
+}
+
+.ui-button-warning .ui-button {
+  background-color: $prime-ng-button-warning-bkg-color;
+  color: $prime-ng-button-warning-font-color;
+
+  &:active {
+    background-color: $prime-ng-button-warning-active-bkg-color;
+  }
+}
+
+.ui-button-danger .ui-button {
+  background-color: $prime-ng-button-danger-bkg-color;
+  color: $prime-ng-button-danger-font-color;
+
+  &:active {
+    background-color: $prime-ng-button-danger-active-bkg-color;
+  }
+}
+
+.ui-button {
+  background-color: $prime-ng-button-bkg-color;
+  border-radius: $prime-ng-button-border-radius;
+  border: 1px solid transparent;
+  padding: $prime-ng-button-padding !important;
+
+  color: $prime-ng-button-font-color;
+  font-size: $prime-ng-button-font-size;
+
+  .ui-button-icon {
+
+  }
+
+  .ui-button-text {
+
+  }
+}

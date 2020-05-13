@@ -10,9 +10,11 @@ import { TeamsComponent
     as TeamsMainComponent } from './main/teams/teams.component';
 import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
-import { SubscriptionComponent } from './main/subscription/subscription.component';
+import { SubscriptionComponent
+    as SubscriptionMainComponent } from './main/subscription/subscription.component';
 
 import { LoginComponent } from './login/login/login.component';
+import { LogoutComponent } from './login/logout/logout.component';
 
 import { ManagementComponent } from './management/management.component';
 import { ArticlesComponent } from './management/articles/articles.component';
@@ -20,6 +22,8 @@ import { InformationsComponent } from './management/informations/informations.co
 import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
 import { SchedulesComponent } from './management/schedules/schedules.component';
 import { SubscriptionsComponent } from './management/subscriptions/subscriptions.component';
+import { SubscriptionComponent
+    as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
 import { PlayersComponent } from './management/players/players.component';
 import { TeamsComponent
     as TeamsManagementComponent } from './management/teams/teams.component';
@@ -36,7 +40,6 @@ import { HelpComponent } from './management/help/help.component';
 // Guards import :
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
-import {LogoutComponent} from './login/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -48,7 +51,7 @@ const routes: Routes = [
       { path: 'teams', component: TeamsMainComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'subscription', component: SubscriptionComponent }
+      { path: 'subscription', component: SubscriptionMainComponent }
     ]
   },
   { path: 'login',
@@ -67,7 +70,12 @@ const routes: Routes = [
       { path: 'informations', component: InformationsComponent },
       { path: 'gymnasiums', component: GymnasiumsComponent },
       { path: 'schedules', component: SchedulesComponent },
-      { path: 'subscriptions', component: SubscriptionsComponent },
+      { path: 'subscriptions',
+        children: [
+          { path: '', component: SubscriptionsComponent },
+          { path: ':id', component: SubscriptionManagementComponent }
+      ]
+      },
       { path: 'players', component: PlayersComponent },
       { path: 'teams', component: TeamsManagementComponent },
       { path: 'licence', component: LicenceComponent },
