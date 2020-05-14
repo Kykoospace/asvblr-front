@@ -74,6 +74,7 @@ $prime-ng-table-row-hover-bkg-color: $global-bkg-darker-active-color;
 $prime-ng-table-row-selected-font-color: $global-contrast-font-active-color;
 $prime-ng-table-row-selected-bkg-color: $global-accent-color;
 $prime-ng-table-row-cell-padding: $global-element-padding;
+$prime-ng-table-paginator-margin: $global-spacing;
 $prime-ng-table-paginator-dropdown-bkg-color: $global-bkg-darker-color;
 $prime-ng-table-paginator-button-padding: $global-element-padding;
 $prime-ng-table-paginator-button-hover-bkg-color: $global-bkg-active-color;
@@ -137,3 +138,7 @@ $prime-ng-toolbar-margin-between-elements: $global-spacing;
 
 // Galleria :
 $prime-ng-galleria-bkg-color: black;
+
+
+// Tabview :
+$prime-ng-tabview-nav-border-color: $global-border-color;

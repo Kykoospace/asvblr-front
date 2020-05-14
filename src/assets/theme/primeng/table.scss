@@ -52,6 +52,7 @@
   }
 
   .ui-paginator {
+    margin-top: $prime-ng-table-paginator-margin;
     .ui-paginator-element {
       color: $prime-ng-table-paginator-button-font-color;
 

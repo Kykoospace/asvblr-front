@@ -59,8 +59,19 @@ a {
   }
 }
 
+p {
+  margin: 0px;
+}
+
 div.separation {
-  padding: 0px !important;
+  padding: 0px;
   margin: 0px;
   border-top: 1px solid $global-border-color;
+}
+
+span.global-legend {
+  user-select: none;
+  font-size: $global-font-size-small;
+  text-align: right;
+  color: $global-disabled-font-color;
 }

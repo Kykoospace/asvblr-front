@@ -1,4 +1,4 @@
-<div class="module-container p-grid">
+<div class="module-container p-grid" *ngIf="subscription">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="pi pi-arrow-left"></p-button>
@@ -9,10 +9,83 @@
       <p-button type="button" label="Supprimer" class="ui-button-danger"></p-button>
     </div>
   </p-toolbar>
-  <div class="separation p-col-12"></div>
   <p-tabView class="p-col-12">
     <p-tabPanel header="Fiche d'inscription">
-      Banane
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Prénom</span>
+        <span class="p-col-5">{{ subscription.firstName }} {{ subscription.lastName | uppercase }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Sexe</span>
+        <span class="p-col-5">{{ subscription.gender ? 'Homme' : 'Femme' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Date de naissance</span>
+        <span class="p-col-5">{{ subscription.birthDate | date: 'shortDate' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Nationality</span>
+        <span class="p-col-5">{{ subscription.nationality }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Numéro de téléphone</span>
+        <span class="p-col-5">{{ subscription.phoneNumber }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Adresse</span>
+        <span class="p-col-5">{{ subscription.address }} - {{ subscription.city }} ({{ subscription.postcode }})</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Catégorie demandée</span>
+        <span class="p-col-5">{{ subscription.idCategory }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Demande de tenue</span>
+        <span class="p-col-5">{{ subscription.equipment ? 'Oui' : 'Non' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid" *ngIf="subscription.equipment">
+        <span class="p-col-3 global-legend">Numéro de maillot souhaité</span>
+        <span class="p-col-5">{{ subscription.requestedJerseyNumber }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid" *ngIf="subscription.equipment">
+        <span class="p-col-3 global-legend">Taille de haut</span>
+        <span class="p-col-5">{{ subscription.idTopSize }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid" *ngIf="subscription.equipment">
+        <span class="p-col-3 global-legend">Taille de pantalon</span>
+        <span class="p-col-5">{{ subscription.idPantsSize }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Assurance complémentaire demandée</span>
+        <span class="p-col-5">{{ subscription.insuranceRequested ? 'Oui' : 'Non' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Licence coach</span>
+        <span class="p-col-5">{{ subscription.coach ? 'Oui' : 'Non' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Licence Arbitre</span>
+        <span class="p-col-5">{{ subscription.referee ? 'Oui' : 'Non' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid" *ngIf="subscription.comment">
+        <span class="p-col-3 global-legend">Commentaire</span>
+        <span class="p-col-5">{{ subscription.comment }}</span>
+        <span class="p-col-4"></span>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Pièces à joindre">
       Du text

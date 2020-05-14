@@ -7,7 +7,7 @@
 
   .ui-tabview-nav {
     padding: 0px !important;
-
+    border-bottom: 1px solid $prime-ng-tabview-nav-border-color;
 
     .ui-tabview-selected a {
       border-color: $global-accent-color;
@@ -19,5 +19,9 @@
       color: $global-primary-font-color;
       border-bottom: 2px solid transparent;
     }
+  }
+
+  .ui-tabview-panel {
+    width: 100%;
   }
 }
