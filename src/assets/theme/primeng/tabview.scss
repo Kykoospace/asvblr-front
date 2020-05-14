@@ -1,0 +1,23 @@
+// ----------------------------------------
+// BUTTON :
+// ----------------------------------------
+
+.ui-tabview {
+  padding: 0px !important;
+
+  .ui-tabview-nav {
+    padding: 0px !important;
+
+
+    .ui-tabview-selected a {
+      border-color: $global-accent-color;
+      color: $global-primary-font-active-color;
+    }
+
+    a {
+      user-select: none;
+      color: $global-primary-font-color;
+      border-bottom: 2px solid transparent;
+    }
+  }
+}

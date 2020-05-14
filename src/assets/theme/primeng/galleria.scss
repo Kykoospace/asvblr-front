@@ -1,11 +1,9 @@
-@import "primeng-variables";
-
 // ----------------------------------------
 // GALLERIA :
 // ----------------------------------------
 
 .ui-galleria {
-  background-color: black;
+  background-color: $prime-ng-galleria-bkg-color;
   text-align: center;
   .ui-panel-images {
     width: 100%;

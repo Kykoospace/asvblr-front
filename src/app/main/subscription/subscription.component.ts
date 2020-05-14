@@ -34,6 +34,24 @@ export class SubscriptionComponent implements OnInit {
     idTopSize: 'Taille de haut'
   };
 
+  private confirmationMessage = {
+    severity: 'success',
+    summary: 'Demande envoyée',
+    detail: 'Votre demande d\'inscription a bien été envoyée. Elle sera traîtée dans les plus brefs délais.'
+  };
+
+  private warningMessage = {
+    severity: 'warn',
+    summary: 'Formulaire incomplet',
+    detail: 'Merci de renseigner tous les champs requis.'
+  };
+
+  private errorMessage = {
+    severity: 'error',
+    summary: 'Erreur lors de l\'envoi',
+    detail: 'Une erreur est survenue pendant l\'envoi. Nous vous invitons à contacter le club.'
+  };
+
   public paymentModesOptions = [];
   public categoryOptions = [];
   public clothingSizesOptions = [];
@@ -117,16 +135,19 @@ export class SubscriptionComponent implements OnInit {
 
   public sendSubscription() {
     if (this.subscriptionForm.valid) {
-      const newSub = this.subscriptionForm.value;
-      newSub.idSeason = 25;
-
-      this.teamService.createSubscription(newSub)
-        .subscribe(sub => {
-            console.log('Nouvelle inscription', sub);
+      // Envoi du formulaire d'inscription :
+      this.teamService.createSubscription(this.subscriptionForm.value)
+        .subscribe(
+          // Succès de l'envoi :
+          sub => {
+            this.messageService.add(this.confirmationMessage);
           },
+          // Erreur de l'envoi :
           err => {
-            console.error(err);
+            this.messageService.add(this.errorMessage);
           });
+    } else {
+      this.messageService.add(this.warningMessage);
     }
   }
 }

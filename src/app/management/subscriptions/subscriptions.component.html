@@ -1,10 +1,11 @@
 <div class="module-container p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
+      <span>Voir les inscriptions :</span>
       <p-selectButton
         [options]="subscriptionsViewOptions"
         [(ngModel)]="subscriptionsView"
-        (onChange)="table.filter(subscriptionsView, 'confirmed', 'equals')">
+        (onChange)="table.filter(subscriptionsView,'validated', 'equals')">
       </p-selectButton>
     </div>
     <div class="ui-toolbar-group-right">
@@ -40,28 +41,8 @@
       </tr>
       <tr>
         <th *ngFor="let column of columns" [ngSwitch]="column.field">
-          <p-dropdown
-            *ngSwitchCase="'gender'"
-            [options]="genderOptions"
-            (onChange)="table.filter($event.value, column.field, 'equals')">
-          </p-dropdown>
-          <p-calendar
-            *ngSwitchCase="'birthDate'"
-            (onSelect)="table.filter(this.formatDate($event), 'birthDate', 'equals')"
-            (onClearClick)="table.filter('', 'date', 'equals')"
-            [showButtonBar]="true"
-            [readonlyInput]="true"
-            styleClass="ui-column-filter"
-            dateFormat="dd/mm/yy">
-          </p-calendar>
-          <p-calendar
-            *ngSwitchCase="'creationDate'"
-            (onSelect)="table.filter(this.formatDate($event), 'creationDate', 'equals')"
-            (onClearClick)="table.filter('', 'date', 'equals')"
-            [showButtonBar]="true"
-            [readonlyInput]="true"
-            styleClass="ui-column-filter"
-            dateFormat="dd/mm/yy"></p-calendar>
+          <p-dropdown *ngSwitchCase="'gender'" [options]="genderOptions" (onChange)="table.filter($event.value, column.field, 'equals')"></p-dropdown>
+          <p-calendar *ngSwitchCase="'birthDate'" (onSelect)="table.filter(this.formatDate($event), 'birthDate', 'equals')" (onClearClick)="table.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
           <input
             *ngSwitchDefault
             pInputText
@@ -75,15 +56,9 @@
     <ng-template pTemplate="body" let-rowData>
       <tr [pSelectableRow]="rowData">
         <td *ngFor="let column of columns" [ngSwitch]="true">
-            <span *ngSwitchCase="column.field === 'gender'">
-              {{ rowData[column.field] ? 'Homme' : 'Femme' }}
-            </span>
-            <span *ngSwitchCase="column.field === 'creationDate' || column.field === 'birthDate'">
-              {{ rowData[column.field] | date: 'shortDate' }}
-            </span>
-            <span *ngSwitchDefault>
-              {{ rowData[column.field] }}
-            </span>
+            <span *ngSwitchCase="column.field === 'gender'">{{ rowData[column.field] ? 'Homme' : 'Femme' }}</span>
+            <span *ngSwitchCase="column.field === 'creationDate' || column.field === 'birthDate'">{{ rowData[column.field] | date: 'shortDate' }}</span>
+            <span *ngSwitchDefault>{{ rowData[column.field] }}</span>
         </td>
       </tr>
     </ng-template>

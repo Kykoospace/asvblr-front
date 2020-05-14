@@ -1,5 +1,3 @@
-@import "primeng-variables";
-
 // ----------------------------------------
 // MEGAMENU :
 // ----------------------------------------
@@ -10,54 +8,49 @@
   .ui-menuitem {
 
     .ui-menuitem-link {
-      padding: $global-element-padding-title;
-      color: $global-contrast-font-color;
-      font-size: $global-font-size;
+      padding: $prime-ng-mega-menu-item-padding;
+      color: $prime-ng-mega-menu-item-font-color;
+      font-size: $prime-ng-mega-menu-item-font-size;
 
       &:hover {
-        background-color: $global-dark-active-color;
-        color: $global-contrast-font-active-color;
+        background-color: $prime-ng-mega-menu-item-hover-bkg-color;
+        color: $prime-ng-mega-menu-item-hover-font-color;
       }
 
       .ui-menuitem-icon {
-        margin-right: $global-spacing;
+        margin-right: $prime-ng-mega-menu-item-icon-margin;
       }
     }
   }
 
   .ui-megamenu-panel {
-    background-color: $global-dark-color;
+    background-color: $prime-ng-mega-menu-panel-bkg-color;
     top: inherit !important;
     padding: 0;
     box-shadow: inherit;
-    border-bottom-left-radius: $global-border-radius;
-    border-bottom-right-radius: $global-border-radius;
+    border-bottom-left-radius: $prime-ng-mega-menu-panel-border-radius;
+    border-bottom-right-radius: $prime-ng-mega-menu-panel-border-radius;
 
     .ui-megamenu-submenu {
-      padding: $global-container-padding;
-      color: $global-contrast-font-active-color;
+      padding: $prime-ng-mega-menu-submenu-padding;
+      color: $prime-ng-mega-menu-submenu-font-color;
 
       .ui-megamenu-submenu-header {
-        padding: $global-element-padding-large;
-        color: $global-accent-color;
+        padding: $prime-ng-mega-menu-submenu-header-padding;
+        color: $prime-ng-mega-menu-submenu-header-font-color;
       }
 
       .ui-menuitem {
-        font-size: $global-font-size;
-        color: $global-contrast-font-color;
+        font-size: $prime-ng-mega-menu-submenu-item-font-size;
+        color: $prime-ng-mega-menu-submenu-item-font-color;
 
         .ui-menuitem-link {
-          padding: $global-element-padding;
-          color: $global-contrast-font-color;
-          border-radius: $global-border-radius;
+          padding: $prime-ng-mega-menu-submenu-item-padding;
+          border-radius: $prime-ng-mega-menu-submenu-item-border-radius;
 
           &:hover {
-            background-color: $global-dark-active-color;
+            background-color: $prime-ng-mega-menu-submenu-item-hover-bkg-color;
             color: $global-contrast-font-active-color;
-          }
-
-          .ui-menuitem-text {
-            font-size: $global-font-size;
           }
         }
       }

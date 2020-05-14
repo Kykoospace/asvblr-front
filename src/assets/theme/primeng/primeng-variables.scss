@@ -11,6 +11,29 @@ $prime-ng-menu-item-font-color: $global-primary-font-color;
 $prime-ng-menu-item-hover-bkg-color: $global-bkg-active-color;
 
 
+// Mega menu :
+$prime-ng-mega-menu-item-padding: $global-element-padding-title;
+$prime-ng-mega-menu-item-font-color: $global-contrast-font-color;
+$prime-ng-mega-menu-item-font-size: $global-font-size;
+$prime-ng-mega-menu-item-icon-margin: $global-spacing;
+$prime-ng-mega-menu-item-hover-bkg-color: $global-dark-active-color;
+$prime-ng-mega-menu-item-hover-font-color: $global-contrast-font-active-color;
+
+$prime-ng-mega-menu-panel-border-radius: $global-border-radius;
+$prime-ng-mega-menu-panel-bkg-color: $global-dark-color;
+
+$prime-ng-mega-menu-submenu-padding: $global-container-padding;
+$prime-ng-mega-menu-submenu-font-color: $global-contrast-font-active-color;
+$prime-ng-mega-menu-submenu-header-padding: $global-element-padding;
+$prime-ng-mega-menu-submenu-header-font-color: $global-accent-color;
+$prime-ng-mega-menu-submenu-item-border-radius: $global-border-radius;
+$prime-ng-mega-menu-submenu-item-padding: $global-element-padding;
+$prime-ng-mega-menu-submenu-item-font-size: $global-font-size;
+$prime-ng-mega-menu-submenu-item-font-color: $global-contrast-font-color;
+$prime-ng-mega-menu-submenu-item-hover-bkg-color: $global-dark-active-color;
+$prime-ng-mega-menu-submenu-item-hover-font-color: $global-contrast-font-active-color;
+
+
 // Button :
 $prime-ng-button-padding: $global-element-padding-small;
 $prime-ng-button-border-radius: $global-border-radius;
@@ -59,12 +82,22 @@ $prime-ng-table-paginator-button-disabled-font-color: $global-disabled-font-colo
 
 
 // Input :
+$prime-ng-input-font-family: $global-font;
 $prime-ng-input-border-radius: $global-border-radius;
 $prime-ng-input-border-color: $global-border-color;
 $prime-ng-input-padding: $global-element-padding;
 $prime-ng-input-font-size: $global-font-size;
 $prime-ng-input-font-color: $global-primary-font-color;
 $prime-ng-input-focus-color: $global-accent-color;
+
+
+// Dropdown :
+$prime-ng-dropdown-wrapper-bkg-color: $global-bkg-color;
+$prime-ng-dropdown-wrapper-item-padding: $global-element-padding;
+$prime-ng-dropdown-wrapper-item-font-color: $global-primary-font-color;
+$prime-ng-dropdown-wrapper-item-hover-bkg-color: $global-bkg-active-color;
+$prime-ng-dropdown-wrapper-item-selected-bkg-color: $global-accent-color;
+$prime-ng-dropdown-wrapper-item-selected-font-color: $global-contrast-font-color;
 
 
 // Calendar :
@@ -78,3 +111,29 @@ $prime-ng-calendar-datepicker-button-disabled-font-color: $global-disabled-font-
 
 // FlexGrid :
 $prime-ng-flexgrid-item-space-between: $global-spacing;
+
+
+// Toast :
+$prime-ng-toast-border-radius: $global-border-radius;
+$prime-ng-toast-padding: $global-element-padding;
+$prime-ng-toast-font-size: $global-font-size;
+
+$prime-ng-toast-info-bkg-color: $global-info-color;
+$prime-ng-toast-info-font-color: $global-primary-font-color;
+
+$prime-ng-toast-success-bkg-color: $global-success-color;
+$prime-ng-toast-success-font-color: $global-primary-font-color;
+
+$prime-ng-toast-warning-bkg-color: $global-warning-color;
+$prime-ng-toast-warning-font-color: $global-primary-font-color;
+
+$prime-ng-toast-error-bkg-color: $global-danger-color;
+$prime-ng-toast-error-font-color: $global-contrast-font-color;
+
+
+// Toolbar :
+$prime-ng-toolbar-margin-between-elements: $global-spacing;
+
+
+// Galleria :
+$prime-ng-galleria-bkg-color: black;

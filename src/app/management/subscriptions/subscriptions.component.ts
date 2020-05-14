@@ -14,9 +14,9 @@ export class SubscriptionsComponent implements OnInit {
 
   public subscriptionsView = false;
   public subscriptionsViewOptions = [
-    { label: 'En cours', value: false },
-    { label: 'Validées', value: true }
-  ]
+    { label: 'En cours', value: false, icon: 'pi pi-pencil' },
+    { label: 'Validées', value: true, icon: 'pi pi-check' }
+  ];
 
 
   public columns = [

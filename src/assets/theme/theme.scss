@@ -4,6 +4,7 @@
 
 // Theme variables :
 @import "variables";
+@import "primeng/primeng-variables";
 
 // Web app layouts :
 @import "main-layout/main-site-layout";
@@ -13,6 +14,7 @@
 // PrimeNG :
 @import "primeng/menu";
 @import "primeng/megamenu";
+@import "primeng/tabview";
 @import "primeng/toolbar";
 @import "primeng/button";
 @import "primeng/selectbutton";

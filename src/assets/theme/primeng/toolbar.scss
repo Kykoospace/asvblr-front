@@ -1,11 +1,13 @@
-
+// ----------------------------------------
+// TOOLBAR :
+// ----------------------------------------
 
 .ui-toolbar {
   padding: 0px !important;
 
   .ui-toolbar-group-left {
     > * {
-      margin-right: $global-spacing;
+      margin-right: $prime-ng-toolbar-margin-between-elements;
     }
   }
 
@@ -13,7 +15,7 @@
     display: block;
     float: right;
     > * {
-      margin-left: $global-spacing;
+      margin-left: $prime-ng-toolbar-margin-between-elements;
     }
   }
 }

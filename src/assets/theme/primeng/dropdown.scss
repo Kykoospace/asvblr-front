@@ -1,7 +1,5 @@
-@import "primeng-variables";
-
 // ----------------------------------------
-// GALLERIA :
+// DROPDOWN :
 // ----------------------------------------
 
 .ui-dropdown {
@@ -15,19 +13,23 @@
   }
 
   .ui-dropdown-items-wrapper {
-    background-color: $global-bkg-color;
-    border: 1px solid $prime-ng-input-border-color;
-    overflow: hidden !important;
+    background-color: $prime-ng-dropdown-wrapper-bkg-color;
 
     .ui-dropdown-list {
       padding: 0px;
 
       .ui-dropdown-item {
-        color: $prime-ng-input-font-color;
+        color: $prime-ng-dropdown-wrapper-item-font-color;
+        padding: $prime-ng-dropdown-wrapper-item-padding;
         margin: 0px;
 
         &:hover {
-          background-color: $global-bkg-active-color;
+          background-color: $prime-ng-dropdown-wrapper-item-hover-bkg-color;
+        }
+
+        &.ui-state-highlight {
+          background-color: $prime-ng-dropdown-wrapper-item-selected-bkg-color;
+          color: $prime-ng-dropdown-wrapper-item-selected-font-color;
         }
       }
     }

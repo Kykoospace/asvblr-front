@@ -37,5 +37,5 @@ export default interface Subscription {
   validationDate: Date;
   idPlayer: number;
   idSeason: number;
-  confirmed: boolean;
+  validated: boolean;
 }

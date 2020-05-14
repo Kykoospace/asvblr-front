@@ -1,5 +1,3 @@
-@import "primeng-variables";
-
 // ----------------------------------------
 // INPUTTEXT :
 // ----------------------------------------
@@ -12,7 +10,7 @@
   color: $prime-ng-input-font-color;
   width: 100%;
   resize: none;
-  font-family: $global-font !important;
+  font-family: $prime-ng-input-font-family !important;
 
   &:focus {
     border-color: $prime-ng-input-focus-color;

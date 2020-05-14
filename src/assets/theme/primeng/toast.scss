@@ -1,26 +1,30 @@
-
-
+// ----------------------------------------
+// TOAST :
+// ----------------------------------------
 
 .ui-toast-message {
-  border-radius: $global-border-radius;
-  color: $global-contrast-font-color;
-  padding: $global-element-padding;
+  border-radius: $prime-ng-toast-border-radius;
+  padding: $prime-ng-toast-padding;
   font-size: $global-font-size;
 
   &.ui-toast-message-info {
-    background-color: $global-info-color;
+    background-color: $prime-ng-toast-info-bkg-color;
+    color: $prime-ng-toast-info-font-color;
   }
 
   &.ui-toast-message-success {
-    background-color: $global-success-color;
+    background-color: $prime-ng-toast-success-bkg-color;
+    color: $prime-ng-toast-success-font-color;
   }
 
   &.ui-toast-message-warn {
-    background-color: $global-warning-color;
+    background-color: $prime-ng-toast-warning-bkg-color;
+    color: $prime-ng-toast-warning-font-color;
   }
 
   &.ui-toast-message-error {
-    background-color: $global-danger-color;
+    background-color: $prime-ng-toast-error-bkg-color;
+    color: $prime-ng-toast-error-font-color;
   }
 
   .ui-toast-summary {
