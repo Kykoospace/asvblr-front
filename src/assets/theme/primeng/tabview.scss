@@ -19,6 +19,10 @@
       color: $global-primary-font-color;
       border-bottom: 2px solid transparent;
     }
+
+    :focus {
+      outline: none;
+    }
   }
 
   .ui-tabview-panel {

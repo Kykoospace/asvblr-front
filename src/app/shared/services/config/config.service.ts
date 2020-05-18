@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
   public apiBaseUrl: string;
+  public apiGouvBaseUrl: string;
 
   constructor() { }
 
@@ -13,5 +14,7 @@ export class ConfigService {
     return this.apiBaseUrl;
   }
 
-
+  public getApiGouvBaseUrl(): string {
+    return this.apiGouvBaseUrl;
+  }
 }

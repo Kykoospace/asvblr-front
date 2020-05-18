@@ -1,0 +1,18 @@
+// ----------------------------------------
+// DIALOG :
+// ----------------------------------------
+
+.ui-dialog-mask {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.ui-dialog {
+  border-radius: $prime-ng-dialog-border-radius;
+  background-color: $prime-ng-dialog-bkg-color;
+  overflow: hidden;
+
+  .ui-dialog-titlebar {
+    border-bottom: 1px solid $prime-ng-dialog-titlebar-border-color !important;
+    background-color: $prime-ng-dialog-titlebar-bkg-color;
+  }
+}

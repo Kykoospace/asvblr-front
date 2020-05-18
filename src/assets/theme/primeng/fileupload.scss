@@ -1,0 +1,12 @@
+// ----------------------------------------
+// BUTTON :
+// ----------------------------------------
+
+.ui-fileupload {
+  border-radius: $prime-ng-input-border-radius;
+  border: 1px solid $prime-ng-input-border-color;
+
+  .ui-button {
+    cursor: pointer;
+  }
+}

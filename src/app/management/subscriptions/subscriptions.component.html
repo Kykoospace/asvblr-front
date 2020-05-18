@@ -29,8 +29,10 @@
     [rows]="maxRowCount"
     [rowsPerPageOptions]="['15', '25', '50']"
     [globalFilterFields]="['firstName', 'lastName', 'gender', 'phoneNumber']"
-    selectionMode="single"
     (onRowSelect)="selectSubscription($event.data)"
+    selectionMode="single"
+    stateStorage="session"
+    stateKey="statedemo-session"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -41,13 +43,26 @@
       </tr>
       <tr>
         <th *ngFor="let column of columns" [ngSwitch]="column.field">
-          <p-dropdown *ngSwitchCase="'gender'" [options]="genderOptions" (onChange)="table.filter($event.value, column.field, 'equals')"></p-dropdown>
-          <p-calendar *ngSwitchCase="'birthDate'" (onSelect)="table.filter(this.formatDate($event), 'birthDate', 'equals')" (onClearClick)="table.filter('', 'date', 'equals')" [showButtonBar]="true" styleClass="ui-column-filter" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+          <p-dropdown
+            *ngSwitchCase="'gender'"
+            [options]="genderOptions"
+            (onChange)="table.filter($event.value, column.field, 'equals')">
+          </p-dropdown>
+          <p-calendar
+            *ngSwitchCase="'birthDate'"
+            (onSelect)="table.filter(this.formatDate($event), 'birthDate', 'equals')"
+            (onClearClick)="table.filter('', 'date', 'equals')"
+            [showButtonBar]="true"
+            [readonlyInput]="true"
+            dateFormat="dd/mm/yy"
+            styleClass="ui-column-filter">
+          </p-calendar>
           <input
             *ngSwitchDefault
             pInputText
             type="text"
             (input)="table.filter($event.target.value, column.field, 'contains')"
+            [value]="table.filters[column.field]?.value"
             placeholder="Filtrer {{ column.column.toLowerCase() }} ..."
           />
         </th>

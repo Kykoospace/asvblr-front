@@ -15,4 +15,8 @@
   &:focus {
     border-color: $prime-ng-input-focus-color;
   }
+
+  &:disabled {
+    user-select: none;
+  }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TeamService } from '../../shared/services/api/team/team.service';
 import { ManagementService } from '../../shared/services/api/management/management.service';
 import {MessageService} from 'primeng';
+import {GouvService} from '../../shared/services/gouv/gouv.service';
 
 @Component({
   selector: 'app-subscription',
@@ -52,9 +53,15 @@ export class SubscriptionComponent implements OnInit {
     detail: 'Une erreur est survenue pendant l\'envoi. Nous vous invitons à contacter le club.'
   };
 
-  public paymentModesOptions = [];
-  public categoryOptions = [];
-  public clothingSizesOptions = [];
+  public paymentModesOptions = [
+    { label: 'Mode de paiement', value: null }
+  ];
+  public categoryOptions = [
+    { label: 'Catégorie', value: null }
+  ];
+  public clothingSizesOptions = [
+    { label: 'Taille', value: null }
+  ];
 
   public calendarLanguage = {
     firstDayOfWeek: 1,
@@ -75,6 +82,7 @@ export class SubscriptionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private teamService: TeamService,
     private managementService: ManagementService,
+    private gouvService: GouvService,
     private messageService: MessageService
   ) {
     this.subscriptionForm = this.formBuilder.group({
@@ -90,10 +98,10 @@ export class SubscriptionComponent implements OnInit {
       city: ['', [ Validators.required ]],
       equipment: [false],
       requestedJerseyNumber: ['', [ Validators.required ]],
-      idTopSize: ['', [ Validators.required ]],
-      idPantsSize: ['', [ Validators.required ]],
-      idCategory: ['', [ Validators.required ]],
-      idPaymentMode: ['' , [ Validators.required ]],
+      idTopSize: [null, [ Validators.required ]],
+      idPantsSize: [null, [ Validators.required ]],
+      idCategory: [null, [ Validators.required ]],
+      idPaymentMode: [null , [ Validators.required ]],
       insuranceRequested: [false],
       referee: [false],
       coach: [false],
@@ -141,6 +149,7 @@ export class SubscriptionComponent implements OnInit {
           // Succès de l'envoi :
           sub => {
             this.messageService.add(this.confirmationMessage);
+            this.subscriptionForm.reset();
           },
           // Erreur de l'envoi :
           err => {
@@ -149,5 +158,18 @@ export class SubscriptionComponent implements OnInit {
     } else {
       this.messageService.add(this.warningMessage);
     }
+  }
+
+  public updateCity(postcode: number) {
+    this.gouvService.getCityByPostcode(postcode)
+      .subscribe(city => {
+        try {
+          this.subscriptionForm.controls.city.setValue(city.nom);
+        } catch (err) {
+          this.subscriptionForm.controls.city.setValue(null);
+        }
+      }, err => {
+        this.subscriptionForm.controls.city.setValue(null);
+      });
   }
 }

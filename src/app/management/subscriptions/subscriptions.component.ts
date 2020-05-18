@@ -49,7 +49,6 @@ export class SubscriptionsComponent implements OnInit {
   ngOnInit(): void { }
 
   public selectSubscription(subscription: Subscription) {
-    console.log(subscription);
     this.router.navigate(['/management/subscriptions/', subscription.id]);
   }
 

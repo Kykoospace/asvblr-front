@@ -14,6 +14,7 @@
 // PrimeNG :
 @import "primeng/menu";
 @import "primeng/megamenu";
+@import "primeng/dialog";
 @import "primeng/tabview";
 @import "primeng/toolbar";
 @import "primeng/button";
@@ -22,6 +23,7 @@
 @import "primeng/galleria";
 @import "primeng/dropdown";
 @import "primeng/inputtext";
+@import "primeng/fileupload";
 @import "primeng/calendar";
 @import "primeng/checkbox";
 @import "primeng/radiobutton";
@@ -59,14 +61,15 @@ a {
   }
 }
 
-p {
-  margin: 0px;
-}
-
 div.separation {
   padding: 0px;
   margin: 0px;
   border-top: 1px solid $global-border-color;
+}
+
+label.global-form-label {
+  margin: $global-spacing 0px;
+  padding: $global-element-padding !important;
 }
 
 span.global-legend {

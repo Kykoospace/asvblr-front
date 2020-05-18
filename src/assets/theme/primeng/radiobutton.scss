@@ -2,9 +2,14 @@
 // RADIO BUTTON :
 // ----------------------------------------
 
+p-radiobutton {
+  box-sizing: border-box;
+}
+
 .ui-radiobutton {
   border: 1px solid $prime-ng-input-border-color;
   border-radius: 100%;
+  margin-right: $prime-ng-radiobutton-label-spacing !important;
 
   &:hover {
     border-color: $prime-ng-input-focus-color;

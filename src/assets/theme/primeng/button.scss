@@ -63,4 +63,13 @@
   .ui-button-text {
 
   }
+
+  &.ui-state-disabled {
+    color: $prime-ng-button-disabled-font-color;
+    background-color: $prime-ng-button-secondary-bkg-color;
+
+    &:active {
+      background-color: $prime-ng-button-secondary-bkg-color;
+    }
+  }
 }

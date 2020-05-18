@@ -65,13 +65,13 @@
 
           <!-- POSTCODE -->
           <div class="p-col-4">
-            <input formControlName="postcode" type="number" pInputText />
+            <input formControlName="postcode" type="number" pInputText (ngModelChange)="updateCity($event)" />
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.postcode }}</label>
 
           <!-- CITY -->
           <div class="p-col-4">
-            <input formControlName="city" type="text" pInputText />
+            <input formControlName="city" type="text" pInputText/>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.city }}</label>
 

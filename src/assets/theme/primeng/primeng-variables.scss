@@ -41,6 +41,7 @@ $prime-ng-button-font-size: $global-font-size-small;
 $prime-ng-button-bkg-color: $global-accent-color;
 $prime-ng-button-active-bkg-color: $global-accent-active-color;
 $prime-ng-button-font-color: $global-contrast-font-color;
+$prime-ng-button-disabled-font-color: $global-disabled-font-color;
 
 $prime-ng-button-secondary-bkg-color: $global-info-color;
 $prime-ng-button-secondary-active-bkg-color: $global-info-active-color;
@@ -80,6 +81,10 @@ $prime-ng-table-paginator-button-padding: $global-element-padding;
 $prime-ng-table-paginator-button-hover-bkg-color: $global-bkg-active-color;
 $prime-ng-table-paginator-button-font-color: $global-primary-font-color;
 $prime-ng-table-paginator-button-disabled-font-color: $global-disabled-font-color;
+
+
+// Radiobutton :
+$prime-ng-radiobutton-label-spacing: $global-spacing;
 
 
 // Input :
@@ -142,3 +147,10 @@ $prime-ng-galleria-bkg-color: black;
 
 // Tabview :
 $prime-ng-tabview-nav-border-color: $global-border-color;
+
+
+// Dialog :
+$prime-ng-dialog-bkg-color: $global-bkg-color;
+$prime-ng-dialog-border-radius: $global-border-radius;
+$prime-ng-dialog-titlebar-border-color: $global-border-color;
+$prime-ng-dialog-titlebar-bkg-color: $global-bkg-darker-color;

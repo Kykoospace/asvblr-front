@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Service import :
 import { ConfigService } from '../../config/config.service';
@@ -11,7 +12,7 @@ import Subscription from '../../../models/entities/Subscription';
 import Category from '../../../models/entities/Category';
 import Season from '../../../models/entities/Season';
 import ClothingSize from '../../../models/entities/ClothingSize';
-import {map} from 'rxjs/operators';
+import Document from '../../../models/entities/Document';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,33 @@ export class TeamService {
     return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions' + subscription.id, { subscription });
   }
 
-  public deleteSubscription(subscriptionId: number): void {
-    this.http.delete<Subscription[]>(this.apiBaseUrl + 'subscriptions/' + subscriptionId);
+  public deleteSubscription(subscriptionId: number): Observable<any> {
+    return this.http.delete<any>(this.apiBaseUrl + 'subscriptions/' + subscriptionId);
+  }
+
+  public updateSubscriptionCNI(idSubscription: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/cni', formData);
+  }
+
+  public updateSubscriptionMedicalCertificate(idSubscription: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/medical-certificate', formData);
+  }
+
+  public updateSubscriptionidentityPhoto(idSubscription: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData);
+  }
+
+  public validateSubscription(idSubscription: number): Observable<Subscription> {
+    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/validated', {});
   }
 
 
@@ -115,5 +141,14 @@ export class TeamService {
 
   public getClothingSize(categoryId: number): Observable<ClothingSize> {
     return this.http.get<ClothingSize>(this.apiBaseUrl + 'clothing-sizes/' + categoryId);
+  }
+
+
+  // ------------------------------------------------
+  // Document routes :
+  // ------------------------------------------------
+
+  public getDocument(idDocument: number): Observable<Document> {
+    return this.http.get<Document>(this.apiBaseUrl + 'documents/' + idDocument);
   }
 }

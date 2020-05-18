@@ -20,16 +20,16 @@ import { ContactComponent } from './main/contact/contact.component';
 
 import { ManagementComponent } from './management/management.component';
 import {
-    ButtonModule,
-    CalendarModule, CheckboxModule,
-    DropdownModule,
-    GalleriaModule, InputTextareaModule,
-    InputTextModule,
-    MegaMenuModule, MenuModule, MessageService,
-    RadioButtonModule, SelectButtonModule, SpinnerModule,
-    TableModule,
-    TabMenuModule, TabViewModule, ToastModule,
-    ToolbarModule
+  ButtonModule,
+  CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule,
+  DropdownModule, FileUploadModule,
+  GalleriaModule, InputTextareaModule,
+  InputTextModule,
+  MegaMenuModule, MenuModule, MessageService, ProgressSpinnerModule,
+  RadioButtonModule, SelectButtonModule, SpinnerModule,
+  TableModule,
+  TabMenuModule, TabViewModule, ToastModule,
+  ToolbarModule
 } from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
 import { InformationsComponent } from './management/informations/informations.component';
@@ -67,6 +67,7 @@ function loadConfiguration(
         .pipe(
           map(config => {
             configService.apiBaseUrl = config.apiBaseUrl;
+            configService.apiGouvBaseUrl = config.apiGouvBaseUrl;
             resolve(true);
           })).subscribe();
     });
@@ -103,31 +104,34 @@ function loadConfiguration(
     LogoutComponent,
     SubscriptionManagementComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        ButtonModule,
-        TableModule,
-        InputTextModule,
-        TabMenuModule,
-        ToolbarModule,
-        MegaMenuModule,
-        GalleriaModule,
-        ReactiveFormsModule,
-        RadioButtonModule,
-        CalendarModule,
-        DropdownModule,
-        CheckboxModule,
-        SpinnerModule,
-        InputTextareaModule,
-        MenuModule,
-        ToastModule,
-        SelectButtonModule,
-        FormsModule,
-        TabViewModule
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ButtonModule,
+    TableModule,
+    InputTextModule,
+    TabMenuModule,
+    ToolbarModule,
+    MegaMenuModule,
+    GalleriaModule,
+    ReactiveFormsModule,
+    RadioButtonModule,
+    CalendarModule,
+    DropdownModule,
+    CheckboxModule,
+    SpinnerModule,
+    InputTextareaModule,
+    MenuModule,
+    ToastModule,
+    SelectButtonModule,
+    FormsModule,
+    TabViewModule,
+    FileUploadModule,
+    ConfirmDialogModule,
+    ProgressSpinnerModule
+  ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
@@ -138,8 +142,9 @@ function loadConfiguration(
         ConfigService
       ],
       multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-    MessageService
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [
     AppComponent

@@ -1,12 +1,15 @@
-<div class="module-container p-grid" *ngIf="subscription">
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="module-container p-grid" *ngIf="!loading">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="pi pi-arrow-left"></p-button>
-      <p-button type="button" label="Valider l'inscription" class="ui-button-secondary"></p-button>
+      <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" *ngIf="!subscription.validated"></p-button>
+      <p-button type="button" label="Validée le {{ subscription.validationDate | date: 'shortDate' }}" class="ui-button-secondary" *ngIf="subscription.validated" [disabled]="true"></p-button>
       <p-button type="button" label="Renvoyer identifiants" class="ui-button-secondary"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button type="button" label="Supprimer" class="ui-button-danger"></p-button>
+      <span class="global-legend">Inscription de {{ subscription.firstName + ' ' + subscription.lastName.toUpperCase() }}, faite le {{ subscription.creationDate | date: 'shortDate' }}</span>
+      <p-button (click)="deleteSubscription()" type="button" label="Supprimer" icon="pi pi-trash" class="ui-button-danger" *ngIf="!subscription.validated"></p-button>
     </div>
   </p-toolbar>
   <p-tabView class="p-col-12">
@@ -87,11 +90,52 @@
         <span class="p-col-4"></span>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Pièces à joindre">
-      Du text
+    <p-tabPanel header="Documents à joindre">
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Carte d'identité</span>
+        <p-fileUpload
+          class="p-col-5"
+          customUpload="true"
+          (uploadHandler)="uploadCNI($event)"
+          accept="image/*"
+          maxFileSize="1000000">
+        </p-fileUpload>
+        <div class="p-col-4">
+          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+        </div>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Certificat médical</span>
+        <p-fileUpload
+          class="p-col-5"
+          customUpload="true"
+          (uploadHandler)="uploadMedicalCertificate($event)"
+          accept="image/*"
+          maxFileSize="1000000">
+        </p-fileUpload>
+        <div class="p-col-4">
+          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+        </div>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Photo d'identité</span>
+        <p-fileUpload
+          class="p-col-5"
+          customUpload="true"
+          (uploadHandler)="uploadIdentityPhoto($event)"
+          accept="image/*"
+          maxFileSize="1000000">
+        </p-fileUpload>
+        <div class="p-col-4">
+          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+        </div>
+      </div>
     </p-tabPanel>
     <p-tabPanel header="Formulaire de licence">
       Bla bla
     </p-tabPanel>
   </p-tabView>
+</div>
+<div class="p-grid p-justify-center" *ngIf="loading">
+  <p-progressSpinner class="p-col-2"></p-progressSpinner>
 </div>
