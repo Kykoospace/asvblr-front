@@ -24,6 +24,11 @@ div#management-layout {
     color: $management-layout-header-font-color;
     padding: $management-layout-header-padding;
 
+    i#management-layout-header-sidenav-button {
+      font-size: $management-layout-sidenav-button-size;
+      margin-right: $management-layout-sidenav-button-spacing;
+    }
+
     img#management-layout-header-logo {
       height: $management-layout-header-logo-size;
       margin-right: $management-layout-header-logo-spacing;
@@ -61,7 +66,7 @@ div#management-layout {
   div#management-layout-sidenav-layout {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: $management-layout-nav-width 1fr;
+    grid-template-columns: auto 1fr;
 
     height: 100%;
     overflow: hidden;
@@ -76,6 +81,7 @@ div#management-layout {
     nav#management-layout-sidenav {
       background-color: $management-layout-nav-bkg-color;
       color: $management-layout-nav-font-color;
+      width: $management-layout-nav-width;
 
       // Nav group :
       ul.management-layout-sidenav-group {

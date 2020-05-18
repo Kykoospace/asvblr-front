@@ -12,6 +12,7 @@ import { MenuItem } from 'primeng';
 export class ManagementComponent implements OnInit {
 
   public userMenu: MenuItem[];
+  public managementNavMenuDisplay: boolean;
   public managementNavMenu: ManagementNavMenu[];
 
   public loggedUser: User;
@@ -19,6 +20,7 @@ export class ManagementComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) {
+    this.managementNavMenuDisplay = window.innerWidth > 1000;
     this.loggedUser = this.authService.getLoggedUser();
   }
 
@@ -58,6 +60,12 @@ export class ManagementComponent implements OnInit {
           { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: '' },
           { label: 'Paramètres', route: 'settings', icon: 'fas fa-cogs', privilege: '' },
           { label: 'Aide', route: 'help', icon: 'fas fa-question', privilege: '' }
+        ]
+      },
+      {
+        label: 'Dev',
+        items: [
+          { label: 'Dev tools', route: 'dev-tools', icon: 'pi pi-desktop', privilege: '' }
         ]
       }
     ];

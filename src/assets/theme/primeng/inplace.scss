@@ -1,0 +1,41 @@
+// ----------------------------------------
+// INPLACE :
+// ----------------------------------------
+
+.ui-inplace {
+  &.ui-inplace-closable {
+    .ui-inputtext {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-right: none;
+    }
+
+    .ui-button {
+      padding: $global-element-padding;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+  }
+
+  .ui-inplace-display {
+    display: block !important;
+    padding: $global-element-padding !important;
+    border-radius: $global-border-radius;
+    border: 1px solid transparent !important;
+    cursor: text !important;
+
+    &:hover {
+      border-color: $global-border-color !important;
+    }
+  }
+
+  .ui-inplace-content {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+
+    .ui-inputtext:focus {
+      border-color: $global-accent-color;
+    }
+  }
+}
+

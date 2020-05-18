@@ -22,8 +22,8 @@ import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
   CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule,
-  DropdownModule, FileUploadModule,
-  GalleriaModule, InputTextareaModule,
+  DropdownModule, EditorModule, FileUploadModule,
+  GalleriaModule, InplaceModule, InputTextareaModule,
   InputTextModule,
   MegaMenuModule, MenuModule, MessageService, ProgressSpinnerModule,
   RadioButtonModule, SelectButtonModule, SpinnerModule,
@@ -54,6 +54,7 @@ import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './login/logout/logout.component';
 
 import { ConfigService } from './shared/services/config/config.service';
+import { DevToolsComponent } from './management/dev-tools/dev-tools.component';
 
 registerLocaleData(localeFr);
 
@@ -102,7 +103,8 @@ function loadConfiguration(
     HelpComponent,
     LoginComponent,
     LogoutComponent,
-    SubscriptionManagementComponent
+    SubscriptionManagementComponent,
+    DevToolsComponent
   ],
   imports: [
     HttpClientModule,
@@ -130,7 +132,9 @@ function loadConfiguration(
     TabViewModule,
     FileUploadModule,
     ConfirmDialogModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    EditorModule,
+    InplaceModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

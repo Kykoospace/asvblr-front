@@ -1,0 +1,91 @@
+<div class="module-container p-grid">
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-left">
+      <p-button label="Primary" icon="pi pi-check"></p-button>
+      <p-button label="Secondary" icon="pi pi-check" class="ui-button-secondary"></p-button>
+      <p-button label="Info" icon="pi pi-info" class="ui-button-info"></p-button>
+      <p-button label="Success" icon="pi pi-check" class="ui-button-success"></p-button>
+      <p-button label="Warning" icon="pi pi-exclamation-triangle" class="ui-button-warning"></p-button>
+    </div>
+    <div class="ui-toolbar-group-right">
+      <p-button label="Danger" icon="pi pi-trash" class="ui-button-danger"></p-button>
+    </div>
+  </p-toolbar>
+  <p-tabView class="p-col-12">
+    <p-tabPanel header="Formulaire">
+      <div class="p-grid">
+        <span class="global-legend p-col-2">Input text</span>
+        <div class="p-col-4">
+          <input type="text" value="Text to input" pInputText>
+        </div>
+        <span class="p-col-2 global-legend">Inplace</span>
+        <p-inplace class="p-col-4">
+          <span pInplaceDisplay>
+            Edit text ...
+          </span>
+          <span pInplaceContent>
+            <input type="text" value="Text to edit" pInputText>
+          </span>
+        </p-inplace>
+        <span class="global-legend p-col-2">Input password</span>
+        <div class="p-col-4">
+          <input type="password" value="Password" pInputText>
+        </div>
+        <span class="p-col-2 global-legend">closable inspace</span>
+        <p-inplace class="p-col-4" [closable]="true">
+          <span pInplaceDisplay>
+            Edit text ...
+          </span>
+          <span pInplaceContent>
+            <input type="text" value="Text to edit" pInputText>
+          </span>
+        </p-inplace>
+        <span class="global-legend p-col-2">Textarea</span>
+        <div class="p-col-4">
+          <textarea value="Text to input" pInputTextarea></textarea>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Menus">
+      Menus
+    </p-tabPanel>
+    <p-tabPanel header="Table">
+      <p-table
+        #table
+        class="p-col-12"
+        [value]="players"
+        [paginator]="true"
+        [rows]="10"
+        [totalRecords]="players.length"
+        [rowsPerPageOptions]="['10', '25', '50']"
+        [globalFilterFields]="['firstName', 'lastName', 'birthDate', 'team', 'Subscription.ts']"
+        (onRowSelect)="selectPlayer($event)"
+        selectionMode="single"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let column of columns" [pSortableColumn]="column.field">
+              {{column.header}}
+              <p-sortIcon [field]="column.field"></p-sortIcon>
+            </th>
+          </tr>
+          <tr>
+            <th *ngFor="let column of columns">
+              <input pInputText type="text" (input)="table.filter($event.target.value, column.field, column.filterMatchMode)" placeholder="Filtrer {{ column.header.toLowerCase() }} ...">
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+          <tr [pSelectableRowDblClick]="rowData">
+            <td *ngFor="let column of columns">
+              {{ rowData[column.field] }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Editor">
+      <p-editor [style]="{'height':'500px'}"></p-editor>
+    </p-tabPanel>
+  </p-tabView>
+</div>
