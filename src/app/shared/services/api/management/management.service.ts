@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../../config/config.service';
+import { Observable } from 'rxjs';
 import PaymentMode from '../../../models/entities/PaymentMode';
-import {ConfigService} from '../../config/config.service';
+import Article from '../../../models/entities/Article';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,39 @@ export class ManagementService {
 
   public getPaymentMode(paymentModeId: number): Observable<PaymentMode> {
     return this.http.get<PaymentMode>(this.apiBaseUrl + 'payment-modes/' + paymentModeId);
+  }
+
+
+
+  // ------------------------------------------------
+  // Articles routes :
+  // ------------------------------------------------
+
+  public getAllArticles(page: number = 1, pageSize: number = 5) {
+    // TODO : faire l'entité de réponse
+  }
+
+  public getArticleList(): Observable<Article[]> {
+    return this.http.get<Article[]>(this.apiBaseUrl + 'articles/list');
+  }
+
+  public createArticle(article: any): Observable<Article> {
+    return this.http.post<Article>(this.apiBaseUrl + 'articles', article);
+  }
+
+  public updateArticle(article: Article): Observable<Article> {
+    return this.http.put<Article>(this.apiBaseUrl + 'articles/' + article.id, article);
+  }
+
+  public deleteArticle(article: Article) {
+    return this.http.delete(this.apiBaseUrl + 'articles/' + article.id);
+  }
+
+  public setArticleVisible(idArticle: number): Observable<Article> {
+    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/visible', {});
+  }
+
+  public setArticleInvisible(idArticle: number): Observable<Article> {
+    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/invisible', {});
   }
 }
