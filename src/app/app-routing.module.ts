@@ -41,6 +41,7 @@ import { HelpComponent } from './management/help/help.component';
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {DevToolsComponent} from './management/dev-tools/dev-tools.component';
+import {ArticleComponent} from './management/articles/article/article.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -67,7 +68,13 @@ const routes: Routes = [
     canActivateChild: [ LoginGuard, PermissionGuard ],
     children: [
       { path: '', redirectTo: 'stats', pathMatch: 'full' },
-      { path: 'articles', component: ArticlesComponent },
+      {
+        path: 'articles',
+        children: [
+          { path: '', component: ArticlesComponent },
+          { path: ':id', component: ArticleComponent }
+        ]
+      },
       { path: 'informations', component: InformationsComponent },
       { path: 'gymnasiums', component: GymnasiumsComponent },
       { path: 'schedules', component: SchedulesComponent },

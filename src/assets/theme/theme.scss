@@ -63,7 +63,11 @@ a {
   }
 }
 
-div.separation {
+h1 {
+  margin: 0px;
+}
+
+div.global-separation {
   padding: 0px;
   margin: 0px;
   border-top: 1px solid $global-border-color;

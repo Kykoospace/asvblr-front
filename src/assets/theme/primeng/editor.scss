@@ -5,16 +5,17 @@
 .ui-editor-container {
 
   .ui-editor-toolbar {
-    background-color: $global-bkg-darker-color;
-    border: 1px solid $global-border-color;
-    border-top-left-radius: $global-border-radius;
-    border-top-right-radius: $global-border-radius;
+    background-color: $prime-ng-editor-toolbar-bkg-color;
+    border: 1px solid $prime-ng-editor-border-color;
+    border-top-left-radius: $prime-ng-editor-border-radius;
+    border-top-right-radius: $prime-ng-editor-border-radius;
   }
 
   .ui-editor-content {
-    border: 1px solid $global-border-color;
+    background-color: $prime-ng-editor-bkg-color;
+    border: 1px solid $prime-ng-editor-border-color;
     border-top: none;
-    border-bottom-left-radius: $global-border-radius;
-    border-bottom-right-radius: $global-border-radius;
+    border-bottom-left-radius: $prime-ng-editor-border-radius;
+    border-bottom-right-radius: $prime-ng-editor-border-radius;
   }
 }

@@ -19,7 +19,7 @@
       />
     </div>
   </p-toolbar>
-  <div class="separation p-col-12"></div>
+  <div class="global-separation p-col-12"></div>
   <p-table
     #table
     class="p-col-12"
@@ -28,11 +28,11 @@
     [columns]="columns"
     [rows]="maxRowCount"
     [rowsPerPageOptions]="['15', '25', '50']"
-    [globalFilterFields]="['firstName', 'lastName', 'gender', 'phoneNumber']"
+    [globalFilterFields]="['firstName', 'lastName', 'phoneNumber']"
     (onRowSelect)="selectSubscription($event.data)"
     selectionMode="single"
     stateStorage="session"
-    stateKey="statedemo-session"
+    stateKey="subscription-table"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>

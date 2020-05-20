@@ -37,6 +37,10 @@ export class ManagementService {
   // Articles routes :
   // ------------------------------------------------
 
+  public getArticle(idArticle: number): Observable<Article> {
+    return this.http.get<Article>(this.apiBaseUrl + 'articles/' + idArticle);
+  }
+
   public getAllArticles(page: number = 1, pageSize: number = 5) {
     // TODO : faire l'entité de réponse
   }
@@ -53,8 +57,8 @@ export class ManagementService {
     return this.http.put<Article>(this.apiBaseUrl + 'articles/' + article.id, article);
   }
 
-  public deleteArticle(article: Article) {
-    return this.http.delete(this.apiBaseUrl + 'articles/' + article.id);
+  public deleteArticle(idArticle: number) {
+    return this.http.delete(this.apiBaseUrl + 'articles/' + idArticle);
   }
 
   public setArticleVisible(idArticle: number): Observable<Article> {

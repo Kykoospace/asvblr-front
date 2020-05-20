@@ -18,8 +18,6 @@ export class SubscriptionComponent implements OnInit {
     detail: 'Le document a bien été téléversé'
   };
 
-  public cniUploadDialog = false;
-
   public subscription: Subscription;
 
   constructor(
@@ -83,19 +81,28 @@ export class SubscriptionComponent implements OnInit {
   }
 
   public deleteSubscription() {
-    console.log('Suppression demandée');
     this.confirmationService.confirm({
-      message: 'Êtes-vous sur(e) de vouloir supprimer l\'inscription de ' + this.subscription.firstName + ' ' + this.subscription.lastName.toUpperCase() + ' ?',
+      message: 'Voulez-vous supprimer l\'inscription de '
+        + this.subscription.firstName + ' '
+        + this.subscription.lastName.toUpperCase() + ' ?',
       accept: () => {
         this.teamService.deleteSubscription(this.subscription.id)
-          .subscribe(() => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Inscription supprimée',
-              detail: 'L\'inscription a bien été supprimée.'
+          .subscribe(
+            () => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Inscription supprimée',
+                detail: 'L\'inscription a bien été supprimée.'
+              });
+              this.backNavigate();
+            },
+            err => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Suppression impossible',
+                detail: 'Une erreur est survenue lors de la suppression de l\'inscription.'
+              })
             });
-            this.router.navigate(['/management/subscriptions']);
-          });
       }
     });
   }

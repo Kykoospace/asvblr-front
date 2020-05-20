@@ -12,7 +12,6 @@ import { MenuItem } from 'primeng';
 export class ManagementComponent implements OnInit {
 
   public userMenu: MenuItem[];
-  public managementNavMenuDisplay: boolean;
   public managementNavMenu: ManagementNavMenu[];
 
   public loggedUser: User;
@@ -20,7 +19,6 @@ export class ManagementComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) {
-    this.managementNavMenuDisplay = window.innerWidth > 1000;
     this.loggedUser = this.authService.getLoggedUser();
   }
 
