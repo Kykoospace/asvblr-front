@@ -1,10 +1,10 @@
 <p-dialog header="Nouvel article" [(visible)]="newArticleDialogToggle">
-  <dv class="p-grid">
+  <div class="p-grid">
     <span class="p-col-12">Choisissez un titre pour le nouvel article :</span>
     <div class="p-col-12">
       <input #articleTitleInput type="text" pInputText>
     </div>
-  </dv>
+  </div>
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
@@ -55,8 +55,8 @@
     <ng-template pTemplate="body" let-rowData>
       <tr [pSelectableRow]="rowData">
         <td *ngFor="let column of columns" [ngSwitch]="true">
-          <span *ngSwitchCase="column.field === 'gender'">{{ rowData[column.field] ? 'Homme' : 'Femme' }}</span>
-          <span *ngSwitchCase="column.field === 'creationDate' || column.field === 'birthDate'">{{ rowData[column.field] | date: 'shortDate' }}</span>
+          <span *ngSwitchCase="column.field === 'creationDate' || column.field === 'lastModificationDate'">{{ rowData[column.field] | date: 'shortDate' }}</span>
+          <span *ngSwitchCase="column.field === 'visible'">{{ rowData[column.field] ? 'Public' : 'Masqué' }}</span>
           <span *ngSwitchDefault>{{ rowData[column.field] }}</span>
         </td>
       </tr>

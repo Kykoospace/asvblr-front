@@ -157,7 +157,20 @@ $prime-ng-dialog-titlebar-bkg-color: $global-bkg-darker-color;
 
 
 // Editor :
+$prime-ng-editor-mask-bkg-color: $global-transparent-color;
 $prime-ng-editor-bkg-color: $global-bkg-color;
 $prime-ng-editor-border-color: $global-border-color;
 $prime-ng-editor-border-radius: $global-border-radius;
 $prime-ng-editor-toolbar-bkg-color: $global-bkg-darker-color;
+
+
+// Tooltip :
+$prime-ng-tooltip-bkg-color: $global-transparent-darker-color;
+$prime-ng-tooltip-border-radius: $global-border-radius;
+$prime-ng-tooltip-padding: $global-element-padding;
+
+
+// Input switch :
+$prime-ng-inputswitch-border-color: $global-border-color;
+$prime-ng-inputswitch-checked-bkg-color: $global-accent-color;
+$prime-ng-inputswitch-checked-circle-bkg-color: $global-bkg-color;

@@ -1,0 +1,21 @@
+// ----------------------------------------
+// INPUT SWITCH :
+// ----------------------------------------
+
+.ui-inputswitch {
+  vertical-align: middle;
+  transition: background-color, .2s;
+  background-color: $prime-ng-inputswitch-border-color;
+  border-radius: 30px;
+
+  &.ui-inputswitch-checked {
+    background-color: $prime-ng-inputswitch-checked-bkg-color;
+  }
+
+  .ui-inputswitch-slider {
+
+    &::before {
+      background-color: $prime-ng-inputswitch-checked-circle-bkg-color;
+    }
+  }
+}

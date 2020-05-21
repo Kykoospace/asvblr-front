@@ -23,13 +23,13 @@ import {
   ButtonModule,
   CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule,
   DropdownModule, EditorModule, FileUploadModule,
-  GalleriaModule, InplaceModule, InputTextareaModule,
+  GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
   MegaMenuModule, MenuModule, MessageService, ProgressSpinnerModule,
   RadioButtonModule, SelectButtonModule, SpinnerModule,
   TableModule,
-  TabMenuModule, TabViewModule, ToastModule,
-  ToolbarModule
+  TabMenuModule, TabViewModule, ToastModule, ToggleButtonModule,
+  ToolbarModule, TooltipModule
 } from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
 import { InformationsComponent } from './management/informations/informations.component';
@@ -137,7 +137,10 @@ function loadConfiguration(
     ProgressSpinnerModule,
     EditorModule,
     InplaceModule,
-    DialogModule
+    DialogModule,
+    InputSwitchModule,
+    TooltipModule,
+    ToggleButtonModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

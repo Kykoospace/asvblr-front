@@ -1,0 +1,16 @@
+// ----------------------------------------
+// TOOLTIP :
+// ----------------------------------------
+
+.ui-tooltip {
+
+  .ui-tooltip-arrow {
+    fill: $prime-ng-tooltip-bkg-color !important;
+  }
+
+  .ui-tooltip-text {
+    background-color: $prime-ng-tooltip-bkg-color !important;
+    border-radius: $prime-ng-tooltip-border-radius;
+    padding: $prime-ng-tooltip-padding !important;
+  }
+}

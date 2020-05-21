@@ -1,0 +1,13 @@
+// ----------------------------------------
+// TOGGLE BUTTON :
+// ----------------------------------------
+
+.ui-togglebutton {
+  background-color: $global-border-color;
+  color: $global-primary-font-color;
+
+  &.ui-state-active {
+    background-color: $global-accent-color;
+    color: $global-contrast-font-color;
+  }
+}
