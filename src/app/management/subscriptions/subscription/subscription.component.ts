@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService} from '../../../shared/services/api/team/team.service';
 import Subscription from '../../../shared/models/entities/Subscription';
 import {ConfirmationService, MessageService} from 'primeng';
+import ClothingSize from '../../../shared/models/entities/ClothingSize';
 
 @Component({
   selector: 'app-subscription',
@@ -19,6 +20,8 @@ export class SubscriptionComponent implements OnInit {
   };
 
   public subscription: Subscription;
+  public topSize: ClothingSize;
+  public pantsSize: ClothingSize;
 
   constructor(
     private router: Router,
@@ -71,23 +74,33 @@ export class SubscriptionComponent implements OnInit {
 
   public validateSubscription() {
     this.loading = true;
+
+    // Call validate-subscription route :
     this.teamService.validateSubscription(this.subscription.id)
-      .subscribe(sub => {
-        this.refreshSubscription();
-      },
+      .subscribe(
+        // If success :
+        sub => {
+          this.refreshSubscription();
+          },
+        // If fail :
         err => {
-        console.error(err);
+          console.error(err);
         });
   }
 
   public deleteSubscription() {
+    // Call confirm dialog box :
     this.confirmationService.confirm({
       message: 'Voulez-vous supprimer l\'inscription de '
         + this.subscription.firstName + ' '
         + this.subscription.lastName.toUpperCase() + ' ?',
+
+      // Callback method when accepted :
       accept: () => {
+        // Call delete route :
         this.teamService.deleteSubscription(this.subscription.id)
           .subscribe(
+            // If success :
             () => {
               this.messageService.add({
                 severity: 'success',
@@ -96,32 +109,66 @@ export class SubscriptionComponent implements OnInit {
               });
               this.backNavigate();
             },
+            // If fail :
             err => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Suppression impossible',
                 detail: 'Une erreur est survenue lors de la suppression de l\'inscription.'
-              })
+              });
             });
       }
     });
   }
 
-  public refreshSubscription(loading = true) {
+  public refreshSubscription(loading: boolean = true) {
     this.loading = loading;
+    // Get subscription id from route :
     const idSubscription = +this.route.snapshot.paramMap.get('id');
 
+    // Call GET route :
     this.teamService.getSubscription(idSubscription)
-      .subscribe((subscription: Subscription) => {
+      .subscribe(
+        // If success :
+        (subscription: Subscription) => {
           this.subscription = subscription;
-
           this.loading = false;
+
+          // Get clothes sizes values :
+          if (subscription.equipment) {
+            this.teamService.getClothingSize(subscription.idTopSize)
+              .subscribe(
+                clotheSize => {
+                  this.topSize = clotheSize;
+                },
+                err => {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Taille de vêtement introuvable'
+                  });
+                }
+              );
+            this.teamService.getClothingSize(subscription.idPantsSize)
+              .subscribe(
+                clotheSize => {
+                  this.pantsSize = clotheSize;
+                },
+                err => {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Taille de vêtement introuvable'
+                  });
+                }
+              );
+          }
         },
+        // If fail :
         err => {
           this.messageService.add({
             severity: 'error',
             summary: 'Inscription introuvable'
           });
+          // Back to subscription list :
           this.router.navigate(['/management/subscriptions']);
         });
   }

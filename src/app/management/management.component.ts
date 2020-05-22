@@ -37,7 +37,6 @@ export class ManagementComponent implements OnInit {
         label: 'Membres',
         items: [
           { label: 'Inscriptions', route: 'subscriptions', icon: 'fas fa-file-signature', privilege: '' },
-          { label: 'Joueurs', route: 'players', icon: 'fas fa-user-friends', privilege: '' },
           { label: 'Équipes', route: 'teams', icon: 'fas fa-users', privilege: '' },
           { label: 'Demande de licence', route: 'licence', icon: 'fas fa-id-card', privilege: '' },
           { label: 'Demande de maillot', route: 'jersey', icon: 'fas fa-tshirt', privilege: '' }
@@ -56,8 +55,7 @@ export class ManagementComponent implements OnInit {
         label: 'Outils',
         items: [
           { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: '' },
-          { label: 'Paramètres', route: 'settings', icon: 'fas fa-cogs', privilege: '' },
-          { label: 'Aide', route: 'help', icon: 'fas fa-question', privilege: '' }
+          { label: 'Paramètres', route: 'settings', icon: 'fas fa-cogs', privilege: '' }
         ]
       },
       {

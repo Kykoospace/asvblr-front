@@ -89,7 +89,7 @@ export class SubscriptionComponent implements OnInit {
       firstName: ['', [ Validators.required ]],
       lastName: ['', [ Validators.required ]],
       gender: [null, [ Validators.required ]],
-      email: ['', [ Validators.required ]],
+      email: ['', [ Validators.required, Validators.email ]],
       phoneNumber: [''],
       birthDate: ['', [ Validators.required ]],
       nationality: ['', [ Validators.required ]],
@@ -97,14 +97,14 @@ export class SubscriptionComponent implements OnInit {
       postcode: ['', [ Validators.required ]],
       city: ['', [ Validators.required ]],
       equipment: [false],
-      requestedJerseyNumber: ['', [ Validators.required ]],
-      idTopSize: [null, [ Validators.required ]],
-      idPantsSize: [null, [ Validators.required ]],
+      requestedJerseyNumber: [''],
+      idTopSize: [null],
+      idPantsSize: [null],
       idCategory: [null, [ Validators.required ]],
-      idPaymentMode: [null , [ Validators.required ]],
-      insuranceRequested: [false],
-      referee: [false],
-      coach: [false],
+      idPaymentMode: [null, [ Validators.required ]],
+      insuranceRequested: [false, [ Validators.required ]],
+      referee: [false, [ Validators.required ]],
+      coach: [false, [ Validators.required ]],
       comment: [''],
     });
 
@@ -142,6 +142,7 @@ export class SubscriptionComponent implements OnInit {
   ngOnInit(): void { }
 
   public sendSubscription() {
+    console.log(this.subscriptionForm.value);
     if (this.subscriptionForm.valid) {
       // Envoi du formulaire d'inscription :
       this.teamService.createSubscription(this.subscriptionForm.value)
@@ -154,6 +155,7 @@ export class SubscriptionComponent implements OnInit {
           // Erreur de l'envoi :
           err => {
             this.messageService.add(this.errorMessage);
+            console.error(err);
           });
     } else {
       this.messageService.add(this.warningMessage);
