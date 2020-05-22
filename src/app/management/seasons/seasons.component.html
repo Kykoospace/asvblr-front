@@ -1,1 +1,21 @@
-<p>seasons works!</p>
+<p-dialog header="Ouvrir une nouvelle saison" [(visible)]="newSeasonToggle">
+  <div class="p-grid">
+    <h1 class="p-col-12">Création d'une nouvelle saison</h1>
+    <span class="p-col-4 global-legend">Nom</span>
+    <div class="p-col-8">
+      <input type="text" value="2020/2021" pInputText disabled>
+    </div>
+    <div class="global-separation p-col-12"></div>
+  </div>
+  <p-footer>
+    <p-button class="ui-button-secondary" label="Non, rester à la saison actuelle" icon="pi pi-times"></p-button>
+    <p-button class="ui-button-warning" label="Oui, ouvrir une nouvelle saison" icon="pi pi-check"></p-button>
+  </p-footer>
+</p-dialog>
+<div class="module-container p-grid">
+  <h1 class="p-col-12">Gestion des saisons</h1>
+  <span class="p-col-4 global-legend">Saison actuelle</span>
+  <span class="p-col-8">{{ currentSeason.name }}</span>
+  <span class="p-col-4 global-legend">Prochaine saison</span>
+  <p-button (click)="newSeasonToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="pi pi-plus"></p-button>
+</div>
