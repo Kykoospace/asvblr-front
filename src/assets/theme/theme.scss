@@ -33,7 +33,6 @@
 @import "primeng/radiobutton";
 @import "primeng/spinner";
 @import "primeng/flexgrid";
-@import "primeng/textarea";
 @import "primeng/toast";
 @import "primeng/tooltip";
 
@@ -81,7 +80,12 @@ label.global-form-label {
   padding: $global-element-padding !important;
 }
 
+sup.global-form-required {
+  color: $global-danger-color;
+}
+
 span.global-legend {
+  margin-top: $global-spacing-small;
   user-select: none;
   font-size: $global-font-size-small;
   text-align: right;

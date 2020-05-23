@@ -9,8 +9,9 @@
   font-size: $prime-ng-input-font-size;
   color: $prime-ng-input-font-color;
   width: 100%;
-  resize: none;
   font-family: $prime-ng-input-font-family !important;
+  // Textarea :
+  resize: none;
 
   &:focus {
     border-color: $prime-ng-input-focus-color;

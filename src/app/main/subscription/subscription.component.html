@@ -16,7 +16,10 @@
           <div class="p-col-4">
             <input formControlName="firstName" type="text" pInputText />
           </div>
-          <label class="global-form-label p-col-8">{{ formLabelValues.firstName }}</label>
+          <label class="global-form-label p-col-8">
+            {{ formLabelValues.firstName }}
+            <sup class="global-form-required">*</sup>
+          </label>
 
           <!-- LASTNAME -->
           <div class="p-col-4">
@@ -76,7 +79,7 @@
 
           <!-- POSTCODE -->
           <div class="p-col-4">
-            <input formControlName="postcode" type="number" pInputText (ngModelChange)="updateCity($event)" />
+            <p-spinner formControlName="postcode" [min]="1000" max="100000" [step]="100" (ngModelChange)="updateCity($event)"></p-spinner>
           </div>
           <label class="global-form-label p-col-8">{{ formLabelValues.postcode }}</label>
 

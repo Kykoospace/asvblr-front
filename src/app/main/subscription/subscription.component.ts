@@ -88,7 +88,7 @@ export class SubscriptionComponent implements OnInit {
     this.subscriptionForm = this.formBuilder.group({
       firstName: ['', [ Validators.required ]],
       lastName: ['', [ Validators.required ]],
-      gender: [null, [ Validators.required ]],
+      gender: [true, [ Validators.required ]],
       email: ['', [ Validators.required, Validators.email ]],
       phoneNumber: [''],
       birthDate: ['', [ Validators.required ]],

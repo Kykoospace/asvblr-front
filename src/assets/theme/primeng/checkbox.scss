@@ -5,6 +5,7 @@
 .ui-chkbox {
   border: 1px solid $prime-ng-input-border-color;
   border-radius: $prime-ng-input-border-radius;
+  margin: $prime-ng-input-padding;
 
   &:hover {
     border-color: $prime-ng-input-focus-color;
