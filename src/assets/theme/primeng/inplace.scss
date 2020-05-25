@@ -4,16 +4,9 @@
 
 .ui-inplace {
   &.ui-inplace-closable {
-    .ui-inputtext {
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
-      border-right: none;
-    }
-
     .ui-button {
       padding: $global-element-padding;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
+      margin-left: $global-spacing;
     }
   }
 

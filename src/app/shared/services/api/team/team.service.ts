@@ -34,17 +34,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions')
-      .pipe(
-        map((subs: Subscription[]) => {
-          subs.forEach(sub => {
-            sub.birthDate = new Date(sub.birthDate);
-            sub.creationDate = new Date(sub.creationDate);
-            sub.validationDate = new Date(sub.validationDate);
-          });
-          return subs;
-        })
-      );
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions');
   }
 
   public getSubscriptionsBySeason(seasonId: number): Observable<Subscription[]> {
