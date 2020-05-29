@@ -13,7 +13,6 @@ import {forkJoin} from 'rxjs';
 })
 export class SubscriptionComponent implements OnInit {
 
-  public loading = true;
   private documentUploadedSuccessMessage = {
     severity: 'success',
     summary: 'Document téléversé',
@@ -46,7 +45,7 @@ export class SubscriptionComponent implements OnInit {
     this.teamService.updateSubscriptionCNI(this.subscription.id, file.files.pop())
       .subscribe(() => {
         this.messageService.add(this.documentUploadedSuccessMessage);
-        this.refreshSubscription(false);
+        this.refreshSubscription();
       }, error => {
         console.error(error);
       });
@@ -57,7 +56,7 @@ export class SubscriptionComponent implements OnInit {
     this.teamService.updateSubscriptionMedicalCertificate(this.subscription.id, file.files.pop())
       .subscribe(() => {
         this.messageService.add(this.documentUploadedSuccessMessage);
-        this.refreshSubscription(false);
+        this.refreshSubscription();
       }, error => {
         console.error(error);
       });
@@ -67,15 +66,13 @@ export class SubscriptionComponent implements OnInit {
     this.teamService.updateSubscriptionidentityPhoto(this.subscription.id, file.files.pop())
       .subscribe(() => {
         this.messageService.add(this.documentUploadedSuccessMessage);
-        this.refreshSubscription(false);
+        this.refreshSubscription();
       }, error => {
         console.error(error);
       });
   }
 
   public validateSubscription() {
-    this.loading = true;
-
     // Call validate-subscription route :
     this.teamService.validateSubscription(this.subscription.id)
       .subscribe(
@@ -122,8 +119,7 @@ export class SubscriptionComponent implements OnInit {
     });
   }
 
-  public refreshSubscription(loading: boolean = true) {
-    this.loading = loading;
+  public refreshSubscription() {
     // Get subscription id from route :
     const idSubscription = +this.route.snapshot.paramMap.get('id');
 
@@ -133,7 +129,6 @@ export class SubscriptionComponent implements OnInit {
         // If success :
         (subscription: Subscription) => {
           this.subscription = subscription;
-          this.loading = false;
 
           // Get clothes sizes values :
           if (subscription.equipment) {
@@ -145,17 +140,13 @@ export class SubscriptionComponent implements OnInit {
                 results => {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
-                  this.loading = false;
                 },
                   err => {
                   this.messageService.add({
                     severity: 'error',
                     summary: 'Taille de vêtement introuvable'
                   });
-                  this.loading = false;
                 });
-          } else {
-            this.loading = false;
           }
         },
         // If fail :

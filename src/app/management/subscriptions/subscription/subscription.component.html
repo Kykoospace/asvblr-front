@@ -1,11 +1,11 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<div class="module-container p-grid" *ngIf="!loading">
+<div class="module-container p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="pi pi-arrow-left"></p-button>
       <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" *ngIf="!subscription.validated"></p-button>
       <p-button type="button" label="Validée le {{ subscription.validationDate | date: 'shortDate' }}" class="ui-button-secondary" *ngIf="subscription.validated" [disabled]="true"></p-button>
-      <p-button type="button" label="Renvoyer identifiants" class="ui-button-secondary"></p-button>
+      <p-button type="button" label="Renvoyer identifiants" class="ui-button-secondary" *ngIf="subscription.validated"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Inscription de {{ subscription.firstName + ' ' + subscription.lastName.toUpperCase() }}, faite le {{ subscription.creationDate | date: 'shortDate' }}</span>
@@ -131,11 +131,8 @@
         </div>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Formulaire de licence">
-      Bla bla
+    <p-tabPanel header="Paiement">
+      Liste des modes de paiement.
     </p-tabPanel>
   </p-tabView>
-</div>
-<div class="p-grid p-justify-center" *ngIf="loading">
-  <p-progressSpinner class="p-col-2"></p-progressSpinner>
 </div>

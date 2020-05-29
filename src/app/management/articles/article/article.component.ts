@@ -11,7 +11,6 @@ import {ConfirmationService, MessageService} from 'primeng';
 })
 export class ArticleComponent implements OnInit {
 
-  public loading: boolean = false;
   public renameArticleToggle: boolean = false;
   public setVisibilityArticleToggle: boolean = false;
 
@@ -26,13 +25,11 @@ export class ArticleComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {
-    this.loading = true;
     this.managementService.getArticle(+this.route.snapshot.paramMap.get('id'))
       .subscribe(
         article => {
           this.article = article;
           this.content = article.content;
-          this.loading = false;
         },
         err => {
           console.error(err);

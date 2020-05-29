@@ -1,5 +1,5 @@
 <p-confirmDialog header="Renommer l'article" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-dialog header="Nouvel article" [(visible)]="renameArticleToggle" *ngIf="!loading">
+<p-dialog header="Nouvel article" [(visible)]="renameArticleToggle">
   <div class="p-grid">
     <span class="p-col-12">Modifier le titre de l'article</span>
     <div class="p-col-12">
@@ -16,7 +16,7 @@
   </p-footer>
 </p-dialog>
 
-<div class="module-container p-grid" *ngIf="!loading">
+<div class="module-container p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" label="Retour" icon="pi pi-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>

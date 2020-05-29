@@ -6,6 +6,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
 import localeFr from '@angular/common/locales/fr';
 import { map } from 'rxjs/operators';
 import { registerLocaleData } from '@angular/common';
+import { SafePipeModule } from 'safe-pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +57,11 @@ import { LogoutComponent } from './login/logout/logout.component';
 import { ConfigService } from './shared/services/config/config.service';
 import { DevToolsComponent } from './management/dev-tools/dev-tools.component';
 import { ArticleComponent } from './management/articles/article/article.component';
-import {SafePipeModule} from 'safe-pipe';
+import { LoadingComponent } from './shared/components/loading/loading.component';
+import { SubscriptionFormComponent } from './shared/components/subscription-form/subscription-form.component';
+import { PlayerCardComponent } from './shared/components/player-card/player-card.component';
+import { UserCardComponent } from './shared/components/user-card/user-card.component';
+import {LoadingScreenInterceptor} from './shared/interceptors/loading-screen.interceptor';
 
 registerLocaleData(localeFr);
 
@@ -107,7 +112,12 @@ function loadConfiguration(
     LogoutComponent,
     SubscriptionManagementComponent,
     DevToolsComponent,
-    ArticleComponent
+    ArticleComponent,
+    LoadingComponent,
+    SubscriptionFormComponent,
+    PlayerCardComponent,
+    UserCardComponent,
+    LoadingComponent
   ],
   imports: [
     HttpClientModule,
@@ -154,7 +164,16 @@ function loadConfiguration(
         ConfigService
       ],
       multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingScreenInterceptor,
+      multi: true
+    },
     MessageService,
     ConfirmationService
   ],
