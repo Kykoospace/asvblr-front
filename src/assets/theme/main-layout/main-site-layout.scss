@@ -54,12 +54,9 @@ div#main-site-layout {
     box-sizing: border-box;
     margin: $main-site-layout-section-margin;
     padding: $main-site-layout-section-padding;
+    background-color: $main-site-layout-section-bkg-primary;
 
-    &.main-site-layout-section-primary {
-      background-color: $main-site-layout-section-bkg-primary;
-    }
-
-    &.main-site-layout-section-secondary {
+    &:nth-child(2n) {
       background-color: $main-site-layout-section-bkg-secondary;
     }
 

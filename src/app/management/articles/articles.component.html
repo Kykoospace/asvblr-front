@@ -38,6 +38,7 @@
     [paginator]="true"
     [columns]="columns"
     [rows]="25"
+    [rowsPerPageOptions]="[10, 25, 50]"
     [globalFilterFields]="['title']"
     (onRowSelect)="selectArticle($event.data)"
     selectionMode="single"

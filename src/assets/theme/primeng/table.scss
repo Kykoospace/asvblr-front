@@ -9,6 +9,11 @@
   .ui-table-caption {
     padding: 0px;
     margin-bottom: $prime-ng-table-caption-spacing;
+    text-align: left;
+
+    .ui-table-globalfilter-container {
+      float: right;
+    }
   }
 
   .ui-table-thead {

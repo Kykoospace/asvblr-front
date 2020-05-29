@@ -1,3 +1,17 @@
+// Import variables
+@import "src/assets/theme/variables";
+
 .home-article-container {
-  padding: 12px 0px;
+
+  ::ng-deep {
+    img {
+      width: 100%;
+    }
+  }
+
+  .home-article-date {
+    text-align: right;
+    font-size: $global-font-size-small;
+    color: $global-disabled-font-color;
+  }
 }

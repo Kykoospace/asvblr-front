@@ -5,13 +5,12 @@
 
   <div
     class="main-site-layout-section"
-    [ngClass]="{'main-site-layout-section-secondary': i % 2 == 0}"
     *ngFor="let article of articles; let i = index"
   >
-    <div class="main-site-layout-section-content">
+    <div class="main-site-layout-section-content home-article-container">
       <h1>{{ article.title }}</h1>
-      <p>{{ article.text }}</p>
-      <p>{{ article.date }}</p>
+      <div [innerHTML]="article.content | safe: 'html'"></div>
+      <p class="home-article-date">Modifié le {{ article.lastModificationDate | date: 'shortDate' }}</p>
     </div>
   </div>
 </div>

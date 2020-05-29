@@ -13,6 +13,7 @@ export class ArticleComponent implements OnInit {
 
   public loading: boolean = false;
   public renameArticleToggle: boolean = false;
+  public setVisibilityArticleToggle: boolean = false;
 
   public article: Article;
 
@@ -74,23 +75,52 @@ export class ArticleComponent implements OnInit {
   }
 
   public renameArticle(title: string) {
-    this.article.title = title;
-    this.managementService.updateArticle(this.article)
+    if (title !== '') {
+      this.article.title = title;
+      this.article.content = this.content;
+      this.managementService.updateArticle(this.article)
+        .subscribe(
+          article => {
+            this.article = article;
+
+            this.content = article.content;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Modifications sauvegardées'
+            });
+            this.renameArticleToggle = false;
+          },
+          err => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Impossible de renommer l\'article',
+              detail: 'Une erreur est survenue lors du renommage de l\'article.'
+            });
+          });
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Le titre ne peut pas être vide'
+      });
+    }
+  }
+
+  public setVisibilityArticle(visible: boolean) {
+    this.managementService.setArticleVisible(this.article.id)
       .subscribe(
         article => {
           this.article = article;
-          this.content = article.content;
           this.messageService.add({
             severity: 'success',
-            summary: 'Modifications sauvegardées'
+            summary: 'Visibilité enregistrée',
+            detail: 'La visibilité de l\'article a bien été enregistrée.'
           });
-          this.renameArticleToggle = false;
         },
         err => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Sauvegarde impossible',
-            detail: 'Une erreur est survenue lors de la sauvegarde de l\'article.'
+            summary: 'Modification impossible',
+            detail: 'Une erreur est survenue lors de la modification de la visibilité de l\'article.'
           });
         }
       );

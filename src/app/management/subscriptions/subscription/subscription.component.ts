@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TeamService} from '../../../shared/services/api/team/team.service';
+import { TeamService } from '../../../shared/services/api/team/team.service';
 import Subscription from '../../../shared/models/entities/Subscription';
-import {ConfirmationService, MessageService} from 'primeng';
+import { ConfirmationService, MessageService } from 'primeng';
 import ClothingSize from '../../../shared/models/entities/ClothingSize';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-subscription',
@@ -136,30 +137,25 @@ export class SubscriptionComponent implements OnInit {
 
           // Get clothes sizes values :
           if (subscription.equipment) {
-            this.teamService.getClothingSize(subscription.idTopSize)
+            forkJoin({
+              topSize: this.teamService.getClothingSize(this.subscription.idTopSize),
+              pantsSize: this.teamService.getClothingSize(this.subscription.idPantsSize)
+            })
               .subscribe(
-                clotheSize => {
-                  this.topSize = clotheSize;
+                results => {
+                  this.topSize = results.topSize;
+                  this.pantsSize = results.pantsSize;
+                  this.loading = false;
                 },
-                err => {
+                  err => {
                   this.messageService.add({
                     severity: 'error',
                     summary: 'Taille de vêtement introuvable'
                   });
-                }
-              );
-            this.teamService.getClothingSize(subscription.idPantsSize)
-              .subscribe(
-                clotheSize => {
-                  this.pantsSize = clotheSize;
-                },
-                err => {
-                  this.messageService.add({
-                    severity: 'error',
-                    summary: 'Taille de vêtement introuvable'
-                  });
-                }
-              );
+                  this.loading = false;
+                });
+          } else {
+            this.loading = false;
           }
         },
         // If fail :

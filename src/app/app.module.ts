@@ -56,6 +56,7 @@ import { LogoutComponent } from './login/logout/logout.component';
 import { ConfigService } from './shared/services/config/config.service';
 import { DevToolsComponent } from './management/dev-tools/dev-tools.component';
 import { ArticleComponent } from './management/articles/article/article.component';
+import {SafePipeModule} from 'safe-pipe';
 
 registerLocaleData(localeFr);
 
@@ -140,7 +141,8 @@ function loadConfiguration(
     DialogModule,
     InputSwitchModule,
     TooltipModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    SafePipeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

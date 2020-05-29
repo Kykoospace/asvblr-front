@@ -4,6 +4,9 @@ import { ConfigService } from '../../config/config.service';
 import { Observable } from 'rxjs';
 import PaymentMode from '../../../models/entities/PaymentMode';
 import Article from '../../../models/entities/Article';
+import Pageable from '../../../models/paging/Pageable';
+import {map} from 'rxjs/operators';
+import Page from '../../../models/paging/Page';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +44,13 @@ export class ManagementService {
     return this.http.get<Article>(this.apiBaseUrl + 'articles/' + idArticle);
   }
 
-  public getAllArticles(page: number = 1, pageSize: number = 5) {
-    // TODO : faire l'entité de réponse
+  public getAllArticles(page: number = 1, pageSize: number = 5): Observable<Article[]> {
+    return this.http.get<Page<Article>>(this.apiBaseUrl + 'articles?page=' + (page - 1) + '&size=' + pageSize)
+      .pipe(map(
+        pageable => {
+          return pageable.content;
+        }
+      ));
   }
 
   public getArticleList(): Observable<Article[]> {
