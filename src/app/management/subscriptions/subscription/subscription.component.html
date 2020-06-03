@@ -1,5 +1,5 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<div class="module-container p-grid">
+<div class="module-container p-grid" *ngIf="subscription">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="pi pi-arrow-left"></p-button>
@@ -59,13 +59,13 @@
         <span class="p-col-5">{{ subscription.requestedJerseyNumber }}</span>
         <span class="p-col-4"></span>
       </div>
-      <div class="p-grid" *ngIf="subscription.equipment">
+      <div class="p-grid" *ngIf="subscription.equipment && topSize">
         <span class="p-col-3 global-legend">Taille de haut</span>
         <span class="p-col-5">{{ topSize.name }}</span>
         <span class="p-col-4"></span>
       </div>
-      <div class="p-grid" *ngIf="subscription.equipment">
-        <span class="p-col-3 global-legend">Taille de pantalon</span>
+      <div class="p-grid" *ngIf="subscription.equipment && pantsSize">
+        <span class="p-col-3 global-legend">Taille de short</span>
         <span class="p-col-5">{{ pantsSize.name }}</span>
         <span class="p-col-4"></span>
       </div>

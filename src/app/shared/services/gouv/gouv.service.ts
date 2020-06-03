@@ -19,9 +19,6 @@ export class GouvService {
   }
 
   public getCityByPostcode(postcode: number): Observable<any> {
-    return this.http.get<any>(this.apiBaseUrl + 'communes?codePostal=' + postcode)
-      .pipe(map((cities: any[]) => {
-        return cities.pop();
-      }));
+    return this.http.get<any>(this.apiBaseUrl + 'communes?codePostal=' + postcode);
   }
 }

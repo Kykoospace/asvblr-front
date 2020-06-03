@@ -36,6 +36,7 @@ $prime-ng-mega-menu-submenu-item-hover-font-color: $global-contrast-font-active-
 
 // Button :
 $prime-ng-button-padding: $global-element-padding-small;
+$prime-ng-button-small-padding: $global-element-padding-small;
 $prime-ng-button-border-radius: $global-border-radius;
 $prime-ng-button-font-size: $global-font-size-small;
 $prime-ng-button-bkg-color: $global-accent-color;
@@ -51,8 +52,9 @@ $prime-ng-button-success-bkg-color: $global-success-color;
 $prime-ng-button-success-active-bkg-color: $global-success-active-color;
 $prime-ng-button-success-font-color: $global-primary-font-color;
 
-$prime-ng-button-info-bkg-color: $global-info-color;
-$prime-ng-button-info-active-bkg-color: $global-info-active-color;
+$prime-ng-button-info-bkg-color: $global-bkg-color;
+$prime-ng-button-info-border-color: $global-info-color;
+$prime-ng-button-info-active-bkg-color: $global-bkg-active-color;
 $prime-ng-button-info-font-color: $global-primary-font-color;
 
 $prime-ng-button-warning-bkg-color: $global-warning-color;

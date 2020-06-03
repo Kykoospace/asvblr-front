@@ -42,6 +42,7 @@ import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {DevToolsComponent} from './management/dev-tools/dev-tools.component';
 import {ArticleComponent} from './management/articles/article/article.component';
+import {SandboxComponent} from './management/sandbox/sandbox.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -95,7 +96,8 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'help', component: HelpComponent },
-      { path: 'dev-tools', component: DevToolsComponent }
+      { path: 'dev-tools', component: DevToolsComponent },
+      { path: 'sandbox', component: SandboxComponent }
     ]
   }
 ];

@@ -26,8 +26,8 @@ import {
   DropdownModule, EditorModule, FileUploadModule,
   GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule, MenuModule, MessageService, ProgressSpinnerModule,
-  RadioButtonModule, SelectButtonModule, SpinnerModule,
+  MegaMenuModule, MenuModule, MessageService, MultiSelectModule, ProgressSpinnerModule,
+  RadioButtonModule, SelectButtonModule, SpinnerModule, StepsModule,
   TableModule,
   TabMenuModule, TabViewModule, ToastModule, ToggleButtonModule,
   ToolbarModule, TooltipModule
@@ -62,6 +62,7 @@ import { SubscriptionFormComponent } from './shared/components/subscription-form
 import { PlayerCardComponent } from './shared/components/player-card/player-card.component';
 import { UserCardComponent } from './shared/components/user-card/user-card.component';
 import {LoadingScreenInterceptor} from './shared/interceptors/loading-screen.interceptor';
+import { SandboxComponent } from './management/sandbox/sandbox.component';
 
 registerLocaleData(localeFr);
 
@@ -117,7 +118,8 @@ function loadConfiguration(
     SubscriptionFormComponent,
     PlayerCardComponent,
     UserCardComponent,
-    LoadingComponent
+    LoadingComponent,
+    SandboxComponent
   ],
   imports: [
     HttpClientModule,
@@ -152,7 +154,9 @@ function loadConfiguration(
     InputSwitchModule,
     TooltipModule,
     ToggleButtonModule,
-    SafePipeModule
+    SafePipeModule,
+    StepsModule,
+    MultiSelectModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

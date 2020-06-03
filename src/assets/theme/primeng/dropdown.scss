@@ -7,9 +7,19 @@
   border-radius: $prime-ng-input-border-radius;
   color: $prime-ng-input-font-color;
   width: 100%;
+  user-select: none;
 
   &.ui-state-focus {
     border-color: #00a69c;
+  }
+
+  &.ui-state-disabled {
+    color: $global-disabled-font-color;
+    background-color: $global-disabled-bkg-color;
+
+    .ui-dropdown-label {
+      color: $global-disabled-font-color;
+    }
   }
 
   .ui-dropdown-items-wrapper {

@@ -23,6 +23,7 @@
 .ui-button-info .ui-button {
   background-color: $prime-ng-button-info-bkg-color;
   color: $prime-ng-button-info-font-color;
+  border-color: $prime-ng-button-info-border-color;
 
   &:active {
     background-color: $prime-ng-button-info-active-bkg-color;
@@ -56,12 +57,8 @@
   color: $prime-ng-button-font-color;
   font-size: $prime-ng-button-font-size;
 
-  .ui-button-icon {
-
-  }
-
-  .ui-button-text {
-
+  &.ui-button-small {
+    padding: $prime-ng-button-small-padding !important;
   }
 
   &.ui-state-disabled {
@@ -71,5 +68,13 @@
     &:active {
       background-color: $prime-ng-button-secondary-bkg-color;
     }
+  }
+
+  .ui-button-icon {
+
+  }
+
+  .ui-button-text {
+
   }
 }

@@ -8,7 +8,7 @@
   overflow: hidden;
   width: 100%;
 
-  .ui-spinner-up, .ui-spinner-down {
+  .ui-spinner-button {
     background: inherit;
     border: inherit;
     color: $prime-ng-input-font-color;
@@ -16,6 +16,11 @@
 
     &:hover {
       color: $prime-ng-input-focus-color
+    }
+
+    &.ui-state-disabled {
+      color: $prime-ng-button-disabled-font-color;
+      background-color: inherit;
     }
   }
 }

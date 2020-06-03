@@ -59,9 +59,10 @@ export class ManagementComponent implements OnInit {
         ]
       },
       {
-        label: 'Dev',
+        label: 'Dev tools',
         items: [
-          { label: 'Dev tools', route: 'dev-tools', icon: 'pi pi-desktop', privilege: '' }
+          { label: 'IHM items', route: 'dev-tools', icon: 'pi pi-desktop', privilege: '' },
+          { label: 'Sandbox', route: 'sandbox', icon: 'pi pi-desktop', privilege: '' }
         ]
       }
     ];

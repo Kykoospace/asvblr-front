@@ -145,6 +145,7 @@ export class SubscriptionComponent implements OnInit {
     console.log(this.subscriptionForm.value);
     if (this.subscriptionForm.valid) {
       // Envoi du formulaire d'inscription :
+      /*
       this.teamService.createSubscription(this.subscriptionForm.value)
         .subscribe(
           // Succès de l'envoi :
@@ -157,6 +158,7 @@ export class SubscriptionComponent implements OnInit {
             this.messageService.add(this.errorMessage);
             console.error(err);
           });
+      */
     } else {
       this.messageService.add(this.warningMessage);
     }

@@ -29,11 +29,10 @@ export class SubscriptionComponent implements OnInit {
     private teamService: TeamService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {
-    this.refreshSubscription();
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.refreshSubscription();
   }
 
   public backNavigate() {
@@ -63,7 +62,7 @@ export class SubscriptionComponent implements OnInit {
   }
 
   public uploadIdentityPhoto(file) {
-    this.teamService.updateSubscriptionidentityPhoto(this.subscription.id, file.files.pop())
+    this.teamService.updateSubscriptionIdentityPhoto(this.subscription.id, file.files.pop())
       .subscribe(() => {
         this.messageService.add(this.documentUploadedSuccessMessage);
         this.refreshSubscription();

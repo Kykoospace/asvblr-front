@@ -1,1 +1,387 @@
-<p>subscription-form works!</p>
+<div class="p-grid">
+  <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep"></p-steps>
+  <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
+    <div class="p-grid" formGroupName="firstStep" *ngIf="activeStep === 0">
+      <!-- FIRSTNAME -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="firstName" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.firstName }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- LASTNAME -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="lastName" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.lastName }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- GENDER -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="gender" [value]="true" formControlName="gender" label="Homme"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="gender" [value]="false" formControlName="gender" label="Femme"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.gender }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- BIRTHDATE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-calendar
+          formControlName="birthDate"
+          [readonlyInput]="true"
+          [locale]="calendarLanguage"
+          [monthNavigator]="true"
+          [yearNavigator]="true"
+          yearRange="1900:{{ maxBirthDateValue.getFullYear() }}"
+          [minDate]="minBirthDateValue"
+          [maxDate]="maxBirthDateValue"
+          (onSelect)="isMinor($event)"
+          dateFormat="dd/mm/yy">
+        </p-calendar>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.birthDate }}
+      </label>
+
+      <!-- BIRTHCOUNTRY -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="nationality" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.nationality }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- EMAIL -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="email" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.email }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- PHONENUMBER -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="phoneNumber" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.phoneNumber }}
+      </label>
+
+
+      <!-- ADDRESS -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="address" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.address }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- POSTCODE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-spinner formControlName="postcode" [min]="1000" max="100000" [step]="10" (ngModelChange)="updateCity($event)"></p-spinner>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.postcode }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <span class="p-col-2" *ngIf="cities"></span>
+      <div class="p-col-8 global-section-fill" *ngIf="cities">
+        <p>Plusieurs villes correspondent à ce code postal</p>
+        <p-button
+          *ngFor="let city of cities"
+          (click)="setCity(city.nom)"
+          label="{{ city.nom }}"
+          class="ui-button-info ui-button-small global-margin-right global-margin-top"
+          type="button"></p-button>
+      </div>
+      <span class="p-col-2" *ngIf="cities"></span>
+
+      <!-- CITY -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input formControlName="city" type="text" pInputText/>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.city }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- CATEGORY -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idCategory }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-12 global-separation"></div>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-right">
+          <p-button type="button" (click)="activeStep = 1" label="Étape suivante" icon="fas fa-arrow-right" iconPos="right" [disabled]="subscriptionForm.get('firstStep').invalid"></p-button>
+        </div>
+      </p-toolbar>
+    </div>
+
+    <div class="p-grid" formGroupName="secondStep" *ngIf="activeStep === 1">
+      <!-- INSURANCE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4 global-align-center">
+        <p-checkbox formControlName="insuranceRequested" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.insuranceRequested }}</label>
+
+      <!-- CALENDAR -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4 global-align-center">
+        <p-checkbox [binary]="true"></p-checkbox> <!-- TODO : formControlName="calendarRequested" -->
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }}</label>
+
+      <!-- EQUIPMENT -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4 global-align-center">
+        <p-checkbox formControlName="equipment" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.equipment }}</label>
+
+      <!-- REQUESTED JERSEY NUMBER -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-spinner formControlName="requestedJerseyNumber" [min]="1" [max]="40" [disabled]="!subscriptionForm.get('secondStep').value.equipment"></p-spinner>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.requestedJerseyNumber }}
+        <i class="far fa-question-circle global-tooltip-icon" [pTooltip]="requestedJerseyNumberTooltip"></i>
+      </label>
+
+      <!-- TOPSIZE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-dropdown [options]="clothingSizesOptions" formControlName="idTopSize" [disabled]="!subscriptionForm.get('secondStep').value.equipment"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idTopSize }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- PANTSIZE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-dropdown [options]="clothingSizesOptions" formControlName="idPantsSize" [disabled]="!subscriptionForm.get('secondStep').value.equipment"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idPantsSize }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-12 global-separation"></div>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-left">
+          <p-button type="button" (click)="activeStep = 0" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+        </div>
+        <div class="ui-toolbar-group-right">
+          <p-button
+            type="button"
+            (click)="activeStep = (isMinor() ? 2 : 3)"
+            label="Étape suivante"
+            icon="fas fa-arrow-right"
+            iconPos="right"
+            [disabled]="subscriptionForm.get('secondStep').invalid">
+          </p-button>
+        </div>
+      </p-toolbar>
+    </div>
+
+    <div class="p-grid" formGroupName="thirdStep" *ngIf="activeStep === 2 && isMinor()">
+
+      <!-- ALLOW LEAVE ALONE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToLeaveAlone" [value]="true" formControlName="pc_allowToLeaveAlone" label="Oui"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToLeaveAlone" [value]="false" formControlName="pc_allowToLeaveAlone" label="Non"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToLeaveAlone }}</label>
+
+      <!-- ALLOW CLUB RESCUE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowClubToRescue" [value]="true" formControlName="pc_allowClubToRescue" label="Oui"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowClubToRescue" [value]="false" formControlName="pc_allowClubToRescue" label="Non"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowClubToRescue }}</label>
+
+      <!-- ALLOW TO TRAVEL -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToTravelWithTeamMate" [value]="true" formControlName="pc_allowToTravelWithTeamMate" label="Oui"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToTravelWithTeamMate" [value]="false" formControlName="pc_allowToTravelWithTeamMate" label="Non"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToTravelWithTeamMate }}</label>
+
+      <!-- ALLOW TO PUBLISH -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToPublish" [value]="true" formControlName="pc_allowToPublish" label="Oui"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToPublish" [value]="false" formControlName="pc_allowToPublish" label="Non"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToPublish }}</label>
+
+      <!-- ALLOW WHATSAPP -->
+      <span class="p-col-2"></span>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToWhatsapp" [value]="true" formControlName="pc_allowToWhatsapp" label="Oui"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="pc_allowToWhatsapp" [value]="false" formControlName="pc_allowToWhatsapp" label="Non"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToWhatsapp }}</label>
+
+      <!-- UNACCOUNTABILITY -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4 global-align-center">
+        <p-checkbox formControlName="pc_unaccountability" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.pc_unaccountability }}</label>
+
+
+      <div class="p-col-12 global-separation"></div>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-left">
+          <p-button type="button" (click)="activeStep = 1" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+        </div>
+        <div class="ui-toolbar-group-right">
+          <p-button
+            type="button"
+            (click)="activeStep = 3"
+            label="Étape suivante"
+            icon="fas fa-arrow-right"
+            iconPos="right"
+            [disabled]="subscriptionForm.get('thirdStep').invalid">
+          </p-button>
+        </div>
+      </p-toolbar>
+    </div>
+    <div class="p-grid" formGroupName="thirdStep" *ngIf="activeStep === 2 && !isMinor()">
+      <p>VOUS N'ÊTES PAS MINEUR ESPÈCE DE ZOUBAB !</p>
+
+
+      <div class="p-col-12 global-separation"></div>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-left">
+          <p-button type="button" (click)="activeStep = 1" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+        </div>
+        <div class="ui-toolbar-group-right">
+          <p-button
+            type="button"
+            (click)="activeStep = 3"
+            label="Étape suivante"
+            icon="fas fa-arrow-right"
+            iconPos="right"
+            [disabled]="subscriptionForm.get('thirdStep').invalid">
+          </p-button>
+        </div>
+      </p-toolbar>
+    </div>
+
+    <div class="p-grid" formGroupName="fourthStep" *ngIf="activeStep === 3">
+      <!-- CNI -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input
+          type="file"
+          formControlName="cni"
+          (change)="cniFileHandler($event)"
+          pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.cni }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- IDENTITY PHOTO -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input
+          type="file"
+          formControlName="identityPhoto"
+          (change)="identityPhotoFileHandler($event)"
+          pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.identityPhoto }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- MEDICAL CERTIFICATE -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <input
+          type="file"
+          formControlName="medicalCertificate"
+          (change)="medicalCertificateFileHandler($event)"
+          pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.medicalCertificate }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- PAYMENT MODES -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <p-multiSelect [options]="paymentModesOptions" formControlName="idsPaymentMode" defaultLabel="Choisir ..."></p-multiSelect>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.idsPaymentMode }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-12 global-separation"></div>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-left">
+          <p-button type="button" (click)="activeStep = (isMinor() ? 2 : 1)" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+        </div>
+        <div class="ui-toolbar-group-right">
+          <p-button type="submit" label="Valider l'inscription !" icon="fas fa-check" [disabled]="subscriptionForm.invalid"></p-button>
+        </div>
+      </p-toolbar>
+    </div>
+  </form>
+</div>

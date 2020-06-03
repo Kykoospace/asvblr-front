@@ -21,7 +21,6 @@ export class LoadingService {
 
   startLoading() {
     this.loading = true;
-    console.log('Start loading');
   }
 
   stopLoading() {

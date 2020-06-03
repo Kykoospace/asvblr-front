@@ -21,6 +21,7 @@ export default interface Subscription {
   idPantsSize: number;
 
   insuranceRequested: boolean;
+  calendarRequested: boolean;
   coach: boolean;
   referee: boolean;
 
@@ -28,9 +29,17 @@ export default interface Subscription {
   idIdentityPhoto: number;
   idMedicalCertificate: number;
 
-  idPaymentMode: number;
+  idsPaymentMode: number[];
 
   comment: string;
+
+  // Parental consent :
+  pc_allowClubToRescue: boolean;
+  pc_allowToLeaveAlone: boolean;
+  pc_allowToPublish: boolean;
+  pc_allowToTravelWithTeamMate: boolean;
+  pc_allowToWhatsapp: boolean;
+  pc_unaccountability: boolean;
 
   // Internal feature :
   creationDate: Date;

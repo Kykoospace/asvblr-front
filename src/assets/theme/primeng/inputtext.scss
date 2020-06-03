@@ -19,5 +19,7 @@
 
   &:disabled {
     user-select: none;
+    background-color: $global-disabled-bkg-color;
+    color: $global-disabled-font-color;
   }
 }

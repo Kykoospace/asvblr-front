@@ -1,6 +1,6 @@
 // Angular import :
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -60,22 +60,20 @@ export class TeamService {
   public updateSubscriptionCNI(idSubscription: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(
-      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/cni', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/cni', formData);
   }
 
   public updateSubscriptionMedicalCertificate(idSubscription: number, file: File): Observable<any> {
+    console.log(file);
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(
-      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/medical-certificate', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/medical-certificate', formData);
   }
 
-  public updateSubscriptionidentityPhoto(idSubscription: number, file: File): Observable<any> {
+  public updateSubscriptionIdentityPhoto(idSubscription: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(
-      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData);
   }
 
   public validateSubscription(idSubscription: number): Observable<Subscription> {
@@ -96,7 +94,7 @@ export class TeamService {
   }
 
   public createSeason(season: Season): Observable<Season> {
-    return this.http.post<Season>(this.apiBaseUrl + 'seasons/create', { season });
+    return this.http.post<Season>(this.apiBaseUrl + 'seasons/create', season);
   }
 
   public updateSeason(season: Season): Observable<Season> {

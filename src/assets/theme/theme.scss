@@ -21,10 +21,12 @@
 @import "primeng/selectbutton";
 @import "primeng/inputswitch";
 @import "primeng/togglebutton";
+@import "primeng/steps";
 @import "primeng/table";
 @import "primeng/editor";
 @import "primeng/galleria";
 @import "primeng/dropdown";
+@import "primeng/multiselect";
 @import "primeng/inputtext";
 @import "primeng/inplace";
 @import "primeng/fileupload";
@@ -57,6 +59,10 @@ html {
 // COMMON ITEMS :
 // ----------------------------------------
 
+p {
+  margin: 0px;
+}
+
 a {
   color: inherit;
 
@@ -65,12 +71,16 @@ a {
   }
 }
 
+i.global-tooltip-icon {
+  color: $global-accent-color;
+}
+
 h1 {
   margin: 0px;
 }
 
 div.global-separation {
-  padding: 0px;
+  padding: 0px !important;
   margin: 0px;
   border-top: 1px solid $global-border-color;
 }
@@ -80,7 +90,7 @@ label.global-form-label {
   padding: $global-element-padding !important;
 }
 
-sup.global-form-required {
+.global-form-required {
   color: $global-danger-color;
 }
 
@@ -98,4 +108,28 @@ span.global-legend {
 
 .global-align-right {
   text-align: right;
+}
+
+.global-margin-right {
+  margin-right: $global-spacing;
+}
+
+.global-margin-top {
+  margin-top: $global-spacing;
+}
+
+.global-margin-bottom {
+  margin-bottom: $global-spacing;
+}
+
+div.global-section {
+  padding: $global-container-padding;
+  border: 1px solid $global-border-color;
+  border-radius: $global-border-radius;
+}
+
+div.global-section-fill {
+  background-color: $global-bkg-darker-color;
+  padding: $global-container-padding;
+  border-radius: $global-border-radius;
 }

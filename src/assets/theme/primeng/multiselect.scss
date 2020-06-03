@@ -1,0 +1,27 @@
+// ----------------------------------------
+// MULTI SELECT :
+// ----------------------------------------
+
+.ui-multiselect {
+  border: 1px solid $prime-ng-input-border-color;
+  border-radius: $prime-ng-input-border-radius;
+  color: $prime-ng-input-font-color;
+  width: 100% !important;
+  padding: $prime-ng-input-padding;
+
+  .ui-multiselect-panel {
+    background-color: $prime-ng-dropdown-wrapper-bkg-color;
+    max-width: 100%;
+
+    .ui-chkbox {
+      margin-right: $global-spacing;
+    }
+
+    .ui-multiselect-filter-icon {
+      top: 50% !important;
+      margin-top: -0.5em;
+      right: 0.5em;
+      left: auto !important;
+    }
+  }
+}
