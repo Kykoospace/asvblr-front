@@ -1,5 +1,6 @@
 <div class="p-grid">
   <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep"></p-steps>
+  <p-button (click)="test()" label="Pré-remplir"></p-button>
   <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
     <div class="p-grid" formGroupName="firstStep" *ngIf="activeStep === 0">
       <!-- FIRSTNAME -->
@@ -53,6 +54,7 @@
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.birthDate }}
+        <span class="global-form-required">*</span>
       </label>
 
       <!-- BIRTHCOUNTRY -->
@@ -153,7 +155,10 @@
       <div class="p-col-4 global-align-center">
         <p-checkbox formControlName="insuranceRequested" [binary]="true"></p-checkbox>
       </div>
-      <label class="global-form-label p-col-6">{{ formLabelValues.insuranceRequested }}</label>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.insuranceRequested }}
+        <a href="http://www.ffvb.org/la-ffvb/l-assurance/" target="_blank">En savoir plus ici</a>
+      </label>
 
       <!-- CALENDAR -->
       <span class="p-col-2"></span>
@@ -176,7 +181,9 @@
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.requestedJerseyNumber }}
-        <i class="far fa-question-circle global-tooltip-icon" [pTooltip]="requestedJerseyNumberTooltip"></i>
+        <i class="far fa-question-circle global-tooltip-icon"
+           [pTooltip]="requestedJerseyNumberTooltip"
+           *ngIf="subscriptionForm.get('secondStep').value.equipment"></i>
       </label>
 
       <!-- TOPSIZE -->
@@ -186,7 +193,7 @@
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.idTopSize }}
-        <span class="global-form-required">*</span>
+        <span class="global-form-required" *ngIf="subscriptionForm.get('secondStep').value.equipment">*</span>
       </label>
 
       <!-- PANTSIZE -->
@@ -196,7 +203,7 @@
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.idPantsSize }}
-        <span class="global-form-required">*</span>
+        <span class="global-form-required" *ngIf="subscriptionForm.get('secondStep').value.equipment">*</span>
       </label>
 
       <div class="p-col-12 global-separation"></div>
@@ -275,7 +282,10 @@
       <div class="p-col-4 global-align-center">
         <p-checkbox formControlName="pc_unaccountability" [binary]="true"></p-checkbox>
       </div>
-      <label class="global-form-label p-col-6">{{ formLabelValues.pc_unaccountability }}</label>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.pc_unaccountability }}
+        <span class="global-form-required">*</span>
+      </label>
 
 
       <div class="p-col-12 global-separation"></div>

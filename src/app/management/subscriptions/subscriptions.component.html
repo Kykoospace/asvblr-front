@@ -1,7 +1,11 @@
 <div class="module-container p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <span>Voir les inscriptions :</span>
+      <p-button
+        label="Nouvelle inscription"
+        icon="fas fa-plus"
+
+      ></p-button>
       <p-selectButton
         [options]="subscriptionsViewOptions"
         [(ngModel)]="subscriptionsView"

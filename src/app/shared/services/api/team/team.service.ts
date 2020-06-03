@@ -76,6 +76,14 @@ export class TeamService {
     return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData);
   }
 
+  public updateSubscriptionDocuments(idSubscription: number, cni: File, identityPhoto: File, medicalCertificate: File): Observable<Subscription> {
+    const formData = new FormData();
+    formData.append('cni', cni);
+    formData.append('identityPhoto', identityPhoto);
+    formData.append('medicalCertificate', medicalCertificate);
+    return this.http.post<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/documents', formData);
+  }
+
   public validateSubscription(idSubscription: number): Observable<Subscription> {
     return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/validated', {});
   }

@@ -40,10 +40,15 @@ export class SubscriptionFormComponent implements OnInit {
     idTopSize: 'Taille de haut',
     pc_allowToLeaveAlone: 'Autorise mon enfant à quitter seul le lieu d\'entrainement ou de compétition',
     pc_allowClubToRescue: 'Autorise les dirigeants du club à prendre toutes les mesures utiles en cas d\'incident',
-    pc_allowToTravelWithTeamMate: 'Autorise mon enfant à prendre place dans une voiture particulière afin d\'effectuer les déplacements nécessités par les compétitions sportives officielles ou amicales au cours de la saison',
+    pc_allowToTravelWithTeamMate: 'Autorise mon enfant à prendre place dans une voiture particulière afin ' +
+      'd\'effectuer les déplacements nécessités par les compétitions sportives officielles ou amicales ' +
+      'au cours de la saison',
     pc_allowToPublish: 'Autorise l\'image de mon enfant à paraître sur les publications du club',
     pc_allowToWhatsapp: 'Autorise mon enfant à faire partie d\'un groupe Whatsapp pour l\'organisation des matchs',
-    pc_unaccountability: 'Je déclare avoir pris connaissance que l\'ASBR Volley-Ball n\'est en aucun cas responsable du vol, de la perte ou de l\'endomagement d\'objets personnels (vêtements, sacs, bijoux, téléphones portables ...) dans tous les équipements sportifs fréquentés',
+    pc_unaccountability: 'Je déclare avoir pris connaissance que ' +
+      'l\'ASBR Volley-Ball n\'est en aucun cas responsable du vol, de la perte ou de ' +
+      'l\'endomagement d\'objets personnels (vêtements, sacs, bijoux, téléphones portables ...) ' +
+      'dans tous les équipements sportifs fréquentés',
     cni: 'Carte nationale d\'identité recto ET verso',
     identityPhoto: 'Photo d\'identité',
     medicalCertificate: 'Certificat médical de moins de deux ans'
@@ -262,13 +267,9 @@ export class SubscriptionFormComponent implements OnInit {
       this.teamService.createSubscription(data)
         .subscribe(
           sub => {
-            forkJoin({
-              cni: this.teamService.updateSubscriptionCNI(sub.id, fourthStep.cni),
-              identityPhoto: this.teamService.updateSubscriptionIdentityPhoto(sub.id, fourthStep.identityPhoto),
-              medicalCertificate: this.teamService.updateSubscriptionMedicalCertificate(sub.id, fourthStep.medicalCertificate)
-            })
+            this.teamService.updateSubscriptionDocuments(sub.id, fourthStep.cni, fourthStep.identityPhoto, fourthStep.medicalCertificate)
               .subscribe(
-                results => {
+                result => {
                   this.messageService.add(this.confirmationMessage);
                 },
                 err => {
