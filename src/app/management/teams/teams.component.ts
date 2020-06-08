@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DynamicDialogTeamFormComponent} from '../../shared/components/dynamic-dialog-team-form/dynamic-dialog-team-form.component';
 import TeamList from '../../shared/models/responses/TeamList';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-teams',
@@ -18,7 +19,9 @@ export class TeamsComponent implements OnInit, OnDestroy {
 
   public teams: TeamList[];
 
-  public categoryOptions: any[];
+  public categoryOptions: any[] = [
+    { label: '', value: null }
+  ];
 
   public columns = [
     { column: 'Nom', field: 'teamName' },
@@ -36,9 +39,14 @@ export class TeamsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.teamService.getTeamList()
-      .subscribe(
-        teams => this.teams = teams,
+    forkJoin({
+      teamList: this.teamService.getTeamList(),
+      teamCategories: this.teamService.getAllTeamCategories()
+    }).subscribe(
+        results => {
+          this.teams = results.teamList;
+          results.teamCategories.forEach(category => this.categoryOptions.push({ label: category.name, value: category.name }));
+        },
         err => {
           console.error(err);
           this.messageService.add({

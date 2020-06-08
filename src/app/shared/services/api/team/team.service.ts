@@ -247,7 +247,7 @@ export class TeamService {
   }
 
   public updateMatch(match: Match): Observable<Match> {
-    return this.http.put<Match>(this.apiBaseUrl + 'matches/' + match.id);
+    return this.http.put<Match>(this.apiBaseUrl + 'matches/' + match.id, match);
   }
 
   public deleteMatch(idMatch: number): Observable<any> {

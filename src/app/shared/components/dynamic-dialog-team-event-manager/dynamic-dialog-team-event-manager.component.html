@@ -1,9 +1,10 @@
-<div class="p-grid" *ngIf="!createToggle">
+<div class="p-grid" *ngIf="!createToggle && matches">
   <p-table
     [value]="matches"
     dataKey="id"
     editMode="row"
-    class="p-col-12">
+    class="p-col-12"
+    *ngIf="matches.length">
     <ng-template pTemplate="header">
       <tr>
         <th>Équipe</th>
@@ -77,13 +78,16 @@
       </tr>
     </ng-template>
   </p-table>
+  <p class="p-col-12" *ngIf="!matches.length">
+    Aucune rencontre pour le moment !
+  </p>
   <div class="global-separation p-col-12"></div>
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="createToggle = true" class="ui-button-info" label="Nouvelle rencontre" icon="fas fa-plus"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="close()" label="Terminer" icon="fas fa-times"></p-button>
+      <p-button (click)="close()" label="Terminer" icon="fas fa-check"></p-button>
     </div>
   </p-toolbar>
 </div>

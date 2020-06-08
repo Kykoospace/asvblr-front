@@ -49,6 +49,7 @@
         <th *ngFor="let column of columns" [ngSwitch]="column.field">
           <p-dropdown
             *ngSwitchCase="'idSubscriptionCategory'"
+            [showClear]="true"
             [options]="subscriptionCategoryOptions"
             (onChange)="table.filter($event.value, column.field, 'equals')">
           </p-dropdown>

@@ -28,7 +28,9 @@ export class SubscriptionsComponent implements OnInit {
   ];
 
   public subscriptionCategories: SubscriptionCategory[];
-  public subscriptionCategoryOptions = [];
+  public subscriptionCategoryOptions = [
+    { label: '', value: null }
+  ];
   public rowCountOptions = [15, 25, 50];
   public maxRowCount = this.rowCountOptions[0];
 

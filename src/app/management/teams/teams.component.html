@@ -30,8 +30,10 @@
       <tr>
         <th *ngFor="let column of columns" [ngSwitch]="column.field">
           <p-dropdown
-            *ngSwitchCase="'idCategory'"
+            *ngSwitchCase="'teamCategoryName'"
             [options]="categoryOptions"
+            [filter]="true"
+            [showClear]="true"
             (onChange)="table.filter($event.value, column.field, 'equals')">
           </p-dropdown>
           <input
