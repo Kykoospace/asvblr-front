@@ -1,0 +1,151 @@
+<div class="p-grid" *ngIf="!createToggle">
+  <p-table
+    [value]="matches"
+    dataKey="id"
+    editMode="row"
+    class="p-col-12">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Équipe</th>
+        <th>Lieu</th>
+        <th>Date</th>
+        <th>Type de match</th>
+        <th style="width:8em"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+      <tr [pEditableRow]="rowData">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="rowData.oppositeTeam" required>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{rowData.oppositeTeam}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="rowData.place" required>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{rowData.place}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-calendar
+                [(ngModel)]="rowData.date"
+                [readonlyInput]="true"
+                [locale]="calendarLanguage"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                yearRange="2000:2100"
+                [showTime]="true"
+                dateFormat="dd/mm/yy">
+              </p-calendar>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ rowData.date | date: 'shortDate' }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-toggleButton
+                onLabel="Aller"
+                offLabel="Retour"
+                [(ngModel)]="rowData.type"
+              ></p-toggleButton>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ rowData.type ? 'Aller' : 'Retour' }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="text-align:center">
+          <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="fas fa-pen" class="ui-button-info global-margin-right"></button>
+          <button *ngIf="!editing" pButton type="button" icon="far fa-trash-alt" class="ui-button-danger" (click)="deleteMatch(rowData)"></button>
+          <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="fas fa-check" class="ui-button-success global-margin-right" (click)="updateMatch(rowData)"></button>
+          <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="fas fa-times" class="ui-button-danger"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div class="global-separation p-col-12"></div>
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-left">
+      <p-button (click)="createToggle = true" class="ui-button-info" label="Nouvelle rencontre" icon="fas fa-plus"></p-button>
+    </div>
+    <div class="ui-toolbar-group-right">
+      <p-button (click)="close()" label="Terminer" icon="fas fa-times"></p-button>
+    </div>
+  </p-toolbar>
+</div>
+
+<form (ngSubmit)="createMatch()" [formGroup]="matchForm" *ngIf="createToggle">
+  <div class="p-grid">
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <input formControlName="oppositeTeam" type="text" pInputText>
+    </div>
+    <label class="global-form-label p-col-6">
+      Équipe adverse
+      <span class="global-form-required">*</span>
+    </label>
+
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <input formControlName="place" type="text" pInputText>
+    </div>
+    <label class="global-form-label p-col-6">
+      Lieu
+      <span class="global-form-required">*</span>
+    </label>
+
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <p-calendar
+        formControlName="date"
+        [readonlyInput]="true"
+        [locale]="calendarLanguage"
+        [monthNavigator]="true"
+        [yearNavigator]="true"
+        yearRange="2000:2100"
+        [showTime]="true"
+        dateFormat="dd/mm/yy">
+      </p-calendar>
+    </div>
+    <label class="global-form-label p-col-6">
+      Date
+      <span class="global-form-required">*</span>
+    </label>
+
+    <span class="p-col-2"></span>
+    <div class="p-col-2">
+      <p-radioButton name="type" [value]="true" formControlName="type" label="Aller"></p-radioButton>
+    </div>
+    <div class="p-col-2">
+      <p-radioButton name="type" [value]="false" formControlName="type" label="Retour"></p-radioButton>
+    </div>
+    <label class="global-form-label p-col-6">
+      Type
+      <span class="global-form-required">*</span>
+    </label>
+
+    <div class="p-col-12 global-separation"></div>
+    <p-toolbar class="p-col-12">
+      <div class="ui-toolbar-group-left">
+        <p-button (click)="createToggle = false" type="button" class="ui-button-info" label="Retour" icon="fas fa-arrow-left"></p-button>
+      </div>
+      <div class="ui-toolbar-group-right">
+        <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="matchForm.invalid"></p-button>
+      </div>
+    </p-toolbar>
+  </div>
+</form>

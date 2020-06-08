@@ -22,6 +22,11 @@
       background-color: $prime-ng-menu-item-hover-bkg-color;
     }
 
+    .ui-menuitem-icon {
+      margin-right: $prime-ng-menu-item-icon-spacing;
+      width: 24px;
+    }
+
     .ui-menuitem-link {
       color: $prime-ng-menu-item-font-color;
     }

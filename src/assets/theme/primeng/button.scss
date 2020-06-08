@@ -2,7 +2,8 @@
 // BUTTON :
 // ----------------------------------------
 
-.ui-button-secondary .ui-button {
+.ui-button-secondary .ui-button,
+.ui-button-secondary.ui-button {
   background-color: $prime-ng-button-secondary-bkg-color;
   color: $prime-ng-button-secondary-font-color;
 
@@ -11,7 +12,8 @@
   }
 }
 
-.ui-button-success .ui-button {
+.ui-button-success .ui-button,
+.ui-button-success.ui-button {
   background-color: $prime-ng-button-success-bkg-color;
   color: $prime-ng-button-success-font-color;
 
@@ -20,7 +22,8 @@
   }
 }
 
-.ui-button-info .ui-button {
+.ui-button-info .ui-button,
+.ui-button-info.ui-button {
   background-color: $prime-ng-button-info-bkg-color;
   color: $prime-ng-button-info-font-color;
   border-color: $prime-ng-button-info-border-color;
@@ -30,7 +33,8 @@
   }
 }
 
-.ui-button-warning .ui-button {
+.ui-button-warning .ui-button,
+.ui-button-warning.ui-button {
   background-color: $prime-ng-button-warning-bkg-color;
   color: $prime-ng-button-warning-font-color;
 
@@ -39,7 +43,8 @@
   }
 }
 
-.ui-button-danger .ui-button {
+.ui-button-danger .ui-button,
+.ui-button-danger.ui-button {
   background-color: $prime-ng-button-danger-bkg-color;
   color: $prime-ng-button-danger-font-color;
 
@@ -68,6 +73,10 @@
     &:active {
       background-color: $prime-ng-button-secondary-bkg-color;
     }
+  }
+
+  &.ui-button-icon-only {
+    padding: 3px 12px !important;
   }
 
   .ui-button-icon {

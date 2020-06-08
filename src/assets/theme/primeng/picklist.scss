@@ -1,0 +1,29 @@
+// ----------------------------------------
+// PICK LIST :
+// ----------------------------------------
+
+.ui-picklist {
+  width: 100%;
+
+  .ui-picklist-listwrapper {
+    border-radius: $global-border-radius;
+    background-color: $global-bkg-darker-color;
+
+    .ui-picklist-caption {
+      user-select: none;
+    }
+
+    .ui-picklist-list {
+      width: 100%;
+    }
+  }
+
+  .ui-picklist-buttons {
+    width: 10%;
+    padding: 0 $global-spacing !important;
+
+    .ui-button {
+      width: 100%;
+    }
+  }
+}

@@ -1,15 +1,15 @@
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog header="Confirmation" icon="fas fa-exclamation-triangle"></p-confirmDialog>
 <div class="module-container p-grid" *ngIf="subscription">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="backNavigate()" type="button" label="Retour" icon="pi pi-arrow-left"></p-button>
+      <p-button (click)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
       <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" *ngIf="!subscription.validated"></p-button>
       <p-button type="button" label="Validée le {{ subscription.validationDate | date: 'shortDate' }}" class="ui-button-secondary" *ngIf="subscription.validated" [disabled]="true"></p-button>
       <p-button type="button" label="Renvoyer identifiants" class="ui-button-secondary" *ngIf="subscription.validated"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Inscription de {{ subscription.firstName + ' ' + subscription.lastName.toUpperCase() }}, faite le {{ subscription.creationDate | date: 'shortDate' }}</span>
-      <p-button (click)="deleteSubscription()" type="button" label="Supprimer" icon="pi pi-trash" class="ui-button-danger" *ngIf="!subscription.validated"></p-button>
+      <p-button (click)="deleteSubscription()" type="button" label="Supprimer" icon="far fa-trash-alt" class="ui-button-danger" *ngIf="!subscription.validated"></p-button>
     </div>
   </p-toolbar>
   <p-tabView class="p-col-12">
@@ -44,9 +44,9 @@
         <span class="p-col-5">{{ subscription.address }} - {{ subscription.city }} ({{ subscription.postcode }})</span>
         <span class="p-col-4"></span>
       </div>
-      <div class="p-grid">
+      <div class="p-grid" *ngIf="category">
         <span class="p-col-3 global-legend">Catégorie demandée</span>
-        <span class="p-col-5">{{ subscription.idCategory }}</span>
+        <span class="p-col-5">{{ category.name }}</span>
         <span class="p-col-4"></span>
       </div>
       <div class="p-grid">
@@ -130,9 +130,6 @@
           <p-button class="ui-button-secondary" label="Apperçu"></p-button>
         </div>
       </div>
-    </p-tabPanel>
-    <p-tabPanel header="Paiement">
-      Liste des modes de paiement.
     </p-tabPanel>
   </p-tabView>
 </div>

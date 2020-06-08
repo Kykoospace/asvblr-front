@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../../shared/services/api/team/team.service';
 import Subscription from '../../shared/models/entities/Subscription';
 import {Router} from '@angular/router';
+import SubscriptionCategory from '../../shared/models/entities/SubscriptionCategory';
 
 @Component({
   selector: 'app-subscriptions',
@@ -14,25 +15,20 @@ export class SubscriptionsComponent implements OnInit {
 
   public subscriptionsView = false;
   public subscriptionsViewOptions = [
-    { label: 'En cours', value: false, icon: 'pi pi-pencil' },
-    { label: 'Validées', value: true, icon: 'pi pi-check' }
+    { label: 'En cours', value: false, icon: 'fas fa-pen' },
+    { label: 'Validées', value: true, icon: 'fas fa-check' }
   ];
-
 
   public columns = [
     { column: 'Prénom', field: 'firstName' },
     { column: 'Nom', field: 'lastName' },
-    { column: 'Sexe', field: 'gender' },
-    { column: 'Date de naissance', field: 'birthDate' },
+    { column: 'Catégorie', field: 'idSubscriptionCategory' },
     { column: 'Numéro de tel', field: 'phoneNumber' },
     { column: 'Date', field: 'creationDate' }
   ];
 
-  public genderOptions = [
-    { label: 'Tous', value: null },
-    { label: 'Homme', value: true },
-    { label: 'Femme', value: false }
-  ];
+  public subscriptionCategories: SubscriptionCategory[];
+  public subscriptionCategoryOptions = [];
   public rowCountOptions = [15, 25, 50];
   public maxRowCount = this.rowCountOptions[0];
 
@@ -46,7 +42,19 @@ export class SubscriptionsComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.teamService.getAllSubscriptionCategories()
+      .subscribe(
+        categories => {
+          this.subscriptionCategories = categories;
+          categories.forEach(
+            category => this.subscriptionCategoryOptions
+              .push({ label: category.name, value: category.id })
+          );
+        },
+        err => console.error(err)
+      );
+  }
 
   public selectSubscription(subscription: Subscription) {
     this.router.navigate(['/management/subscriptions/', subscription.id]);
@@ -67,4 +75,8 @@ export class SubscriptionsComponent implements OnInit {
     return date.getFullYear() + '/' + month + '/' + day;
   }
 
+  getCategoryName(idSubscriptionCategory): string {
+    return this.subscriptionCategories
+      .find(category => category.id === idSubscriptionCategory).name;
+  }
 }

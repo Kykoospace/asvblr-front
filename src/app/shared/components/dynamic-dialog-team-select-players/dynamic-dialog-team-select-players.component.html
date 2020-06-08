@@ -1,0 +1,27 @@
+<div class="p-grid">
+  <p-pickList
+    class="p-col-12"
+    sourceHeader="Joueurs inscrits"
+    [source]="sourcePlayers"
+    [showSourceControls]="false"
+    targetHeader="Joueurs de l'équipe"
+    [target]="targetPlayers"
+    [showTargetControls]="false"
+    filterBy="firstName,lastName"
+    dragdrop="true">
+    <ng-template let-player pTemplate="item">
+      <app-player-card
+        [player]="player"
+        [showRequestedCategory]="true"
+        [requestedCategoryCollection]="subscriptionCategories"
+        [showGender]="true"></app-player-card>
+    </ng-template>
+  </p-pickList>
+  <div class="global-separation p-col-12"></div>
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-right">
+      <p-button (click)="cancel()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+      <p-button (click)="close()" label="Valider" icon="fas fa-check"></p-button>
+    </div>
+  </p-toolbar>
+</div>

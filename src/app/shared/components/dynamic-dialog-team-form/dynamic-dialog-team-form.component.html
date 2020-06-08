@@ -1,0 +1,36 @@
+<form (ngSubmit)="createTeam()" [formGroup]="teamForm">
+  <div class="p-grid">
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <input formControlName="name" type="text" pInputText>
+    </div>
+    <label class="global-form-label p-col-6">
+      Nom de l'équipe
+      <span class="global-form-required">*</span>
+    </label>
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <p-dropdown formControlName="idTeamCategory" [options]="categoryOptions" [filter]="true"></p-dropdown>
+    </div>
+    <label class="global-form-label p-col-6">
+      Catégorie de compétition
+      <span class="global-form-required">*</span>
+    </label>
+    <span class="p-col-2"></span>
+    <div class="p-col-4">
+      <p-dropdown formControlName="idCoach" [options]="users" [filter]="true"></p-dropdown>
+    </div>
+    <label class="global-form-label p-col-6">
+      Coach
+    </label>
+
+    <div class="p-col-12 global-separation"></div>
+    <p-toolbar class="p-col-12">
+      <div class="ui-toolbar-group-right">
+        <p-button (click)="close()" type="button" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="teamForm.invalid"></p-button>
+      </div>
+    </p-toolbar>
+  </div>
+
+</form>

@@ -8,8 +8,8 @@
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="newArticleDialogToggle = false" class="ui-button-secondary" label="Annuler" icon="pi pi-times"></p-button>
-        <p-button (click)="createArticle(articleTitleInput.value)" label="Valider" icon="pi pi-check"></p-button>
+        <p-button (click)="newArticleDialogToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (click)="createArticle(articleTitleInput.value)" label="Valider" icon="fas fa-check"></p-button>
       </div>
     </p-toolbar>
   </p-footer>
@@ -17,10 +17,10 @@
 <div class="module-container p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="newArticleDialogToggle = true" label="Nouvel article" icon="pi pi-plus"></p-button>
+      <p-button (click)="newArticleDialogToggle = true" label="Nouvel article" icon="fas fa-plus"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+      <i class="fas fa-search" style="margin:4px 4px 0 0"></i>
       <input
         type="text"
         pInputText size="50"

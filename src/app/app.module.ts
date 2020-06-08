@@ -22,11 +22,11 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
-  CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule,
-  DropdownModule, EditorModule, FileUploadModule,
+  CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule, DialogService,
+  DropdownModule, DynamicDialogModule, EditorModule, FileUploadModule,
   GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
-  MegaMenuModule, MenuModule, MessageService, MultiSelectModule, ProgressSpinnerModule,
+  MegaMenuModule, MenuModule, MessageService, MultiSelectModule, PickListModule, ProgressSpinnerModule,
   RadioButtonModule, SelectButtonModule, SpinnerModule, StepsModule,
   TableModule,
   TabMenuModule, TabViewModule, ToastModule, ToggleButtonModule,
@@ -63,6 +63,11 @@ import { PlayerCardComponent } from './shared/components/player-card/player-card
 import { UserCardComponent } from './shared/components/user-card/user-card.component';
 import {LoadingScreenInterceptor} from './shared/interceptors/loading-screen.interceptor';
 import { SandboxComponent } from './management/sandbox/sandbox.component';
+import { TeamComponent } from './management/teams/team/team.component';
+import { DynamicDialogTeamFormComponent } from './shared/components/dynamic-dialog-team-form/dynamic-dialog-team-form.component';
+import { DynamicDialogTeamSelectPlayersComponent } from './shared/components/dynamic-dialog-team-select-players/dynamic-dialog-team-select-players.component';
+import { TeamCardComponent } from './shared/components/team-card/team-card.component';
+import { DynamicDialogTeamEventManagerComponent } from './shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
 
 registerLocaleData(localeFr);
 
@@ -119,7 +124,12 @@ function loadConfiguration(
     PlayerCardComponent,
     UserCardComponent,
     LoadingComponent,
-    SandboxComponent
+    SandboxComponent,
+    TeamComponent,
+    DynamicDialogTeamFormComponent,
+    DynamicDialogTeamSelectPlayersComponent,
+    TeamCardComponent,
+    DynamicDialogTeamEventManagerComponent
   ],
   imports: [
     HttpClientModule,
@@ -151,12 +161,14 @@ function loadConfiguration(
     EditorModule,
     InplaceModule,
     DialogModule,
+    DynamicDialogModule,
     InputSwitchModule,
     TooltipModule,
     ToggleButtonModule,
     SafePipeModule,
     StepsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    PickListModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -179,10 +191,15 @@ function loadConfiguration(
       multi: true
     },
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    DialogService
   ],
   bootstrap: [
     AppComponent
+  ],
+  entryComponents: [
+    DynamicDialogTeamFormComponent,
+    DynamicDialogTeamSelectPlayersComponent
   ]
 })
 export class AppModule {

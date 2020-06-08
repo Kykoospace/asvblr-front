@@ -13,7 +13,7 @@ export default interface Subscription {
   postcode: number;
   city: string;
 
-  idCategory: number;
+  idSubscriptionCategory: number;
 
   equipment: boolean;
   requestedJerseyNumber: number;

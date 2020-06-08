@@ -11,4 +11,6 @@ export default interface Player {
   birthDate: Date;
   birthCountry: string;
   idUser: number;
+  idSubscriptionCategory: number;
+  licenceNumber: string;
 }

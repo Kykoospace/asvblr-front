@@ -22,8 +22,11 @@
     }
   }
 
-  .ui-dropdown-items-wrapper {
+  .ui-dropdown-panel {
     background-color: $prime-ng-dropdown-wrapper-bkg-color;
+  }
+
+  .ui-dropdown-items-wrapper {
 
     .ui-dropdown-list {
       padding: 0px;

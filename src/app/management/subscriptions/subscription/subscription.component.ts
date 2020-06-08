@@ -5,6 +5,7 @@ import Subscription from '../../../shared/models/entities/Subscription';
 import { ConfirmationService, MessageService } from 'primeng';
 import ClothingSize from '../../../shared/models/entities/ClothingSize';
 import {forkJoin} from 'rxjs';
+import SubscriptionCategory from '../../../shared/models/entities/SubscriptionCategory';
 
 @Component({
   selector: 'app-subscription',
@@ -20,6 +21,8 @@ export class SubscriptionComponent implements OnInit {
   };
 
   public subscription: Subscription;
+
+  public category: SubscriptionCategory;
   public topSize: ClothingSize;
   public pantsSize: ClothingSize;
 
@@ -132,11 +135,13 @@ export class SubscriptionComponent implements OnInit {
           // Get clothes sizes values :
           if (subscription.equipment) {
             forkJoin({
+              category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
               topSize: this.teamService.getClothingSize(this.subscription.idTopSize),
               pantsSize: this.teamService.getClothingSize(this.subscription.idPantsSize)
             })
               .subscribe(
                 results => {
+                  this.category = results.category;
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
                 },

@@ -12,13 +12,13 @@ div#management-layout {
   grid-template-columns: 1fr;
 
   height: 100%;
-  max-height: 100%;
 
   // Header :
   header#management-layout-header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    user-select: none;
 
     background-color: $management-layout-header-bkg-color;
     color: $management-layout-header-font-color;

@@ -8,8 +8,8 @@
     <div class="global-separation p-col-12"></div>
   </div>
   <p-footer>
-    <p-button class="ui-button-secondary" label="Non, rester à la saison actuelle" icon="pi pi-times"></p-button>
-    <p-button class="ui-button-warningl" label="Oui, ouvrir une nouvelle saison" icon="pi pi-check"></p-button>
+    <p-button class="ui-button-secondary" label="Non, rester à la saison actuelle" icon="fas fa-times"></p-button>
+    <p-button class="ui-button-warningl" label="Oui, ouvrir une nouvelle saison" icon="fas fa-check"></p-button>
   </p-footer>
 </p-dialog>
 <div class="module-container p-grid">
@@ -17,5 +17,5 @@
   <span class="p-col-4 global-legend">Saison actuelle</span>
   <span class="p-col-8">{{ currentSeason.name }}</span>
   <span class="p-col-4 global-legend">Prochaine saison</span>
-  <p-button (click)="newSeasonToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="pi pi-plus"></p-button>
+  <p-button (click)="newSeasonToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="fas fa-plus"></p-button>
 </div>

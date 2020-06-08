@@ -27,6 +27,8 @@ import { SubscriptionComponent
 import { PlayersComponent } from './management/players/players.component';
 import { TeamsComponent
     as TeamsManagementComponent } from './management/teams/teams.component';
+import { TeamComponent
+    as TeamManagementComponent } from './management/teams/team/team.component';
 import { LicenceComponent } from './management/licence/licence.component';
 import { JerseyComponent } from './management/jersey/jersey.component';
 import { OfficeComponent } from './management/office/office.component';
@@ -86,7 +88,13 @@ const routes: Routes = [
       ]
       },
       { path: 'players', component: PlayersComponent },
-      { path: 'teams', component: TeamsManagementComponent },
+      {
+        path: 'teams',
+        children: [
+          { path: '', component: TeamsManagementComponent },
+          { path: ':id', component: TeamManagementComponent }
+        ]
+      },
       { path: 'licence', component: LicenceComponent },
       { path: 'jersey', component: JerseyComponent },
       { path: 'office', component: OfficeComponent },

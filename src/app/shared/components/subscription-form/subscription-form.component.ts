@@ -27,7 +27,7 @@ export class SubscriptionFormComponent implements OnInit {
     equipment: 'Souhaitez-vous acheter un tenue aux couleurs de votre équipe ?',
     firstName: 'Prénom',
     gender: 'Sexe',
-    idCategory: 'Catégorie de niveau souhaitée',
+    idSubscriptionCategory: 'Catégorie de niveau souhaitée',
     idsPaymentMode: 'Mode de paiement',
     insuranceRequested: 'Souhaitez-vous prendre l\'assurance supplémentaire ?',
     calendarRequested: 'Souhaitez-vous le calendrier du club ? (5€)',
@@ -117,7 +117,7 @@ export class SubscriptionFormComponent implements OnInit {
         });
       });
 
-    this.teamService.getAllCategories()
+    this.teamService.getAllSubscriptionCategories()
       .subscribe(categories => {
         categories.forEach(category => {
           this.categoryOptions.push({
@@ -151,7 +151,7 @@ export class SubscriptionFormComponent implements OnInit {
       firstStep: this.formBuilder.group({
         firstName: ['', [ Validators.required ]],
         lastName: ['', [ Validators.required ]],
-        gender: [true, [ Validators.required ]],
+        gender: [null, [ Validators.required ]],
         email: ['', [ Validators.required, Validators.email ]],
         phoneNumber: [''],
         birthDate: ['', [ Validators.required ]],
@@ -159,7 +159,7 @@ export class SubscriptionFormComponent implements OnInit {
         address: ['', [ Validators.required ]],
         postcode: ['', [ Validators.required ]],
         city: ['', [ Validators.required ]],
-        idCategory: [null, [ Validators.required ]],
+        idSubscriptionCategory: [null, [ Validators.required ]],
         referee: [false, [ Validators.required ]],
         coach: [false, [ Validators.required ]],
         comment: [''],

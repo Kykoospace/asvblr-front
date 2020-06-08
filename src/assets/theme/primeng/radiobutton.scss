@@ -7,6 +7,7 @@ p-radiobutton {
 }
 
 .ui-radiobutton {
+  background-color: $global-bkg-color;
   border: 1px solid $prime-ng-input-border-color;
   border-radius: 100%;
   margin: $prime-ng-input-padding;

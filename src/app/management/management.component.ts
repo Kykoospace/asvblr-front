@@ -61,17 +61,17 @@ export class ManagementComponent implements OnInit {
       {
         label: 'Dev tools',
         items: [
-          { label: 'IHM items', route: 'dev-tools', icon: 'pi pi-desktop', privilege: '' },
-          { label: 'Sandbox', route: 'sandbox', icon: 'pi pi-desktop', privilege: '' }
+          { label: 'IHM items', route: 'dev-tools', icon: 'fas fa-desktop', privilege: '' },
+          { label: 'Sandbox', route: 'sandbox', icon: 'fas fa-desktop', privilege: '' }
         ]
       }
     ];
 
     this.userMenu = [
-      { label: 'Retour au site', icon: 'pi pi-fw pi-home', routerLink: ['/main'] },
-      { label: 'Compte utilisateur', icon: 'pi pi-fw pi-user-edit' },
-      { label: 'Fiche de joueur', icon: 'pi pi-fw pi-user' },
-      { label: 'Déconnexion', icon: 'pi pi-fw pi-sign-out', routerLink: ['/login/sign-out'] }
+      { label: 'Retour au site', icon: 'fas fa-home', routerLink: ['/main'] },
+      { label: 'Compte utilisateur', icon: 'fas fa-user-edit' },
+      { label: 'Fiche de joueur', icon: 'fas fa-user' },
+      { label: 'Déconnexion', icon: 'fas fa-sign-out-alt', routerLink: ['/login/sign-out'] }
     ];
   }
 

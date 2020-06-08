@@ -1,6 +1,5 @@
 <div class="p-grid">
   <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep"></p-steps>
-  <p-button (click)="test()" label="Pré-remplir"></p-button>
   <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
     <div class="p-grid" formGroupName="firstStep" *ngIf="activeStep === 0">
       <!-- FIRSTNAME -->
@@ -133,11 +132,21 @@
       <!-- CATEGORY -->
       <span class="p-col-2"></span>
       <div class="p-col-4">
-        <p-dropdown [options]="categoryOptions" formControlName="idCategory"></p-dropdown>
+        <p-dropdown [options]="categoryOptions" formControlName="idSubscriptionCategory"></p-dropdown>
       </div>
       <label class="global-form-label p-col-6">
-        {{ formLabelValues.idCategory }}
+        {{ formLabelValues.idSubscriptionCategory }}
         <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- COMMENT -->
+      <span class="p-col-2"></span>
+      <div class="p-col-4">
+        <textarea formControlName="comment" pInputTextarea></textarea>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.comment }}
       </label>
 
       <div class="p-col-12 global-separation"></div>

@@ -1,0 +1,21 @@
+@import "src/assets/theme/variables";
+
+.player-card-container {
+  .player-card-main {
+    .player-card-gender {
+      margin-right: $global-spacing;
+    }
+
+    .player-card-gender, .player-card-birth-date {
+      font-size: $global-font-size-small;
+      color: $global-disabled-font-color;
+    }
+  }
+
+  .player-card-requested-category {
+    white-space: nowrap;
+    font-size: $global-font-size-small;
+    font-style: italic;
+    color: $global-disabled-font-color;
+  }
+}

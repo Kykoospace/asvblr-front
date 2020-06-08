@@ -9,12 +9,20 @@
 .ui-dialog {
   border-radius: $prime-ng-dialog-border-radius;
   background-color: $prime-ng-dialog-bkg-color;
-  overflow: hidden;
   max-width: 50vw;
 
   .ui-dialog-titlebar {
+    border-top-left-radius: $prime-ng-dialog-border-radius;
+    border-top-right-radius: $prime-ng-dialog-border-radius;
     border-bottom: 1px solid $prime-ng-dialog-titlebar-border-color !important;
     background-color: $prime-ng-dialog-titlebar-bkg-color;
+    padding: $global-element-padding-title !important;
+    font-size: $global-font-size-large;
+    user-select: none;
+
+    .ui-dialog-titlebar-icon {
+      float: right;
+    }
   }
 
   .ui-dialog-footer {
