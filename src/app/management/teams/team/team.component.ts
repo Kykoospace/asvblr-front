@@ -6,6 +6,8 @@ import {ConfirmationService, DialogService, DynamicDialogRef, MessageService} fr
 import {DynamicDialogTeamSelectPlayersComponent} from '../../../shared/components/dynamic-dialog-team-select-players/dynamic-dialog-team-select-players.component';
 import {DynamicDialogTeamEventManagerComponent} from '../../../shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
 import {TeamCardComponent} from '../../../shared/components/team-card/team-card.component';
+import Player from '../../../shared/models/entities/Player';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-team',
@@ -94,6 +96,50 @@ export class TeamComponent implements OnInit, OnDestroy {
     });
   }
 
+  public updatePlayers(newTeamPlayers: Player[]) {
+    const playersToAdd: any[] = [];
+    const playersToRemove: number[] = [];
+
+    this.teamService.getAllPlayersTeam(this.team.id)
+      .subscribe(
+        oldTeamPlayers => {
+          newTeamPlayers.forEach(
+            newTeamPlayer => {
+              if (oldTeamPlayers.find(pl => pl.idPlayer === newTeamPlayer.id) === undefined) {
+                playersToAdd.push({ idPlayer: newTeamPlayer.id });
+              }
+            });
+          oldTeamPlayers.forEach(
+            oldTeamPlayer => {
+              if (newTeamPlayers.find(pl => pl.id === oldTeamPlayer.idPlayer) === undefined) {
+                playersToRemove.push(oldTeamPlayer.idPlayer);
+              }
+            });
+
+          const requests: any = {};
+          if (playersToAdd.length > 0) {
+            requests.addPlayers = this.teamService.addPlayerToTeam(this.team.id, playersToAdd);
+          }
+          if (playersToRemove.length > 0) {
+            requests.removePlayers = this.teamService.removePlayerFromTeam(this.team.id, playersToRemove);
+          }
+
+          forkJoin(requests)
+            .subscribe(
+              results => {
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Les joueurs de l\'équipe ont été mis à jour'
+                });
+                this.teamCardComponent.refreshPlayers();
+              },
+              err => console.error(err)
+            );
+        },
+        err => console.error(err)
+      );
+  }
+
   public openPlayerSelectorDialog() {
     this.playerSelectorDialogRef
       = this.dialogService
@@ -105,7 +151,12 @@ export class TeamComponent implements OnInit, OnDestroy {
       });
     this.playerSelectorDialogRef.onClose
       .subscribe(
-        () => this.teamCardComponent.refreshPlayers()
+        teamPlayers => {
+          if (teamPlayers) {
+            this.updatePlayers(teamPlayers);
+          }
+        },
+        err => console.error(err)
       );
   }
 

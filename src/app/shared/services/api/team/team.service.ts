@@ -92,6 +92,10 @@ export class TeamService {
     return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/players', players);
   }
 
+  public removePlayerFromTeam(idTeam: number, idsPlayer: any): Observable<any> {
+    return this.http.request('delete', this.apiBaseUrl + 'teams/' + idTeam + '/players', { body: idsPlayer });
+  }
+
   public getAllTeamMatches(idTeam: number): Observable<Match[]> {
     return this.http.get<Match[]>(this.apiBaseUrl + 'teams/' + idTeam + '/matches');
   }
@@ -204,7 +208,7 @@ export class TeamService {
   }
 
   public deleteSeason(idSeason: number): Observable<any> {
-    this.http.delete<any>(this.apiBaseUrl + 'seasons/delete/' + idSeason);
+    return this.http.delete<any>(this.apiBaseUrl + 'seasons/delete/' + idSeason);
   }
 
 

@@ -40,7 +40,7 @@ export class DynamicDialogTeamSelectPlayersComponent implements OnInit {
         results => {
           results.players.forEach(
             player => {
-              if (results.teamPlayers.find(element => element.id === player.id)) {
+              if (results.teamPlayers.find(element => element.idPlayer === player.id)) {
                 this.targetPlayers.push(player);
               } else {
                 this.sourcePlayers.push(player);
