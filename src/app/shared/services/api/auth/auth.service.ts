@@ -51,4 +51,8 @@ export class AuthService {
   public getLoggedUser(): User {
     return this.tokenStorageService.getUser();
   }
+
+  public resetPassword(email: string): Observable<any> {
+    return this.http.post<any>(this.apiBaseUrl + 'users/reset-password?email=' + email, {});
+  }
 }

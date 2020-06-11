@@ -82,7 +82,7 @@ export class MainComponent implements OnInit {
   }
 
   public accessMemberArea() {
-    this.router.navigate(['management']);
+    this.router.navigate(['/management']);
   }
 
 }

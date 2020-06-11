@@ -1,6 +1,20 @@
 <div class="p-grid">
   <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep"></p-steps>
   <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
+
+    <div class="p-grid" *ngIf="activeStep == -1">
+      <p class="p-col-12">Afin de vous inscrire, veillez à préparer les copies numériques des documents suivants :</p>
+      <ul class="p-col-12 global-list">
+        <li>Carte d'identité (recto ET verso)</li>
+        <li>Certificat médical de moins de deux ans</li>
+        <li>Photo d'identité à jour</li>
+      </ul>
+      <p class="p-col-12">Une question ? <a [routerLink]="['/main/contact']">Contactez-nous !</a></p>
+      <div class="p-col-12 global-align-center">
+        <p-button (click)="activeStep = 0" label="Commencer !"></p-button>
+      </div>
+    </div>
+
     <div class="p-grid" formGroupName="firstStep" *ngIf="activeStep === 0">
       <!-- FIRSTNAME -->
       <span class="p-col-2"></span>
@@ -152,6 +166,9 @@
       <div class="p-col-12 global-separation"></div>
 
       <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-left">
+          <p-button type="button" (click)="activeStep = -1" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        </div>
         <div class="ui-toolbar-group-right">
           <p-button type="button" (click)="activeStep = 1" label="Étape suivante" icon="fas fa-arrow-right" iconPos="right" [disabled]="subscriptionForm.get('firstStep').invalid"></p-button>
         </div>
@@ -219,7 +236,7 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = 0" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (click)="activeStep = 0" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button
@@ -301,29 +318,7 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = 1" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
-        </div>
-        <div class="ui-toolbar-group-right">
-          <p-button
-            type="button"
-            (click)="activeStep = 3"
-            label="Étape suivante"
-            icon="fas fa-arrow-right"
-            iconPos="right"
-            [disabled]="subscriptionForm.get('thirdStep').invalid">
-          </p-button>
-        </div>
-      </p-toolbar>
-    </div>
-    <div class="p-grid" formGroupName="thirdStep" *ngIf="activeStep === 2 && !isMinor()">
-      <p>VOUS N'ÊTES PAS MINEUR ESPÈCE DE ZOUBAB !</p>
-
-
-      <div class="p-col-12 global-separation"></div>
-
-      <p-toolbar class="p-col-12">
-        <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = 1" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (click)="activeStep = 1" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button
@@ -395,10 +390,21 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = (isMinor() ? 2 : 1)" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (click)="activeStep = (isMinor() ? 2 : 1)" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button type="submit" label="Valider l'inscription !" icon="fas fa-check" [disabled]="subscriptionForm.invalid"></p-button>
+        </div>
+      </p-toolbar>
+    </div>
+
+    <div class="p-grid" *ngIf="activeStep == 4">
+      <h1 class="p-col-12 global-align-center">Merci {{ subscriptionForm.get('firstStep').get('firstName').value }} !</h1>
+      <p class="p-col-12 global-align-center">Votre inscription a bien été prise en compte.</p>
+      <p class="p-col-12 global-align-center">Un email de confirmation a été envoyé à l'adresse {{ subscriptionForm.get('firstStep').get('email').value }}.</p>
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-right">
+          <p-button type="button" (click)="resetForm()" class="ui-button-info" label="Une autre inscription ?"></p-button>
         </div>
       </p-toolbar>
     </div>

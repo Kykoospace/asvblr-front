@@ -103,6 +103,19 @@ span.global-legend {
   color: $global-disabled-font-color;
 }
 
+ul.global-list {
+  padding-left: $global-spacing-large !important;
+  list-style: inside;
+
+  li {
+    margin-bottom: $global-spacing;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
 .global-align-center {
   text-align: center;
 }

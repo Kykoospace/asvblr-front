@@ -7,44 +7,34 @@
       <i id="login-layout-return-link-icon" class="fas fa-chevron-left"></i>
       <span id="login-layout-return-link-label">Retour au site</span>
     </a>
-    <div id="login-layout-main-content">
+    <div class="login-layout-main-content">
       <form [formGroup]="loginForm">
         <p
           class="login-layout-main-content-error-message"
           *ngIf="loginErrorToggle">
           {{ loginErrorMessage }}
         </p>
-        <p
-          class="login-layout-main-content-error-message"
-          *ngIf="formErrorUsernameToggle">
-          {{ formErrorUsernameMessage }}
-        </p>
         <input
           formControlName="username"
           class="login-layout-main-content-field"
           placeholder="Identifiant"
           type="text"
-          required
         >
-        <p
-          class="login-layout-main-content-error-message"
-          *ngIf="formErrorPasswordToggle">
-          {{ formErrorPasswordMessage }}
-        </p>
         <input
           formControlName="password"
           class="login-layout-main-content-field"
           placeholder="Mot de passe"
           type="password"
-          required
         >
         <button
           id="login-layout-main-content-connection-button"
           (click)="signIn()"
+          [disabled]="loginForm.invalid"
         >
           Connexion
         </button>
       </form>
+      <a [routerLink]="['/login/reset-password']" id="login-layout-main-content-link">Mot de passe oublié</a>
     </div>
   </div>
 </div>

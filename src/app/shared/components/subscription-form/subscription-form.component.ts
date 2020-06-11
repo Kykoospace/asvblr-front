@@ -14,7 +14,7 @@ import {forkJoin} from 'rxjs';
 export class SubscriptionFormComponent implements OnInit {
 
   public steps: MenuItem[];
-  public activeStep: number = 0;
+  public activeStep: number;
 
   public formLabelValues = {
     address: 'Adresse',
@@ -107,35 +107,7 @@ export class SubscriptionFormComponent implements OnInit {
     private messageService: MessageService,
     private cd: ChangeDetectorRef
   ) {
-    this.managementService.getAllPaymentModes()
-      .subscribe(paymentModes => {
-        paymentModes.forEach(paymentMode => {
-          this.paymentModesOptions.push({
-            label: paymentMode.name,
-            value: paymentMode.id
-          });
-        });
-      });
-
-    this.teamService.getAllSubscriptionCategories()
-      .subscribe(categories => {
-        categories.forEach(category => {
-          this.categoryOptions.push({
-            label: category.name,
-            value: category.id
-          });
-        });
-      });
-
-    this.teamService.getAllClothingSizes()
-      .subscribe(clothingSizes => {
-        clothingSizes.forEach(clothingSize => {
-          this.clothingSizesOptions.push({
-            label: clothingSize.name,
-            value: clothingSize.id
-          });
-        });
-      });
+    this.activeStep = -1;
   }
 
   ngOnInit() {
@@ -146,6 +118,7 @@ export class SubscriptionFormComponent implements OnInit {
       { label: 'Documents & règlement' }
     ];
 
+    // Initialisation du formulaire :
     this.subscriptionForm = this.formBuilder.group({
       // Informations personnelles :
       firstStep: this.formBuilder.group({
@@ -194,24 +167,9 @@ export class SubscriptionFormComponent implements OnInit {
       })
     });
 
-    const secondStep = this.subscriptionForm.get('secondStep');
-
-    secondStep.get('equipment').valueChanges
-      .subscribe((equipment) => {
-        const topSize = secondStep.get('idTopSize');
-        const pantsSize = secondStep.get('idPantsSize');
-        if (equipment) {
-          topSize.setValidators(Validators.required);
-          pantsSize.setValidators(Validators.required);
-        } else {
-          topSize.clearValidators();
-          pantsSize.clearValidators();
-        }
-        topSize.updateValueAndValidity();
-        pantsSize.updateValueAndValidity();
-      });
-
+    // Initialisation des custom validators :
     const firstStep: AbstractControl = this.subscriptionForm.get('firstStep');
+    const secondStep = this.subscriptionForm.get('secondStep');
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
     firstStep.get('birthDate').valueChanges
@@ -238,6 +196,52 @@ export class SubscriptionFormComponent implements OnInit {
           control.updateValueAndValidity();
         });
         unaccountabilityControl.updateValueAndValidity();
+      });
+
+    secondStep.get('equipment').valueChanges
+      .subscribe((equipment) => {
+        const topSize = secondStep.get('idTopSize');
+        const pantsSize = secondStep.get('idPantsSize');
+        if (equipment) {
+          topSize.setValidators(Validators.required);
+          pantsSize.setValidators(Validators.required);
+        } else {
+          topSize.clearValidators();
+          pantsSize.clearValidators();
+        }
+        topSize.updateValueAndValidity();
+        pantsSize.updateValueAndValidity();
+      });
+
+    // Récupération des datasets :
+    this.managementService.getAllPaymentModes()
+      .subscribe(paymentModes => {
+        paymentModes.forEach(paymentMode => {
+          this.paymentModesOptions.push({
+            label: paymentMode.name,
+            value: paymentMode.id
+          });
+        });
+      });
+
+    this.teamService.getAllSubscriptionCategories()
+      .subscribe(categories => {
+        categories.forEach(category => {
+          this.categoryOptions.push({
+            label: category.name,
+            value: category.id
+          });
+        });
+      });
+
+    this.teamService.getAllClothingSizes()
+      .subscribe(clothingSizes => {
+        clothingSizes.forEach(clothingSize => {
+          this.clothingSizesOptions.push({
+            label: clothingSize.name,
+            value: clothingSize.id
+          });
+        });
       });
   }
 
@@ -266,23 +270,26 @@ export class SubscriptionFormComponent implements OnInit {
 
       this.teamService.createSubscription(data)
         .subscribe(
-          sub => {
-            this.teamService.updateSubscriptionDocuments(sub.id, fourthStep.cni, fourthStep.identityPhoto, fourthStep.medicalCertificate)
+          subscription => {
+            this.teamService.updateSubscriptionDocuments(
+              subscription.id,
+              fourthStep.cni,
+              fourthStep.identityPhoto,
+              fourthStep.medicalCertificate
+            )
               .subscribe(
                 result => {
                   this.messageService.add(this.confirmationMessage);
+                  this.activeStep = 4;
                 },
-                err => {
-                  console.error(err);
-                  this.messageService.add({
+                err => this.messageService.add({
                     severity: 'error',
                     summary: 'Erreur lors de l\'envoi de l\'inscription',
                     detail: 'Une erreur est survenu lors de l\'envoi des documents'
-                  });
-                });
+                })
+              );
           },
           err => {
-            console.error(err);
             this.messageService.add(this.errorMessage);
           }
         );
@@ -351,6 +358,11 @@ export class SubscriptionFormComponent implements OnInit {
     return date > new Date();
   }
 
+  public resetForm() {
+    this.activeStep = 0;
+    this.subscriptionForm.reset();
+  }
+
   test() {
     const firstStep = this.subscriptionForm.get('firstStep');
     firstStep.get('firstName').setValue('Kyllian');
@@ -362,5 +374,6 @@ export class SubscriptionFormComponent implements OnInit {
     firstStep.get('phoneNumber').setValue('0625131440');
     firstStep.get('address').setValue('21 av du Fort');
     firstStep.get('postcode').setValue(92120);
+    firstStep.get('comment').setValue('Je souhaite intégrer une équipe départementale');
   }
 }

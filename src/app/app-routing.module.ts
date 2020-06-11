@@ -45,6 +45,7 @@ import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {DevToolsComponent} from './management/dev-tools/dev-tools.component';
 import {ArticleComponent} from './management/articles/article/article.component';
 import {SandboxComponent} from './management/sandbox/sandbox.component';
+import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -63,7 +64,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
       { path: 'sign-in', component: LoginComponent },
-      { path: 'sign-out', component: LogoutComponent }
+      { path: 'sign-out', component: LogoutComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'reset-password:token', component: ResetPasswordComponent }
     ]
   },
   { path: 'management', component: ManagementComponent,

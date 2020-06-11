@@ -68,6 +68,7 @@ import { DynamicDialogTeamFormComponent } from './shared/components/dynamic-dial
 import { DynamicDialogTeamSelectPlayersComponent } from './shared/components/dynamic-dialog-team-select-players/dynamic-dialog-team-select-players.component';
 import { TeamCardComponent } from './shared/components/team-card/team-card.component';
 import { DynamicDialogTeamEventManagerComponent } from './shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 registerLocaleData(localeFr);
 
@@ -129,7 +130,8 @@ function loadConfiguration(
     DynamicDialogTeamFormComponent,
     DynamicDialogTeamSelectPlayersComponent,
     TeamCardComponent,
-    DynamicDialogTeamEventManagerComponent
+    DynamicDialogTeamEventManagerComponent,
+    ResetPasswordComponent
   ],
   imports: [
     HttpClientModule,

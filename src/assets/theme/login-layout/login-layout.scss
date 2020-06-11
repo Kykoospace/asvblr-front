@@ -45,7 +45,7 @@
     align-items: center;
     justify-content: center;
 
-    #login-layout-main-content {
+    .login-layout-main-content {
       width: 300px;
       background-color: $global-bkg-darker-color;
       padding: $global-container-padding;
@@ -57,7 +57,16 @@
         margin-bottom: $global-spacing;
       }
 
-      input.login-layout-main-content-field {
+      .login-layout-main-content-instruction {
+        font-size: $global-font-size-small;
+        margin-bottom: $global-spacing;
+      }
+
+      .login-layout-main-content-message {
+        margin-bottom: $global-spacing;
+      }
+
+      .login-layout-main-content-field {
         display: block;
         box-sizing: border-box;
         width: 100%;
@@ -78,11 +87,25 @@
         border-radius: $global-border-radius;
         border: none;
         padding: $global-element-padding-large;
+        margin-top: $global-spacing-large;
         cursor: pointer;
 
         &:hover {
           background-color: $global-accent-active-color;
         }
+
+        &:disabled {
+          background-color: $global-disabled-bkg-color;
+          color: $global-disabled-font-color;
+          cursor: inherit;
+        }
+      }
+
+      #login-layout-main-content-link {
+        display: block;
+        text-align: center;
+        font-size: $global-font-size-small;
+        margin-top: $global-spacing;
       }
     }
   }
