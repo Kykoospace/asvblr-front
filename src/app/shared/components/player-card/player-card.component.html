@@ -1,8 +1,8 @@
-<div class="player-card-container p-grid">
-  <div class="player-card-main p-col">
+<div class="player-card-container">
+  <div class="player-card-main">
     <p class="player-card-name">{{ player.firstName + ' ' + player.lastName.toUpperCase() }}</p>
     <span class="player-card-gender" *ngIf="showGender">{{ player.gender ? 'Homme' : 'Femme' }}</span>
     <span class="player-card-birth-date" *ngIf="showBirthDate">{{ player.birthDate | date: 'shortDate' }}</span>
   </div>
-  <span class="player-card-requested-category p-col" *ngIf="showRequestedCategory && requestedCategory">{{ requestedCategory.name }}</span>
+  <span class="player-card-requested-category" *ngIf="showRequestedCategory && requestedCategory">{{ requestedCategory.name }}</span>
 </div>

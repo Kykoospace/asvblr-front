@@ -1,6 +1,11 @@
 @import "src/assets/theme/variables";
 
 .player-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: $global-element-padding;
+
   .player-card-main {
     .player-card-gender {
       margin-right: $global-spacing;
