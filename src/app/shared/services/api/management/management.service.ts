@@ -7,6 +7,7 @@ import Article from '../../../models/entities/Article';
 import Pageable from '../../../models/paging/Pageable';
 import {map} from 'rxjs/operators';
 import Page from '../../../models/paging/Page';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class ManagementService {
 
   constructor(
     private configService: ConfigService,
+    private authService: AuthService,
     private http: HttpClient
   ) {
     this.apiBaseUrl = this.configService.getApiBaseUrl();
@@ -41,10 +43,10 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getArticle(idArticle: number): Observable<Article> {
-    return this.http.get<Article>(this.apiBaseUrl + 'articles/' + idArticle);
+    return this.http.get<Article>(this.apiBaseUrl + 'articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public getAllArticles(page: number = 1, pageSize: number = 5): Observable<Article[]> {
+  public getAllArticles(page: number = 1, pageSize: number = 10): Observable<Article[]> {
     return this.http.get<Page<Article>>(this.apiBaseUrl + 'articles?page=' + (page - 1) + '&size=' + pageSize)
       .pipe(map(
         pageable => {
@@ -54,26 +56,26 @@ export class ManagementService {
   }
 
   public getArticleList(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiBaseUrl + 'articles/list');
+    return this.http.get<Article[]>(this.apiBaseUrl + 'articles/list', { headers: this.authService.getAuthorizationHeader() });
   }
 
   public createArticle(article: any): Observable<Article> {
-    return this.http.post<Article>(this.apiBaseUrl + 'articles', article);
+    return this.http.post<Article>(this.apiBaseUrl + 'articles', article, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateArticle(article: Article): Observable<Article> {
-    return this.http.put<Article>(this.apiBaseUrl + 'articles/' + article.id, article);
+    return this.http.put<Article>(this.apiBaseUrl + 'articles/' + article.id, article, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteArticle(idArticle: number) {
-    return this.http.delete(this.apiBaseUrl + 'articles/' + idArticle);
+    return this.http.delete(this.apiBaseUrl + 'articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public setArticleVisible(idArticle: number): Observable<Article> {
-    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/visible', {});
+    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/visible', {}, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public setArticleInvisible(idArticle: number): Observable<Article> {
-    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/invisible', {});
+    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/invisible', {}, { headers: this.authService.getAuthorizationHeader() });
   }
 }

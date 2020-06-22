@@ -91,7 +91,7 @@ label.global-form-label {
   padding: $global-element-padding !important;
 }
 
-.global-form-required {
+.global-form-required, .global-font-danger {
   color: $global-danger-color;
 }
 

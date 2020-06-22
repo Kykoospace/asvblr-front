@@ -32,17 +32,16 @@ export class LoginComponent implements OnInit {
     this.loginErrorToggle = false;
 
     if (this.loginForm.valid) {
-      this.authService.signIn(
-        this.loginForm.controls.username.value,
-        this.loginForm.controls.password.value
-      ).subscribe(
+      this.authService.signIn(this.loginForm.value)
+        .subscribe(
         auth => {
-          // TODO : si première connexion, diriger vers page de défnition de mot de passe
-          const nextUrl = this.route.snapshot.paramMap.get('returnUrl') || '/management';
-          this.router.navigate([nextUrl]);
+          console.log(auth);
+          const returnUrl = this.route.snapshot.paramMap.get('returnUrl');
+          this.router.navigate([(returnUrl) ? returnUrl : '/management']);
         },
         err => {
           this.loginErrorToggle = true;
+          console.error(err);
         }
       );
     }

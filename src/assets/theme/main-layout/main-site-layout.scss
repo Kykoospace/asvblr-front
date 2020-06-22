@@ -48,6 +48,24 @@ div#main-site-layout {
   footer#main-site-layout-footer {
     clear: both;
     padding: $main-site-layout-footer-padding;
+    display: flex;
+
+    #main-site-layout-footer-left {
+      width: 67%;
+    }
+
+    #main-site-layout-footer-right {
+      width: 33%;
+
+      #main-site-layout-footer-connexion-button {
+        padding: 12px;
+      }
+    }
+
+    .main-site-layout-footer-title {
+      font-size: $global-font-size-title;
+      margin-bottom: $global-spacing-large;
+    }
   }
 
   .main-site-layout-section {

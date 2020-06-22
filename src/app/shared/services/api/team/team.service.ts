@@ -20,6 +20,7 @@ import TeamCategory from '../../../models/entities/TeamCategory';
 import TeamList from '../../../models/responses/TeamList';
 import Player from '../../../models/entities/Player';
 import Match from '../../../models/entities/Match';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class TeamService {
 
   constructor(
     private configService: ConfigService,
+    private authService: AuthService,
     private http: HttpClient
   ) {
     this.apiBaseUrl = configService.getApiBaseUrl();
@@ -40,7 +42,7 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllPlayers(): Observable<Player[]> {
-    return this.http.get<Player[]>(this.apiBaseUrl + 'players');
+    return this.http.get<Player[]>(this.apiBaseUrl + 'players', { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getPlayer(idPlayer: number): Observable<Player> {
@@ -61,11 +63,11 @@ export class TeamService {
   }
 
   public getTeamList(): Observable<TeamList[]> {
-    return this.http.get<TeamList[]>(this.apiBaseUrl + 'teams/list-detail');
+    return this.http.get<TeamList[]>(this.apiBaseUrl + 'teams/list-detail', { headers: this.authService.getAuthorizationHeader() });
   }
 
   public createTeam(team: any): Observable<Team> {
-    return this.http.post<Team>(this.apiBaseUrl + 'teams', team);
+    return this.http.post<Team>(this.apiBaseUrl + 'teams', team, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getTeam(idTeam: number): Observable<Team> {
@@ -73,15 +75,15 @@ export class TeamService {
   }
 
   public updateTeam(idTeam: number, team: Team): Observable<Team> {
-    return this.http.put<Team>(this.apiBaseUrl + 'teams/' + idTeam, team);
+    return this.http.put<Team>(this.apiBaseUrl + 'teams/' + idTeam, team, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteTeam(idTeam: number): Observable<any> {
-    return this.http.delete<any>(this.apiBaseUrl + 'teams/' + idTeam);
+    return this.http.delete<any>(this.apiBaseUrl + 'teams/' + idTeam, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public addCoachToTeam(idTeam: number, idUser: number): Observable<Team> {
-    return this.http.patch<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach/' + idUser, {});
+    return this.http.patch<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach/' + idUser, {}, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getAllPlayersTeam(idTeam: number): Observable<PlayerTeam[]> {
@@ -89,11 +91,11 @@ export class TeamService {
   }
 
   public addPlayerToTeam(idTeam: number, players: any): Observable<Team> {
-    return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/players', players);
+    return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/players', players, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public removePlayerFromTeam(idTeam: number, idsPlayer: any): Observable<any> {
-    return this.http.request('delete', this.apiBaseUrl + 'teams/' + idTeam + '/players', { body: idsPlayer });
+    return this.http.request('delete', this.apiBaseUrl + 'teams/' + idTeam + '/players', { body: idsPlayer, headers: this.authService.getAuthorizationHeader() });
   }
 
   public getAllTeamMatches(idTeam: number): Observable<Match[]> {
@@ -119,15 +121,11 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions');
-  }
-
-  public getSubscriptionsBySeason(idSeason: number): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(this.apiBaseUrl + 'seasons/' + idSeason + '/subscriptions');
+    return this.http.get<Subscription[]>(this.apiBaseUrl + 'subscriptions', { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getSubscription(idSubscription: number): Observable<Subscription> {
-    return this.http.get<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription);
+    return this.http.get<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public createSubscription(subscription: any): Observable<Subscription> {
@@ -135,30 +133,29 @@ export class TeamService {
   }
 
   public updateSubscription(subscription: Subscription): Observable<Subscription> {
-    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions' + subscription.id, { subscription });
+    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions' + subscription.id, { subscription }, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteSubscription(idSubscription: number): Observable<any> {
-    return this.http.delete<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription);
+    return this.http.delete<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateSubscriptionCNI(idSubscription: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/cni', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/cni', formData, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateSubscriptionMedicalCertificate(idSubscription: number, file: File): Observable<any> {
-    console.log(file);
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/medical-certificate', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/medical-certificate', formData, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateSubscriptionIdentityPhoto(idSubscription: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData);
+    return this.http.post<any>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/identity-photo', formData, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateSubscriptionDocuments(idSubscription: number, cni: File, identityPhoto: File, medicalCertificate: File): Observable<Subscription> {
@@ -170,7 +167,7 @@ export class TeamService {
   }
 
   public validateSubscription(idSubscription: number): Observable<Subscription> {
-    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/validated', {});
+    return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/validated', {}, { headers: this.authService.getAuthorizationHeader() });
   }
 
 
@@ -199,16 +196,16 @@ export class TeamService {
     return this.http.get<Season>(this.apiBaseUrl + 'seasons/' + idSeason);
   }
 
-  public createSeason(season: Season): Observable<Season> {
-    return this.http.post<Season>(this.apiBaseUrl + 'seasons/create', season);
+  public getCurrentSeason(): Observable<Season> {
+    return this.http.get<Season>(this.apiBaseUrl + 'seasons/current-season', { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public createSeason(seasonName: string): Observable<Season> {
+    return this.http.post<Season>(this.apiBaseUrl + 'seasons', { name: seasonName }, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateSeason(season: Season): Observable<Season> {
-    return this.http.post<Season>(this.apiBaseUrl + 'seasons/update/' + season.id, { season });
-  }
-
-  public deleteSeason(idSeason: number): Observable<any> {
-    return this.http.delete<any>(this.apiBaseUrl + 'seasons/delete/' + idSeason);
+    return this.http.put<Season>(this.apiBaseUrl + 'seasons/' + season.id, { season });
   }
 
 
@@ -247,14 +244,14 @@ export class TeamService {
   }
 
   public createMatch(match: any): Observable<Match> {
-    return this.http.post<Match>(this.apiBaseUrl + 'matches', match);
+    return this.http.post<Match>(this.apiBaseUrl + 'matches', match, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateMatch(match: Match): Observable<Match> {
-    return this.http.put<Match>(this.apiBaseUrl + 'matches/' + match.id, match);
+    return this.http.put<Match>(this.apiBaseUrl + 'matches/' + match.id, match, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteMatch(idMatch: number): Observable<any> {
-    return this.http.delete<any>(this.apiBaseUrl + 'matches/' + idMatch);
+    return this.http.delete<any>(this.apiBaseUrl + 'matches/' + idMatch, { headers: this.authService.getAuthorizationHeader() });
   }
 }

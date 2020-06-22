@@ -1,21 +1,47 @@
-<p-dialog header="Ouvrir une nouvelle saison" [(visible)]="newSeasonToggle">
+<p-dialog header="Ouvrir une nouvelle saison" [(visible)]="validationDialogToggle">
   <div class="p-grid">
-    <h1 class="p-col-12">Création d'une nouvelle saison</h1>
-    <span class="p-col-4 global-legend">Nom</span>
-    <div class="p-col-8">
-      <input type="text" value="2020/2021" pInputText disabled>
+    <p class="p-col-8 p-offset-2">Veuillez entrer la phrase suivante afin de confirmer l'ouverture de saison :</p>
+    <p class="p-col-8 p-offset-2">"{{ validationSentence }}"</p>
+    <div class="p-col-6 p-offset-3">
+      <input #inputSentence type="text" pInputText>
     </div>
-    <div class="global-separation p-col-12"></div>
+    <div class="p-col-12 global-section-fill">
+      <p class="global-font-danger global-margin-bottom">
+        <i class="fas fa-exclamation-triangle"></i>
+        Attention : ouvrir une saison entraîne la fermeture de la saison actuelle.
+      </p>
+      <p class="global-font-danger global-margin-bottom">
+        Il vous sera impossible de revenir en arrière, de modifier la saison précédente ni les équipes et les inscriptions qui lui sont liées.
+      </p>
+      <p class="global-font-danger">
+        Toutes les inscriptions seront alors recueillies pour la nouvelle saison ouverte.
+      </p>
+    </div>
   </div>
   <p-footer>
-    <p-button class="ui-button-secondary" label="Non, rester à la saison actuelle" icon="fas fa-times"></p-button>
-    <p-button class="ui-button-warningl" label="Oui, ouvrir une nouvelle saison" icon="fas fa-check"></p-button>
+    <p-button class="ui-button-info" (click)="validationDialogToggle = false" label="Annuler" icon="fas fa-times"></p-button>
+    <p-button class="ui-button-warning" (click)="createNewSeason()" label="Confirmer" icon="fas fa-exclamation-triangle" [disabled]="inputSentence.value !== validationSentence"></p-button>
   </p-footer>
 </p-dialog>
+
 <div class="module-container p-grid">
   <h1 class="p-col-12">Gestion des saisons</h1>
   <span class="p-col-4 global-legend">Saison actuelle</span>
-  <span class="p-col-8">{{ currentSeason.name }}</span>
-  <span class="p-col-4 global-legend">Prochaine saison</span>
-  <p-button (click)="newSeasonToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="fas fa-plus"></p-button>
+  <span class="p-col-8">{{ (currentSeason) ? currentSeason.name : noSeasonMessage }}</span>
+  <div class="p-col-8 p-offset-2" *ngIf="nextSeasonName !== currentSeason?.name">
+    <div class="p-grid global-section">
+      <h1 class="p-col-12">Création d'une nouvelle saison</h1>
+      <span class="p-col-4 global-legend">Nom</span>
+      <div class="p-col-4">
+        <input type="text" [value]="nextSeasonName" pInputText disabled>
+      </div>
+      <span class="p-col-4"></span>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-right">
+          <p-button (click)="validationDialogToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="fas fa-exclamation-triangle"></p-button>
+        </div>
+      </p-toolbar>
+    </div>
+  </div>
 </div>

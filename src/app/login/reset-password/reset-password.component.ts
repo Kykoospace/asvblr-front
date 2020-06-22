@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/api/auth/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ResetPasswordComponent implements OnInit {
 
+  public token: string;
   public recoverSuccessToggle: boolean = false;
 
   public passwordRecoverErrorToggle: boolean = false;
@@ -20,13 +21,16 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.passwordRecoverForm = this.formBuilder.group({
       email: ['', [ Validators.required, Validators.email ]]
     });
+
+    this.token = this.route.snapshot.paramMap.get('token');
   }
 
   public sendPasswordRecoverRequest() {

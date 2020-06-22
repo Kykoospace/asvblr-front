@@ -23,8 +23,15 @@
   </div>
   <div class="main-site-layout-section main-site-layout-section-secondary">
     <footer id="main-site-layout-footer">
-      Footer
-      <p-button (click)="accessMemberArea()" label="Espace membre" icon="fas fa-lock"></p-button>
+      <div id="main-site-layout-footer-left">
+        <p class="main-site-layout-footer-title">Association de volley-ball de Bourg-la-reine</p>
+      </div>
+      <div id="main-site-layout-footer-right" class="global-section">
+        <p class="main-site-layout-footer-title">Accès membres</p>
+        <div class="global-align-center">
+          <p-button (click)="accessMemberArea()" label="Connexion"></p-button>
+        </div>
+      </div>
     </footer>
   </div>
 </div>

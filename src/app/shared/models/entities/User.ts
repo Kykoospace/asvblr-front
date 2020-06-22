@@ -1,5 +1,3 @@
-import Privilege from './Privileges';
-
 export default interface User {
   id: number;
   username: string;
@@ -7,5 +5,6 @@ export default interface User {
   lastName: string;
   email: string;
   role: string;
-  privileges: Privilege[];
+  privileges: string[];
+  passwordChanged: boolean;
 }

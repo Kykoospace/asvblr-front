@@ -16,10 +16,9 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    return JSON.parse(
-      window.localStorage
-        .getItem(TokenStorageService.TOKEN_KEY)
-    ).token;
+    const session = window.localStorage
+      .getItem(TokenStorageService.TOKEN_KEY)
+    return (session) ? JSON.parse(session).token : session;
   }
 
   public getUser(): User {

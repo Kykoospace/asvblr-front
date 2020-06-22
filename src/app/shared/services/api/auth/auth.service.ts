@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from '../../token-storage/token-storage.service';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -14,6 +14,8 @@ import User from '../../../models/entities/User';
 })
 export class AuthService {
 
+  public static NO_BEARER_HEADER: string = 'no-bearer';
+
   private apiBaseUrl: string;
 
   constructor(
@@ -25,12 +27,14 @@ export class AuthService {
     this.apiBaseUrl = this.configService.getApiBaseUrl();
   }
 
-  public signIn(username: string, password: string): Observable<SignInResponse> {
-    return this.http
-      .post<SignInResponse>(
-        this.apiBaseUrl + 'auth/signin',
-        { username, password }
-        )
+  public getAuthorizationHeader(): HttpHeaders {
+    return new HttpHeaders({ 'Authorization': 'Bearer ' + this.getToken() });
+  }
+
+  public signIn(authCredentials: any): Observable<SignInResponse> {
+    return this.http.post<SignInResponse>(
+      this.apiBaseUrl + 'auth/signin', authCredentials
+      )
       .pipe(
         map(auth => {
           this.tokenStorageService.storeToken(auth);
@@ -39,9 +43,9 @@ export class AuthService {
       );
   }
 
-  public signOut(): void {
+  public signOut(returnUrl: string = null): void {
     this.tokenStorageService.removeToken();
-    this.router.navigate(['login', { returnUrl: this.router.routerState.snapshot.url }]);
+    this.router.navigate(['login', { returnUrl: returnUrl ? returnUrl : this.router.routerState.snapshot.url }]);
   }
 
   public isSignedIn(): boolean {
@@ -52,7 +56,17 @@ export class AuthService {
     return this.tokenStorageService.getUser();
   }
 
+  public getToken(): string {
+    return this.tokenStorageService.getToken();
+  }
+
   public resetPassword(email: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'users/reset-password?email=' + email, {});
+    return this.http.post<any>(this.apiBaseUrl + 'users/reset-password', { email });
+  }
+
+  public changePassword(oldPassword: string, password: string): Observable<any> {
+    console.log('oldPassword', oldPassword);
+    console.log('password', password);
+    return this.http.post(this.apiBaseUrl + 'users/update-password', { oldPassword: oldPassword, password: password }, { headers: this.getAuthorizationHeader() });
   }
 }

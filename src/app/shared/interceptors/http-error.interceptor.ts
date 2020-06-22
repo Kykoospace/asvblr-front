@@ -13,11 +13,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .handle(request)
       .pipe(
         catchError(err => {
-          // Si l'utilisateur n'est pas authentifié :
-          if (err.status === 401) {
-            console.error('ERROR HANDLER:  user logged out');
-          }
-
           return throwError(err);
         })
       );

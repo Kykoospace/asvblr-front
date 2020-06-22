@@ -5,6 +5,7 @@ import {TeamService} from '../../services/api/team/team.service';
 import {ManagementService} from '../../services/api/management/management.service';
 import {GouvService} from '../../services/gouv/gouv.service';
 import {forkJoin} from 'rxjs';
+import Season from '../../models/entities/Season';
 
 @Component({
   selector: 'app-subscription-form',
@@ -15,6 +16,8 @@ export class SubscriptionFormComponent implements OnInit {
 
   public steps: MenuItem[];
   public activeStep: number;
+
+  public currentSeason: Season;
 
   public formLabelValues = {
     address: 'Adresse',
@@ -133,19 +136,19 @@ export class SubscriptionFormComponent implements OnInit {
         postcode: ['', [ Validators.required ]],
         city: ['', [ Validators.required ]],
         idSubscriptionCategory: [null, [ Validators.required ]],
-        referee: [false, [ Validators.required ]],
-        coach: [false, [ Validators.required ]],
-        comment: [''],
       }),
 
       // Suppléments :
       secondStep: this.formBuilder.group({
         insuranceRequested: [false, [ Validators.required ]],
+        referee: [false, [ Validators.required ]],
+        coach: [false, [ Validators.required ]],
         calendarRequested: [false, [ Validators.required ]],
         equipment: [false],
         requestedJerseyNumber: [''],
         idTopSize: [null],
         idPantsSize: [null],
+        comment: ['']
       }),
 
       // Autorisation parentale :
@@ -212,6 +215,12 @@ export class SubscriptionFormComponent implements OnInit {
         topSize.updateValueAndValidity();
         pantsSize.updateValueAndValidity();
       });
+
+    // Récupération de la saison actuelle :
+    this.teamService.getCurrentSeason()
+      .subscribe(
+        season => this.currentSeason = season
+      )
 
     // Récupération des datasets :
     this.managementService.getAllPaymentModes()
