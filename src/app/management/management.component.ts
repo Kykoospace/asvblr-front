@@ -3,6 +3,7 @@ import {AuthService} from '../shared/services/api/auth/auth.service';
 import User from '../shared/models/entities/User';
 import ManagementNavMenu from '../shared/models/menus/ManagementNavMenu';
 import { MenuItem } from 'primeng';
+import AppConstants from '../shared/AppConstants';
 
 @Component({
   selector: 'app-management',
@@ -10,6 +11,8 @@ import { MenuItem } from 'primeng';
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent implements OnInit {
+
+  public title: string;
 
   public userMenu: MenuItem[];
   public managementNavMenu: ManagementNavMenu[];
@@ -19,6 +22,7 @@ export class ManagementComponent implements OnInit {
   constructor(
     private authService: AuthService
   ) {
+    this.title = AppConstants.APP_NAME_MEDIUM;
     this.loggedUser = this.authService.getLoggedUser();
   }
 

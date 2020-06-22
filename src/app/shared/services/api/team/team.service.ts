@@ -63,7 +63,16 @@ export class TeamService {
   }
 
   public getTeamList(): Observable<TeamList[]> {
-    return this.http.get<TeamList[]>(this.apiBaseUrl + 'teams/list-detail', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<TeamList[]>(
+      this.apiBaseUrl + 'teams/list-detail',
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        teams => {
+          teams.forEach(team => team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase());
+          return teams;
+        }
+      ));
   }
 
   public createTeam(team: any): Observable<Team> {

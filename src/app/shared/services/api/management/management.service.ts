@@ -8,6 +8,7 @@ import Pageable from '../../../models/paging/Pageable';
 import {map} from 'rxjs/operators';
 import Page from '../../../models/paging/Page';
 import {AuthService} from '../auth/auth.service';
+import User from '../../../models/entities/User';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,15 @@ export class ManagementService {
   ) {
     this.apiBaseUrl = this.configService.getApiBaseUrl();
   }
+
+  // ------------------------------------------------
+  // User routes :
+  // ------------------------------------------------
+
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiBaseUrl + 'users', { headers: this.authService.getAuthorizationHeader() });
+  }
+
 
   // ------------------------------------------------
   // PaymentMode routes :

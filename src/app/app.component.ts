@@ -11,6 +11,6 @@ export class AppComponent {
   constructor(
     private titleService: Title
   ) {
-    this.titleService.setTitle(AppConstants.APP_NAME);
+    this.titleService.setTitle(AppConstants.APP_NAME_SHORT);
   }
 }

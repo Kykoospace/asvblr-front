@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
 import {Router} from '@angular/router';
+import AppConstants from '../shared/AppConstants';
 
 @Component({
   selector: 'app-main',
@@ -8,6 +9,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  public title: string;
+  public subTitle: string;
 
   public navItems: MenuItem[] = [
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
@@ -73,10 +77,12 @@ export class MainComponent implements OnInit {
     { label: 'Contact', routerLink: 'contact', icon: 'fas fa-envelope' },
   ]
 
-
   constructor(
     private router: Router
-  ) { }
+  ) {
+    this.title = AppConstants.APP_NAME_MAIN_TITLE;
+    this.subTitle = AppConstants.APP_NAME_SUB_TITLE;
+  }
 
   ngOnInit() {
   }

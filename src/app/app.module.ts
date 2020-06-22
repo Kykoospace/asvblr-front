@@ -70,6 +70,7 @@ import { TeamCardComponent } from './shared/components/team-card/team-card.compo
 import { DynamicDialogTeamEventManagerComponent } from './shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './login/change-password/change-password.component';
+import { DynamicDialogCreateUserComponent } from './shared/components/dynamic-dialog-create-user/dynamic-dialog-create-user.component';
 
 registerLocaleData(localeFr);
 
@@ -133,7 +134,8 @@ function loadConfiguration(
     TeamCardComponent,
     DynamicDialogTeamEventManagerComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DynamicDialogCreateUserComponent
   ],
   imports: [
     HttpClientModule,

@@ -3,6 +3,7 @@ export default interface TeamList {
   teamName: string;
   nbPlayers: number;
   teamCategoryName: string;
+  coachFullName: string;
   coachFirstName: string;
   coachLastName: string;
 }

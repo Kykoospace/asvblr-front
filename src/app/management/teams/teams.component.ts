@@ -26,7 +26,7 @@ export class TeamsComponent implements OnInit, OnDestroy {
   public columns = [
     { column: 'Nom', field: 'teamName' },
     { column: 'Categorie', field: 'teamCategoryName' },
-    { column: 'Coach', field: 'coachName' },
+    { column: 'Coach', field: 'coachFullName' },
     { column: 'Nombre de joueurs', field: 'nbPlayers' }
   ];
 
@@ -65,7 +65,6 @@ export class TeamsComponent implements OnInit, OnDestroy {
   }
 
   public selectTeam(team: Team) {
-    console.log(team);
     this.router.navigate(['/management/teams/', team.id]);
   }
 

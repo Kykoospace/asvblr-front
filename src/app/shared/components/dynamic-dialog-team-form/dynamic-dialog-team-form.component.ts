@@ -4,6 +4,8 @@ import { ManagementService } from '../../services/api/management/management.serv
 import User from '../../models/entities/User';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng';
+import {forkJoin} from 'rxjs';
+import {AuthService} from '../../services/api/auth/auth.service';
 
 @Component({
   selector: 'app-dynamic-dialog-team-form',
@@ -14,7 +16,10 @@ export class DynamicDialogTeamFormComponent implements OnInit {
 
   public teamForm: FormGroup;
 
-  public users: User[];
+  public userOptions = [
+    { label: 'Coach', value: null }
+  ];
+
   public categoryOptions = [
     { label: 'Catégorie', value: null }
   ];
@@ -33,11 +38,17 @@ export class DynamicDialogTeamFormComponent implements OnInit {
       idCoach: [null]
     });
 
-    this.teamService.getAllTeamCategories()
+    forkJoin({
+      categories: this.teamService.getAllTeamCategories(),
+      users: this.managementService.getAllUsers()
+    })
       .subscribe(
-        categories => {
-          categories.forEach(
+        results => {
+          results.categories.forEach(
             category => this.categoryOptions.push({ label: category.name, value: category.id })
+          );
+          results.users.forEach(
+            user => this.userOptions.push({ label: user.firstName + ' ' + user.lastName.toUpperCase(), value: user.id })
           );
         },
         err => console.error(err)

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../../config/config.service';
 import SignInResponse from '../../../models/responses/SignInResponse';
 import User from '../../../models/entities/User';
+import Role from '../../../models/entities/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,16 @@ export class AuthService {
 
   public resetPassword(password: string, token: string): Observable<any> {
     return this.http.post<any>(this.apiBaseUrl + 'users/save-password?password=' + password + '&token=' + token, {});
+  }
+
+
+
+
+  public getAllRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.apiBaseUrl + 'roles', { headers: this.getAuthorizationHeader() });
+  }
+
+  public getRole(idRole: number): Observable<Role> {
+    return this.http.get<Role>(this.apiBaseUrl + 'roles/' + idRole);
   }
 }
