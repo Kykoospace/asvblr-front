@@ -60,13 +60,22 @@ export class AuthService {
     return this.tokenStorageService.getToken();
   }
 
-  public resetPassword(email: string): Observable<any> {
+  public sendRequestResetPassword(email: string): Observable<any> {
     return this.http.post<any>(this.apiBaseUrl + 'users/reset-password', { email });
   }
 
   public changePassword(oldPassword: string, password: string): Observable<any> {
-    console.log('oldPassword', oldPassword);
-    console.log('password', password);
-    return this.http.post(this.apiBaseUrl + 'users/update-password', { oldPassword: oldPassword, password: password }, { headers: this.getAuthorizationHeader() });
+    return this.http.post<any>(
+      this.apiBaseUrl + 'users/update-password',
+      { oldPassword, password },
+      { headers: this.getAuthorizationHeader() });
+  }
+
+  public checkResetPasswordToken(token: string): Observable<any> {
+    return this.http.get<any>(this.apiBaseUrl + 'users/change-password?token=' + token);
+  }
+
+  public resetPassword(password: string, token: string): Observable<any> {
+    return this.http.post<any>(this.apiBaseUrl + 'users/save-password?password=' + password + '&token=' + token, {});
   }
 }
