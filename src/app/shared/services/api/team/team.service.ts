@@ -91,8 +91,8 @@ export class TeamService {
     return this.http.delete<any>(this.apiBaseUrl + 'teams/' + idTeam, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public addCoachToTeam(idTeam: number, idUser: number): Observable<Team> {
-    return this.http.patch<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach/' + idUser, {}, { headers: this.authService.getAuthorizationHeader() });
+  public addCoachToTeam(idTeam: number, idCoach: number): Observable<Team> {
+    return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach', { idCoach }, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getAllPlayersTeam(idTeam: number): Observable<PlayerTeam[]> {

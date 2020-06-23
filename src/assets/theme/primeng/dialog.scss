@@ -25,6 +25,10 @@
     }
   }
 
+  .ui-dialog-content {
+    min-height: fit-content;
+  }
+
   .ui-dialog-footer {
     border-top: 1px solid $prime-ng-dialog-titlebar-border-color;
   }

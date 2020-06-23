@@ -1,1 +1,57 @@
-<p>dynamic-dialog-create-user works!</p>
+<form class="p-grid" [formGroup]="newUserForm" (ngSubmit)="createUser()">
+  <!-- TYPE -->
+  <div class="p-col-2 p-offset-2">
+    <p-radioButton name="type" [value]="true" formControlName="type" label="Coach"></p-radioButton>
+  </div>
+  <div class="p-col-2">
+    <p-radioButton name="type" [value]="false" formControlName="type" label="Gérant"></p-radioButton>
+  </div>
+  <label class="global-form-label p-col-6">
+    {{ formLabelValues.type }}
+    <span class="global-form-required">*</span>
+  </label>
+
+  <!-- FIRSTNAME -->
+  <div class="p-col-4 p-offset-2">
+    <input formControlName="firstName" type="text" pInputText />
+  </div>
+  <label class="global-form-label p-col-6">
+    {{ formLabelValues.firstName }}
+    <span class="global-form-required">*</span>
+  </label>
+
+  <!-- LASTNAME -->
+  <div class="p-col-4 p-offset-2">
+    <input formControlName="lastName" type="text" pInputText />
+  </div>
+  <label class="global-form-label p-col-6">
+    {{ formLabelValues.lastName }}
+    <span class="global-form-required">*</span>
+  </label>
+
+  <!-- EMAIL -->
+  <div class="p-col-4 p-offset-2">
+    <input formControlName="email" type="text" pInputText />
+  </div>
+  <label class="global-form-label p-col-6">
+    {{ formLabelValues.email }}
+    <span class="global-form-required">*</span>
+  </label>
+
+
+  <!-- CATEGORY -->
+  <div class="p-col-4 p-offset-2" *ngIf="newUserForm.get('type').value">
+    <p-multiSelect [options]="teams" formControlName="teams" defaultLabel="Choisir ..."></p-multiSelect>
+  </div>
+  <label class="global-form-label p-col-6" *ngIf="newUserForm.get('type').value">
+    {{ formLabelValues.teams }}
+    <span class="global-form-required">*</span>
+  </label>
+
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-right">
+      <p-button (click)="close()" type="button" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+      <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="newUserForm.invalid"></p-button>
+    </div>
+  </p-toolbar>
+</form>

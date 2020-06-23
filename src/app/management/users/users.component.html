@@ -1,11 +1,31 @@
-<p-dialog header="Nouvel utilisateur non joueur" [(visible)]="newUserToggle">
-  Content
+<p-dialog header="Détails" [(visible)]="userDetailToggle" *ngIf="selectedUser">
+  <div class="p-grid">
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Prénom</span>
+      <span class="p-col-5">{{ selectedUser.firstName }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Nom</span>
+      <span class="p-col-5">{{ selectedUser.lastName }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Adresse mail</span>
+      <span class="p-col-5">{{ selectedUser.email }}</span>
+      <span class="p-col-4"></span>
+    </div>
+  </div>
+  <p-footer>
+    <p-button (click)="userDetailToggle = false" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
+    <p-button (click)="deleteUser(selectedUser)" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button>
+  </p-footer>
 </p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button label="Utilisateur non joueur" icon="fas fa-plus"></p-button>
+      <p-button (click)="openNewUserDialog()" label="Utilisateur non joueur" icon="fas fa-plus"></p-button>
     </div>
   </p-toolbar>
   <p-table

@@ -4,7 +4,6 @@ import { ConfigService } from '../../config/config.service';
 import { Observable } from 'rxjs';
 import PaymentMode from '../../../models/entities/PaymentMode';
 import Article from '../../../models/entities/Article';
-import Pageable from '../../../models/paging/Pageable';
 import {map} from 'rxjs/operators';
 import Page from '../../../models/paging/Page';
 import {AuthService} from '../auth/auth.service';
@@ -33,6 +32,22 @@ export class ManagementService {
     return this.http.get<User[]>(this.apiBaseUrl + 'users', { headers: this.authService.getAuthorizationHeader() });
   }
 
+  public createUser(userData: any): Observable<User> {
+    return this.http.post<User>(this.apiBaseUrl + 'auth/signup', userData, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public deleteUser(idUser: number): Observable<any> {
+    return this.http.delete<any>(this.apiBaseUrl + 'users/' + idUser, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public giveManagerRole(idUser: number): Observable<User> {
+    return this.http.patch<User>(
+      this.apiBaseUrl + 'users/' + idUser + '/give-manager-right',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
 
   // ------------------------------------------------
   // PaymentMode routes :
@@ -42,8 +57,8 @@ export class ManagementService {
     return this.http.get<PaymentMode[]>(this.apiBaseUrl + 'payment-modes');
   }
 
-  public getPaymentMode(paymentModeId: number): Observable<PaymentMode> {
-    return this.http.get<PaymentMode>(this.apiBaseUrl + 'payment-modes/' + paymentModeId);
+  public getPaymentMode(idPaymentMode: number): Observable<PaymentMode> {
+    return this.http.get<PaymentMode>(this.apiBaseUrl + 'payment-modes/' + idPaymentMode);
   }
 
 

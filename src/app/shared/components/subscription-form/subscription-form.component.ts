@@ -26,7 +26,7 @@ export class SubscriptionFormComponent implements OnInit {
     city: 'Ville',
     coach: 'Êtes-vous un(e) coach ?',
     comment: 'Avez-vous autre chose à nous dire ?',
-    email: 'Email',
+    email: 'Adresse mail',
     equipment: 'Souhaitez-vous acheter un tenue aux couleurs de votre équipe ?',
     firstName: 'Prénom',
     gender: 'Sexe',

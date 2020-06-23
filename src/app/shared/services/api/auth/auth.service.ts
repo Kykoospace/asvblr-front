@@ -62,22 +62,22 @@ export class AuthService {
   }
 
   public sendRequestResetPassword(email: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'users/reset-password', { email });
+    return this.http.post<any>(this.apiBaseUrl + 'auth/reset-password', { email });
   }
 
   public changePassword(oldPassword: string, password: string): Observable<any> {
     return this.http.post<any>(
-      this.apiBaseUrl + 'users/update-password',
+      this.apiBaseUrl + 'auth/update-password',
       { oldPassword, password },
       { headers: this.getAuthorizationHeader() });
   }
 
   public checkResetPasswordToken(token: string): Observable<any> {
-    return this.http.get<any>(this.apiBaseUrl + 'users/change-password?token=' + token);
+    return this.http.get<any>(this.apiBaseUrl + 'auth/change-password?token=' + token);
   }
 
   public resetPassword(password: string, token: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'users/save-password?password=' + password + '&token=' + token, {});
+    return this.http.post<any>(this.apiBaseUrl + 'auth/save-password', { password, token });
   }
 
 
