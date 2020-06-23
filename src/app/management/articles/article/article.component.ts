@@ -13,6 +13,7 @@ export class ArticleComponent implements OnInit {
 
   public renameArticleToggle: boolean = false;
   public setVisibilityArticleToggle: boolean = false;
+  articleVisibilityToggle: boolean = false;
 
   public article: Article;
 
@@ -24,7 +25,10 @@ export class ArticleComponent implements OnInit {
     private managementService: ManagementService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {
+  ) {}
+
+
+  ngOnInit(): void {
     this.managementService.getArticle(+this.route.snapshot.paramMap.get('id'))
       .subscribe(
         article => {
@@ -42,8 +46,6 @@ export class ArticleComponent implements OnInit {
         }
       );
   }
-
-  ngOnInit(): void { }
 
   public backNavigate() {
     this.router.navigate(['/management/articles']);
@@ -87,13 +89,8 @@ export class ArticleComponent implements OnInit {
             });
             this.renameArticleToggle = false;
           },
-          err => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Impossible de renommer l\'article',
-              detail: 'Une erreur est survenue lors du renommage de l\'article.'
-            });
-          });
+          err => console.error(err)
+        );
     } else {
       this.messageService.add({
         severity: 'warn',
@@ -125,6 +122,7 @@ export class ArticleComponent implements OnInit {
 
   public deleteArticle() {
     this.confirmationService.confirm({
+      header: 'Supprimer l\'article',
       message: 'Voulez-vous supprimer l\'article ?',
       accept: () => {
         this.managementService.deleteArticle(this.article.id)

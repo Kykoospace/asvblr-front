@@ -27,15 +27,15 @@ export class SubscriptionFormComponent implements OnInit {
     coach: 'Êtes-vous un(e) coach ?',
     comment: 'Avez-vous autre chose à nous dire ?',
     email: 'Adresse mail',
-    equipment: 'Souhaitez-vous acheter un tenue aux couleurs de votre équipe ?',
+    equipment: 'Souhaitez-vous une tenue aux couleurs de votre équipe ?',
     firstName: 'Prénom',
     gender: 'Sexe',
     idSubscriptionCategory: 'Catégorie de niveau souhaitée',
     idsPaymentMode: 'Mode de paiement',
     insuranceRequested: 'Souhaitez-vous prendre l\'assurance supplémentaire ?',
-    calendarRequested: 'Souhaitez-vous le calendrier du club ? (5€)',
+    calendarRequested: 'Souhaitez-vous le calendrier du club ?',
     lastName: 'Nom de famille',
-    idPantsSize: 'Taille de pantalon',
+    idPantsSize: 'Taille de short',
     phoneNumber: 'Numéro de téléphone',
     postcode: 'Code postal',
     referee: 'Êtes-vous un(e) arbitre ?',
@@ -57,7 +57,8 @@ export class SubscriptionFormComponent implements OnInit {
     medicalCertificate: 'Certificat médical de moins de deux ans'
   };
 
-  public requestedJerseyNumberTooltip = 'Avez-vous un numéro favori ? Nous ferons notre possible pour vous le procurer !';
+  public requestedEquipmentTooltip = 'Maillot obligatoire en compétition, short également obligatoire en régional et supérieur. Renseignez-vous auprès de votre entraîneur.';
+  public requestedJerseyNumberTooltip = 'Vous avez un numéro favori ? Nous ferons notre possible pour vous le procurer !';
 
   private confirmationMessage = {
     severity: 'success',

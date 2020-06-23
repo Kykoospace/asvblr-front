@@ -91,9 +91,8 @@ export class SubscriptionComponent implements OnInit {
   public deleteSubscription() {
     // Call confirm dialog box :
     this.confirmationService.confirm({
-      message: 'Voulez-vous supprimer l\'inscription de '
-        + this.subscription.firstName + ' '
-        + this.subscription.lastName.toUpperCase() + ' ?',
+      message: 'Voulez-vous supprimer l\'inscription ?',
+      header: 'Supprimer l\'inscription',
 
       // Callback method when accepted :
       accept: () => {

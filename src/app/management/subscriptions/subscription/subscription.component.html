@@ -1,11 +1,18 @@
-<p-confirmDialog header="Confirmation" icon="fas fa-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog
+  icon="fas fa-exclamation-triangle"
+  acceptLabel="Supprimer"
+  acceptIcon="far fa-trash-alt"
+  acceptButtonStyleClass="ui-button-danger"
+  rejectLabel="Annuler"
+  rejectIcon="fas fa-times"
+  rejectButtonStyleClass="ui-button-info"
+></p-confirmDialog>
 <div class="module-container p-grid" *ngIf="subscription">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
       <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" *ngIf="!subscription.validated"></p-button>
       <p-button type="button" label="Validée le {{ subscription.validationDate | date: 'shortDate' }}" class="ui-button-secondary" *ngIf="subscription.validated" [disabled]="true"></p-button>
-      <p-button type="button" label="Renvoyer identifiants" class="ui-button-secondary" *ngIf="subscription.validated"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Inscription de {{ subscription.firstName + ' ' + subscription.lastName.toUpperCase() }}, faite le {{ subscription.creationDate | date: 'shortDate' }}</span>
@@ -15,7 +22,7 @@
   <p-tabView class="p-col-12">
     <p-tabPanel header="Fiche d'inscription">
       <div class="p-grid">
-        <span class="p-col-3 global-legend">Prénom</span>
+        <span class="p-col-3 global-legend">Nom</span>
         <span class="p-col-5">{{ subscription.firstName }} {{ subscription.lastName | uppercase }}</span>
         <span class="p-col-4"></span>
       </div>
@@ -30,7 +37,7 @@
         <span class="p-col-4"></span>
       </div>
       <div class="p-grid">
-        <span class="p-col-3 global-legend">Nationality</span>
+        <span class="p-col-3 global-legend">Nationalité</span>
         <span class="p-col-5">{{ subscription.nationality }}</span>
         <span class="p-col-4"></span>
       </div>
@@ -41,7 +48,7 @@
       </div>
       <div class="p-grid">
         <span class="p-col-3 global-legend">Adresse</span>
-        <span class="p-col-5">{{ subscription.address }} - {{ subscription.city }} ({{ subscription.postcode }})</span>
+        <span class="p-col-5">{{ subscription.address }}, {{ subscription.postcode }} {{ subscription.city }}</span>
         <span class="p-col-4"></span>
       </div>
       <div class="p-grid" *ngIf="category">
@@ -72,6 +79,11 @@
       <div class="p-grid">
         <span class="p-col-3 global-legend">Assurance complémentaire demandée</span>
         <span class="p-col-5">{{ subscription.insuranceRequested ? 'Oui' : 'Non' }}</span>
+        <span class="p-col-4"></span>
+      </div>
+      <div class="p-grid">
+        <span class="p-col-3 global-legend">Calendrier du club demandé</span>
+        <span class="p-col-5">{{ subscription.calendarRequested ? 'Oui' : 'Non' }}</span>
         <span class="p-col-4"></span>
       </div>
       <div class="p-grid">

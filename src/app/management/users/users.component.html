@@ -1,20 +1,20 @@
 <p-dialog header="Détails" [(visible)]="userDetailToggle" *ngIf="selectedUser">
   <div class="p-grid">
     <div class="p-grid">
-      <span class="p-col-3 global-legend">Prénom</span>
-      <span class="p-col-5">{{ selectedUser.firstName }}</span>
+      <span class="p-col-4 global-legend">Prénom</span>
+      <span class="p-col-4">{{ selectedUser.firstName }}</span>
       <span class="p-col-4"></span>
 
-      <span class="p-col-3 global-legend">Nom</span>
-      <span class="p-col-5">{{ selectedUser.lastName }}</span>
+      <span class="p-col-4 global-legend">Nom</span>
+      <span class="p-col-4">{{ selectedUser.lastName }}</span>
       <span class="p-col-4"></span>
 
-      <span class="p-col-3 global-legend">Adresse mail</span>
-      <span class="p-col-5">{{ selectedUser.email }}</span>
+      <span class="p-col-4 global-legend">Adresse mail</span>
+      <span class="p-col-4">{{ selectedUser.email }}</span>
       <span class="p-col-4"></span>
 
-      <span class="p-col-3 global-legend">Rôle</span>
-      <span class="p-col-5">
+      <span class="p-col-4 global-legend">Rôle</span>
+      <span class="p-col-4">
       <p-selectButton
         #roleSelect
         [options]="roleSelectOptions"

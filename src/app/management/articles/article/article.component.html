@@ -1,4 +1,12 @@
-<p-confirmDialog header="Renommer l'article" icon="fas fa-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog
+  icon="fas fa-exclamation-triangle"
+  acceptLabel="Supprimer"
+  acceptIcon="far fa-trash-alt"
+  acceptButtonStyleClass="ui-button-danger"
+  rejectLabel="Annuler"
+  rejectIcon="fas fa-times"
+  rejectButtonStyleClass="ui-button-info"
+></p-confirmDialog>
 <p-dialog header="Nouvel article" [(visible)]="renameArticleToggle">
   <div class="p-grid">
     <span class="p-col-12">Modifier le titre de l'article</span>
@@ -9,7 +17,7 @@
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="renameArticleToggle = false" class="ui-button-secondary" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (click)="renameArticleToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
         <p-button (click)="renameArticle(articleTitleInput.value)" label="Valider" icon="fas fa-check"></p-button>
       </div>
     </p-toolbar>
@@ -22,7 +30,7 @@
       <p-button (click)="backNavigate()" label="Retour" icon="fas fa-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>
       <p-button (click)="saveArticle()" class="ui-button-success" label="Sauvegarder" icon="fas fa-save" *ngIf="article.content !== content"></p-button>
       <p-button (click)="renameArticleToggle = true" class="ui-button-secondary" label="Renommer l'article" icon="fas fa-pen"></p-button>
-      <p-button (click)="setVisibilityArticleToggle = true" class="ui-button-warning" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye"></p-button>
+      <p-button (click)="setVisibilityArticleToggle = true" class="ui-button-secondary" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Créé le {{ article.creationDate | date: 'shortDate' }}</span>

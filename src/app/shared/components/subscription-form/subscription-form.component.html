@@ -1,6 +1,7 @@
 <div class="p-grid" *ngIf="currentSeason">
   <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep" *ngIf="activeStep >= 0 && activeStep <= 3"></p-steps>
   <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
+    <p-button type="button" (click)="test()"></p-button>
 
     <div class="p-grid" *ngIf="activeStep == -1">
       <h1 class="p-col-12 global-align-center">Inscription pour la saison {{ currentSeason.name }}</h1>
@@ -191,7 +192,11 @@
       <div class="p-col-4 p-offset-2 global-align-center">
         <p-checkbox formControlName="equipment" [binary]="true"></p-checkbox>
       </div>
-      <label class="global-form-label p-col-6">{{ formLabelValues.equipment }}</label>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.equipment }}
+        <i class="fas fa-exclamation-triangle global-tooltip-icon-warning"
+           [pTooltip]="requestedEquipmentTooltip"></i>
+      </label>
 
       <!-- REQUESTED JERSEY NUMBER -->
       <div class="p-col-4 p-offset-2">
