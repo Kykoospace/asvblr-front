@@ -19,8 +19,13 @@ export class UsersComponent implements OnInit {
 
   public users: User[];
   public selectedUser: User;
+  public selectedRole: boolean;
 
   public roleOptions: any[];
+  public roleSelectOptions = [
+    { label: 'Membre', value: false, icon: 'fas fa-user' },
+    { label: 'Gérant', value: true, icon: 'fas fa-user-tie' }
+  ]
 
   public columns = [
     { column: 'Prénom', field: 'firstName' },
@@ -85,6 +90,7 @@ export class UsersComponent implements OnInit {
   public selectUser(user: User) {
     this.selectedUser = user;
     this.userDetailToggle = true;
+    this.selectedRole = user.roles.find(role => role === 'MANAGER_ROLE') != null;
   }
 
   public openNewUserDialog() {
@@ -131,5 +137,28 @@ export class UsersComponent implements OnInit {
         );
       }
     });
+  }
+
+  public setManagerRole(user: User, value: boolean) {
+    if (value) {
+      this.confirmationService.confirm({
+        message: 'Voulez-vous promouvoir l\'utilisateur ?',
+        accept: () => {
+          this.managementService.giveManagerRole(user.id).subscribe(
+            () => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Utilisateur promu gérant'
+              });
+              this.refreshUsers();
+            },
+            err => console.error(err)
+          );
+        },
+        reject: () => this.selectedRole = false
+      });
+    } else {
+      // TODO : remove manager right
+    }
   }
 }

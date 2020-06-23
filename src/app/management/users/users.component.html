@@ -12,6 +12,17 @@
       <span class="p-col-3 global-legend">Adresse mail</span>
       <span class="p-col-5">{{ selectedUser.email }}</span>
       <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Rôle</span>
+      <span class="p-col-5">
+      <p-selectButton
+        #roleSelect
+        [options]="roleSelectOptions"
+        [(ngModel)]="selectedRole"
+        (onChange)="setManagerRole(selectedUser, selectedRole)">
+      </p-selectButton>
+      </span>
+      <span class="p-col-4"></span>
     </div>
   </div>
   <p-footer>
