@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ArticlesComponent implements OnInit {
 
   public articles: Article[];
-  public newArticleDialogToggle = false;
+  public newArticleDialogToggle: boolean;
 
   public columns = [
     { column: 'Titre', field: 'title' },
@@ -27,6 +27,7 @@ export class ArticlesComponent implements OnInit {
     private router: Router
   ) {
     this.refreshArticleList();
+    this.newArticleDialogToggle = false;
   }
 
   ngOnInit(): void { }

@@ -62,6 +62,10 @@
   color: $prime-ng-button-font-color;
   font-size: $prime-ng-button-font-size;
 
+  &:active {
+    background-color: $prime-ng-button-active-bkg-color;
+  }
+
   &.ui-button-small {
     padding: $prime-ng-button-small-padding !important;
   }

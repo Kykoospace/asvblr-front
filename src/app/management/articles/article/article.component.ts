@@ -13,9 +13,9 @@ export class ArticleComponent implements OnInit {
 
   public renameArticleToggle: boolean = false;
   public setVisibilityArticleToggle: boolean = false;
-  articleVisibilityToggle: boolean = false;
 
   public article: Article;
+  public newArticleVisibility: boolean;
 
   public content: string;
 
@@ -25,25 +25,22 @@ export class ArticleComponent implements OnInit {
     private managementService: ManagementService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
+    this.refreshArticle();
+  }
+
+  public refreshArticle(): void {
     this.managementService.getArticle(+this.route.snapshot.paramMap.get('id'))
       .subscribe(
         article => {
           this.article = article;
           this.content = article.content;
+          this.newArticleVisibility = article.visible;
         },
-        err => {
-          console.error(err);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Article introuvable',
-            detail: 'Impossible de charger l\'article demandé'
-          });
-          this.backNavigate();
-        }
+        err => console.error(err)
       );
   }
 
@@ -56,12 +53,11 @@ export class ArticleComponent implements OnInit {
     this.managementService.updateArticle(this.article)
       .subscribe(
         article => {
-          this.article = article;
-          this.content = article.content;
           this.messageService.add({
             severity: 'success',
             summary: 'Modifications sauvegardées'
           });
+          this.refreshArticle();
         },
         err => {
           this.messageService.add({
@@ -80,14 +76,12 @@ export class ArticleComponent implements OnInit {
       this.managementService.updateArticle(this.article)
         .subscribe(
           article => {
-            this.article = article;
-
-            this.content = article.content;
             this.messageService.add({
               severity: 'success',
               summary: 'Modifications sauvegardées'
             });
             this.renameArticleToggle = false;
+            this.refreshArticle();
           },
           err => console.error(err)
         );
@@ -99,25 +93,23 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  public setVisibilityArticle(visible: boolean) {
-    this.managementService.setArticleVisible(this.article.id)
-      .subscribe(
-        article => {
-          this.article = article;
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Visibilité enregistrée',
-            detail: 'La visibilité de l\'article a bien été enregistrée.'
-          });
-        },
-        err => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Modification impossible',
-            detail: 'Une erreur est survenue lors de la modification de la visibilité de l\'article.'
-          });
-        }
-      );
+  public setVisibilityArticle() {
+    const request = (this.newArticleVisibility)
+      ? this.managementService.setArticleVisible(this.article.id)
+      : this.managementService.setArticleInvisible(this.article.id);
+
+    request.subscribe(
+      article => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Visibilité enregistrée',
+          detail: 'La visibilité de l\'article a bien été enregistrée.'
+        });
+        this.setVisibilityArticleToggle = false;
+        this.refreshArticle();
+      },
+      err => console.error(err)
+    );
   }
 
   public deleteArticle() {

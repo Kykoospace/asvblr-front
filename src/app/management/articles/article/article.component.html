@@ -7,7 +7,7 @@
   rejectIcon="fas fa-times"
   rejectButtonStyleClass="ui-button-info"
 ></p-confirmDialog>
-<p-dialog header="Nouvel article" [(visible)]="renameArticleToggle">
+<p-dialog header="Renommer l'article" *ngIf="article" [(visible)]="renameArticleToggle">
   <div class="p-grid">
     <span class="p-col-12">Modifier le titre de l'article</span>
     <div class="p-col-12">
@@ -24,7 +24,25 @@
   </p-footer>
 </p-dialog>
 
-<div class="module-container p-grid">
+<p-dialog header="Visibilité" *ngIf="article" [(visible)]="setVisibilityArticleToggle">
+  <div class="p-grid">
+    <span class="p-col-4 global-legend">Article public</span>
+    <span class="p-col-4">
+      <p-inputSwitch [(ngModel)]="newArticleVisibility"></p-inputSwitch>
+    </span>
+    <span class="p-col-4"></span>
+  </div>
+  <p-footer>
+    <p-toolbar>
+      <div class="ui-toolbar-group-right">
+        <p-button (click)="setVisibilityArticleToggle = false; newArticleVisibility = article.visible" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (click)="setVisibilityArticle()" label="Valider" icon="fas fa-check"></p-button>
+      </div>
+    </p-toolbar>
+  </p-footer>
+</p-dialog>
+
+<div class="module-container p-grid" *ngIf="article">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" label="Retour" icon="fas fa-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>

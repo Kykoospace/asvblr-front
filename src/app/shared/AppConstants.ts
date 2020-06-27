@@ -23,7 +23,7 @@ export default class AppConstants {
       items: [
         { label: 'Inscriptions', route: 'subscriptions', icon: 'fas fa-file-signature', privilege: 'SUBSCRIPTION_MANAGEMENT' },
         { label: 'Équipes', route: 'teams', icon: 'fas fa-users', privilege: 'TEAM_MANAGEMENT' },
-        { label: 'Messages', route: 'mailer', icon: 'far fa-envelope' }
+        { label: 'Email groupé', route: 'mailer', icon: 'far fa-envelope', privilege: 'MAIL_MANAGEMENT' }
       ]
     },
     {
