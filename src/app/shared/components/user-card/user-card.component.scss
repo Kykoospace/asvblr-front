@@ -1,0 +1,15 @@
+@import "src/assets/theme/variables";
+
+.user-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: $global-element-padding;
+
+  .user-card-main {
+    .user-card-mail {
+      font-size: $global-font-size-small;
+      color: $global-disabled-font-color;
+    }
+  }
+}

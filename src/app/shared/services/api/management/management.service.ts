@@ -48,6 +48,14 @@ export class ManagementService {
       );
   }
 
+  public removeManagerRole(idUser: number): Observable<User> {
+    return this.http.patch<User>(
+      this.apiBaseUrl + 'users/' + idUser + '/remove-manager-right',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
 
   // ------------------------------------------------
   // PaymentMode routes :
@@ -102,5 +110,15 @@ export class ManagementService {
 
   public setArticleInvisible(idArticle: number): Observable<Article> {
     return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/invisible', {}, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+
+
+  // ------------------------------------------------
+  // Mail routes :
+  // ------------------------------------------------
+
+  public sendMail(mail: any): Observable<any> {
+    return this.http.post(this.apiBaseUrl + 'mails/send-mail', mail, { headers: this.authService.getAuthorizationHeader() });
   }
 }

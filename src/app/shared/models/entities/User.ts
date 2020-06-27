@@ -5,6 +5,7 @@ export default interface User {
   lastName: string;
   email: string;
   roles: string[];
+  formatedRoles?: string[];
   privileges: string[];
   passwordChanged: boolean;
 }

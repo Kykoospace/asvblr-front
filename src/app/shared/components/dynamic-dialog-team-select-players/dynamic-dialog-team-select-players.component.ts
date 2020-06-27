@@ -15,10 +15,7 @@ export class DynamicDialogTeamSelectPlayersComponent implements OnInit {
   private idTeam: number;
   public subscriptionCategories: SubscriptionCategory[] = [];
 
-  @Input()
   public sourcePlayers: Player[] = [];
-
-  @Input()
   public targetPlayers: Player[] = [];
 
   constructor(

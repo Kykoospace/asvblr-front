@@ -24,53 +24,11 @@ export class ManagementComponent implements OnInit {
   ) {
     this.title = AppConstants.APP_NAME_MEDIUM;
     this.loggedUser = this.authService.getLoggedUser();
+    this.managementNavMenu = AppConstants.getNavMenuItems(this.authService.getLoggedUser().privileges);
+    // this.managementNavMenu = AppConstants.APP_NAV_MENU_ITEMS;
   }
 
   ngOnInit() {
-    this.managementNavMenu = [
-      {
-        label: 'Site public',
-        items: [
-          { label: 'Articles', route: 'articles', icon: 'fas fa-newspaper', privilege: '' },
-          { label: 'Informations', route: 'informations', icon: 'fas fa-info', privilege: '' },
-          { label: 'Gymnases', route: 'gymnasiums', icon: 'fas fa-volleyball-ball', privilege: '' },
-          { label: 'Séances et horaires', route: 'schedules', icon: 'fas fa-calendar-alt', privilege: '' }
-        ]
-      },
-      {
-        label: 'Membres',
-        items: [
-          { label: 'Inscriptions', route: 'subscriptions', icon: 'fas fa-file-signature', privilege: '' },
-          { label: 'Équipes', route: 'teams', icon: 'fas fa-users', privilege: '' },
-          { label: 'Demande de licence', route: 'licence', icon: 'fas fa-id-card', privilege: '' },
-          { label: 'Demande de maillot', route: 'jersey', icon: 'fas fa-tshirt', privilege: '' }
-        ]
-      },
-      {
-        label: 'Gestion du club',
-        items: [
-          { label: 'Bureau', route: 'office', icon: 'fas fa-building', privilege: '' },
-          { label: 'Entraîneurs', route: 'coaches', icon: 'fas fa-user-friends', privilege: '' },
-          { label: 'Saisons', route: 'seasons', icon: 'fas fa-newspaper', privilege: '' },
-          { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: '' }
-        ]
-      },
-      {
-        label: 'Outils',
-        items: [
-          { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: '' },
-          { label: 'Paramètres', route: 'settings', icon: 'fas fa-cogs', privilege: '' }
-        ]
-      },
-      {
-        label: 'Dev tools',
-        items: [
-          { label: 'IHM items', route: 'dev-tools', icon: 'fas fa-desktop', privilege: '' },
-          { label: 'Sandbox', route: 'sandbox', icon: 'fas fa-desktop', privilege: '' }
-        ]
-      }
-    ];
-
     this.userMenu = [
       { label: 'Retour au site', icon: 'fas fa-home', routerLink: ['/main'] },
       { label: 'Compte utilisateur', icon: 'fas fa-user-edit' },

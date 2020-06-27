@@ -15,7 +15,13 @@ import Role from '../../../models/entities/Role';
 })
 export class AuthService {
 
-  public static NO_BEARER_HEADER: string = 'no-bearer';
+  public static userHasRole(testedRole: string, userRoles: string[]): boolean {
+    return userRoles.find(role => role === testedRole) !== undefined;
+  }
+
+  public static userHasPrivilege(testedPrivilege: string, userPrivileges: string[]): boolean {
+    return userPrivileges.find(privilege => privilege === testedPrivilege) !== undefined;
+  }
 
   private apiBaseUrl: string;
 
@@ -49,6 +55,14 @@ export class AuthService {
     this.router.navigate(['login', { returnUrl: returnUrl ? returnUrl : this.router.routerState.snapshot.url }]);
   }
 
+  public userHasRole(testedRole: string): boolean {
+    return this.getLoggedUser().roles.find(role => role === testedRole) !== undefined;
+  }
+
+  public userHasPrivilege(testedPrivilege: string): boolean {
+    return this.getLoggedUser().privileges.find(privilege => privilege === testedPrivilege) !== undefined;
+  }
+
   public isSignedIn(): boolean {
     return this.tokenStorageService.isTokenStored();
   }
@@ -79,9 +93,6 @@ export class AuthService {
   public resetPassword(password: string, token: string): Observable<any> {
     return this.http.post<any>(this.apiBaseUrl + 'auth/save-password', { password, token });
   }
-
-
-
 
   public getAllRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(this.apiBaseUrl + 'roles', { headers: this.getAuthorizationHeader() });

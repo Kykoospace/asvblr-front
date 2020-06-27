@@ -6,6 +6,7 @@ import {AuthService} from '../../shared/services/api/auth/auth.service';
 import AppConstants from '../../shared/AppConstants';
 import {DynamicDialogCreateUserComponent} from '../../shared/components/dynamic-dialog-create-user/dynamic-dialog-create-user.component';
 import {TeamService} from '../../shared/services/api/team/team.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -31,7 +32,7 @@ export class UsersComponent implements OnInit {
     { column: 'Prénom', field: 'firstName' },
     { column: 'Nom', field: 'lastName' },
     { column: 'Email', field: 'email' },
-    { column: 'Rôles', field: 'roles' }
+    { column: 'Rôles', field: 'formatedRoles' }
   ];
 
   constructor(
@@ -72,7 +73,7 @@ export class UsersComponent implements OnInit {
               user.roles.forEach(
                 role => roles.push(AppConstants.getRoleName(role))
               );
-              user.roles = roles;
+              user.formatedRoles = roles;
             }
           );
         },
@@ -90,7 +91,7 @@ export class UsersComponent implements OnInit {
   public selectUser(user: User) {
     this.selectedUser = user;
     this.userDetailToggle = true;
-    this.selectedRole = user.roles.find(role => role === 'MANAGER_ROLE') != null;
+    this.selectedRole = AuthService.userHasRole('ROLE_MANAGER', user.roles);
   }
 
   public openNewUserDialog() {
@@ -104,9 +105,9 @@ export class UsersComponent implements OnInit {
                 user => {
                   if (data.type) {
                     // Si coach :
-                    data.teams.forEach(
-                      id => this.teamService.addCoachToTeam(id, user.id).subscribe(() => this.refreshUsers())
-                    );
+                    const calls = [];
+                    data.teams.forEach(id => calls.push(this.teamService.addCoachToTeam(id, user.id)));
+                    forkJoin(calls).subscribe(() => this.refreshUsers());
                   } else {
                     // Si gérant :
                     this.managementService.giveManagerRole(user.id).subscribe(() => this.refreshUsers());
@@ -144,8 +145,9 @@ export class UsersComponent implements OnInit {
       this.confirmationService.confirm({
         message: 'Voulez-vous promouvoir l\'utilisateur ?',
         accept: () => {
-          this.managementService.giveManagerRole(user.id).subscribe(
-            () => {
+          this.managementService.giveManagerRole(user.id)
+            .subscribe(
+            user => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Utilisateur promu gérant'
@@ -158,7 +160,17 @@ export class UsersComponent implements OnInit {
         reject: () => this.selectedRole = false
       });
     } else {
-      // TODO : remove manager right
+      this.managementService.removeManagerRole(user.id)
+        .subscribe(
+          user => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Utilisateur rétrogradé'
+            });
+            this.refreshUsers();
+          },
+          err => console.error(err)
+        );
     }
   }
 }

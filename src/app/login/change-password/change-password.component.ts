@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {AuthService} from '../../shared/services/api/auth/auth.service';
-import {MessageService} from 'primeng';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AuthService} from '../../shared/services/api/auth/auth.service';
+import { MessageService} from 'primeng';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
     this.changePasswordErrorMessage = 'Les mots de passes sont différents';
     this.changePasswordErrorToggle = false;
@@ -42,6 +44,7 @@ export class ChangePasswordComponent implements OnInit {
   public changePassword() {
     if (this.changePasswordForm.valid) {
       const form = this.changePasswordForm.value;
+      console.log('Change password');
       this.authService.changePassword(form.oldPassword, form.password)
         .subscribe(
           (user) => {
@@ -51,7 +54,10 @@ export class ChangePasswordComponent implements OnInit {
             });
             this.authService.signOut('/management');
           },
-          err => console.error(err)
+          err => this.messageService.add({
+            severity: 'error',
+            summary: 'Le mot de passe est incorrect'
+          })
         );
     }
   }

@@ -41,8 +41,6 @@ import { SubscriptionComponent
     as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
 import { PlayersComponent } from './management/players/players.component';
 import { TeamsComponent } from './management/teams/teams.component';
-import { LicenceComponent } from './management/licence/licence.component';
-import { JerseyComponent } from './management/jersey/jersey.component';
 import { OfficeComponent } from './management/office/office.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { CoachesComponent } from './management/coaches/coaches.component';
@@ -71,6 +69,8 @@ import { DynamicDialogTeamEventManagerComponent } from './shared/components/dyna
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './login/change-password/change-password.component';
 import { DynamicDialogCreateUserComponent } from './shared/components/dynamic-dialog-create-user/dynamic-dialog-create-user.component';
+import { MailerComponent } from './management/mailer/mailer.component';
+import { DynamicDialogSelectUsersComponent } from './shared/components/dynamic-dialog-select-users/dynamic-dialog-select-users.component';
 
 registerLocaleData(localeFr);
 
@@ -108,8 +108,6 @@ function loadConfiguration(
     SubscriptionsComponent,
     PlayersComponent,
     TeamsComponent,
-    LicenceComponent,
-    JerseyComponent,
     OfficeComponent,
     StatsComponent,
     CoachesComponent,
@@ -135,7 +133,9 @@ function loadConfiguration(
     DynamicDialogTeamEventManagerComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
-    DynamicDialogCreateUserComponent
+    DynamicDialogCreateUserComponent,
+    MailerComponent,
+    DynamicDialogSelectUsersComponent
   ],
   imports: [
     HttpClientModule,

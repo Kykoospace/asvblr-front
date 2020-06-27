@@ -29,8 +29,6 @@ import { TeamsComponent
     as TeamsManagementComponent } from './management/teams/teams.component';
 import { TeamComponent
     as TeamManagementComponent } from './management/teams/team/team.component';
-import { LicenceComponent } from './management/licence/licence.component';
-import { JerseyComponent } from './management/jersey/jersey.component';
 import { OfficeComponent } from './management/office/office.component';
 import { CoachesComponent } from './management/coaches/coaches.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
@@ -47,6 +45,7 @@ import {ArticleComponent} from './management/articles/article/article.component'
 import {SandboxComponent} from './management/sandbox/sandbox.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {ChangePasswordComponent} from './login/change-password/change-password.component';
+import {MailerComponent} from './management/mailer/mailer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -100,8 +99,7 @@ const routes: Routes = [
           { path: ':id', component: TeamManagementComponent }
         ]
       },
-      { path: 'licence', component: LicenceComponent },
-      { path: 'jersey', component: JerseyComponent },
+      { path: 'mailer', component: MailerComponent },
       { path: 'office', component: OfficeComponent },
       { path: 'coaches', component: CoachesComponent },
       { path: 'seasons', component: SeasonsComponent },

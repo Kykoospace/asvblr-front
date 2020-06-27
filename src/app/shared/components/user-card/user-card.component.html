@@ -1,1 +1,6 @@
-<p>user-card works!</p>
+<div class="user-card-container">
+  <div class="user-card-main">
+    <p class="user-card-name">{{ user.firstName + ' ' + user.lastName.toUpperCase() }}</p>
+    <span class="user-card-mail" *ngIf="showEmail">{{ user.email }}</span>
+  </div>
+</div>
