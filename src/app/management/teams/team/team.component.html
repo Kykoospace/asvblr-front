@@ -4,12 +4,13 @@
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
       <p-button (click)="openPlayerSelectorDialog()" class="ui-button-secondary" label="Gérer les joueurs"></p-button>
-      <p-button class="ui-button-secondary" label="Changer de coach"></p-button>
+      <p-button (click)="openCoachSelectorDialog()" class="ui-button-secondary" label="Coach"></p-button>
       <p-button (click)="openEventManagerDialog()" class="ui-button-secondary" label="Rencontres"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <p-button (click)="deleteTeam()" type="button" label="Supprimer" icon="far fa-trash-alt" class="ui-button-danger"></p-button>
     </div>
   </p-toolbar>
-  <app-team-card #teamCardComponent class="p-col-12" [team]="team"></app-team-card>
+  <h1 class="p-col-12">{{ team.name }}</h1>
+  <app-team-players-list class="p-col-12" [enableEditionTools]="true" [players]="teamPlayers"></app-team-players-list>
 </div>

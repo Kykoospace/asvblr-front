@@ -8,6 +8,9 @@ import {DynamicDialogTeamEventManagerComponent} from '../../../shared/components
 import {TeamCardComponent} from '../../../shared/components/team-card/team-card.component';
 import Player from '../../../shared/models/entities/Player';
 import {forkJoin} from 'rxjs';
+import PlayerTeam from '../../../shared/models/entities/PlayerTeam';
+import {DynamicDialogTeamSelectCoachComponent} from '../../../shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
+import User from '../../../shared/models/entities/User';
 
 @Component({
   selector: 'app-team',
@@ -20,9 +23,11 @@ export class TeamComponent implements OnInit, OnDestroy {
   private teamCardComponent: TeamCardComponent;
 
   public playerSelectorDialogRef: DynamicDialogRef;
+  public coachSelectorDialogRef: DynamicDialogRef;
   public eventManagerDialogRef: DynamicDialogRef;
 
   public team: Team;
+  public teamPlayers: PlayerTeam[];
 
   constructor(
     private router: Router,
@@ -39,7 +44,10 @@ export class TeamComponent implements OnInit, OnDestroy {
 
     this.teamService.getTeam(idTeam)
       .subscribe(
-        team => this.team = team,
+        team => {
+          this.team = team;
+          this.refreshPlayers();
+        },
         err => {
           this.messageService.add({
             severity: 'error',
@@ -61,6 +69,14 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   public backNavigate() {
     this.router.navigate(['/management/teams']);
+  }
+
+  public refreshPlayers(): void {
+    this.teamService.getAllPlayersTeam(this.team.id)
+      .subscribe(
+        teamPlayers => this.teamPlayers = teamPlayers,
+        err => console.error(err)
+      );
   }
 
   public deleteTeam() {
@@ -131,7 +147,7 @@ export class TeamComponent implements OnInit, OnDestroy {
                   severity: 'success',
                   summary: 'Les joueurs de l\'équipe ont été mis à jour'
                 });
-                this.teamCardComponent.refreshPlayers();
+                this.refreshPlayers();
               },
               err => console.error(err)
             );
@@ -159,6 +175,36 @@ export class TeamComponent implements OnInit, OnDestroy {
           }
         },
         err => console.error(err)
+      );
+  }
+
+  public openCoachSelectorDialog(): void {
+    this.coachSelectorDialogRef
+      = this.dialogService.open(
+        DynamicDialogTeamSelectCoachComponent,
+      {
+        header: 'Coach de l\'équipe',
+        data: {
+          idCoach: this.team.idCoach
+        }
+      }
+    );
+    this.coachSelectorDialogRef.onClose
+      .subscribe(
+        (idUser: number) => {
+          if (idUser) {
+            this.teamService.addCoachToTeam(this.team.id, idUser)
+              .subscribe(
+                team => {
+                  this.team = team;
+                  this.messageService.add({
+                    severity: 'success',
+                    summary: 'Coach de l\'équipe mis à jour'
+                  });
+                }
+              );
+          }
+        }
       );
   }
 

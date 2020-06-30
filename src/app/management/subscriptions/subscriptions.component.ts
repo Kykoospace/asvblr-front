@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { TeamService } from '../../shared/services/api/team/team.service';
 import Subscription from '../../shared/models/entities/Subscription';
 import {Router} from '@angular/router';
@@ -9,11 +9,13 @@ import SubscriptionCategory from '../../shared/models/entities/SubscriptionCateg
   templateUrl: './subscriptions.component.html',
   styleUrls: ['./subscriptions.component.scss']
 })
-export class SubscriptionsComponent implements OnInit {
+export class SubscriptionsComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('table') dt;
 
   public subscriptions: Subscription[];
 
-  public subscriptionsView = false;
+  public subscriptionsView: boolean = false;
   public subscriptionsViewOptions = [
     { label: 'En cours', value: false, icon: 'fas fa-pen' },
     { label: 'Validées', value: true, icon: 'fas fa-check' }
@@ -56,6 +58,10 @@ export class SubscriptionsComponent implements OnInit {
         },
         err => console.error(err)
       );
+  }
+
+  ngAfterViewInit(): void {
+    this.dt.filter(this.subscriptions, 'validated', false);
   }
 
   public selectSubscription(subscription: Subscription) {

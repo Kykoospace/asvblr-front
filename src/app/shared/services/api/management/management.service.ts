@@ -29,7 +29,25 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiBaseUrl + 'users', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<User[]>(
+      this.apiBaseUrl + 'users',
+      { headers: this.authService.getAuthorizationHeader()
+      })
+      .pipe(map((users) => {
+        users.forEach(user => user.fullName = user.firstName + ' ' + user.lastName.toUpperCase());
+        return users;
+      }));
+  }
+
+  public getUser(idUser: number): Observable<User> {
+    return this.http.get<User>(
+      this.apiBaseUrl + 'users/' + idUser,
+      { headers: this.authService.getAuthorizationHeader()
+      })
+      .pipe(map((user) => {
+        user.fullName = user.firstName + ' ' + user.lastName.toUpperCase();
+        return user;
+      }));
   }
 
   public createUser(userData: any): Observable<User> {

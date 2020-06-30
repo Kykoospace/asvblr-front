@@ -71,6 +71,8 @@ import { ChangePasswordComponent } from './login/change-password/change-password
 import { DynamicDialogCreateUserComponent } from './shared/components/dynamic-dialog-create-user/dynamic-dialog-create-user.component';
 import { MailerComponent } from './management/mailer/mailer.component';
 import { DynamicDialogSelectUsersComponent } from './shared/components/dynamic-dialog-select-users/dynamic-dialog-select-users.component';
+import { TeamPlayersListComponent } from './shared/components/team-players-list/team-players-list.component';
+import { DynamicDialogTeamSelectCoachComponent } from './shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
 
 registerLocaleData(localeFr);
 
@@ -135,7 +137,9 @@ function loadConfiguration(
     ChangePasswordComponent,
     DynamicDialogCreateUserComponent,
     MailerComponent,
-    DynamicDialogSelectUsersComponent
+    DynamicDialogSelectUsersComponent,
+    TeamPlayersListComponent,
+    DynamicDialogTeamSelectCoachComponent
   ],
   imports: [
     HttpClientModule,
