@@ -1,10 +1,10 @@
 <div class="p-grid">
   <p-pickList
     class="p-col-12"
-    sourceHeader="Joueurs inscrits"
+    [sourceHeader]="config.data.sourceHeader"
     [source]="sourcePlayers"
     [showSourceControls]="false"
-    targetHeader="Joueurs de l'équipe"
+    [targetHeader]="config.data.targetHeader + ' (' + targetPlayers.length + ')'"
     [target]="targetPlayers"
     [showTargetControls]="false"
     filterBy="firstName,lastName"

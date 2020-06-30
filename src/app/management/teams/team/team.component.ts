@@ -146,6 +146,8 @@ export class TeamComponent implements OnInit, OnDestroy {
       .open(DynamicDialogTeamSelectPlayersComponent, {
         header: 'Gérer les joueurs',
         data: {
+          sourceHeader: 'Joueurs inscrits',
+          targetHeader: 'Joueurs de l\'équipe',
           idTeam: this.team.id
         }
       });
