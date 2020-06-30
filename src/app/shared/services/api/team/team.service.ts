@@ -21,6 +21,7 @@ import TeamList from '../../../models/responses/TeamList';
 import Player from '../../../models/entities/Player';
 import Match from '../../../models/entities/Match';
 import {AuthService} from '../auth/auth.service';
+import User from '../../../models/entities/User';
 
 @Injectable({
   providedIn: 'root'
@@ -109,6 +110,10 @@ export class TeamService {
 
   public getAllTeamMatches(idTeam: number): Observable<Match[]> {
     return this.http.get<Match[]>(this.apiBaseUrl + 'teams/' + idTeam + '/matches');
+  }
+
+  public getAllTeamUsers(idTeam: number): Observable<User[]> {
+    return this.http.get<User[]>(this.apiBaseUrl + 'teams/' + idTeam + '/users', { headers: this.authService.getAuthorizationHeader() });
   }
 
 

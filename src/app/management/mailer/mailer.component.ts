@@ -51,6 +51,7 @@ export class MailerComponent implements OnInit {
         data: {
           sourceLabel: 'Annuaire du club',
           targetLabel: 'Destinataires',
+          showTeamSelector: true,
           targetUsers: this.mailForm.get('idsUser').value
         }
       });

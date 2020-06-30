@@ -1,10 +1,17 @@
 <div class="p-grid">
+  <div class="p-col-4 p-offset-2">
+    <p-dropdown #teamSelector [options]="teamOptions"></p-dropdown>
+  </div>
+  <div class="p-col-4">
+    <p-button (click)="addTeamUsers(teamSelector.value)" class="ui-button-info" label="Ajouter les membres" icon="fas fa-plus" [disabled]="!teamSelector.value"></p-button>
+  </div>
+  <div class="global-separation p-col-12"></div>
   <p-pickList
     class="p-col-12"
     [sourceHeader]="config.data.sourceLabel"
     [source]="sourceUsers"
     [showSourceControls]="false"
-    [targetHeader]="config.data.targetLabel"
+    [targetHeader]="config.data.targetLabel + ' (' + targetUsers.length + ')'"
     [target]="targetUsers"
     [showTargetControls]="false"
     filterBy="firstName,lastName"
