@@ -21,7 +21,7 @@ export class DynamicDialogTeamSelectPlayersComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private messageService: MessageService,
-    private config: DynamicDialogConfig,
+    public config: DynamicDialogConfig,
     private ref: DynamicDialogRef
   ) {
     this.idTeam = this.config.data.idTeam;
