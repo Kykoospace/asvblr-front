@@ -1,23 +1,22 @@
 <form (ngSubmit)="createTeam()" [formGroup]="teamForm">
   <div class="p-grid">
-    <span class="p-col-2"></span>
-    <div class="p-col-4">
+    <div class="p-col-4 p-offset-2">
       <input formControlName="name" type="text" pInputText>
     </div>
     <label class="global-form-label p-col-6">
       Nom de l'équipe
       <span class="global-form-required">*</span>
     </label>
-    <span class="p-col-2"></span>
-    <div class="p-col-4">
+
+    <div class="p-col-4 p-offset-2">
       <p-dropdown formControlName="idTeamCategory" [options]="categoryOptions" [filter]="true"></p-dropdown>
     </div>
     <label class="global-form-label p-col-6">
       Catégorie de compétition
       <span class="global-form-required">*</span>
     </label>
-    <span class="p-col-2"></span>
-    <div class="p-col-4">
+
+    <div class="p-col-4 p-offset-2">
       <p-dropdown formControlName="idCoach" [options]="userOptions" [filter]="true"></p-dropdown>
     </div>
     <label class="global-form-label p-col-6">

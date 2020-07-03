@@ -9,13 +9,13 @@ import SubscriptionCategory from '../../shared/models/entities/SubscriptionCateg
   templateUrl: './subscriptions.component.html',
   styleUrls: ['./subscriptions.component.scss']
 })
-export class SubscriptionsComponent implements OnInit, AfterViewInit {
+export class SubscriptionsComponent implements OnInit {
 
   @ViewChild('table') dt;
 
   public subscriptions: Subscription[];
 
-  public subscriptionsView: boolean = false;
+  public subscriptionsView: boolean;
   public subscriptionsViewOptions = [
     { label: 'En cours', value: false, icon: 'fas fa-pen' },
     { label: 'Validées', value: true, icon: 'fas fa-check' }
@@ -58,10 +58,6 @@ export class SubscriptionsComponent implements OnInit, AfterViewInit {
         },
         err => console.error(err)
       );
-  }
-
-  ngAfterViewInit(): void {
-    this.dt.filter(this.subscriptions, 'validated', false);
   }
 
   public selectSubscription(subscription: Subscription) {

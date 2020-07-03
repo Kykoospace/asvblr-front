@@ -1,22 +1,20 @@
-<div class="p-grid">
+<form [formGroup]="mailForm" class="p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="sendMail()" label="Envoyer" icon="fas fa-paper-plane" [disabled]="mailForm.invalid"></p-button>
-      <p-button (click)="openReceiversSelectorDialog()" class="ui-button-secondary" [label]="getReceiversLabel()" icon="fas fa-users"></p-button>
+      <p-button type="button" (click)="sendMail()" label="Envoyer" icon="fas fa-paper-plane" [disabled]="mailForm.invalid"></p-button>
+      <p-button type="button" (click)="openReceiversSelectorDialog()" class="ui-button-secondary" [label]="getReceiversLabel()" icon="fas fa-users"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="resetForm()" class="ui-button-danger" label="Effacer" icon="far fa-trash-alt"></p-button>
+      <p-button type="button" (click)="resetForm()" class="ui-button-danger" label="Effacer" icon="far fa-trash-alt"></p-button>
     </div>
   </p-toolbar>
   <div class="global-separation p-col-12"></div>
+  <h2 class="p-col-12">Titre</h2>
   <div class="p-col-12">
-    <form [formGroup]="mailForm" class="p-grid">
-      <div class="p-col-12">
-        <input type="text" placeholder="Titre du message" formControlName="object" pInputText>
-      </div>
-      <div class="p-col-12">
-        <textarea class="p-col-12" [style]="{ height: '500px' }" placeholder="Contenu du message" formControlName="content" pInputTextarea></textarea>
-      </div>
-    </form>
+    <input type="text" formControlName="object" pInputText>
   </div>
-</div>
+  <h2 class="p-col-12">Contenu du message</h2>
+  <div class="p-col-12">
+    <textarea class="p-col-12" [style]="{ height: '500px' }" formControlName="content" pInputTextarea></textarea>
+  </div>
+</form>

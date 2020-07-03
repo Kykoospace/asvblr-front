@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: $global-element-padding;
+  user-select: none;
 
   .user-card-main {
     .user-card-mail {

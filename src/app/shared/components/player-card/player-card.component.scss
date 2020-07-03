@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: $global-element-padding;
+  user-select: none;
 
   .player-card-main {
     .player-card-gender {

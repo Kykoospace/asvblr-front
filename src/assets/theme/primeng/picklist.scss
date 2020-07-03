@@ -16,6 +16,19 @@
 
     .ui-picklist-list {
       width: 100%;
+
+      .ui-picklist-item {
+        border-radius: $global-border-radius;
+        padding: 0px;
+
+        &:active {
+          outline: none;
+        }
+
+        &.ui-state-highlight {
+          outline: 1px solid $global-accent-color;
+        }
+      }
     }
   }
 
@@ -24,7 +37,14 @@
     padding: 0 $global-spacing !important;
 
     .ui-button {
+      background-color: $prime-ng-button-info-bkg-color;
+      color: $prime-ng-button-info-font-color;
+      border: 1px solid $prime-ng-button-info-border-color;
       width: 100%;
+
+      &:active {
+        background-color: $prime-ng-button-info-active-bkg-color;
+      }
     }
   }
 }
