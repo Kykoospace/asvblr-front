@@ -3,14 +3,14 @@ import {AuthService} from './services/api/auth/auth.service';
 
 export default class AppConstants {
   public static APP_NAME_LONG: string = 'Association sportive de Bourg-la-Reine - Volleyball';
-  public static APP_NAME_MEDIUM: string = 'Association Volleyball de Bourg-la-Reine';
+  public static APP_NAME_MEDIUM: string = 'Club de Volleyball de Bourg-la-Reine';
   public static APP_NAME_SHORT: string = 'ASBR - Volleyball';
   public static APP_NAME_MAIN_TITLE: string = 'Association sportive de Bourg-la-Reine';
   public static APP_NAME_SUB_TITLE: string = 'Le club de Volleyball';
 
   public static APP_NAV_MENU_ITEMS: ManagementNavMenu[] = [
     {
-      label: 'Site public',
+      label: 'Gestion du site',
       items: [
         { label: 'Articles', route: 'articles', icon: 'fas fa-newspaper', privilege: 'ARTICLE_MANAGEMENT' },
         { label: 'Informations', route: 'informations', icon: 'fas fa-info' },
@@ -19,17 +19,11 @@ export default class AppConstants {
       ]
     },
     {
-      label: 'Membres',
+      label: 'Gestion du club',
       items: [
         { label: 'Inscriptions', route: 'subscriptions', icon: 'fas fa-file-signature', privilege: 'SUBSCRIPTION_MANAGEMENT' },
         { label: 'Équipes', route: 'teams', icon: 'fas fa-users', privilege: 'TEAM_MANAGEMENT' },
-        { label: 'Email groupé', route: 'mailer', icon: 'far fa-envelope', privilege: 'MAIL_MANAGEMENT' }
-      ]
-    },
-    {
-      label: 'Gestion du club',
-      items: [
-        { label: 'Entraîneurs', route: 'coaches', icon: 'fas fa-user-friends' },
+        { label: 'Email groupé', route: 'mailer', icon: 'far fa-envelope', privilege: 'MAIL_MANAGEMENT' },
         { label: 'Saisons', route: 'seasons', icon: 'fas fa-newspaper', privilege: 'SEASON_MANAGEMENT' },
         { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: 'STATISTICS_READ' }
       ]
