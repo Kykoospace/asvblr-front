@@ -42,8 +42,8 @@ export class ManagementService {
   public getUser(idUser: number): Observable<User> {
     return this.http.get<User>(
       this.apiBaseUrl + 'users/' + idUser,
-      { headers: this.authService.getAuthorizationHeader()
-      })
+      { headers: this.authService.getAuthorizationHeader()}
+      )
       .pipe(map((user) => {
         user.fullName = user.firstName + ' ' + user.lastName.toUpperCase();
         return user;

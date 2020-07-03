@@ -29,23 +29,23 @@ import { TeamsComponent
     as TeamsManagementComponent } from './management/teams/teams.component';
 import { TeamComponent
     as TeamManagementComponent } from './management/teams/team/team.component';
-import { OfficeComponent } from './management/office/office.component';
-import { CoachesComponent } from './management/coaches/coaches.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
 import { HelpComponent } from './management/help/help.component';
-
-// Guards import :
-import { LoginGuard } from './shared/guards/login/login.guard';
-import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {DevToolsComponent} from './management/dev-tools/dev-tools.component';
 import {ArticleComponent} from './management/articles/article/article.component';
 import {SandboxComponent} from './management/sandbox/sandbox.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {ChangePasswordComponent} from './login/change-password/change-password.component';
 import {MailerComponent} from './management/mailer/mailer.component';
+
+// Guards import :
+import { LoginGuard } from './shared/guards/login/login.guard';
+import { PermissionGuard } from './shared/guards/permission/permission.guard';
+import {PlayComponent} from './management/play/play.component';
+import {CoachComponent} from './management/coach/coach.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -74,7 +74,6 @@ const routes: Routes = [
     canActivate: [ LoginGuard, PermissionGuard ],
     canActivateChild: [ LoginGuard, PermissionGuard ],
     children: [
-      { path: '', redirectTo: 'stats', pathMatch: 'full' },
       {
         path: 'articles',
         children: [
@@ -92,6 +91,8 @@ const routes: Routes = [
       ]
       },
       { path: 'players', component: PlayersComponent },
+      { path: 'play', component: PlayComponent },
+      { path: 'coach', component: CoachComponent },
       {
         path: 'teams',
         children: [
@@ -100,8 +101,6 @@ const routes: Routes = [
         ]
       },
       { path: 'mailer', component: MailerComponent },
-      { path: 'office', component: OfficeComponent },
-      { path: 'coaches', component: CoachesComponent },
       { path: 'seasons', component: SeasonsComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'users', component: UsersComponent },

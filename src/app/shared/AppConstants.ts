@@ -29,7 +29,6 @@ export default class AppConstants {
     {
       label: 'Gestion du club',
       items: [
-        { label: 'Bureau', route: 'office', icon: 'fas fa-building' },
         { label: 'Entraîneurs', route: 'coaches', icon: 'fas fa-user-friends' },
         { label: 'Saisons', route: 'seasons', icon: 'fas fa-newspaper', privilege: 'SEASON_MANAGEMENT' },
         { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: 'STATISTICS_READ' }
@@ -50,31 +49,6 @@ export default class AppConstants {
       ]
     }
   ];
-
-  public static getNavMenuItems(userPrivileges: string[]): ManagementNavMenu[] {
-    const navMenuItems = AppConstants.APP_NAV_MENU_ITEMS;
-    let returnNavMenu: ManagementNavMenu[] = [];
-    let item: ManagementNavMenu;
-    navMenuItems.forEach(
-      navMenu => {
-        item = { label: navMenu.label, items: [] };
-        navMenu.items.forEach(
-          navMenuItem => {
-            if (navMenuItem.privilege !== undefined) {
-              if (AuthService.userHasPrivilege(navMenuItem.privilege, userPrivileges)) {
-                console.log(navMenuItem.privilege);
-                item.items.push(navMenuItem);
-              }
-            } else {
-              item.items.push(navMenuItem);
-            }
-          }
-        );
-        returnNavMenu.push(item);
-      }
-    );
-    return returnNavMenu;
-  }
 
   public static API_ROLE_NAMES: Map<string, string> = new Map<string, string>([
     ['ROLE_PRESIDENT', 'Président'],

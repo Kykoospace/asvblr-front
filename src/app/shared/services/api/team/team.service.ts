@@ -76,6 +76,27 @@ export class TeamService {
       ));
   }
 
+  public getTeamsOfPlayer(idPlayer: number): Observable<TeamList[]> {
+    return this.http.get<TeamList[]>(
+      this.apiBaseUrl + 'players/' + idPlayer + '/teams',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
+  public getTeamsOfUser(idUser: number): Observable<TeamList[]> {
+    return this.http.get<TeamList[]>(
+      this.apiBaseUrl + 'users/' + idUser + '/teams',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
+  public getCoachedTeams(idUser: number): Observable<TeamList[]> {
+    return this.http.get<TeamList[]>(
+      this.apiBaseUrl + 'users/' + idUser + '/coached-teams',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
   public createTeam(team: any): Observable<Team> {
     return this.http.post<Team>(this.apiBaseUrl + 'teams', team, { headers: this.authService.getAuthorizationHeader() });
   }

@@ -41,9 +41,7 @@ import { SubscriptionComponent
     as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
 import { PlayersComponent } from './management/players/players.component';
 import { TeamsComponent } from './management/teams/teams.component';
-import { OfficeComponent } from './management/office/office.component';
 import { StatsComponent } from './management/stats/stats.component';
-import { CoachesComponent } from './management/coaches/coaches.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
 import { SettingsComponent } from './management/settings/settings.component';
@@ -73,6 +71,8 @@ import { MailerComponent } from './management/mailer/mailer.component';
 import { DynamicDialogSelectUsersComponent } from './shared/components/dynamic-dialog-select-users/dynamic-dialog-select-users.component';
 import { TeamPlayersListComponent } from './shared/components/team-players-list/team-players-list.component';
 import { DynamicDialogTeamSelectCoachComponent } from './shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
+import { PlayComponent } from './management/play/play.component';
+import { CoachComponent } from './management/coach/coach.component';
 
 registerLocaleData(localeFr);
 
@@ -110,9 +110,7 @@ function loadConfiguration(
     SubscriptionsComponent,
     PlayersComponent,
     TeamsComponent,
-    OfficeComponent,
     StatsComponent,
-    CoachesComponent,
     SeasonsComponent,
     UsersComponent,
     SettingsComponent,
@@ -139,7 +137,9 @@ function loadConfiguration(
     MailerComponent,
     DynamicDialogSelectUsersComponent,
     TeamPlayersListComponent,
-    DynamicDialogTeamSelectCoachComponent
+    DynamicDialogTeamSelectCoachComponent,
+    PlayComponent,
+    CoachComponent
   ],
   imports: [
     HttpClientModule,

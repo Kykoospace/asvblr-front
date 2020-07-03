@@ -52,7 +52,9 @@ export class ChangePasswordComponent implements OnInit {
               severity: 'success',
               summary: 'Mot de passe changé'
             });
-            this.authService.signOut('/management');
+            console.log('New user: ', user);
+            this.authService.setLoggedUser(user);
+            this.router.navigate(['/management']);
           },
           err => this.messageService.add({
             severity: 'error',

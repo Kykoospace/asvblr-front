@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OfficeComponent } from './office.component';
+import { CoachComponent } from './coach.component';
 
-describe('OfficeComponent', () => {
-  let component: OfficeComponent;
-  let fixture: ComponentFixture<OfficeComponent>;
+describe('CoachComponent', () => {
+  let component: CoachComponent;
+  let fixture: ComponentFixture<CoachComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OfficeComponent ]
+      declarations: [ CoachComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OfficeComponent);
+    fixture = TestBed.createComponent(CoachComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

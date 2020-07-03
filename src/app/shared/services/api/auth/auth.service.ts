@@ -44,6 +44,7 @@ export class AuthService {
       )
       .pipe(
         map(auth => {
+          auth.user.fullName = auth.user.firstName + ' ' + auth.user.lastName.toUpperCase();
           this.tokenStorageService.storeToken(auth);
           return auth;
         })
@@ -69,6 +70,10 @@ export class AuthService {
 
   public getLoggedUser(): User {
     return this.tokenStorageService.getUser();
+  }
+
+  public setLoggedUser(user: User): void {
+    this.tokenStorageService.setUser(user);
   }
 
   public getToken(): string {

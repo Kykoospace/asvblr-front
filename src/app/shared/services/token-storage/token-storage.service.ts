@@ -28,6 +28,14 @@ export class TokenStorageService {
     ).user;
   }
 
+  public setUser(user: User): void {
+    const auth = JSON.parse(window.localStorage.getItem(TokenStorageService.TOKEN_KEY));
+    if (auth) {
+      auth.user = user;
+      window.localStorage.setItem(TokenStorageService.TOKEN_KEY, JSON.stringify(auth));
+    }
+  }
+
   public removeToken(): void {
     window.localStorage.removeItem(TokenStorageService.TOKEN_KEY);
   }
