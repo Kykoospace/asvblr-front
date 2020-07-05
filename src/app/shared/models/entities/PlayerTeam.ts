@@ -9,8 +9,7 @@ export default interface PlayerTeam {
   birthDate: Date;
   licenceNumber: string;
   jerseyNumber: number;
-  // TODO: update here :
-  // requestedJerseyNumber: number;
+  requestedJerseyNumber: number;
   positionName: string;
   positionShortName: string;
 }

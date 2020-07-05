@@ -10,6 +10,7 @@ export default interface Player {
   phoneNumber: number;
   birthDate: Date;
   birthCountry: string;
+  requestedJerseyNumber: number;
   idUser: number;
   idSubscriptionCategory: number;
   licenceNumber: string;

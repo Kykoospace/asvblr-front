@@ -27,12 +27,16 @@ export class DynamicDialogTeamSelectCoachComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    forkJoin({
-      coach: this.managementService.getUser(this.config.data.idCoach),
+    const requests: any = {
       users: this.managementService.getAllUsers()
-    })
+    };
+    if (this.config.data.idCoach) {
+      requests.coach = this.managementService.getUser(this.config.data.idCoach);
+    }
+
+    forkJoin(requests)
       .subscribe(
-        results => {
+        (results: any) => {
           this.coach = results.coach;
           results.users.forEach(
             user => this.userOptions.push({
