@@ -22,6 +22,7 @@ import Player from '../../../models/entities/Player';
 import Match from '../../../models/entities/Match';
 import {AuthService} from '../auth/auth.service';
 import User from '../../../models/entities/User';
+import Drive from '../../../models/entities/Drive';
 
 @Injectable({
   providedIn: 'root'
@@ -101,8 +102,14 @@ export class TeamService {
     return this.http.post<Team>(this.apiBaseUrl + 'teams', team, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public getTeam(idTeam: number): Observable<Team> {
-    return this.http.get<Team>(this.apiBaseUrl + 'teams/' + idTeam);
+  public getTeam(idTeam: number): Observable<TeamList> {
+    return this.http.get<TeamList>(this.apiBaseUrl + 'teams/' + idTeam)
+      .pipe(map(
+        team => {
+          team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase()
+          return team;
+        }
+      ));
   }
 
   public updateTeam(idTeam: number, team: Team): Observable<Team> {
@@ -267,7 +274,7 @@ export class TeamService {
 
 
   // ------------------------------------------------
-  // Matches routes :
+  // Match routes :
   // ------------------------------------------------
 
   public getAllMatches(): Observable<Match[]> {
@@ -289,4 +296,46 @@ export class TeamService {
   public deleteMatch(idMatch: number): Observable<any> {
     return this.http.delete<any>(this.apiBaseUrl + 'matches/' + idMatch, { headers: this.authService.getAuthorizationHeader() });
   }
+
+  public getMatchDrives(idMatch: number): Observable<Drive[]> {
+    return this.http.get<Drive[]>(this.apiBaseUrl + 'matches/' + idMatch + '/drives', { headers: this.authService.getAuthorizationHeader() });
+  }
+
+
+  // ------------------------------------------------
+  // Drive routes :
+  // ------------------------------------------------
+
+  public getAllDrives(): Observable<Drive[]> {
+    return this.http.get<Drive[]>(this.apiBaseUrl + 'drives', { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public getDrive(idDrive): Observable<Drive> {
+    return this.http.get<Drive>(this.apiBaseUrl + 'drives/' + idDrive, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public createDrive(drive: any): Observable<Drive> {
+    return this.http.post<Drive>(this.apiBaseUrl + 'drives', drive, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public updateDrive(drive: Drive): Observable<Drive> {
+    return this.http.put<Drive>(this.apiBaseUrl + 'drives/' + drive.id, drive, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public deleteDrive(idDrive: number): Observable<any> {
+    return this.http.delete<any>(this.apiBaseUrl + 'drives/' + idDrive, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public getDrivePassengers(idDrive: number): Observable<User[]> {
+    return this.http.get<User[]>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers', { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public addDrivePassenger(idDrive: number, idUser: number): Observable<Drive> {
+    return this.http.post<Drive>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers', { idUser }, { headers: this.authService.getAuthorizationHeader() })
+  }
+
+  public removeDrivePassenger(idDrive: number, idUser: number): Observable<Drive> {
+    return this.http.delete<Drive>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers/' + idUser, { headers: this.authService.getAuthorizationHeader() })
+  }
+
 }

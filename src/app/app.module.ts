@@ -73,6 +73,9 @@ import { TeamPlayersListComponent } from './shared/components/team-players-list/
 import { DynamicDialogTeamSelectCoachComponent } from './shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
 import { PlayComponent } from './management/play/play.component';
 import { CoachComponent } from './management/coach/coach.component';
+import { TeamMatchListComponent } from './shared/components/team-match-list/team-match-list.component';
+import { TeamMatchCardComponent } from './shared/components/team-match-list/team-match-card/team-match-card.component';
+import { DynamicDialogTeamMatchDetailComponent } from './shared/components/dynamic-dialog-team-match-detail/dynamic-dialog-team-match-detail.component';
 
 registerLocaleData(localeFr);
 
@@ -139,7 +142,10 @@ function loadConfiguration(
     TeamPlayersListComponent,
     DynamicDialogTeamSelectCoachComponent,
     PlayComponent,
-    CoachComponent
+    CoachComponent,
+    TeamMatchListComponent,
+    TeamMatchCardComponent,
+    DynamicDialogTeamMatchDetailComponent
   ],
   imports: [
     HttpClientModule,

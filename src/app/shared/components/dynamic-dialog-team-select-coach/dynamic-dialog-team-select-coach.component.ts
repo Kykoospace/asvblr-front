@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
-import User from '../../models/entities/User';
 import {ManagementService} from '../../services/api/management/management.service';
-import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-dialog-team-select-coach',
@@ -11,7 +9,7 @@ import {forkJoin} from 'rxjs';
 })
 export class DynamicDialogTeamSelectCoachComponent implements OnInit {
 
-  public coach: User;
+  public coachName: string;
   public newCoach: number;
 
   public userOptions: any[];
@@ -27,18 +25,11 @@ export class DynamicDialogTeamSelectCoachComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const requests: any = {
-      users: this.managementService.getAllUsers()
-    };
-    if (this.config.data.idCoach) {
-      requests.coach = this.managementService.getUser(this.config.data.idCoach);
-    }
-
-    forkJoin(requests)
+    this.coachName = this.config.data.coachName;
+    this.managementService.getAllUsers()
       .subscribe(
-        (results: any) => {
-          this.coach = results.coach;
-          results.users.forEach(
+        users => {
+          users.forEach(
             user => this.userOptions.push({
               label: user.fullName,
               value: user.id
@@ -50,8 +41,8 @@ export class DynamicDialogTeamSelectCoachComponent implements OnInit {
   }
 
   public getCoachName(): string {
-    if (this.coach) {
-      return this.coach.fullName;
+    if (this.coachName) {
+      return this.coachName;
     }
     return 'Aucun coach';
   }

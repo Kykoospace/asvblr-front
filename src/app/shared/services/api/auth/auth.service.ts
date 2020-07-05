@@ -88,7 +88,14 @@ export class AuthService {
     return this.http.post<any>(
       this.apiBaseUrl + 'auth/update-password',
       { oldPassword, password },
-      { headers: this.getAuthorizationHeader() });
+      { headers: this.getAuthorizationHeader() })
+      .pipe(
+        map(auth => {
+          auth.user.fullName = auth.user.firstName + ' ' + auth.user.lastName.toUpperCase();
+          this.tokenStorageService.storeToken(auth);
+          return auth;
+        })
+      );
   }
 
   public checkResetPasswordToken(token: string): Observable<any> {

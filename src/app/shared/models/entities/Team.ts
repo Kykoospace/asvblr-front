@@ -3,5 +3,5 @@ export default interface Team {
   name: string;
   idSeason: number;
   idCoach: number;
-  idCategory: number;
+  idTeamCategory: number;
 }

@@ -20,6 +20,10 @@
       border-bottom: 2px solid transparent;
     }
 
+    .ui-state-disabled a {
+      color: $global-disabled-font-color;
+    }
+
     :focus {
       outline: none;
     }

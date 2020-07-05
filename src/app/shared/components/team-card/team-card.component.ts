@@ -1,36 +1,47 @@
-import {Component, Input, OnInit} from '@angular/core';
-import Team from '../../models/entities/Team';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import PlayerTeam from '../../models/entities/PlayerTeam';
 import {TeamService} from '../../services/api/team/team.service';
+import {forkJoin} from 'rxjs';
+import TeamList from '../../models/responses/TeamList';
+import Match from '../../models/entities/Match';
+import {TeamMatchListComponent} from '../team-match-list/team-match-list.component';
 
 @Component({
   selector: 'app-team-card',
   templateUrl: './team-card.component.html',
   styleUrls: ['./team-card.component.scss']
 })
-export class TeamCardComponent implements OnInit {
+export class TeamCardComponent implements AfterViewInit, OnChanges {
 
   @Input()
-  public team: Team;
-
+  public team: TeamList;
   public players: PlayerTeam[] = [];
+  public matches: Match[];
 
   constructor(
     private teamService: TeamService
   ) { }
 
-  ngOnInit(): void {
-    this.teamService.getAllPlayersTeam(this.team.id)
-      .subscribe(
-        players => this.players = players,
-        err => console.error(err)
-      );
+  ngAfterViewInit(): void {
+    this.refreshTeam();
   }
 
-  public refreshPlayers() {
-    this.teamService.getAllPlayersTeam(this.team.id)
+  ngOnChanges(changes: SimpleChanges) {
+    this.refreshTeam();
+  }
+
+  public refreshTeam() {
+    const requests = {
+      players: this.teamService.getAllPlayersTeam(this.team.id),
+      matches: this.teamService.getAllTeamMatches(this.team.id)
+    };
+
+    forkJoin(requests)
       .subscribe(
-        players => this.players = players,
+        (results: any) => {
+          this.players = results.players;
+          this.matches = results.matches;
+        },
         err => console.error(err)
       );
   }

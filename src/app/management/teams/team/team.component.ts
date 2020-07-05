@@ -1,16 +1,14 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TeamService} from '../../../shared/services/api/team/team.service';
-import Team from '../../../shared/models/entities/Team';
 import {ConfirmationService, DialogService, DynamicDialogRef, MessageService} from 'primeng';
 import {DynamicDialogTeamSelectPlayersComponent} from '../../../shared/components/dynamic-dialog-team-select-players/dynamic-dialog-team-select-players.component';
 import {DynamicDialogTeamEventManagerComponent} from '../../../shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
-import {TeamCardComponent} from '../../../shared/components/team-card/team-card.component';
 import Player from '../../../shared/models/entities/Player';
 import {forkJoin} from 'rxjs';
 import PlayerTeam from '../../../shared/models/entities/PlayerTeam';
 import {DynamicDialogTeamSelectCoachComponent} from '../../../shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
-import User from '../../../shared/models/entities/User';
+import TeamList from '../../../shared/models/responses/TeamList';
 
 @Component({
   selector: 'app-team',
@@ -19,14 +17,11 @@ import User from '../../../shared/models/entities/User';
 })
 export class TeamComponent implements OnInit, OnDestroy {
 
-  @ViewChild(TeamCardComponent)
-  private teamCardComponent: TeamCardComponent;
-
   public playerSelectorDialogRef: DynamicDialogRef;
   public coachSelectorDialogRef: DynamicDialogRef;
   public eventManagerDialogRef: DynamicDialogRef;
 
-  public team: Team;
+  public team: TeamList;
   public teamPlayers: PlayerTeam[];
 
   constructor(
@@ -39,23 +34,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // Get team id from route :
-    const idTeam = +this.route.snapshot.paramMap.get('id');
-
-    this.teamService.getTeam(idTeam)
-      .subscribe(
-        team => {
-          this.team = team;
-          this.refreshPlayers();
-        },
-        err => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Équipe introuvable'
-          });
-          this.backNavigate();
-        }
-      );
+    this.refreshTeam();
   }
 
   ngOnDestroy(): void {
@@ -71,6 +50,27 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.router.navigate(['/management/teams']);
   }
 
+  public refreshTeam(): void {
+    // Get team id from route :
+    const idTeam = +this.route.snapshot.paramMap.get('id');
+
+    this.teamService.getTeam(idTeam)
+      .subscribe(
+        team => {
+          this.team = team;
+          this.refreshPlayers();
+        },
+        err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Équipe introuvable'
+          });
+          console.error(err);
+          // this.backNavigate();
+        }
+      );
+  }
+
   public refreshPlayers(): void {
     this.teamService.getAllPlayersTeam(this.team.id)
       .subscribe(
@@ -83,7 +83,7 @@ export class TeamComponent implements OnInit, OnDestroy {
     // Call confirm dialog box :
     this.confirmationService.confirm({
       message: 'Voulez-vous supprimer l\'équipe '
-        + this.team.name + ' ?',
+        + this.team.teamName + ' ?',
 
       // Callback method when accepted :
       accept: () => {
@@ -185,7 +185,7 @@ export class TeamComponent implements OnInit, OnDestroy {
       {
         header: 'Coach de l\'équipe',
         data: {
-          idCoach: this.team.idCoach
+          coachName: this.team.coachFullName
         }
       }
     );
@@ -196,7 +196,7 @@ export class TeamComponent implements OnInit, OnDestroy {
             this.teamService.addCoachToTeam(this.team.id, idUser)
               .subscribe(
                 team => {
-                  this.team = team;
+                  this.refreshTeam();
                   this.messageService.add({
                     severity: 'success',
                     summary: 'Coach de l\'équipe mis à jour'

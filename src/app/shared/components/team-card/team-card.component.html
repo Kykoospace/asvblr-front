@@ -1,10 +1,21 @@
-<div class="team-card-container">
-  <div class="team-card-header">
-    <h1 class="team-card-header-name">{{ team.name }}</h1>
+<div class="team-card-container p-grid" *ngIf="team">
+  <div class="team-card-header p-col-12">
+    <h1 class="team-card-header-name">{{ team.teamName }}</h1>
   </div>
-  <div class="team-card-player-container">
-    <div class="team-card-player" *ngFor="let player of players">
-
+  <div class="team-card-player-container p-col-8">
+    <h3>Effectif</h3>
+    <app-team-players-list [players]="players"></app-team-players-list>
+  </div>
+  <div class="team-card-side-display p-col-4 p-grid">
+    <div class="p-col-12 p-grid">
+      <span class="p-col-4 global-legend">Coach</span>
+      <span class="p-col-8">{{ team.coachFullName }}</span>
+      <span class="p-col-4 global-legend">Catégorie</span>
+      <span class="p-col-8">{{ team.teamCategoryName }}</span>
+    </div>
+    <div class="p-col-12 p-grid global-section-fill">
+      <h3 class="p-col-12">Rencontres</h3>
+      <app-team-match-list class="p-col-12" [matches]="matches" [enableDriveOptions]="true"></app-team-match-list>
     </div>
   </div>
 </div>

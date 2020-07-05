@@ -1,0 +1,29 @@
+<p-tabView>
+  <p-tabPanel header="Détails">
+    <div class="p-grid">
+      <span class="p-col-4 global-legend">Équipe</span>
+      <span class="p-col-4">{{ match.oppositeTeam }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-4 global-legend">Type</span>
+      <span class="p-col-4">{{ match.type ? 'Aller' : 'Retour' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-4 global-legend">Lieu</span>
+      <span class="p-col-4">{{ match.place }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-4 global-legend">Date</span>
+      <span class="p-col-4">{{ match.date | date: 'short' }}</span>
+      <span class="p-col-4"></span>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Co-voiturage {{ drives?.length > 0 ? '(' + drives.length + ')' : '' }}" [disabled]="!enableDriveOptions">
+    <p-toolbar class="p-col-12">
+      <div class="ui-toolbar-group-left">
+        <p-button label="Proposer ma voiture" icon="fas fa-car"></p-button>
+
+      </div>
+    </p-toolbar>
+  </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,6 @@
+<app-team-match-card
+  *ngFor="let match of matches"
+  [match]="match"
+  [selectable]="true"
+  (selectMatch)="selectMatch($event)">
+</app-team-match-card>
