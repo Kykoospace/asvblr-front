@@ -8,7 +8,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-player>
-    <tr>
+    <tr (click)="onSelectPlayer(player)" [class.ui-selectable-row]="enableEditionTools">
       <td>{{ player.jerseyNumber }}</td>
       <td>{{ player.firstName + ' ' + player.lastName.toUpperCase() }}</td>
       <td>{{ player.positionName }}</td>

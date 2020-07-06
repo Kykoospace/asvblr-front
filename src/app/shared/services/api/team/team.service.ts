@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 
 // Service import :
 import { ConfigService } from '../../config/config.service';
+import { AuthService } from '../auth/auth.service';
 
 // Entities import :
 import Subscription from '../../../models/entities/Subscription';
-import Category from '../../../models/entities/SubscriptionCategory';
 import Season from '../../../models/entities/Season';
 import ClothingSize from '../../../models/entities/ClothingSize';
 import Document from '../../../models/entities/Document';
@@ -19,8 +19,8 @@ import SubscriptionCategory from '../../../models/entities/SubscriptionCategory'
 import TeamCategory from '../../../models/entities/TeamCategory';
 import TeamList from '../../../models/responses/TeamList';
 import Player from '../../../models/entities/Player';
+import Position from '../../../models/entities/Position';
 import Match from '../../../models/entities/Match';
-import {AuthService} from '../auth/auth.service';
 import User from '../../../models/entities/User';
 import Drive from '../../../models/entities/Drive';
 
@@ -106,7 +106,7 @@ export class TeamService {
     return this.http.get<TeamList>(this.apiBaseUrl + 'teams/' + idTeam)
       .pipe(map(
         team => {
-          team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase()
+          team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase();
           return team;
         }
       ));
@@ -125,7 +125,15 @@ export class TeamService {
   }
 
   public getAllPlayersTeam(idTeam: number): Observable<PlayerTeam[]> {
-    return this.http.get<PlayerTeam[]>(this.apiBaseUrl + 'teams/' + idTeam + '/players');
+    return this.http.get<PlayerTeam[]>(this.apiBaseUrl + 'teams/' + idTeam + '/players')
+      .pipe(map(
+        players => {
+          players.forEach(
+            player => player.fullName = player.firstName + ' ' + player.lastName.toUpperCase()
+          );
+          return players;
+        }
+      ));
   }
 
   public addPlayerToTeam(idTeam: number, players: any): Observable<Team> {
@@ -137,7 +145,13 @@ export class TeamService {
   }
 
   public getAllTeamMatches(idTeam: number): Observable<Match[]> {
-    return this.http.get<Match[]>(this.apiBaseUrl + 'teams/' + idTeam + '/matches');
+    return this.http.get<Match[]>(this.apiBaseUrl + 'teams/' + idTeam + '/matches')
+      .pipe(map(
+        matches => {
+          matches.forEach(match => match.date = new Date(match.date));
+          return matches;
+        }
+      ));
   }
 
   public getAllTeamUsers(idTeam: number): Observable<User[]> {
@@ -155,6 +169,19 @@ export class TeamService {
 
   public getTeamCategory(idTeamCategory: number): Observable<SubscriptionCategory> {
     return this.http.get<TeamCategory>(this.apiBaseUrl + 'team-categories/' + idTeamCategory);
+  }
+
+
+  // ------------------------------------------------
+  // Position routes :
+  // ------------------------------------------------
+
+  public getAllPositions(): Observable<Position[]> {
+    return this.http.get<Position[]>(this.apiBaseUrl + 'positions', { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public getPosition(idPosition: number): Observable<Position> {
+    return this.http.get<Position>(this.apiBaseUrl + 'positions/' + idPosition, { headers: this.authService.getAuthorizationHeader() });
   }
 
 
@@ -298,7 +325,16 @@ export class TeamService {
   }
 
   public getMatchDrives(idMatch: number): Observable<Drive[]> {
-    return this.http.get<Drive[]>(this.apiBaseUrl + 'matches/' + idMatch + '/drives', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<Drive[]>(
+      this.apiBaseUrl + 'matches/' + idMatch + '/drives',
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        drives => {
+          drives.forEach(drive => drive.date = new Date(drive.date));
+          return drives;
+        }
+      ));
   }
 
 
@@ -307,19 +343,46 @@ export class TeamService {
   // ------------------------------------------------
 
   public getAllDrives(): Observable<Drive[]> {
-    return this.http.get<Drive[]>(this.apiBaseUrl + 'drives', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<Drive[]>(this.apiBaseUrl + 'drives', { headers: this.authService.getAuthorizationHeader() })
+      .pipe(map(
+        drives => {
+          drives.forEach(drive => drive.date = new Date(drive.date));
+          return drives;
+        }
+        ));
   }
 
   public getDrive(idDrive): Observable<Drive> {
-    return this.http.get<Drive>(this.apiBaseUrl + 'drives/' + idDrive, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<Drive>(this.apiBaseUrl + 'drives/' + idDrive, { headers: this.authService.getAuthorizationHeader() })
+      .pipe(map(
+        drive => {
+          drive.date = new Date(drive.date);
+          return drive;
+        }
+      ));
   }
 
   public createDrive(drive: any): Observable<Drive> {
-    return this.http.post<Drive>(this.apiBaseUrl + 'drives', drive, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.post<Drive>(this.apiBaseUrl + 'drives', drive, { headers: this.authService.getAuthorizationHeader() })
+      .pipe(map(
+        returnedDrive => {
+          returnedDrive.date = new Date(returnedDrive.date);
+          return returnedDrive;
+        }
+      ));
   }
 
   public updateDrive(drive: Drive): Observable<Drive> {
-    return this.http.put<Drive>(this.apiBaseUrl + 'drives/' + drive.id, drive, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.put<Drive>(
+      this.apiBaseUrl + 'drives/' + drive.id, drive,
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        returnedDrive => {
+          returnedDrive.date = new Date(returnedDrive.date);
+          return returnedDrive;
+        }
+      ));
   }
 
   public deleteDrive(idDrive: number): Observable<any> {
@@ -327,15 +390,42 @@ export class TeamService {
   }
 
   public getDrivePassengers(idDrive: number): Observable<User[]> {
-    return this.http.get<User[]>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<User[]>(
+      this.apiBaseUrl + 'drives/' + idDrive + '/passengers',
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        passengers => {
+          passengers.forEach(passenger => passenger.fullName = passenger.firstName + ' ' + passenger.lastName.toUpperCase());
+          return passengers;
+        }
+      ));
   }
 
   public addDrivePassenger(idDrive: number, idUser: number): Observable<Drive> {
-    return this.http.post<Drive>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers', { idUser }, { headers: this.authService.getAuthorizationHeader() })
+    return this.http.post<Drive>(
+      this.apiBaseUrl + 'drives/' + idDrive + '/passengers', { idUser },
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        returnedDrive => {
+          returnedDrive.date = new Date(returnedDrive.date);
+          return returnedDrive;
+        }
+      ));
   }
 
   public removeDrivePassenger(idDrive: number, idUser: number): Observable<Drive> {
-    return this.http.delete<Drive>(this.apiBaseUrl + 'drives/' + idDrive + '/passengers/' + idUser, { headers: this.authService.getAuthorizationHeader() })
+    return this.http.delete<Drive>(
+      this.apiBaseUrl + 'drives/' + idDrive + '/passengers/' + idUser,
+      { headers: this.authService.getAuthorizationHeader() }
+      )
+      .pipe(map(
+        returnedDrive => {
+          returnedDrive.date = new Date(returnedDrive.date);
+          return returnedDrive;
+        }
+      ));
   }
 
 }

@@ -1,0 +1,22 @@
+@import "src/assets/theme/variables";
+
+.match-drive-card {
+  border: 1px solid $global-border-color;
+  border-radius: $global-border-radius;
+  margin-top: $global-spacing;
+
+  .match-drive-card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: $global-font-size-giant;
+  }
+
+  .match-drive-card-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $global-element-padding;
+    user-select: none;
+  }
+}

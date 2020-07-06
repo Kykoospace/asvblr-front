@@ -4,3 +4,4 @@
   [selectable]="true"
   (selectMatch)="selectMatch($event)">
 </app-team-match-card>
+<p *ngIf="matches?.length === 0">Aucune rencontre</p>

@@ -1,4 +1,10 @@
-<div (click)="emitSelectedMatch()" class="match-card">
-  <p>{{ match.oppositeTeam }}</p>
+<div
+  class="team-match-card"
+  (click)="emitSelectedMatch()"
+  [class.selectable]="selectable">
+  <div class="team-match-card-main">
+    <p class="team-match-card-team">{{ match.oppositeTeam }}</p>
+    <p class="team-match-card-type">match {{ match.type ? 'aller' : 'retour' }}</p>
+  </div>
   <p>{{ match.date | date: 'short' }}</p>
 </div>

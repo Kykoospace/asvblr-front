@@ -9,7 +9,7 @@
     </label>
 
     <div class="p-col-4 p-offset-2">
-      <p-dropdown formControlName="idTeamCategory" [options]="categoryOptions" [filter]="true"></p-dropdown>
+      <p-dropdown formControlName="idTeamCategory" appendTo="body" [options]="categoryOptions" [filter]="true"></p-dropdown>
     </div>
     <label class="global-form-label p-col-6">
       Catégorie de compétition
@@ -17,7 +17,7 @@
     </label>
 
     <div class="p-col-4 p-offset-2">
-      <p-dropdown formControlName="idCoach" [options]="userOptions" [filter]="true"></p-dropdown>
+      <p-dropdown formControlName="idCoach" appendTo="body" [options]="userOptions" [filter]="true"></p-dropdown>
     </div>
     <label class="global-form-label p-col-6">
       Coach

@@ -21,6 +21,7 @@
       > th {
         color: $prime-ng-table-header-font-color;
         padding: $prime-ng-table-header-padding !important;
+        font-weight: normal;
 
         &.ui-state-highlight {
           text-decoration: underline;
@@ -36,17 +37,21 @@
         background-color: $prime-ng-table-row-secondary-bkg-color;
       }
 
-      &:hover {
-        background-color: $prime-ng-table-row-hover-bkg-color;
-      }
-
       &.ui-state-highlight {
         color: $prime-ng-table-row-selected-font-color;
         background-color: $prime-ng-table-row-selected-bkg-color;
+
+        &:hover {
+          backgroud-color: $prime-ng-table-row-selected-bkg-color;
+        }
       }
 
       &.ui-selectable-row {
         cursor: pointer;
+
+        &:hover {
+          background-color: $prime-ng-table-row-hover-bkg-color;
+        }
       }
 
       > td {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import PlayerTeam from '../../models/entities/PlayerTeam';
 
 @Component({
@@ -14,8 +14,16 @@ export class TeamPlayersListComponent implements OnInit {
   @Input()
   public players: PlayerTeam[];
 
+  @Output()
+  public selectPlayer: EventEmitter<PlayerTeam> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {}
 
+  public onSelectPlayer(player: PlayerTeam): void {
+    if (this.enableEditionTools) {
+      this.selectPlayer.emit(player);
+    }
+  }
 }

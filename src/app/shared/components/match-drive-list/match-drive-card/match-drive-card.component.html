@@ -1,0 +1,50 @@
+<div class="match-drive-card">
+  <div class="p-grid">
+    <div class="p-col-2 match-drive-card-title"><p>{{ drive.go ? 'Aller' : 'Retour' }}</p></div>
+    <div class="p-col-10 p-grid">
+      <div class="p-col-3">
+        <span class="global-legend">Conducteur</span>
+        <p>{{ drive.firstNameDriver + ' ' + drive.lastNameDriver.toUpperCase() }}</p>
+      </div>
+      <div class="p-col-5" *ngIf="drive.go">
+        <span class="global-legend">Départ</span>
+        <p>{{ drive.address }} à {{ drive.date | date: 'shortTime' }}</p>
+      </div>
+      <div class="p-col-5" *ngIf="!drive.go">
+        <span class="global-legend">Retour</span>
+        <p>{{ drive.address }}</p>
+      </div>
+      <div class="p-col-3">
+        <span class="global-legend">Places libres</span>
+        <p>{{ drive.nbFreePlaces }}</p>
+      </div>
+      <div class="p-col-1" *ngIf="drive.idDriver === loggedUser.id">
+        <p-button
+          (click)="deleteThisDrive()"
+          pTooltip="Annuler le covoiturage"
+          class="ui-button-danger"
+          icon="far fa-trash-alt">
+        </p-button>
+      </div>
+      <div class="p-col-12 global-separation"></div>
+      <div class="p-col-12"><span class="global-legend">Passagers</span></div>
+      <div class="p-col-11">
+        <span class="global-tag-soft" *ngFor="let passenger of passengers"><i class="fas fa-user"></i>{{ passenger.fullName }}</span>
+      </div>
+      <div class="p-col-1" *ngIf="userCanEnter()">
+        <p-button
+          (click)="enterThisDrive()"
+          pTooltip="Rejoindre le covoiturage"
+          icon="fas fa-sign-in-alt">
+        </p-button>
+      </div>
+      <div class="p-col-1" *ngIf="!userCanEnter() && drive.idDriver !== loggedUser.id">
+        <p-button
+          (click)="leaveThisDrive()"
+          pTooltip="Quitter le covoiturage"
+          icon="fas fa-sign-out-alt">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</div>

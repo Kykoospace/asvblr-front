@@ -92,7 +92,7 @@ export class DynamicDialogTeamEventManagerComponent implements OnInit {
           this.refreshMatches();
         },
         err => console.error(err)
-      )
+      );
   }
 
   public deleteMatch(match: Match) {

@@ -1,0 +1,2 @@
+<app-match-drive-card (enterDrive)="onEnterDrive($event)" (leaveDrive)="onLeaveDrive($event)" (deleteDrive)="onDeleteDrive($event)" *ngFor="let drive of drives" [drive]="drive"></app-match-drive-card>
+<p *ngIf="drives.length === 0">Aucun covoiturage de prévu pour l'instant</p>

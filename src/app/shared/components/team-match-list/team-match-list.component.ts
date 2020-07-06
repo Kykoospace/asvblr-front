@@ -28,6 +28,7 @@ export class TeamMatchListComponent {
     this.matchDetailDialogRef = this.dialogService.open(
       DynamicDialogTeamMatchDetailComponent, {
         header: 'Détail de rencontre',
+        width: '70%',
         data: {
           match: match,
           enableDriveOptions: this.enableDriveOptions

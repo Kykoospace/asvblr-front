@@ -27,6 +27,7 @@
 
   .ui-dialog-content {
     min-height: fit-content;
+    overflow-y: auto;
   }
 
   .ui-dialog-footer {

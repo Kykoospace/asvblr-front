@@ -4,7 +4,6 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '
 import {TeamService} from '../../services/api/team/team.service';
 import {ManagementService} from '../../services/api/management/management.service';
 import {GouvService} from '../../services/gouv/gouv.service';
-import {forkJoin} from 'rxjs';
 import Season from '../../models/entities/Season';
 
 @Component({

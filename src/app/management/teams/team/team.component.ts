@@ -19,7 +19,6 @@ export class TeamComponent implements OnInit, OnDestroy {
 
   public playerSelectorDialogRef: DynamicDialogRef;
   public coachSelectorDialogRef: DynamicDialogRef;
-  public eventManagerDialogRef: DynamicDialogRef;
 
   public team: TeamList;
   public teamPlayers: PlayerTeam[];
@@ -41,9 +40,7 @@ export class TeamComponent implements OnInit, OnDestroy {
     if (this.playerSelectorDialogRef) {
       this.playerSelectorDialogRef.close();
     }
-    if (this.eventManagerDialogRef) {
-      this.eventManagerDialogRef.close();
-    }
+    // TODO: FERMER TOUTES les DialogRef dans tous les composants dans ngOnDestroy
   }
 
   public backNavigate() {
@@ -206,16 +203,5 @@ export class TeamComponent implements OnInit, OnDestroy {
           }
         }
       );
-  }
-
-  public openEventManagerDialog() {
-    this.eventManagerDialogRef
-      = this.dialogService
-      .open(DynamicDialogTeamEventManagerComponent, {
-        header: 'Gérer les rencontres de la saison',
-        data: {
-          idTeam: this.team.id
-        }
-      });
   }
 }

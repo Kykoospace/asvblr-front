@@ -154,13 +154,36 @@ ul.global-list {
 }
 
 div.global-section {
-  padding: $global-container-padding;
   border: 1px solid $global-border-color;
   border-radius: $global-border-radius;
 }
 
 div.global-section-fill {
   background-color: $global-bkg-darker-color;
-  padding: $global-container-padding;
   border-radius: $global-border-radius;
+}
+
+.global-tag {
+  border-radius: $global-border-radius;
+  background-color: $global-pallet-color-2;
+  padding: $global-element-padding-small;
+  margin: $global-spacing-small;
+  margin-left: 0px;
+  color: $global-contrast-font-color;
+
+  i {
+    margin-right: $global-spacing;
+  }
+}
+
+.global-tag-soft {
+  border-radius: $global-border-radius;
+  border: 1px solid $global-pallet-color-2;
+  padding: $global-element-padding-small;
+  margin: $global-spacing-small;
+  margin-left: 0px;
+
+  i {
+    margin-right: $global-spacing;
+  }
 }

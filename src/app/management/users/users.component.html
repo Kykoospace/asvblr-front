@@ -75,7 +75,7 @@
     <ng-template pTemplate="body" let-rowData>
       <tr [pSelectableRow]="rowData">
         <td *ngFor="let column of columns" [ngSwitch]="true">
-          <span *ngSwitchCase="column.field === 'formatedRoles'"><span class="user-role-tag" *ngFor="let role of rowData[column.field]">{{ role }}</span></span>
+          <span *ngSwitchCase="column.field === 'formatedRoles'"><span class="global-tag" *ngFor="let role of rowData[column.field]">{{ role }}</span></span>
           <span *ngSwitchDefault>{{ rowData[column.field] }}</span>
         </td>
       </tr>
