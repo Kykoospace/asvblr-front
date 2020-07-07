@@ -19,132 +19,132 @@
       <p-button (click)="deleteSubscription()" type="button" label="Supprimer" icon="far fa-trash-alt" class="ui-button-danger" *ngIf="!subscription.validated"></p-button>
     </div>
   </p-toolbar>
-  <p-tabView class="p-col-12">
-    <p-tabPanel header="Fiche d'inscription">
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Nom</span>
-        <span class="p-col-5">{{ subscription.firstName }} {{ subscription.lastName | uppercase }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Sexe</span>
-        <span class="p-col-5">{{ subscription.gender ? 'Homme' : 'Femme' }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Date de naissance</span>
-        <span class="p-col-5">{{ subscription.birthDate | date: 'shortDate' }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Nationalité</span>
-        <span class="p-col-5">{{ subscription.nationality }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Numéro de téléphone</span>
-        <span class="p-col-5">{{ subscription.phoneNumber }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Adresse</span>
-        <span class="p-col-5">{{ subscription.address }}, {{ subscription.postcode }} {{ subscription.city }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid" *ngIf="category">
-        <span class="p-col-3 global-legend">Catégorie demandée</span>
-        <span class="p-col-5">{{ category.name }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Demande de tenue</span>
-        <span class="p-col-5">{{ subscription.equipment ? 'Oui' : 'Non' }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid" *ngIf="subscription.equipment">
-        <span class="p-col-3 global-legend">Numéro de maillot souhaité</span>
-        <span class="p-col-5">{{ subscription.requestedJerseyNumber }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid" *ngIf="subscription.equipment && topSize">
-        <span class="p-col-3 global-legend">Taille de haut</span>
-        <span class="p-col-5">{{ topSize.name }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid" *ngIf="subscription.equipment && pantsSize">
-        <span class="p-col-3 global-legend">Taille de short</span>
-        <span class="p-col-5">{{ pantsSize.name }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Assurance complémentaire demandée</span>
-        <span class="p-col-5">{{ subscription.insuranceRequested ? 'Oui' : 'Non' }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Calendrier du club demandé</span>
-        <span class="p-col-5">{{ subscription.calendarRequested ? 'Oui' : 'Non' }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Licence coach</span>
-        <span class="p-col-5">{{ subscription.coach ? 'Oui' : 'Non' }}</span>
-        <span class="p-col-4"></span>
-
-        <span class="p-col-3 global-legend">Licence Arbitre</span>
-        <span class="p-col-5">{{ subscription.referee ? 'Oui' : 'Non' }}</span>
-        <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid" *ngIf="subscription.comment">
-        <span class="p-col-3 global-legend">Commentaire</span>
-        <span class="p-col-5">{{ subscription.comment }}</span>
-        <span class="p-col-4"></span>
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Documents à joindre">
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Carte d'identité</span>
-        <p-fileUpload
-          class="p-col-5"
-          customUpload="true"
-          (uploadHandler)="uploadCNI($event)"
-          accept="image/*"
-          maxFileSize="1000000">
-        </p-fileUpload>
-        <div class="p-col-4">
-          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-        </div>
-      </div>
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Certificat médical</span>
-        <p-fileUpload
-          class="p-col-5"
-          customUpload="true"
-          (uploadHandler)="uploadMedicalCertificate($event)"
-          accept="image/*"
-          maxFileSize="1000000">
-        </p-fileUpload>
-        <div class="p-col-4">
-          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-        </div>
-      </div>
-      <div class="p-grid">
-        <span class="p-col-3 global-legend">Photo d'identité</span>
-        <p-fileUpload
-          class="p-col-5"
-          customUpload="true"
-          (uploadHandler)="uploadIdentityPhoto($event)"
-          accept="image/*"
-          maxFileSize="1000000">
-        </p-fileUpload>
-        <div class="p-col-4">
-          <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-        </div>
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Paiement">
-      <div class="p-grid">
-        <app-subscription-payment-mode-card
-          class="p-col-6 p-offset-3"
-          *ngFor="let paimentMode of paymentModes"
-          [subscriptionPaymentMode]="paimentMode"
-          (payPaymentMode)="payPaymentMode($event)"
-          (unpayPaymentMode)="unpayPaymentMode($event)">
-        </app-subscription-payment-mode-card>
-      </div>
-    </p-tabPanel>
-  </p-tabView>
 </div>
+<p-tabView>
+  <p-tabPanel header="Fiche d'inscription">
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Nom</span>
+      <span class="p-col-5">{{ subscription.firstName }} {{ subscription.lastName | uppercase }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Sexe</span>
+      <span class="p-col-5">{{ subscription.gender ? 'Homme' : 'Femme' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Date de naissance</span>
+      <span class="p-col-5">{{ subscription.birthDate | date: 'shortDate' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Nationalité</span>
+      <span class="p-col-5">{{ subscription.nationality }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Numéro de téléphone</span>
+      <span class="p-col-5">{{ subscription.phoneNumber }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Adresse</span>
+      <span class="p-col-5">{{ subscription.address }}, {{ subscription.postcode }} {{ subscription.city }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="category">
+      <span class="p-col-3 global-legend">Catégorie demandée</span>
+      <span class="p-col-5">{{ category.name }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Demande de tenue</span>
+      <span class="p-col-5">{{ subscription.equipment ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="subscription.equipment">
+      <span class="p-col-3 global-legend">Numéro de maillot souhaité</span>
+      <span class="p-col-5">{{ subscription.requestedJerseyNumber }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="subscription.equipment && topSize">
+      <span class="p-col-3 global-legend">Taille de haut</span>
+      <span class="p-col-5">{{ topSize.name }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="subscription.equipment && pantsSize">
+      <span class="p-col-3 global-legend">Taille de short</span>
+      <span class="p-col-5">{{ pantsSize.name }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Assurance complémentaire demandée</span>
+      <span class="p-col-5">{{ subscription.insuranceRequested ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Calendrier du club demandé</span>
+      <span class="p-col-5">{{ subscription.calendarRequested ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Licence coach</span>
+      <span class="p-col-5">{{ subscription.coach ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Licence Arbitre</span>
+      <span class="p-col-5">{{ subscription.referee ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="subscription.comment">
+      <span class="p-col-3 global-legend">Commentaire</span>
+      <span class="p-col-5">{{ subscription.comment }}</span>
+      <span class="p-col-4"></span>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Documents à joindre">
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Carte d'identité</span>
+      <p-fileUpload
+        class="p-col-5"
+        customUpload="true"
+        (uploadHandler)="uploadCNI($event)"
+        accept="image/*"
+        maxFileSize="1000000">
+      </p-fileUpload>
+      <div class="p-col-4">
+        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+      </div>
+    </div>
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Certificat médical</span>
+      <p-fileUpload
+        class="p-col-5"
+        customUpload="true"
+        (uploadHandler)="uploadMedicalCertificate($event)"
+        accept="image/*"
+        maxFileSize="1000000">
+      </p-fileUpload>
+      <div class="p-col-4">
+        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+      </div>
+    </div>
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Photo d'identité</span>
+      <p-fileUpload
+        class="p-col-5"
+        customUpload="true"
+        (uploadHandler)="uploadIdentityPhoto($event)"
+        accept="image/*"
+        maxFileSize="1000000">
+      </p-fileUpload>
+      <div class="p-col-4">
+        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Paiement">
+    <div class="p-grid">
+      <app-subscription-payment-mode-card
+        class="p-col-6 p-offset-3"
+        *ngFor="let paimentMode of paymentModes"
+        [subscriptionPaymentMode]="paimentMode"
+        (payPaymentMode)="payPaymentMode($event)"
+        (unpayPaymentMode)="unpayPaymentMode($event)">
+      </app-subscription-payment-mode-card>
+    </div>
+  </p-tabPanel>
+</p-tabView>

@@ -63,7 +63,7 @@ export default class AppConstants {
     if (iterator) {
       return AppConstants.APP_COLORS[iterator % AppConstants.APP_COLORS.length];
     } else {
-      return AppConstants.APP_COLORS.pop();
+      return AppConstants.APP_COLORS[0];
     }
   }
 
