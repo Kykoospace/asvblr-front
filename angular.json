@@ -42,7 +42,10 @@
               // Quill :
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.bubble.css",
-              "node_modules/quill/dist/quill.snow.css"
+              "node_modules/quill/dist/quill.snow.css",
+
+              // Chart js:
+              "node_modules/chart.js/dist/Chart.js"
             ],
             "scripts": [
               "node_modules/quill/dist/quill.js"

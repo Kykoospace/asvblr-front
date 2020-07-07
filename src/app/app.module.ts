@@ -22,7 +22,7 @@ import { ContactComponent } from './main/contact/contact.component';
 import { ManagementComponent } from './management/management.component';
 import {
   ButtonModule,
-  CalendarModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule, DialogService,
+  CalendarModule, ChartModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule, DialogService,
   DropdownModule, DynamicDialogModule, EditorModule, FileUploadModule,
   GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
@@ -79,6 +79,7 @@ import { DynamicDialogTeamMatchDetailComponent } from './shared/components/dynam
 import { MatchDriveListComponent } from './shared/components/match-drive-list/match-drive-list.component';
 import { MatchDriveCardComponent } from './shared/components/match-drive-list/match-drive-card/match-drive-card.component';
 import { DynamicDialogTeamPlayerListEditComponent } from './shared/components/dynamic-dialog-team-player-list-edit/dynamic-dialog-team-player-list-edit.component';
+import { SubscriptionPaymentModeCardComponent } from './shared/components/subscription-payment-mode-card/subscription-payment-mode-card.component';
 
 registerLocaleData(localeFr);
 
@@ -151,7 +152,8 @@ function loadConfiguration(
     DynamicDialogTeamMatchDetailComponent,
     MatchDriveListComponent,
     MatchDriveCardComponent,
-    DynamicDialogTeamPlayerListEditComponent
+    DynamicDialogTeamPlayerListEditComponent,
+    SubscriptionPaymentModeCardComponent
   ],
   imports: [
     HttpClientModule,
@@ -190,7 +192,8 @@ function loadConfiguration(
     SafePipeModule,
     StepsModule,
     MultiSelectModule,
-    PickListModule
+    PickListModule,
+    ChartModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

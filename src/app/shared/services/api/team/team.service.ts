@@ -23,6 +23,7 @@ import Position from '../../../models/entities/Position';
 import Match from '../../../models/entities/Match';
 import User from '../../../models/entities/User';
 import Drive from '../../../models/entities/Drive';
+import SubscriptionPaymentMode from '../../../models/responses/SubscriptionPaymentMode';
 
 @Injectable({
   providedIn: 'root'
@@ -237,6 +238,29 @@ export class TeamService {
 
   public validateSubscription(idSubscription: number): Observable<Subscription> {
     return this.http.patch<Subscription>(this.apiBaseUrl + 'subscriptions/' + idSubscription + '/validated', {}, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+  public getSubscriptionPaymentModes(idSubscription: number): Observable<SubscriptionPaymentMode[]> {
+    return this.http.get<SubscriptionPaymentMode[]>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/payments',
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public paySubscriptionPaymentMode(idSubscription: number, idPaymentMode: number): Observable<SubscriptionPaymentMode[]> {
+    return this.http.patch<SubscriptionPaymentMode[]>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/payments/' + idPaymentMode + '/validated',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
+  public unpaySubscriptionPaymentMode(idSubscription: number, idPaymentMode: number): Observable<SubscriptionPaymentMode[]> {
+    return this.http.patch<SubscriptionPaymentMode[]>(
+      this.apiBaseUrl + 'subscriptions/' + idSubscription + '/payments/' + idPaymentMode + '/unvalidated',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
 

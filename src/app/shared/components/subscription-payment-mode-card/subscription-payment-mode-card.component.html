@@ -1,0 +1,8 @@
+<div class="subscription-payment-mode-card">
+  <div class="subscription-payment-mode-card-main">
+    <span class="global-legend">Type</span>
+    <p class="subscription-payment-mode-card-name">{{ subscriptionPaymentMode.namePaymentMode }}</p>
+  </div>
+  <p-button (click)="setPaymentModePaied()" label="Accepter" icon="fas fa-check"></p-button>
+  <p>Statut: {{ subscriptionPaymentMode.paid ? 'Payé' : 'En attente' }}</p>
+</div>

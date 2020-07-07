@@ -6,6 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng';
 import ClothingSize from '../../../shared/models/entities/ClothingSize';
 import {forkJoin} from 'rxjs';
 import SubscriptionCategory from '../../../shared/models/entities/SubscriptionCategory';
+import SubscriptionPaymentMode from '../../../shared/models/responses/SubscriptionPaymentMode';
 
 @Component({
   selector: 'app-subscription',
@@ -22,6 +23,7 @@ export class SubscriptionComponent implements OnInit {
 
   public subscription: Subscription;
 
+  public paymentModes: SubscriptionPaymentMode[];
   public category: SubscriptionCategory;
   public topSize: ClothingSize;
   public pantsSize: ClothingSize;
@@ -42,36 +44,76 @@ export class SubscriptionComponent implements OnInit {
     this.router.navigate(['/management/subscriptions']);
   }
 
+  public refreshSubscription() {
+    // Get subscription id from route :
+    const idSubscription = +this.route.snapshot.paramMap.get('id');
+
+    // Call GET route :
+    this.teamService.getSubscription(idSubscription)
+      .subscribe(
+        // If success :
+        (subscription: Subscription) => {
+          this.subscription = subscription;
+          const requests: any = {
+            paymentModes: this.teamService.getSubscriptionPaymentModes(this.subscription.id),
+            category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory)
+          };
+
+          if (this.subscription.equipment) {
+            requests.topSize = this.teamService.getClothingSize(this.subscription.idTopSize);
+            requests.pantsSize = this.teamService.getClothingSize(this.subscription.idPantsSize);
+          }
+          forkJoin(requests)
+            .subscribe(
+              (results: any) => {
+                this.paymentModes = results.paymentModes;
+                this.category = results.category;
+                if (this.subscription.equipment) {
+                  this.topSize = results.topSize;
+                  this.pantsSize = results.pantsSize;
+                }
+              },
+              err => console.error(err)
+            );
+        },
+        // If fail :
+        err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Inscription introuvable'
+          });
+          // Back to subscription list :
+          this.router.navigate(['/management/subscriptions']);
+        });
+  }
+
   public uploadCNI(file) {
-    console.log(file);
     this.teamService.updateSubscriptionCNI(this.subscription.id, file.files.pop())
       .subscribe(() => {
         this.messageService.add(this.documentUploadedSuccessMessage);
         this.refreshSubscription();
-      }, error => {
-        console.error(error);
-      });
+      }, err => console.error(err)
+      );
   }
 
   public uploadMedicalCertificate(file) {
-    console.log('Upload certif demandé');
     this.teamService.updateSubscriptionMedicalCertificate(this.subscription.id, file.files.pop())
-      .subscribe(() => {
+      .subscribe(
+        () => {
         this.messageService.add(this.documentUploadedSuccessMessage);
         this.refreshSubscription();
-      }, error => {
-        console.error(error);
-      });
+      }, err => console.error(err)
+      );
   }
 
   public uploadIdentityPhoto(file) {
     this.teamService.updateSubscriptionIdentityPhoto(this.subscription.id, file.files.pop())
-      .subscribe(() => {
+      .subscribe(
+        () => {
         this.messageService.add(this.documentUploadedSuccessMessage);
         this.refreshSubscription();
-      }, error => {
-        console.error(error);
-      });
+      }, err => console.error(err)
+      );
   }
 
   public validateSubscription() {
@@ -120,46 +162,19 @@ export class SubscriptionComponent implements OnInit {
     });
   }
 
-  public refreshSubscription() {
-    // Get subscription id from route :
-    const idSubscription = +this.route.snapshot.paramMap.get('id');
-
-    // Call GET route :
-    this.teamService.getSubscription(idSubscription)
+  public payPaymentMode(subscriptionPaymentMode: SubscriptionPaymentMode): void {
+    this.teamService.paySubscriptionPaymentMode(this.subscription.id, subscriptionPaymentMode.idPaymentMode)
       .subscribe(
-        // If success :
-        (subscription: Subscription) => {
-          this.subscription = subscription;
+        paymentModes => this.paymentModes = paymentModes,
+        err => console.error(err)
+      );
+  }
 
-          // Get clothes sizes values :
-          if (subscription.equipment) {
-            forkJoin({
-              category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
-              topSize: this.teamService.getClothingSize(this.subscription.idTopSize),
-              pantsSize: this.teamService.getClothingSize(this.subscription.idPantsSize)
-            })
-              .subscribe(
-                results => {
-                  this.category = results.category;
-                  this.topSize = results.topSize;
-                  this.pantsSize = results.pantsSize;
-                },
-                  err => {
-                  this.messageService.add({
-                    severity: 'error',
-                    summary: 'Taille de vêtement introuvable'
-                  });
-                });
-          }
-        },
-        // If fail :
-        err => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Inscription introuvable'
-          });
-          // Back to subscription list :
-          this.router.navigate(['/management/subscriptions']);
-        });
+  public unpayPaymentMode(subscriptionPaymentMode: SubscriptionPaymentMode): void {
+    this.teamService.unpaySubscriptionPaymentMode(this.subscription.id, subscriptionPaymentMode.idPaymentMode)
+      .subscribe(
+        paymentModes => this.paymentModes = paymentModes,
+        err => console.error(err)
+      );
   }
 }

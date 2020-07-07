@@ -25,28 +25,23 @@
         <span class="p-col-3 global-legend">Nom</span>
         <span class="p-col-5">{{ subscription.firstName }} {{ subscription.lastName | uppercase }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Sexe</span>
         <span class="p-col-5">{{ subscription.gender ? 'Homme' : 'Femme' }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Date de naissance</span>
         <span class="p-col-5">{{ subscription.birthDate | date: 'shortDate' }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Nationalité</span>
         <span class="p-col-5">{{ subscription.nationality }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Numéro de téléphone</span>
         <span class="p-col-5">{{ subscription.phoneNumber }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Adresse</span>
         <span class="p-col-5">{{ subscription.address }}, {{ subscription.postcode }} {{ subscription.city }}</span>
         <span class="p-col-4"></span>
@@ -80,18 +75,15 @@
         <span class="p-col-3 global-legend">Assurance complémentaire demandée</span>
         <span class="p-col-5">{{ subscription.insuranceRequested ? 'Oui' : 'Non' }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Calendrier du club demandé</span>
         <span class="p-col-5">{{ subscription.calendarRequested ? 'Oui' : 'Non' }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Licence coach</span>
         <span class="p-col-5">{{ subscription.coach ? 'Oui' : 'Non' }}</span>
         <span class="p-col-4"></span>
-      </div>
-      <div class="p-grid">
+
         <span class="p-col-3 global-legend">Licence Arbitre</span>
         <span class="p-col-5">{{ subscription.referee ? 'Oui' : 'Non' }}</span>
         <span class="p-col-4"></span>
@@ -141,6 +133,17 @@
         <div class="p-col-4">
           <p-button class="ui-button-secondary" label="Apperçu"></p-button>
         </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Paiement">
+      <div class="p-grid">
+        <app-subscription-payment-mode-card
+          class="p-col-6 p-offset-3"
+          *ngFor="let paimentMode of paymentModes"
+          [subscriptionPaymentMode]="paimentMode"
+          (payPaymentMode)="payPaymentMode($event)"
+          (unpayPaymentMode)="unpayPaymentMode($event)">
+        </app-subscription-payment-mode-card>
       </div>
     </p-tabPanel>
   </p-tabView>

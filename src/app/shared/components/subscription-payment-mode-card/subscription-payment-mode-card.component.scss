@@ -1,0 +1,19 @@
+@import "src/assets/theme/variables";
+
+.subscription-payment-mode-card {
+  border-radius: $global-border-radius;
+  border: 1px solid $global-border-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: $global-element-padding;
+  user-select: none;
+
+  &.selectable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $global-bkg-active-color;
+    }
+  }
+}

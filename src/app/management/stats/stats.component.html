@@ -1,1 +1,12 @@
-<p>stats works!</p>
+<p-tabView>
+  <p-tabPanel header="Age des joueurs">
+    <p-chart type="bar" [data]="playersAgeStats"></p-chart>
+  </p-tabPanel>
+  <p-tabPanel header="Localisation des joueurs">
+    <p-chart type="doughnut" [data]="playersCityStats"></p-chart>
+  </p-tabPanel>
+  <p-tabPanel header="Modes de paiement">
+
+  </p-tabPanel>
+  <p-tabPanel header="Statistiques du site"></p-tabPanel>
+</p-tabView>

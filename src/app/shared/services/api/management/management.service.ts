@@ -144,21 +144,21 @@ export class ManagementService {
   // Statisctics routes :
   // ------------------------------------------------
 
-  public getPaymentModeStats(): Observable<any> {
+  public getPlayersPaymentModeStats(): Observable<any> {
     return this.http.get<any>(
       this.apiBaseUrl + 'statistics/payments-mode',
       { headers: this.authService.getAuthorizationHeader() }
       );
   }
 
-  public getAgeStats(): Observable<any> {
+  public getPlayersAgeStats(): Observable<any> {
     return this.http.get<any>(
       this.apiBaseUrl + 'statistics/players-by-age',
       { headers: this.authService.getAuthorizationHeader() }
       );
   }
 
-  public getCityStats(): Observable<any> {
+  public getPlayersCityStats(): Observable<any> {
     return this.http.get<any>(
       this.apiBaseUrl + 'statistics/players-city',
       { headers: this.authService.getAuthorizationHeader() }

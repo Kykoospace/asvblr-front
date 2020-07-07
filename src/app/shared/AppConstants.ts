@@ -51,6 +51,22 @@ export default class AppConstants {
     ['ROLE_PLAYER', 'Joueur']
   ]);
 
+  public static APP_COLORS = [
+    '#00a69c',
+    '#004e64',
+    '#b9e3c6',
+    '#706c61',
+    '#899e8b'
+  ];
+
+  public static getColor(iterator?: number): string {
+    if (iterator) {
+      return AppConstants.APP_COLORS[iterator % AppConstants.APP_COLORS.length];
+    } else {
+      return AppConstants.APP_COLORS.pop();
+    }
+  }
+
   public static getRoleName(role: string): string {
     return AppConstants.API_ROLE_NAMES.get(role);
   }
