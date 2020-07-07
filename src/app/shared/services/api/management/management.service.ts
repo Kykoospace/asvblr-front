@@ -131,12 +131,48 @@ export class ManagementService {
   }
 
 
-
   // ------------------------------------------------
   // Mail routes :
   // ------------------------------------------------
 
   public sendMail(mail: any): Observable<any> {
     return this.http.post(this.apiBaseUrl + 'mails/send-mail', mail, { headers: this.authService.getAuthorizationHeader() });
+  }
+
+
+  // ------------------------------------------------
+  // Statisctics routes :
+  // ------------------------------------------------
+
+  public getPaymentModeStats(): Observable<any> {
+    return this.http.get<any>(
+      this.apiBaseUrl + 'statistics/payments-mode',
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public getAgeStats(): Observable<any> {
+    return this.http.get<any>(
+      this.apiBaseUrl + 'statistics/players-by-age',
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public getCityStats(): Observable<any> {
+    return this.http.get<any>(
+      this.apiBaseUrl + 'statistics/players-city',
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public getVisitStats(): Observable<any> {
+    return this.http.get<any>(
+      this.apiBaseUrl + 'statistics/visits',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
+  public addVisitCount(pageCode: string): Observable<any> {
+    return this.http.post<any>(this.apiBaseUrl + 'statistics/visits', { pageCode });
   }
 }

@@ -11,7 +11,7 @@
         <p>{{ drive.address }} à {{ drive.date | date: 'shortTime' }}</p>
       </div>
       <div class="p-col-5" *ngIf="!drive.go">
-        <span class="global-legend">Retour</span>
+        <span class="global-legend">Arrivée</span>
         <p>{{ drive.address }}</p>
       </div>
       <div class="p-col-3">
@@ -40,6 +40,7 @@
       </div>
       <div class="p-col-1" *ngIf="!userCanEnter() && drive.idDriver !== loggedUser.id">
         <p-button
+          class="ui-button-danger"
           (click)="leaveThisDrive()"
           pTooltip="Quitter le covoiturage"
           icon="fas fa-sign-out-alt">

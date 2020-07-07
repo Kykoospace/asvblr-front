@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import AppConstants from '../shared/AppConstants';
+import {filter} from 'rxjs/operators';
+import {ManagementService} from '../shared/services/api/management/management.service';
 
 @Component({
   selector: 'app-main',
@@ -78,10 +80,36 @@ export class MainComponent implements OnInit {
   ]
 
   constructor(
-    private router: Router
+    private router: Router,
+    private managementService: ManagementService
   ) {
     this.title = AppConstants.APP_NAME_MAIN_TITLE;
     this.subTitle = AppConstants.APP_NAME_SUB_TITLE;
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(
+        (event: NavigationEnd) => {
+          let pageCode: string;
+          switch (event.urlAfterRedirects) {
+            case '/main/home':
+              pageCode = 'HOME_PAGE';
+              break;
+            case '/main/subscription':
+              pageCode = 'SUBSCRIPTION_PAGE';
+              break;
+            case '/main/contact':
+              pageCode = 'CONTACT_PAGE';
+              break;
+            default:
+              pageCode = undefined;
+              break;
+          }
+          if (pageCode) {
+            this.managementService.addVisitCount(pageCode)
+              .subscribe();
+          }
+        }
+      );
   }
 
   ngOnInit() {

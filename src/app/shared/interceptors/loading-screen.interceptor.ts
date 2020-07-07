@@ -14,7 +14,8 @@ export class LoadingScreenInterceptor implements HttpInterceptor {
    * URLs for which the loading screen should not be enabled
    */
   private skippUrls = [
-    'https://geo.api.gouv.fr/'
+    'https://geo.api.gouv.fr/',
+    'api/statistics/visits'
   ];
 
   constructor(private loadingService: LoadingService) {
