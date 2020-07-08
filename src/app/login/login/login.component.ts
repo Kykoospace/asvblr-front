@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/api/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharePasswordService} from '../share-password.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharePasswordService: SharePasswordService
   ) {
     this.loginForm = this.formBuilder.group({
       username: this.formBuilder.control('', [ Validators.required ]),
@@ -35,7 +37,9 @@ export class LoginComponent implements OnInit {
       this.authService.signIn(this.loginForm.value)
         .subscribe(
         auth => {
-          console.log(auth);
+          if (!auth.user.passwordChanged) {
+            this.sharePasswordService.setPassword(this.loginForm.value.password);
+          }
           const returnUrl = this.route.snapshot.paramMap.get('returnUrl');
           this.router.navigate([(returnUrl) ? returnUrl : '/management']);
         },

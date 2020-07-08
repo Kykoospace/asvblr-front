@@ -91,6 +91,9 @@ export class SubscriptionFormComponent implements OnInit {
   public maxBirthDateValue = new Date();
 
   public subscriptionForm: FormGroup;
+  public fileCNI: File;
+  public fileMedicalCertificate: File;
+  public fileIdentityPhoto: File;
 
   public cities: any[];
 
@@ -99,8 +102,7 @@ export class SubscriptionFormComponent implements OnInit {
     private teamService: TeamService,
     private managementService: ManagementService,
     private gouvService: GouvService,
-    private messageService: MessageService,
-    private cd: ChangeDetectorRef
+    private messageService: MessageService
   ) {
     this.activeStep = -1;
     this.calendarLanguage = AppConstants.CALENDAR_OPTIONS;
@@ -156,12 +158,9 @@ export class SubscriptionFormComponent implements OnInit {
 
       // Documents & règlement :
       fourthStep: this.formBuilder.group({
-        cni: [null, [ Validators.required ]],
-        identityPhoto: [null, [ Validators.required ]],
-        medicalCertificate: [null, [ Validators.required ]],
-        idsPaymentMode: [null, [ Validators.required ]],
+        idsPaymentMode: [null, [ Validators.required ]]
       })
-    });
+    }, { validators: this.fileValidator(this.fileCNI, this.fileIdentityPhoto, this.fileMedicalCertificate) });
 
     // Initialisation des custom validators :
     const firstStep: AbstractControl = this.subscriptionForm.get('firstStep');
@@ -247,6 +246,23 @@ export class SubscriptionFormComponent implements OnInit {
       });
   }
 
+  public fileValidator(
+    fileCNI: File,
+    fileIdentityPhoto: File,
+    fileMedicalCertificate: File
+  ) {
+    if (fileCNI === null) {
+      return { noCNI: true };
+    }
+    if (fileIdentityPhoto === null) {
+      return { noIdentityPhoto: true };
+    }
+    if (fileMedicalCertificate === null) {
+      return { noMedicalCertificate: true };
+    }
+    return null;
+  }
+
   public sendSubscription() {
     if (this.subscriptionForm.valid) {
       // Envoi du formulaire d'inscription :
@@ -275,24 +291,28 @@ export class SubscriptionFormComponent implements OnInit {
           subscription => {
             this.teamService.updateSubscriptionDocuments(
               subscription.id,
-              fourthStep.cni,
-              fourthStep.identityPhoto,
-              fourthStep.medicalCertificate
+              this.fileCNI,
+              this.fileIdentityPhoto,
+              this.fileMedicalCertificate
             )
               .subscribe(
                 result => {
                   this.messageService.add(this.confirmationMessage);
                   this.activeStep = 4;
                 },
-                err => this.messageService.add({
+                err => {
+                  this.messageService.add({
                     severity: 'error',
                     summary: 'Erreur lors de l\'envoi de l\'inscription',
                     detail: 'Une erreur est survenu lors de l\'envoi des documents'
-                })
+                  });
+                  console.error(err);
+                }
               );
           },
           err => {
             this.messageService.add(this.errorMessage);
+            console.error(err);
           }
         );
     } else {
@@ -301,33 +321,15 @@ export class SubscriptionFormComponent implements OnInit {
   }
 
   public cniFileHandler(event) {
-    if (event.target.files && event.target.files.length) {
-      const [ file ] = event.target.files;
-      this.subscriptionForm
-        .get('fourthStep')
-        .get('cni')
-        .patchValue(file);
-    }
+    this.fileCNI = <File>event.target.files[0];
   }
 
   public identityPhotoFileHandler(event) {
-    if (event.target.files && event.target.files.length) {
-      const [ file ] = event.target.files;
-      this.subscriptionForm
-        .get('fourthStep')
-        .get('identityPhoto')
-        .patchValue(file);
-    }
+    this.fileIdentityPhoto = <File>event.target.files[0];
   }
 
   public medicalCertificateFileHandler(event) {
-    if (event.target.files && event.target.files.length) {
-      const [ file ] = event.target.files;
-      this.subscriptionForm
-        .get('fourthStep')
-        .get('medicalCertificate')
-        .patchValue(file);
-    }
+    this.fileMedicalCertificate = <File>event.target.files[0];
   }
 
   public updateCity(postcode: number) {

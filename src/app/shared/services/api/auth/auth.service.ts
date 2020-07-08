@@ -90,10 +90,10 @@ export class AuthService {
       { oldPassword, password },
       { headers: this.getAuthorizationHeader() })
       .pipe(
-        map(auth => {
-          auth.user.fullName = auth.user.firstName + ' ' + auth.user.lastName.toUpperCase();
-          this.tokenStorageService.storeToken(auth);
-          return auth;
+        map(user => {
+          user.fullName = user.firstName + ' ' + user.lastName.toUpperCase();
+          this.tokenStorageService.setUser(user);
+          return user;
         })
       );
   }

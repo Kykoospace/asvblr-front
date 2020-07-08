@@ -1,1 +1,17 @@
-<p>contact works!</p>
+<div class="main-site-layout-section">
+  <form (ngSubmit)="sendEmail()" [formGroup]="emailForm" class="p-grid">
+    <p>Votre adresse email</p>
+    <div class="p-col-12">
+      <input type="text" formControlName="sender" pInputText>
+    </div>
+    <p>Votre question</p>
+    <div class="p-col-12">
+      <textarea formControlName="content" pInputText></textarea>
+    </div>
+    <p-toolbat class="p-col-12">
+      <div class="ui-toolbar-group-right">
+        <p-button type="submit" label="Envoyer" icon="fas fa-paper-plane" [disabled]="emailForm.invalid"></p-button>
+      </div>
+    </p-toolbat>
+  </form>
+</div>

@@ -1,3 +1,7 @@
 <div class="p-grid">
-
+  <form [formGroup]="testForm" (ngSubmit)="submit()">
+    <input type="text" formControlName="idSubscription">
+    <input type="file" (change)="onSelectFile($event)" pInputText>
+    <button type="submit">Send</button>
+  </form>
 </div>

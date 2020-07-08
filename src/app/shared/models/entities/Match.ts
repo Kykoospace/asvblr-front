@@ -26,7 +26,7 @@ export default abstract class Match {
           match.defensiveRating,
           match.technicalRating
         ],
-        label: match.oppositeTeam,
+        label: match.oppositeTeam + ' ' + (match.type ? '(aller)' : '(retour)'),
         backgroundColor: 'rgba(0, 166, 156, .2)',
         borderColor: AppConstants.getColor(),
         pointBackgroundColor: AppConstants.getColor(),

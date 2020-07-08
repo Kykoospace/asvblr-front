@@ -19,7 +19,7 @@
     Poste
   </label>
 
-  <div class="p-col-4 p-offset-2">
+  <div class="p-col-4 p-offset-2 global-align-right">
     <p-button (click)="setLeader()" label="Capitaine" icon="fas fa-crown" [disabled]="player.idPlayer === team.idPlayerLeader"></p-button>
   </div>
   <label class="global-form-label p-col-6">
@@ -32,7 +32,7 @@
       <p-button (click)="cancel()" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="updatePlayer()" label="Valider" icon="fas fa-check" [disabled]="teamPlayerDetailForm.untouched || teamPlayerDetailForm.invalid"></p-button>
+      <p-button (click)="updatePlayer()" label="Valider" icon="fas fa-check" [disabled]="!teamPlayerDetailForm.dirty || teamPlayerDetailForm.invalid"></p-button>
     </div>
   </p-toolbar>
 </form>

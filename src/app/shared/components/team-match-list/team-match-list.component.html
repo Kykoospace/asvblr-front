@@ -9,7 +9,7 @@
       </app-team-match-card>
     </div>
   </p-tabPanel>
-  <p-tabPanel header="Jouées" *ngIf="passedMatches.length > 0">
+  <p-tabPanel header="Joués" *ngIf="passedMatches.length > 0">
     <app-team-match-card
       *ngFor="let match of passedMatches"
       [match]="match"

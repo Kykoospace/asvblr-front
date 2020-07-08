@@ -1,8 +1,8 @@
 <p-table [value]="players">
   <ng-template pTemplate="header">
     <tr>
-      <th></th>
-      <th>Numéro</th>
+      <th class="first-column"></th>
+      <th>Maillot</th>
       <th>Joueur</th>
       <th>Poste</th>
       <th>Numéro de licence</th>
@@ -10,13 +10,13 @@
   </ng-template>
   <ng-template pTemplate="body" let-player>
     <tr (click)="onSelectPlayer(player)" [class.ui-selectable-row]="enableEditionTools">
-      <th>
+      <th class="first-column">
         <i class="fas fa-crown" *ngIf="player.idPlayer === idPlayerLeader"></i>
       </th>
-      <td>{{ player.jerseyNumber }}</td>
-      <td>{{ player.firstName + ' ' + player.lastName.toUpperCase() }}</td>
-      <td>{{ player.positionName }}</td>
-      <td>{{ player.licenceNumber }}</td>
+      <td class="global-align-center">{{ player.jerseyNumber }}</td>
+      <td class="global-align-center">{{ player.firstName + ' ' + player.lastName.toUpperCase() }}</td>
+      <td class="global-align-center">{{ player.positionName }}</td>
+      <td class="global-align-right">{{ player.licenceNumber }}</td>
     </tr>
   </ng-template>
 </p-table>

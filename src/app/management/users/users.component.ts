@@ -97,28 +97,7 @@ export class UsersComponent implements OnInit {
   public openNewUserDialog() {
     this.newUserDialogRef = this.dialogService.open(DynamicDialogCreateUserComponent, { header: 'Nouvel utilisateur non joueur' });
     this.newUserDialogRef.onClose
-      .subscribe(
-        (data) => {
-          if (data) {
-            this.managementService.createUser({ firstName: data.firstName, lastName: data.lastName, email: data.email })
-              .subscribe(
-                user => {
-                  if (data.type) {
-                    // Si coach :
-                    const calls = [];
-                    data.teams.forEach(id => calls.push(this.teamService.setTeamCoach(id, user.id)));
-                    forkJoin(calls).subscribe(() => this.refreshUsers());
-                  } else {
-                    // Si gérant :
-                    this.managementService.giveManagerRole(user.id).subscribe(() => this.refreshUsers());
-                  }
-                },
-                err => console.error(err)
-              );
-          }
-        },
-        err => console.error(err)
-      );
+      .subscribe(() => this.refreshUsers());
   }
 
   public deleteUser(user: User): void {

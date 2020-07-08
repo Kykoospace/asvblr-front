@@ -3,7 +3,8 @@ import {TeamService} from '../../services/api/team/team.service';
 import TeamList from '../../models/responses/TeamList';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManagementService} from '../../services/api/management/management.service';
-import {DynamicDialogRef} from 'primeng';
+import {DynamicDialogRef, MessageService} from 'primeng';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-dialog-create-user',
@@ -28,7 +29,8 @@ export class DynamicDialogCreateUserComponent implements OnInit {
     private ref: DynamicDialogRef,
     private managementService: ManagementService,
     private teamService: TeamService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +62,25 @@ export class DynamicDialogCreateUserComponent implements OnInit {
 
   public createUser(): void {
     if (this.newUserForm.valid) {
-      this.ref.close(this.newUserForm.value);
+      const data = this.newUserForm.value;
+      this.managementService.createUser({ firstName: data.firstName, lastName: data.lastName, email: data.email })
+        .subscribe(
+          user => {
+            if (data.type) {
+              // Si coach :
+              const calls = [];
+              data.teams.forEach(id => calls.push(this.teamService.setTeamCoach(id, user.id)));
+              forkJoin(calls).subscribe(() => this.ref.close());
+            } else {
+              // Si gérant :
+              this.managementService.giveManagerRole(user.id).subscribe(() => this.ref.close());
+            }
+          },
+          err => this.messageService.add({
+            severity: 'error',
+            summary: 'Email déjà utilisé'
+          })
+        );
     }
   }
 

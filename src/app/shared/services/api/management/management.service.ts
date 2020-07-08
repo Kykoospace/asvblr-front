@@ -136,7 +136,18 @@ export class ManagementService {
   // ------------------------------------------------
 
   public sendMail(mail: any): Observable<any> {
-    return this.http.post(this.apiBaseUrl + 'mails/send-mail', mail, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.post(
+      this.apiBaseUrl + 'mails/send-mail',
+      mail,
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
+  public sendMailContact(mail: any): Observable<any> {
+    return this.http.post(
+      this.apiBaseUrl + 'mails/contact-mail',
+      mail
+    );
   }
 
 

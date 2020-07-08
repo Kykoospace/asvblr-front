@@ -1,8 +1,6 @@
 <div class="p-grid" *ngIf="currentSeason">
   <p-steps class="p-col-12" [model]="steps" [(activeIndex)]="activeStep" *ngIf="activeStep >= 0 && activeStep <= 3"></p-steps>
   <form class="p-col-12" [formGroup]="subscriptionForm" (ngSubmit)="sendSubscription()">
-    <p-button type="button" (click)="test()"></p-button>
-
     <div class="p-grid" *ngIf="activeStep == -1">
       <h1 class="p-col-12 global-align-center">Inscription pour la saison {{ currentSeason.name }}</h1>
       <p class="p-col-12">Afin de vous inscrire, veillez à préparer les copies numériques des documents suivants :</p>
@@ -18,6 +16,7 @@
     </div>
 
     <div class="p-grid" formGroupName="firstStep" *ngIf="activeStep === 0">
+      <p-button (click)="test()"></p-button>
       <!-- FIRSTNAME -->
       <div class="p-col-4 p-offset-2">
         <input formControlName="firstName" type="text" pInputText />
@@ -334,11 +333,7 @@
     <div class="p-grid" formGroupName="fourthStep" *ngIf="activeStep === 3">
       <!-- CNI -->
       <div class="p-col-4 p-offset-2">
-        <input
-          type="file"
-          formControlName="cni"
-          (change)="cniFileHandler($event)"
-          pInputText>
+        <input type="file" (change)="cniFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.cni }}
@@ -347,11 +342,7 @@
 
       <!-- IDENTITY PHOTO -->
       <div class="p-col-4 p-offset-2">
-        <input
-          type="file"
-          formControlName="identityPhoto"
-          (change)="identityPhotoFileHandler($event)"
-          pInputText>
+        <input type="file" (change)="identityPhotoFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.identityPhoto }}
@@ -360,11 +351,7 @@
 
       <!-- MEDICAL CERTIFICATE -->
       <div class="p-col-4 p-offset-2">
-        <input
-          type="file"
-          formControlName="medicalCertificate"
-          (change)="medicalCertificateFileHandler($event)"
-          pInputText>
+        <input type="file" (change)="medicalCertificateFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.medicalCertificate }}

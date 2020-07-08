@@ -20,7 +20,7 @@
     </div>
   </p-toolbar>
 </div>
-<p-tabView>
+<p-tabView *ngIf="subscription">
   <p-tabPanel header="Fiche d'inscription">
     <div class="p-grid">
       <span class="p-col-3 global-legend">Nom</span>

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { AuthService} from '../../shared/services/api/auth/auth.service';
 import { MessageService} from 'primeng';
 import {Router} from '@angular/router';
+import {SharePasswordService} from '../share-password.service';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +21,8 @@ export class ChangePasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private sharePasswordService: SharePasswordService
   ) {
     this.changePasswordErrorMessage = 'Les mots de passes sont différents';
     this.changePasswordErrorToggle = false;
@@ -28,7 +30,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePasswordForm = this.formBuilder.group({
-      oldPassword: ['', [ Validators.required ]],
+      oldPassword: [this.sharePasswordService.getPassword(), [ Validators.required ]],
       password: ['', [ Validators.required, Validators.minLength(5) ]],
       confirmation: ['', [ Validators.required, Validators.minLength(5) ]]
     }, { validators: this.checkPasswords });
@@ -56,10 +58,13 @@ export class ChangePasswordComponent implements OnInit {
             this.authService.setLoggedUser(user);
             this.router.navigate(['/management']);
           },
-          err => this.messageService.add({
-            severity: 'error',
-            summary: 'Le mot de passe est incorrect'
-          })
+          err => {
+            console.error(err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Le mot de passe est incorrect'
+            });
+          }
         );
     }
   }

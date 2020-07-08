@@ -62,7 +62,9 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
         (results: any) => {
           this.players = results.players;
           this.matches = results.matches;
-          this.lastMatchStats = Match.getMatchData(results.lastMatch);
+          if (results.lastMatch) {
+            this.lastMatchStats = Match.getMatchData(results.lastMatch);
+          }
           this.setEvolutionStats();
         },
         err => console.error(err)
@@ -78,11 +80,21 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
   }
 
   public refreshMatches(): void {
-    this.teamService.getAllTeamMatches(this.team.id)
+    const requests = {
+      matches: this.teamService.getAllTeamMatches(this.team.id),
+      lastMatch: this.teamService.getLastTeamMatch(this.team.id)
+    };
+
+    forkJoin(requests)
       .subscribe(
-        matches => {
-          this.matches = matches;
+        (results: any) => {
+          this.matches = results.matches;
           this.setEvolutionStats();
+
+          this.lastMatchStats =
+            results.lastMatch
+              ? Match.getMatchData(results.lastMatch)
+              : null;
         },
         err => console.error(err)
       );
@@ -174,7 +186,7 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
       });
     this.eventManagerDialogRef.onClose
       .subscribe(
-        () => this.refreshTeam()
+        () => this.refreshMatches()
       );
   }
 }

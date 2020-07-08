@@ -191,7 +191,9 @@ export class TeamService {
     return this.http.get<Match>(this.apiBaseUrl + 'teams/' + idTeam + '/last-match')
       .pipe(map(
         match => {
-          match.date = new Date(match.date);
+          if (match) {
+            match.date = new Date(match.date);
+          }
           return match;
         }
       ));
