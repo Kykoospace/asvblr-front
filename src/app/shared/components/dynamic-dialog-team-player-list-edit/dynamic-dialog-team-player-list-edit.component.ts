@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ManagementService} from '../../services/api/management/management.service';
 import {DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
 import {TeamService} from '../../services/api/team/team.service';
-import PlayerTeam from '../../models/entities/PlayerTeam';
+import TeamPlayer from '../../models/entities/TeamPlayer';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-dialog-team-player-list-edit',
@@ -11,29 +12,42 @@ import PlayerTeam from '../../models/entities/PlayerTeam';
 })
 export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
 
-  public player: PlayerTeam;
-  public positionOptions = [];
+  public idTeam: number;
+  public player: TeamPlayer;
+  public positionOptions = [
+    { label: 'Poste', value: null }
+  ];
+  public teamPlayerDetailForm: FormGroup;
 
   constructor(
     private teamService: TeamService,
     private messageService: MessageService,
     public config: DynamicDialogConfig,
-    private ref: DynamicDialogRef
+    private ref: DynamicDialogRef,
+    private formBuilder: FormBuilder
   ) {
+    this.idTeam = this.config.data.idTeam;
     this.player = this.config.data.player;
   }
 
   ngOnInit(): void {
     this.teamService.getAllPositions()
       .subscribe(
-        positions => positions.forEach(
-          position => this.positionOptions.push({
-            label: position.name,
-            value: position.id
-          })
-        ),
+        positions => {
+          positions.forEach(
+            position => this.positionOptions.push({
+              label: position.name,
+              value: position.id
+            })
+          );
+          this.teamPlayerDetailForm.get('idPosition').setValue(this.player.idPosition);
+        },
         err => console.error(err)
       );
+    this.teamPlayerDetailForm = this.formBuilder.group({
+      number: [this.player.jerseyNumber],
+      idPosition: [null, [ Validators.required ]]
+    });
   }
 
   public cancel(): void {
@@ -41,6 +55,18 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
   }
 
   public updatePlayer(): void {
-    this.ref.close();
+    if (this.teamPlayerDetailForm.valid) {
+      this.teamService.updateTeamPlayer(this.config.data.idTeam, this.player.idPlayer, this.teamPlayerDetailForm.value)
+        .subscribe(
+            () => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Poste du joueur mis à jour'
+              });
+              this.ref.close();
+            },
+            err => console.error(err)
+          );
+    }
   }
 }

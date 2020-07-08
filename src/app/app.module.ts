@@ -27,7 +27,7 @@ import {
   GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
   InputTextModule,
   MegaMenuModule, MenuModule, MessageService, MultiSelectModule, PickListModule, ProgressSpinnerModule,
-  RadioButtonModule, SelectButtonModule, SpinnerModule, StepsModule,
+  RadioButtonModule, RatingModule, SelectButtonModule, SpinnerModule, StepsModule,
   TableModule,
   TabMenuModule, TabViewModule, ToastModule, ToggleButtonModule,
   ToolbarModule, TooltipModule
@@ -193,7 +193,8 @@ function loadConfiguration(
     StepsModule,
     MultiSelectModule,
     PickListModule,
-    ChartModule
+    ChartModule,
+    RatingModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

@@ -1,30 +1,123 @@
 <p-tabView *ngIf="!createDriveToggle">
   <p-tabPanel header="Détails">
     <div class="p-grid">
-      <span class="p-col-4 global-legend">Équipe</span>
-      <span class="p-col-4">{{ match.oppositeTeam }}</span>
-      <span class="p-col-4"></span>
+      <span class="p-col-6 global-legend">Équipe</span>
+      <span class="p-col-6">{{ match.oppositeTeam }}</span>
 
-      <span class="p-col-4 global-legend">Type</span>
-      <span class="p-col-4">{{ match.type ? 'Aller' : 'Retour' }}</span>
-      <span class="p-col-4"></span>
+      <span class="p-col-6 global-legend">Type</span>
+      <span class="p-col-6">{{ match.type ? 'Aller' : 'Retour' }}</span>
 
-      <span class="p-col-4 global-legend">Lieu</span>
-      <span class="p-col-4">{{ match.place }}</span>
-      <span class="p-col-4"></span>
+      <span class="p-col-6 global-legend">Lieu</span>
+      <span class="p-col-6">{{ match.place }}</span>
 
-      <span class="p-col-4 global-legend">Date</span>
-      <span class="p-col-4">{{ match.date | date: 'short' }}</span>
-      <span class="p-col-4"></span>
+      <span class="p-col-6 global-legend">Date</span>
+      <span class="p-col-6">{{ match.date | date: 'short' }}</span>
+      <div class="p-col-12 global-separation" *ngIf="match.comment"></div>
+      <div class="p-col-12 p-grid" *ngIf="match.comment">
+        <h3 class="p-col-12">Commentaire du coach</h3>
+        <p class="p-col-5">{{ match.comment }}</p>
+        <p-chart class="p-col-7" type="radar" [data]="matchStats" [options]="radarChartOptions"></p-chart>
+      </div>
     </div>
   </p-tabPanel>
-  <p-tabPanel header="Co-voiturage {{ drives?.length > 0 ? '(' + drives.length + ')' : '' }}" [disabled]="!enableDriveOptions">
+  <p-tabPanel
+    header="Co-voiturage {{ drives?.length > 0 ? '(' + drives.length + ')' : '' }}"
+    *ngIf="enableDriveOptions"
+    [disabled]="matchPassed()">
     <p-toolbar>
       <div class="ui-toolbar-group-right">
         <p-button (click)="createDriveToggle = true" label="Proposer un covoiturage" icon="fas fa-car"></p-button>
       </div>
     </p-toolbar>
     <app-match-drive-list (enterDrive)="onEnterDrive($event)" (leaveDrive)="onLeaveDrive($event)" (deleteDrive)="onDeleteDrive($event)" *ngIf="drives" [drives]="drives"></app-match-drive-list>
+  </p-tabPanel>
+  <p-tabPanel
+    header="Commentaire du coach"
+    *ngIf="enableCoachOptions"
+    [disabled]="!matchPassed()">
+    <form [formGroup]="coachCommentForm" class="p-grid">
+      <div class="p-col-4 p-offset-2">
+        <textarea formControlName="comment" type="text" pInputText></textarea>
+      </div>
+      <label class="global-form-label p-col-6">
+        Commentaire
+        <span class="global-form-required">*</span>
+      </label>
+      <div class="p-col-4 p-offset-2">
+        <p-rating
+          [stars]="10"
+          [cancel]="false"
+          iconOnClass="fas fa-star"
+          iconOffClass="far fa-star"
+          formControlName="collectiveRating">
+        </p-rating>
+      </div>
+      <label class="global-form-label p-col-6">
+        Collectif
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-4 p-offset-2">
+        <p-rating
+          [stars]="10"
+          [cancel]="false"
+          iconOnClass="fas fa-star"
+          iconOffClass="far fa-star"
+          formControlName="combativenessRating">
+        </p-rating>
+      </div>
+      <label class="global-form-label p-col-6">
+        Combativité
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-4 p-offset-2">
+        <p-rating
+          [stars]="10"
+          [cancel]="false"
+          iconOnClass="fas fa-star"
+          iconOffClass="far fa-star"
+          formControlName="offensiveRating">
+        </p-rating>
+      </div>
+      <label class="global-form-label p-col-6">
+        Attaque
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-4 p-offset-2">
+        <p-rating
+          [stars]="10"
+          [cancel]="false"
+          iconOnClass="fas fa-star"
+          iconOffClass="far fa-star"
+          formControlName="defensiveRating">
+        </p-rating>
+      </div>
+      <label class="global-form-label p-col-6">
+        Défense
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-4 p-offset-2">
+        <p-rating
+          [stars]="10"
+          [cancel]="false"
+          iconOnClass="fas fa-star"
+          iconOffClass="far fa-star"
+          formControlName="technicalRating">
+        </p-rating>
+      </div>
+      <label class="global-form-label p-col-6">
+        Technique
+        <span class="global-form-required">*</span>
+      </label>
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-right">
+          <p-button (click)="sendCoachComment()" label="Valider" icon="fas fa-check" [disabled]="coachCommentForm.invalid"></p-button>
+        </div>
+      </p-toolbar>
+    </form>
   </p-tabPanel>
 </p-tabView>
 <form class="p-grid" [formGroup]="driveForm" *ngIf="createDriveToggle">

@@ -1,27 +1,45 @@
 <div class="team-card-container p-grid" *ngIf="team">
-  <div class="team-card-header p-col-12">
-    <h1 class="team-card-header-name">{{ team.teamName }}</h1>
+  <p-toolbar class="p-col-12" *ngIf="enableCoachOptions">
+    <div class="ui-toolbar-group-left">
+      <p-button (click)="openEventManagerDialog()" class="ui-button-secondary" label="Gérer les rencontres"></p-button>
+      <p-button (click)="openLeaderDialog()" class="ui-button-secondary" label="Définir un capitaine"></p-button>
+    </div>
+  </p-toolbar>
+  <div class="p-col-12 global-separation" *ngIf="enableCoachOptions"></div>
+  <div class="p-col-12 p-xl-8">
+    <div class="p-grid global-section-fill">
+      <h1 class="p-col-12">{{ team.teamName }}</h1>
+      <span class="p-col-3 global-legend">Coach</span>
+      <span class="p-col-3">{{ team.coachFullName }}</span>
+      <span class="p-col-3 global-legend">Catégorie</span>
+      <span class="p-col-3">{{ team.teamCategoryName }}</span>
+    </div>
+    <p-tabView>
+      <p-tabPanel header="Effectif">
+        <div>
+          <app-team-players-list (selectPlayer)="openTeamPlayerEditDialog($event)" [players]="players" [enableEditionTools]="enableCoachOptions"></app-team-players-list>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Évolution">
+        <p-chart type="line" [options]="lineChartOptions" [data]="evolutionStats"></p-chart>
+      </p-tabPanel>
+    </p-tabView>
   </div>
-  <div class="team-card-player-container p-col-8">
-    <app-team-players-list (selectPlayer)="selectPlayer($event)" [players]="players" [enableEditionTools]="enableCoachOptions"></app-team-players-list>
-  </div>
-  <div class="team-card-side-display p-col-4 p-grid global-section">
-    <h3 class="p-col-12">Dernier match</h3>
-    <p-chart class="p-col-12" type="radar" [options]="chartOptions" [data]="lastMatchStats"></p-chart>
-
-    <span class="p-col-4 global-legend">Coach</span>
-    <span class="p-col-8">{{ team.coachFullName }}</span>
-    <span class="p-col-4 global-legend">Catégorie</span>
-    <span class="p-col-8">{{ team.teamCategoryName }}</span>
-
-    <div class="p-col-12 global-separation"></div>
-
-    <h3 class="p-col-12">Rencontres</h3>
-    <app-team-match-list class="p-col-12" [matches]="matches" [enableDriveOptions]="true"></app-team-match-list>
-    <p-toolbar class="p-col-12" *ngIf="enableCoachOptions">
-      <div class="ui-toolbar-group-right">
-        <p-button (click)="openEventManagerDialog()" class="ui-button-info" label="Gérer les rencontres"></p-button>
+  <div class="p-col-12 p-xl-4">
+    <div class="p-grid global-section no-padding">
+      <div class="p-col-12 p-lg-6 p-xl-12 p-grid no-padding">
+        <h3 class="p-col-12">Calendrier</h3>
+        <p-chart class="p-col-12" type="radar" [options]="radarChartOptions" [data]="lastMatchStats"></p-chart>
       </div>
-    </p-toolbar>
+      <div class="p-col-12 p-lg-6 p-xl-12 p-grid no-padding">
+        <app-team-match-list
+          class="p-col-12"
+          [matches]="matches"
+          [enableCoachOptions]="enableCoachOptions"
+          [enableDriveOptions]="true"
+          (matchChange)="refreshMatches()">
+        </app-team-match-list>
+      </div>
+    </div>
   </div>
 </div>

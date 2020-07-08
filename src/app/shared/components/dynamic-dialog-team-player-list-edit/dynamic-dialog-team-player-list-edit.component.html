@@ -1,18 +1,23 @@
-<div class="p-grid">
-  {{ player | json }}
-  <span class="p-col-4 p-offset-2 global-legend">Nom</span>
-  <p class="p-col-4">{{ player.fullName }}</p>
-
+<form [formGroup]="teamPlayerDetailForm" class="p-grid">
   <span class="p-col-4 p-offset-2 global-legend">Numéro de tel</span>
   <p class="p-col-4">{{ player.phoneNumber }}</p>
 
   <span class="p-col-4 p-offset-2 global-legend">Adresse</span>
   <p class="p-col-4">{{ player.address }}, {{ player.postcode }} {{ player.city }}</p>
 
-  <span class="p-col-4 p-offset-2 global-legend">Position</span>
-  <div class="p-col-4">
-    <p-dropdown appendTo="body" [options]="positionOptions"></p-dropdown>
+  <div class="p-col-4 p-offset-2">
+    <p-spinner min="1" max="40" formControlName="number" placeholder="Numéro souhaité: {{ player.requestedJerseyNumber }}"></p-spinner>
   </div>
+  <label class="global-form-label p-col-6">
+    Numéro de maillot
+  </label>
+
+  <div class="p-col-4 p-offset-2">
+    <p-dropdown appendTo="body" [options]="positionOptions" formControlName="idPosition"></p-dropdown>
+  </div>
+  <label class="global-form-label p-col-6">
+    Poste
+  </label>
 
   <div class="p-col-12 global-separation"></div>
   <p-toolbar class="p-col-12">
@@ -20,7 +25,7 @@
       <p-button (click)="cancel()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="updatePlayer()" label="Valider" icon="fas fa-check"></p-button>
+      <p-button (click)="updatePlayer()" label="Valider" icon="fas fa-check" [disabled]="teamPlayerDetailForm.invalid"></p-button>
     </div>
   </p-toolbar>
-</div>
+</form>

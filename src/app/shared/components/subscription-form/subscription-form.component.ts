@@ -5,6 +5,7 @@ import {TeamService} from '../../services/api/team/team.service';
 import {ManagementService} from '../../services/api/management/management.service';
 import {GouvService} from '../../services/gouv/gouv.service';
 import Season from '../../models/entities/Season';
+import AppConstants from '../../AppConstants';
 
 @Component({
   selector: 'app-subscription-form',
@@ -85,16 +86,7 @@ export class SubscriptionFormComponent implements OnInit {
     { label: 'Taille', value: null }
   ];
 
-  public calendarLanguage = {
-    firstDayOfWeek: 1,
-    dayNames: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-    dayNamesShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-    dayNamesMin: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-    monthNames: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
-    monthNamesShort: [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
-    today: 'Aujourd\'hui',
-    clear: 'Effacer'
-  };
+  public calendarLanguage: any;
   public minBirthDateValue = new Date('01/01/1900');
   public maxBirthDateValue = new Date();
 
@@ -111,6 +103,7 @@ export class SubscriptionFormComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.activeStep = -1;
+    this.calendarLanguage = AppConstants.CALENDAR_OPTIONS;
   }
 
   ngOnInit() {

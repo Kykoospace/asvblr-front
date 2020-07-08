@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import PlayerTeam from '../../models/entities/PlayerTeam';
+import TeamPlayer from '../../models/entities/TeamPlayer';
 
 @Component({
   selector: 'app-team-players-list',
@@ -12,16 +12,16 @@ export class TeamPlayersListComponent implements OnInit {
   public enableEditionTools: boolean = false;
 
   @Input()
-  public players: PlayerTeam[];
+  public players: TeamPlayer[];
 
   @Output()
-  public selectPlayer: EventEmitter<PlayerTeam> = new EventEmitter();
+  public selectPlayer: EventEmitter<TeamPlayer> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {}
 
-  public onSelectPlayer(player: PlayerTeam): void {
+  public onSelectPlayer(player: TeamPlayer): void {
     if (this.enableEditionTools) {
       this.selectPlayer.emit(player);
     }

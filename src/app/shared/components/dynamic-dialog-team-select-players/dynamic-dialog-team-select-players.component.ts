@@ -30,7 +30,7 @@ export class DynamicDialogTeamSelectPlayersComponent implements OnInit {
   ngOnInit(): void {
     forkJoin({
       players: this.teamService.getAllPlayers(),
-      teamPlayers: this.teamService.getAllPlayersTeam(this.idTeam),
+      teamPlayers: this.teamService.getAllTeamPlayers(this.idTeam),
       subscriptionCategories: this.teamService.getAllSubscriptionCategories()
     })
       .subscribe(

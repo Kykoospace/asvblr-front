@@ -3,6 +3,7 @@ import Match from '../../models/entities/Match';
 import {TeamService} from '../../services/api/team/team.service';
 import {DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import AppConstants from '../../AppConstants';
 
 @Component({
   selector: 'app-dynamic-dialog-team-event-manager',
@@ -18,16 +19,7 @@ export class DynamicDialogTeamEventManagerComponent implements OnInit {
 
   public matchForm: FormGroup;
 
-  public calendarLanguage = {
-    firstDayOfWeek: 1,
-    dayNames: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-    dayNamesShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-    dayNamesMin: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-    monthNames: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
-    monthNamesShort: [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
-    today: 'Aujourd\'hui',
-    clear: 'Effacer'
-  };
+  public calendarLanguage: any;
 
   constructor(
     private teamService: TeamService,
@@ -37,6 +29,7 @@ export class DynamicDialogTeamEventManagerComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.idTeam = this.config.data.idTeam;
+    this.calendarLanguage = AppConstants.CALENDAR_OPTIONS;
   }
 
   ngOnInit(): void {

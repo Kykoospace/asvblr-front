@@ -1,7 +1,21 @@
-<app-team-match-card
-  *ngFor="let match of matches"
-  [match]="match"
-  [selectable]="true"
-  (selectMatch)="selectMatch($event)">
-</app-team-match-card>
+<p-tabView>
+  <p-tabPanel header="Prochainement" *ngIf="futuresMatches.length > 0">
+    <div class="global-listing-container">
+      <app-team-match-card
+        *ngFor="let match of futuresMatches"
+        [match]="match"
+        [selectable]="true"
+        (selectMatch)="selectMatch($event)">
+      </app-team-match-card>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Jouées" *ngIf="passedMatches.length > 0">
+    <app-team-match-card
+      *ngFor="let match of passedMatches"
+      [match]="match"
+      [selectable]="true"
+      (selectMatch)="selectMatch($event)">
+    </app-team-match-card>
+  </p-tabPanel>
+</p-tabView>
 <p *ngIf="matches?.length === 0">Aucune rencontre</p>

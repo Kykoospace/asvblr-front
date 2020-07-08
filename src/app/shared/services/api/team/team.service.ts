@@ -14,7 +14,7 @@ import Season from '../../../models/entities/Season';
 import ClothingSize from '../../../models/entities/ClothingSize';
 import Document from '../../../models/entities/Document';
 import Team from '../../../models/entities/Team';
-import PlayerTeam from '../../../models/entities/PlayerTeam';
+import TeamPlayer from '../../../models/entities/TeamPlayer';
 import SubscriptionCategory from '../../../models/entities/SubscriptionCategory';
 import TeamCategory from '../../../models/entities/TeamCategory';
 import TeamList from '../../../models/responses/TeamList';
@@ -50,6 +50,14 @@ export class TeamService {
 
   public getPlayer(idPlayer: number): Observable<Player> {
     return this.http.get<Player>(this.apiBaseUrl + 'players/' + idPlayer);
+  }
+
+  public updatePlayer(idPlayer: number, player: Player): Observable<Player> {
+    return this.http.put<Player>(
+      this.apiBaseUrl + 'players/' + idPlayer,
+      player,
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
   public getAllPlayerNotInTeam(idTeam: number): Observable<Player[]> {
@@ -125,8 +133,8 @@ export class TeamService {
     return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach', { idCoach }, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public getAllPlayersTeam(idTeam: number): Observable<PlayerTeam[]> {
-    return this.http.get<PlayerTeam[]>(this.apiBaseUrl + 'teams/' + idTeam + '/players')
+  public getAllTeamPlayers(idTeam: number): Observable<TeamPlayer[]> {
+    return this.http.get<TeamPlayer[]>(this.apiBaseUrl + 'teams/' + idTeam + '/players')
       .pipe(map(
         players => {
           players.forEach(
@@ -137,11 +145,19 @@ export class TeamService {
       ));
   }
 
-  public addPlayerToTeam(idTeam: number, players: any): Observable<Team> {
+  public addTeamPlayer(idTeam: number, players: any): Observable<Team> {
     return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/players', players, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public removePlayerFromTeam(idTeam: number, idsPlayer: any): Observable<any> {
+  public updateTeamPlayer(idTeam: number, idPlayer: number, status: any): Observable<TeamPlayer> {
+    return this.http.put<TeamPlayer>(
+      this.apiBaseUrl + 'teams/' + idTeam + '/players/' + idPlayer,
+      status,
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public removeTeamPlayer(idTeam: number, idsPlayer: any): Observable<any> {
     return this.http.request('delete', this.apiBaseUrl + 'teams/' + idTeam + '/players', { body: idsPlayer, headers: this.authService.getAuthorizationHeader() });
   }
 
@@ -151,6 +167,16 @@ export class TeamService {
         matches => {
           matches.forEach(match => match.date = new Date(match.date));
           return matches;
+        }
+      ));
+  }
+
+  public getLastTeamMatch(idTeam: number): Observable<Match> {
+    return this.http.get<Match>(this.apiBaseUrl + 'teams/' + idTeam + '/last-match')
+      .pipe(map(
+        match => {
+          match.date = new Date(match.date);
+          return match;
         }
       ));
   }
@@ -357,6 +383,20 @@ export class TeamService {
         drives => {
           drives.forEach(drive => drive.date = new Date(drive.date));
           return drives;
+        }
+      ));
+  }
+
+  public addMatchCoachComment(idMatch: number, comment: any): Observable<Match> {
+    return  this.http.patch<Match>(
+      this.apiBaseUrl + 'matches/' + idMatch,
+      comment,
+      { headers: this.authService.getAuthorizationHeader() }
+    )
+      .pipe(map(
+        match => {
+          match.date = new Date(match.date);
+          return match;
         }
       ));
   }

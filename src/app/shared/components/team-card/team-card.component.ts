@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import PlayerTeam from '../../models/entities/PlayerTeam';
+import TeamPlayer from '../../models/entities/TeamPlayer';
 import {TeamService} from '../../services/api/team/team.service';
 import {forkJoin} from 'rxjs';
 import TeamList from '../../models/responses/TeamList';
@@ -26,31 +26,21 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
   @Input()
   public enableCoachOptions: boolean = false;
 
-  public players: PlayerTeam[] = [];
+  public players: TeamPlayer[] = [];
   public matches: Match[];
+  public evolutionStats: any;
   public lastMatchStats: any;
 
-  public chartOptions = {
-    legend: {
-      position: 'bottom',
-      labels: {
-        fontSize: 14,
-        padding: 12,
-        fontFamily: 'Roboto',
-        fontColor: '#303030'
-      }
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      }
-    }
-  };
+  public lineChartOptions: any;
+  public radarChartOptions: any;
 
   constructor(
     private teamService: TeamService,
     private dialogService: DialogService
-  ) { }
+  ) {
+    this.lineChartOptions = AppConstants.LINE_CHART_OPTIONS;
+    this.radarChartOptions = AppConstants.RADAR_CHART_OPTIONS;
+  }
 
   ngAfterViewInit(): void {
     this.refreshTeam();
@@ -62,9 +52,9 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
 
   public refreshTeam() {
     const requests = {
-      players: this.teamService.getAllPlayersTeam(this.team.id),
+      players: this.teamService.getAllTeamPlayers(this.team.id),
       matches: this.teamService.getAllTeamMatches(this.team.id),
-      // TODO: lastMatch
+      lastMatch: this.teamService.getLastTeamMatch(this.team.id)
     };
 
     forkJoin(requests)
@@ -72,39 +62,103 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
         (results: any) => {
           this.players = results.players;
           this.matches = results.matches;
-
-          // TODO: lastMatch
-          this.lastMatchStats = {
-            labels: ['Collectif', 'Combativité', 'Attaque', 'Défense', 'Technique'],
-            datasets: [{
-              data: [8, 7, 7, 6, 4],
-              label: 'Antony 23/04/2020',
-              backgroundColor: 'rgba(0, 166, 156, .2)',
-              borderColor: AppConstants.getColor(),
-              pointBackgroundColor: AppConstants.getColor(),
-              pointBorderColor: '#ffffff',
-              pointHoverBackgroundColor: '#ffffff',
-              pointHoverBorderColor: AppConstants.getColor()
-            }]
-          };
+          this.lastMatchStats = Match.getMatchData(results.lastMatch);
+          this.setEvolutionStats();
         },
         err => console.error(err)
       );
   }
 
-  public selectPlayer(player: PlayerTeam) {
+  public refreshPlayers(): void {
+    this.teamService.getAllTeamPlayers(this.team.id)
+      .subscribe(
+        players => this.players = players,
+        err => console.error(err)
+      );
+  }
+
+  public refreshMatches(): void {
+    this.teamService.getAllTeamMatches(this.team.id)
+      .subscribe(
+        matches => {
+          this.matches = matches;
+          this.setEvolutionStats();
+        },
+        err => console.error(err)
+      );
+  }
+
+  public setEvolutionStats(): void {
+    const labels: string[] = [];
+    const collectifDataset: number[] = [];
+    const combativenessDataset: number[] = [];
+    const offensiveDataset: number[] = [];
+    const defensiveDataset: number[] = [];
+    const technicalDataset: number[] = [];
+    this.matches
+      .filter(match => match.date.getTime() < Date.now())
+      .filter(match => match.comment)
+      .forEach(
+      match => {
+        labels.push(match.oppositeTeam + ' ' + (match.type ? '(aller)' : '(retour)'));
+        collectifDataset.push(match.collectiveRating);
+        combativenessDataset.push(match.combativenessRating);
+        offensiveDataset.push(match.offensiveRating);
+        defensiveDataset.push(match.defensiveRating);
+        technicalDataset.push(match.technicalRating);
+      }
+    );
+    this.evolutionStats = {
+      labels,
+      datasets: [
+        {
+          label: 'Collectif',
+          data: collectifDataset,
+          fill: false,
+          borderColor: AppConstants.getColor(0)
+        },
+        {
+          label: 'Combativité',
+          data: combativenessDataset,
+          fill: false,
+          borderColor: AppConstants.getColor(1)
+        },
+        {
+          label: 'Attaque',
+          data: offensiveDataset,
+          fill: false,
+          borderColor: AppConstants.getColor(2)
+        },
+        {
+          label: 'Défense',
+          data: defensiveDataset,
+          fill: false,
+          borderColor: AppConstants.getColor(3)
+        },
+        {
+          label: 'Technique',
+          data: technicalDataset,
+          fill: false,
+          borderColor: AppConstants.getColor(4)
+        },
+      ]
+    };
+  }
+
+  public openTeamPlayerEditDialog(player: TeamPlayer) {
     if (this.enableCoachOptions) {
       this.playerEditDialogRef = this.dialogService.open(
         DynamicDialogTeamPlayerListEditComponent, {
-          header: 'Fiche du joueur',
+          header: player.fullName,
           data: {
+            idTeam: this.team.id,
             player
           }
         }
       );
       this.playerEditDialogRef.onClose
         .subscribe(
-          () => this.refreshTeam()
+          () => this.refreshPlayers()
         );
     }
   }
@@ -122,5 +176,9 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
       .subscribe(
         () => this.refreshTeam()
       );
+  }
+
+  public openLeaderDialog() {
+
   }
 }

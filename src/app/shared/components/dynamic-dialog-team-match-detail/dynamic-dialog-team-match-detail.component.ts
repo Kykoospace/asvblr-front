@@ -6,6 +6,7 @@ import Drive from '../../models/entities/Drive';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/api/auth/auth.service';
 import {forkJoin} from 'rxjs';
+import AppConstants from '../../AppConstants';
 
 @Component({
   selector: 'app-dynamic-dialog-team-match-detail',
@@ -17,20 +18,13 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
   public createDriveToggle: boolean;
 
   public match: Match;
+  public enableCoachOptions: boolean = false;
   public enableDriveOptions: boolean = false;
   public drives: Drive[];
   public driveForm: FormGroup;
-
-  public calendarLanguage = {
-    firstDayOfWeek: 1,
-    dayNames: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-    dayNamesShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-    dayNamesMin: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-    monthNames: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
-    monthNamesShort: [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
-    today: 'Aujourd\'hui',
-    clear: 'Effacer'
-  };
+  public coachCommentForm: FormGroup;
+  public matchStats: any;
+  public radarChartOptions: any;
 
   constructor(
     private teamService: TeamService,
@@ -42,7 +36,10 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
   ) {
     this.createDriveToggle = false;
     this.match = this.config.data.match;
+    this.enableCoachOptions = this.config.data.enableCoachOptions;
     this.enableDriveOptions = this.config.data.enableDriveOptions;
+    this.matchStats = Match.getMatchData(this.match);
+    this.radarChartOptions = AppConstants.RADAR_CHART_OPTIONS;
   }
 
   ngOnInit(): void {
@@ -98,6 +95,15 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
           returnPlace.updateValueAndValidity();
         }
       );
+
+    this.coachCommentForm = this.formBuilder.group({
+      comment: [this.match.comment, [ Validators.required ]],
+      collectiveRating: [this.match.collectiveRating, [ Validators.required ]],
+      combativenessRating: [this.match.combativenessRating, [ Validators.required ]],
+      offensiveRating: [this.match.offensiveRating, [ Validators.required ]],
+      defensiveRating: [this.match.defensiveRating, [ Validators.required ]],
+      technicalRating: [this.match.technicalRating, [ Validators.required ]]
+    });
   }
 
   private refreshDrives(): void {
@@ -213,5 +219,26 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
           this.refreshDrives();
         }
       );
+  }
+
+  public matchPassed(): boolean {
+    return this.match.date.getTime() < Date.now();
+  }
+
+  public sendCoachComment(): void {
+    if (this.coachCommentForm.valid) {
+      this.teamService.addMatchCoachComment(this.match.id, this.coachCommentForm.value)
+        .subscribe(
+          match => {
+            this.match = match;
+            this.matchStats = Match.getMatchData(this.match);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Commentaire de match ajouté'
+            });
+          },
+          err => console.error(err)
+        );
+    }
   }
 }

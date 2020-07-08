@@ -1,4 +1,4 @@
-export default interface PlayerTeam {
+export default interface TeamPlayer {
   idPlayer: number;
   firstName: string;
   lastName: string;

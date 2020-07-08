@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TeamCardComponent} from '../../shared/components/team-card/team-card.component';
 import TeamList from '../../shared/models/responses/TeamList';

@@ -6,7 +6,7 @@ import {DynamicDialogTeamSelectPlayersComponent} from '../../../shared/component
 import {DynamicDialogTeamEventManagerComponent} from '../../../shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
 import Player from '../../../shared/models/entities/Player';
 import {forkJoin} from 'rxjs';
-import PlayerTeam from '../../../shared/models/entities/PlayerTeam';
+import TeamPlayer from '../../../shared/models/entities/TeamPlayer';
 import {DynamicDialogTeamSelectCoachComponent} from '../../../shared/components/dynamic-dialog-team-select-coach/dynamic-dialog-team-select-coach.component';
 import TeamList from '../../../shared/models/responses/TeamList';
 
@@ -21,7 +21,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   public coachSelectorDialogRef: DynamicDialogRef;
 
   public team: TeamList;
-  public teamPlayers: PlayerTeam[];
+  public teamPlayers: TeamPlayer[];
 
   constructor(
     private router: Router,
@@ -69,7 +69,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   }
 
   public refreshPlayers(): void {
-    this.teamService.getAllPlayersTeam(this.team.id)
+    this.teamService.getAllTeamPlayers(this.team.id)
       .subscribe(
         teamPlayers => this.teamPlayers = teamPlayers,
         err => console.error(err)
@@ -113,7 +113,7 @@ export class TeamComponent implements OnInit, OnDestroy {
     const playersToAdd: any[] = [];
     const playersToRemove: number[] = [];
 
-    this.teamService.getAllPlayersTeam(this.team.id)
+    this.teamService.getAllTeamPlayers(this.team.id)
       .subscribe(
         oldTeamPlayers => {
           newTeamPlayers.forEach(
@@ -131,10 +131,10 @@ export class TeamComponent implements OnInit, OnDestroy {
 
           const requests: any = {};
           if (playersToAdd.length > 0) {
-            requests.addPlayers = this.teamService.addPlayerToTeam(this.team.id, playersToAdd);
+            requests.addPlayers = this.teamService.addTeamPlayer(this.team.id, playersToAdd);
           }
           if (playersToRemove.length > 0) {
-            requests.removePlayers = this.teamService.removePlayerFromTeam(this.team.id, playersToRemove);
+            requests.removePlayers = this.teamService.removeTeamPlayer(this.team.id, playersToRemove);
           }
 
           forkJoin(requests)

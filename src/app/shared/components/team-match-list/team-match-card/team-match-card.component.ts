@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import Match from '../../../models/entities/Match';
+import AppConstants from '../../../AppConstants';
 
 @Component({
   selector: 'app-team-match-card',

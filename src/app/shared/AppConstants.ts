@@ -44,13 +44,6 @@ export default class AppConstants {
     }
   ];
 
-  public static API_ROLE_NAMES: Map<string, string> = new Map<string, string>([
-    ['ROLE_PRESIDENT', 'Président'],
-    ['ROLE_MANAGER', 'Gérant'],
-    ['ROLE_COACH', 'Entraîneur'],
-    ['ROLE_PLAYER', 'Joueur']
-  ]);
-
   public static APP_COLORS = [
     '#00a69c',
     '#004e64',
@@ -58,6 +51,49 @@ export default class AppConstants {
     '#706c61',
     '#899e8b'
   ];
+
+  public static CALENDAR_OPTIONS = {
+    firstDayOfWeek: 1,
+    dayNames: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+    dayNamesShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+    dayNamesMin: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+    monthNames: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+    monthNamesShort: [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+    today: 'Aujourd\'hui',
+    clear: 'Effacer'
+  };
+
+  public static LINE_CHART_OPTIONS = { };
+
+  public static RADAR_CHART_OPTIONS = {
+    scale: {
+      ticks: {
+        suggestedMin: 0,
+        suggestedMax: 10
+      }
+    },
+    legend: {
+      position: 'bottom',
+      labels: {
+        fontSize: 14,
+        padding: 12,
+        fontFamily: 'Roboto',
+        fontColor: '#303030'
+      }
+    },
+    elements: {
+      line: {
+        borderWidth: 2
+      }
+    }
+  };
+
+  public static API_ROLE_NAMES: Map<string, string> = new Map<string, string>([
+    ['ROLE_PRESIDENT', 'Président'],
+    ['ROLE_MANAGER', 'Gérant'],
+    ['ROLE_COACH', 'Entraîneur'],
+    ['ROLE_PLAYER', 'Joueur']
+  ]);
 
   public static getColor(iterator?: number): string {
     if (iterator) {

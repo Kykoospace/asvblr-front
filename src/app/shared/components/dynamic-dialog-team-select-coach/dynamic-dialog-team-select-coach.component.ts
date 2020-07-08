@@ -41,7 +41,7 @@ export class DynamicDialogTeamSelectCoachComponent implements OnInit {
   }
 
   public getCoachName(): string {
-    if (this.coachName) {
+    if (this.coachName !== null) {
       return this.coachName;
     }
     return 'Aucun coach';
