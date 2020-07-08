@@ -151,7 +151,7 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
         DynamicDialogTeamPlayerListEditComponent, {
           header: player.fullName,
           data: {
-            idTeam: this.team.id,
+            team: this.team,
             player
           }
         }
@@ -176,9 +176,5 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
       .subscribe(
         () => this.refreshTeam()
       );
-  }
-
-  public openLeaderDialog() {
-
   }
 }

@@ -1,11 +1,4 @@
 <div class="team-card-container p-grid" *ngIf="team">
-  <p-toolbar class="p-col-12" *ngIf="enableCoachOptions">
-    <div class="ui-toolbar-group-left">
-      <p-button (click)="openEventManagerDialog()" class="ui-button-secondary" label="Gérer les rencontres"></p-button>
-      <p-button (click)="openLeaderDialog()" class="ui-button-secondary" label="Définir un capitaine"></p-button>
-    </div>
-  </p-toolbar>
-  <div class="p-col-12 global-separation" *ngIf="enableCoachOptions"></div>
   <div class="p-col-12 p-xl-8">
     <div class="p-grid global-section-fill">
       <h1 class="p-col-12">{{ team.teamName }}</h1>
@@ -17,7 +10,12 @@
     <p-tabView>
       <p-tabPanel header="Effectif">
         <div>
-          <app-team-players-list (selectPlayer)="openTeamPlayerEditDialog($event)" [players]="players" [enableEditionTools]="enableCoachOptions"></app-team-players-list>
+          <app-team-players-list
+            (selectPlayer)="openTeamPlayerEditDialog($event)"
+            [players]="players"
+            [idPlayerLeader]="team.idPlayerLeader"
+            [enableEditionTools]="enableCoachOptions">
+          </app-team-players-list>
         </div>
       </p-tabPanel>
       <p-tabPanel header="Évolution">
@@ -28,7 +26,10 @@
   <div class="p-col-12 p-xl-4">
     <div class="p-grid global-section no-padding">
       <div class="p-col-12 p-lg-6 p-xl-12 p-grid no-padding">
-        <h3 class="p-col-12">Calendrier</h3>
+        <h3 class="p-col-6">Calendrier</h3>
+        <div class="p-col-6 global-align-right">
+          <p-button (click)="openEventManagerDialog()" class="ui-button-info" label="Gérer les rencontres"></p-button>
+        </div>
         <p-chart class="p-col-12" type="radar" [options]="radarChartOptions" [data]="lastMatchStats"></p-chart>
       </div>
       <div class="p-col-12 p-lg-6 p-xl-12 p-grid no-padding">

@@ -11,5 +11,10 @@
     </div>
   </p-toolbar>
   <h1 class="p-col-12">{{ team.teamName }}</h1>
-  <app-team-players-list class="p-col-12" [enableEditionTools]="true" [players]="teamPlayers"></app-team-players-list>
+  <app-team-players-list
+    class="p-col-12"
+    [enableEditionTools]="true"
+    [idPlayerLeader]="team.idPlayerLeader"
+    [players]="teamPlayers">
+  </app-team-players-list>
 </div>

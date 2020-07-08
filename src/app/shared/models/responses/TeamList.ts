@@ -6,4 +6,8 @@ export default interface TeamList {
   coachFullName: string;
   coachFirstName: string;
   coachLastName: string;
+  idPlayerLeader: number;
+  leaderFirstName: string;
+  leaderLastName: string;
+  leaderFullName: string;
 }

@@ -1,6 +1,7 @@
 <p-table [value]="players">
   <ng-template pTemplate="header">
     <tr>
+      <th></th>
       <th>Numéro</th>
       <th>Joueur</th>
       <th>Poste</th>
@@ -9,6 +10,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-player>
     <tr (click)="onSelectPlayer(player)" [class.ui-selectable-row]="enableEditionTools">
+      <th>
+        <i class="fas fa-crown" *ngIf="player.idPlayer === idPlayerLeader"></i>
+      </th>
       <td>{{ player.jerseyNumber }}</td>
       <td>{{ player.firstName + ' ' + player.lastName.toUpperCase() }}</td>
       <td>{{ player.positionName }}</td>

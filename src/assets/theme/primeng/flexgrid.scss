@@ -9,7 +9,7 @@
     padding: $prime-ng-flexgrid-item-space-between !important;
   }
 
-  &.no-padding {
+  &.no-padding > * {
     padding: 0px !important;
   }
 }

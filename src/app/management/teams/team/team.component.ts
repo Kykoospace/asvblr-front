@@ -190,7 +190,7 @@ export class TeamComponent implements OnInit, OnDestroy {
       .subscribe(
         (idUser: number) => {
           if (idUser) {
-            this.teamService.addCoachToTeam(this.team.id, idUser)
+            this.teamService.setTeamCoach(this.team.id, idUser)
               .subscribe(
                 team => {
                   this.refreshTeam();

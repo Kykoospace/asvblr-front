@@ -106,7 +106,7 @@ export class UsersComponent implements OnInit {
                   if (data.type) {
                     // Si coach :
                     const calls = [];
-                    data.teams.forEach(id => calls.push(this.teamService.addCoachToTeam(id, user.id)));
+                    data.teams.forEach(id => calls.push(this.teamService.setTeamCoach(id, user.id)));
                     forkJoin(calls).subscribe(() => this.refreshUsers());
                   } else {
                     // Si gérant :

@@ -3,7 +3,7 @@ import {DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
 import {TeamService} from '../../services/api/team/team.service';
 import TeamPlayer from '../../models/entities/TeamPlayer';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {forkJoin} from 'rxjs';
+import TeamList from '../../models/responses/TeamList';
 
 @Component({
   selector: 'app-dynamic-dialog-team-player-list-edit',
@@ -12,7 +12,7 @@ import {forkJoin} from 'rxjs';
 })
 export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
 
-  public idTeam: number;
+  public team: TeamList;
   public player: TeamPlayer;
   public positionOptions = [
     { label: 'Poste', value: null }
@@ -26,7 +26,7 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
     private ref: DynamicDialogRef,
     private formBuilder: FormBuilder
   ) {
-    this.idTeam = this.config.data.idTeam;
+    this.team = this.config.data.team;
     this.player = this.config.data.player;
   }
 
@@ -56,7 +56,7 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
 
   public updatePlayer(): void {
     if (this.teamPlayerDetailForm.valid) {
-      this.teamService.updateTeamPlayer(this.config.data.idTeam, this.player.idPlayer, this.teamPlayerDetailForm.value)
+      this.teamService.updateTeamPlayer(this.team.id, this.player.idPlayer, this.teamPlayerDetailForm.value)
         .subscribe(
             () => {
               this.messageService.add({
@@ -68,5 +68,19 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
             err => console.error(err)
           );
     }
+  }
+
+  public setLeader(): void {
+    this.teamService.setTeamLeader(this.team.id, this.player.idPlayer)
+      .subscribe(
+        team => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Joueur promu capitaine'
+          });
+          this.team.idPlayerLeader = this.player.idPlayer;
+        },
+        err => console.error(err)
+      );
   }
 }

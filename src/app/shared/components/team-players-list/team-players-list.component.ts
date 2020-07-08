@@ -14,6 +14,9 @@ export class TeamPlayersListComponent implements OnInit {
   @Input()
   public players: TeamPlayer[];
 
+  @Input()
+  public idPlayerLeader: number;
+
   @Output()
   public selectPlayer: EventEmitter<TeamPlayer> = new EventEmitter();
 

@@ -80,7 +80,10 @@ export class TeamService {
       )
       .pipe(map(
         teams => {
-          teams.forEach(team => team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase());
+          teams.forEach(team => {
+            team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase();
+            team.leaderFullName = team.leaderFirstName + ' ' + team.leaderLastName.toUpperCase();
+          });
           return teams;
         }
       ));
@@ -116,6 +119,7 @@ export class TeamService {
       .pipe(map(
         team => {
           team.coachFullName = team.coachFirstName + ' ' + team.coachLastName.toUpperCase();
+          team.leaderFullName = team.leaderFirstName + ' ' + team.leaderLastName.toUpperCase();
           return team;
         }
       ));
@@ -129,8 +133,20 @@ export class TeamService {
     return this.http.delete<any>(this.apiBaseUrl + 'teams/' + idTeam, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public addCoachToTeam(idTeam: number, idCoach: number): Observable<Team> {
-    return this.http.post<Team>(this.apiBaseUrl + 'teams/' + idTeam + '/coach', { idCoach }, { headers: this.authService.getAuthorizationHeader() });
+  public setTeamCoach(idTeam: number, idCoach: number): Observable<Team> {
+    return this.http.post<Team>(
+      this.apiBaseUrl + 'teams/' + idTeam + '/coach',
+      { idCoach },
+      { headers: this.authService.getAuthorizationHeader() }
+      );
+  }
+
+  public setTeamLeader(idTeam: number, idLeader: number): Observable<Team> {
+    return this.http.post<Team>(
+      this.apiBaseUrl + 'teams/' + idTeam + '/leader',
+      { idLeader },
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
   public getAllTeamPlayers(idTeam: number): Observable<TeamPlayer[]> {
