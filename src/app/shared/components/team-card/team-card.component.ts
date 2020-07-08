@@ -8,6 +8,7 @@ import {TeamMatchListComponent} from '../team-match-list/team-match-list.compone
 import {DialogService, DynamicDialogRef} from 'primeng';
 import {DynamicDialogTeamPlayerListEditComponent} from '../dynamic-dialog-team-player-list-edit/dynamic-dialog-team-player-list-edit.component';
 import {DynamicDialogTeamEventManagerComponent} from '../dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
+import AppConstants from '../../AppConstants';
 
 @Component({
   selector: 'app-team-card',
@@ -27,6 +28,24 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
 
   public players: PlayerTeam[] = [];
   public matches: Match[];
+  public lastMatchStats: any;
+
+  public chartOptions = {
+    legend: {
+      position: 'bottom',
+      labels: {
+        fontSize: 14,
+        padding: 12,
+        fontFamily: 'Roboto',
+        fontColor: '#303030'
+      }
+    },
+    elements: {
+      line: {
+        borderWidth: 2
+      }
+    }
+  };
 
   constructor(
     private teamService: TeamService,
@@ -44,7 +63,8 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
   public refreshTeam() {
     const requests = {
       players: this.teamService.getAllPlayersTeam(this.team.id),
-      matches: this.teamService.getAllTeamMatches(this.team.id)
+      matches: this.teamService.getAllTeamMatches(this.team.id),
+      // TODO: lastMatch
     };
 
     forkJoin(requests)
@@ -52,6 +72,21 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
         (results: any) => {
           this.players = results.players;
           this.matches = results.matches;
+
+          // TODO: lastMatch
+          this.lastMatchStats = {
+            labels: ['Collectif', 'Combativité', 'Attaque', 'Défense', 'Technique'],
+            datasets: [{
+              data: [8, 7, 7, 6, 4],
+              label: 'Antony 23/04/2020',
+              backgroundColor: 'rgba(0, 166, 156, .2)',
+              borderColor: AppConstants.getColor(),
+              pointBackgroundColor: AppConstants.getColor(),
+              pointBorderColor: '#ffffff',
+              pointHoverBackgroundColor: '#ffffff',
+              pointHoverBorderColor: AppConstants.getColor()
+            }]
+          };
         },
         err => console.error(err)
       );

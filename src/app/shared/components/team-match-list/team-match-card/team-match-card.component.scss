@@ -3,7 +3,7 @@
 .team-match-card {
   border-radius: $global-border-radius;
   border: 1px solid $global-border-color;
-  margin-bottom: $global-spacing;
+  margin-top: $global-spacing;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,7 +13,7 @@
   &.selectable {
     cursor: pointer;
 
-    &:hover {
+    &:active {
       background-color: $global-bkg-active-color;
     }
   }

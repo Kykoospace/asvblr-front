@@ -96,7 +96,11 @@ const routes: Routes = [
           { path: ':id', component: PlayComponent }
         ]
       },
-      { path: 'coach', component: CoachComponent },
+      { path: 'coach',
+        children: [
+          { path: ':id', component: CoachComponent }
+        ]
+      },
       {
         path: 'teams',
         children: [

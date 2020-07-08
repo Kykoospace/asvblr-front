@@ -5,16 +5,20 @@
   <div class="team-card-player-container p-col-8">
     <app-team-players-list (selectPlayer)="selectPlayer($event)" [players]="players" [enableEditionTools]="enableCoachOptions"></app-team-players-list>
   </div>
-  <div class="team-card-side-display p-col-4 p-grid">
+  <div class="team-card-side-display p-col-4 p-grid global-section">
+    <h3 class="p-col-12">Dernier match</h3>
+    <p-chart class="p-col-12" type="radar" [options]="chartOptions" [data]="lastMatchStats"></p-chart>
+
     <span class="p-col-4 global-legend">Coach</span>
     <span class="p-col-8">{{ team.coachFullName }}</span>
     <span class="p-col-4 global-legend">Catégorie</span>
     <span class="p-col-8">{{ team.teamCategoryName }}</span>
+
     <div class="p-col-12 global-separation"></div>
 
-    <h3>Rencontres</h3>
+    <h3 class="p-col-12">Rencontres</h3>
     <app-team-match-list class="p-col-12" [matches]="matches" [enableDriveOptions]="true"></app-team-match-list>
-    <p-toolbar class="p-col-12">
+    <p-toolbar class="p-col-12" *ngIf="enableCoachOptions">
       <div class="ui-toolbar-group-right">
         <p-button (click)="openEventManagerDialog()" class="ui-button-info" label="Gérer les rencontres"></p-button>
       </div>

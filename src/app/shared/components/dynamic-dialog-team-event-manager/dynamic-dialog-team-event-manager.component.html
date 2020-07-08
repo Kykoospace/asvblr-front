@@ -40,6 +40,7 @@
           <p-cellEditor>
             <ng-template pTemplate="input">
               <p-calendar
+                appendTo="body"
                 [(ngModel)]="rowData.date"
                 [readonlyInput]="true"
                 [locale]="calendarLanguage"
@@ -115,6 +116,7 @@
     <span class="p-col-2"></span>
     <div class="p-col-4">
       <p-calendar
+        appendTo="body"
         formControlName="date"
         [readonlyInput]="true"
         [locale]="calendarLanguage"

@@ -4,33 +4,33 @@
 
 .ui-calendar {
   width: 100%;
+}
 
-  .ui-datepicker {
-    background-color: $prime-ng-calendar-datepicker-bkg-color;
-    border-radius: $prime-ng-input-border-radius;
-    min-width: 25em !important;
+.ui-datepicker {
+  background-color: $prime-ng-calendar-datepicker-bkg-color;
+  border-radius: $prime-ng-input-border-radius;
+  min-width: 25em !important;
 
-    .ui-datepicker-calendar {
-      td {
-        padding: 9px 6px;
+  .ui-datepicker-calendar {
+    td {
+      padding: 9px 6px;
 
-        a {
-          border-radius: $prime-ng-calendar-datepicker-button-border-radius;
-          cursor: pointer;
+      a {
+        border-radius: $prime-ng-calendar-datepicker-button-border-radius;
+        cursor: pointer;
 
-          &:hover {
-            background-color: $prime-ng-calendar-datepicker-button-hover-color;
-          }
-
-          &.ui-state-active {
-            background-color: $prime-ng-calendar-datepicker-button-active-color;
-            color: $prime-ng-calendar-datepicker-button-active-font-color;
-          }
+        &:hover {
+          background-color: $prime-ng-calendar-datepicker-button-hover-color;
         }
 
-        span {
-          color: $prime-ng-calendar-datepicker-button-disabled-font-color;
+        &.ui-state-active {
+          background-color: $prime-ng-calendar-datepicker-button-active-color;
+          color: $prime-ng-calendar-datepicker-button-active-font-color;
         }
+      }
+
+      span {
+        color: $prime-ng-calendar-datepicker-button-disabled-font-color;
       }
     }
   }

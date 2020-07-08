@@ -87,7 +87,7 @@ export class ManagementComponent implements OnInit {
             playMenu.items.push({
               label: team.teamName,
               icon: 'fas fa-users',
-              route: 'play/' + team.id
+              route: 'coach/' + team.id
             });
           }),
           err => console.error(err)

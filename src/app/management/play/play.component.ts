@@ -9,7 +9,7 @@ import {TeamService} from '../../shared/services/api/team/team.service';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss']
 })
-export class PlayComponent implements AfterViewInit {
+export class PlayComponent implements OnInit {
 
   @ViewChild('teamCardComponent')
   teamCardComponent: TeamCardComponent;
@@ -22,7 +22,7 @@ export class PlayComponent implements AfterViewInit {
     private teamService: TeamService
   ) { }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.route.params.subscribe(
       params => {
         this.teamService.getTeam(params.id)
@@ -32,5 +32,4 @@ export class PlayComponent implements AfterViewInit {
       }
     );
   }
-
 }

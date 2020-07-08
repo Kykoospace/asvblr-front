@@ -6,6 +6,10 @@ export default interface Match {
   date: Date;
   type: boolean;
 
-  rate: number;
   comment: string;
+  collectiveRating: number;
+  combativenessRating: number;
+  offensiveRating: number;
+  defensiveRating: number;
+  technicalRating: number;
 }
