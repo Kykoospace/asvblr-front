@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import Page from '../../../models/paging/Page';
 import {AuthService} from '../auth/auth.service';
 import User from '../../../models/entities/User';
+import Price from '../../../models/entities/Price';
 
 @Injectable({
   providedIn: 'root'
@@ -141,6 +142,23 @@ export class ManagementService {
     return this.http.post(
       'api/mails/contact-mail',
       mail
+    );
+  }
+
+
+  // ------------------------------------------------
+  // Prices routes :
+  // ------------------------------------------------
+
+  public getAllPrices(): Observable<Price[]> {
+    return this.http.get<Price[]>('api/prices');
+  }
+
+  public updatePrices(prices: Price[]): Observable<Price[]> {
+    return this.http.patch<Price[]>(
+      'api/prices',
+      prices,
+      { headers: this.authService.getAuthorizationHeader() }
     );
   }
 

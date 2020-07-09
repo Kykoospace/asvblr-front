@@ -6,13 +6,18 @@ import { AuthService } from '../services/api/auth/auth.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(
+    private authService: AuthService
+  ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next
       .handle(request)
       .pipe(
         catchError(err => {
+          if (err.status === 401) {
+            this.authService.signOut();
+          }
           return throwError(err);
         })
       );

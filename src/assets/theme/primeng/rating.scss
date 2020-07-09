@@ -1,0 +1,13 @@
+// ----------------------------------------
+// RATING :
+// ----------------------------------------
+
+.ui-rating {
+  .ui-rating-icon {
+    color: $global-primary-font-color;
+
+    &:hover {
+      color: $global-accent-color;
+    }
+  }
+}

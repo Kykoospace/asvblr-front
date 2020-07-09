@@ -1,0 +1,23 @@
+<div class="p-grid">
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-left">
+      <p-button
+        (click)="updatePrices()"
+        class="ui-button-success"
+        label="Enregistrer"
+        icon="fas fa-save"
+        [disabled]="!allPricesValid()">
+      </p-button>
+    </div>
+  </p-toolbar>
+  <div class="p-col-12 global-separation"></div>
+</div>
+<div class="p-grid" *ngFor="let price of prices">
+  <div class="p-col-4 p-offset-2">
+    <p-spinner [(ngModel)]="price.price" min="1"></p-spinner>
+  </div>
+  <label class="global-form-label p-col-6">
+    {{ price.name }}
+    <span class="global-form-required">*</span>
+  </label>
+</div>

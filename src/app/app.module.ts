@@ -33,9 +33,6 @@ import {
   ToolbarModule, TooltipModule
 } from 'primeng';
 import { ArticlesComponent } from './management/articles/articles.component';
-import { InformationsComponent } from './management/informations/informations.component';
-import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
-import { SchedulesComponent } from './management/schedules/schedules.component';
 import { SubscriptionsComponent } from './management/subscriptions/subscriptions.component';
 import { SubscriptionComponent
     as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
@@ -44,8 +41,6 @@ import { TeamsComponent } from './management/teams/teams.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
-import { SettingsComponent } from './management/settings/settings.component';
-import { HelpComponent } from './management/help/help.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './login/logout/logout.component';
@@ -79,6 +74,7 @@ import { MatchDriveListComponent } from './shared/components/match-drive-list/ma
 import { MatchDriveCardComponent } from './shared/components/match-drive-list/match-drive-card/match-drive-card.component';
 import { DynamicDialogTeamPlayerListEditComponent } from './shared/components/dynamic-dialog-team-player-list-edit/dynamic-dialog-team-player-list-edit.component';
 import { SubscriptionPaymentModeCardComponent } from './shared/components/subscription-payment-mode-card/subscription-payment-mode-card.component';
+import { PricesComponent } from './management/prices/prices.component';
 
 registerLocaleData(localeFr);
 
@@ -93,17 +89,12 @@ registerLocaleData(localeFr);
     ContactComponent,
     ManagementComponent,
     ArticlesComponent,
-    InformationsComponent,
-    GymnasiumsComponent,
-    SchedulesComponent,
     SubscriptionsComponent,
     PlayersComponent,
     TeamsComponent,
     StatsComponent,
     SeasonsComponent,
     UsersComponent,
-    SettingsComponent,
-    HelpComponent,
     LoginComponent,
     LogoutComponent,
     SubscriptionManagementComponent,
@@ -135,7 +126,8 @@ registerLocaleData(localeFr);
     MatchDriveListComponent,
     MatchDriveCardComponent,
     DynamicDialogTeamPlayerListEditComponent,
-    SubscriptionPaymentModeCardComponent
+    SubscriptionPaymentModeCardComponent,
+    PricesComponent
   ],
   imports: [
     HttpClientModule,

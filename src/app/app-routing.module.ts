@@ -18,9 +18,6 @@ import { LogoutComponent } from './login/logout/logout.component';
 
 import { ManagementComponent } from './management/management.component';
 import { ArticlesComponent } from './management/articles/articles.component';
-import { InformationsComponent } from './management/informations/informations.component';
-import { GymnasiumsComponent } from './management/gymnasiums/gymnasiums.component';
-import { SchedulesComponent } from './management/schedules/schedules.component';
 import { SubscriptionsComponent } from './management/subscriptions/subscriptions.component';
 import { SubscriptionComponent
     as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
@@ -32,20 +29,19 @@ import { TeamComponent
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { UsersComponent } from './management/users/users.component';
-import { SettingsComponent } from './management/settings/settings.component';
-import { HelpComponent } from './management/help/help.component';
-import {DevToolsComponent} from './management/dev-tools/dev-tools.component';
-import {ArticleComponent} from './management/articles/article/article.component';
-import {SandboxComponent} from './management/sandbox/sandbox.component';
-import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
-import {ChangePasswordComponent} from './login/change-password/change-password.component';
-import {MailerComponent} from './management/mailer/mailer.component';
+import { DevToolsComponent } from './management/dev-tools/dev-tools.component';
+import { ArticleComponent } from './management/articles/article/article.component';
+import { SandboxComponent } from './management/sandbox/sandbox.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './login/change-password/change-password.component';
+import { MailerComponent } from './management/mailer/mailer.component';
 
 // Guards import :
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {PlayComponent} from './management/play/play.component';
 import {CoachComponent} from './management/coach/coach.component';
+import {PricesComponent} from './management/prices/prices.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -57,7 +53,8 @@ const routes: Routes = [
       { path: 'teams', component: TeamsMainComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
-      { path: 'subscription', component: SubscriptionMainComponent }
+      { path: 'subscription', component: SubscriptionMainComponent },
+      { path: '**', redirectTo: 'home' }
     ]
   },
   { path: 'login',
@@ -67,7 +64,8 @@ const routes: Routes = [
       { path: 'sign-out', component: LogoutComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'reset-password:token', component: ResetPasswordComponent },
-      { path: 'change-password', component: ChangePasswordComponent }
+      { path: 'change-password', component: ChangePasswordComponent },
+      { path: '**', redirectTo: '/login' }
     ]
   },
   { path: 'management', component: ManagementComponent,
@@ -81,9 +79,7 @@ const routes: Routes = [
           { path: ':id', component: ArticleComponent }
         ]
       },
-      { path: 'informations', component: InformationsComponent },
-      { path: 'gymnasiums', component: GymnasiumsComponent },
-      { path: 'schedules', component: SchedulesComponent },
+      { path: 'prices', component: PricesComponent },
       { path: 'subscriptions',
         children: [
           { path: '', component: SubscriptionsComponent },
@@ -112,10 +108,9 @@ const routes: Routes = [
       { path: 'seasons', component: SeasonsComponent },
       { path: 'stats', component: StatsComponent },
       { path: 'users', component: UsersComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'help', component: HelpComponent },
       { path: 'dev-tools', component: DevToolsComponent },
-      { path: 'sandbox', component: SandboxComponent }
+      { path: 'sandbox', component: SandboxComponent },
+      { path: '**', redirectTo: '/management' }
     ]
   }
 ];

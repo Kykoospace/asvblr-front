@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Match from '../../models/entities/Match';
 import {TeamService} from '../../services/api/team/team.service';
-import {DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
+import {DialogService, DynamicDialogConfig, DynamicDialogRef, MessageService} from 'primeng';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import AppConstants from '../../AppConstants';
 
@@ -26,7 +26,8 @@ export class DynamicDialogTeamEventManagerComponent implements OnInit {
     private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
     private formBuilder: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogService: DialogService
   ) {
     this.idTeam = this.config.data.idTeam;
     this.calendarLanguage = AppConstants.CALENDAR_OPTIONS;

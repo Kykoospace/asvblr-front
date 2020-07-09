@@ -168,7 +168,8 @@ export class SubscriptionFormComponent implements OnInit {
     const secondStep: AbstractControl = this.subscriptionForm.get('secondStep');
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
-    // TODO: remove after test :
+    // remove after test :
+    /*
     firstStep.get('firstName').valueChanges
       .subscribe(
         firstName => {
@@ -177,6 +178,7 @@ export class SubscriptionFormComponent implements OnInit {
           }
         }
       );
+     */
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {

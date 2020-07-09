@@ -13,9 +13,8 @@ export default class AppConstants {
       label: 'Gestion du site',
       items: [
         { label: 'Articles', route: 'articles', icon: 'fas fa-newspaper', privilege: 'ARTICLE_MANAGEMENT' },
-        { label: 'Informations', route: 'informations', icon: 'fas fa-info' },
-        { label: 'Gymnases', route: 'gymnasiums', icon: 'fas fa-volleyball-ball' },
-        { label: 'Séances et horaires', route: 'schedules', icon: 'fas fa-calendar-alt' }
+        { label: 'Prix', route: 'prices', icon: 'fas fa-euro-sign' },
+        { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: 'USER_MANAGEMENT' }
       ]
     },
     {
@@ -28,13 +27,7 @@ export default class AppConstants {
         { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: 'STATISTICS_READ' }
       ]
     },
-    {
-      label: 'Outils',
-      items: [
-        { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: 'USER_MANAGEMENT' },
-        { label: 'Paramètres', route: 'settings', icon: 'fas fa-cogs' }
-      ]
-    },
+    /*
     {
       label: 'Dev tools',
       items: [
@@ -42,6 +35,7 @@ export default class AppConstants {
         { label: 'Sandbox', route: 'sandbox', icon: 'fas fa-desktop' }
       ]
     }
+     */
   ];
 
   public static APP_COLORS = [
