@@ -7,6 +7,7 @@ import ClothingSize from '../../../shared/models/entities/ClothingSize';
 import {forkJoin} from 'rxjs';
 import SubscriptionCategory from '../../../shared/models/entities/SubscriptionCategory';
 import SubscriptionPaymentMode from '../../../shared/models/responses/SubscriptionPaymentMode';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-subscription',
@@ -33,7 +34,8 @@ export class SubscriptionComponent implements OnInit {
     private route: ActivatedRoute,
     private teamService: TeamService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -160,6 +162,12 @@ export class SubscriptionComponent implements OnInit {
             });
       }
     });
+  }
+
+  public getValidationLabel(): string {
+    return this.subscription.validated
+      ? 'Validée le ' + this.datePipe.transform(this.subscription.validationDate, 'dd/MM/yyyy')
+      : 'Valider l\'inscription';
   }
 
   public allPaimentModesPaied(): boolean {

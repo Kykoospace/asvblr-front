@@ -21,7 +21,7 @@ export class StatsComponent implements OnInit {
 
   ngOnInit() {
     const requests = {
-      // visits: this.managementService.getVisitStats(),
+      visits: this.managementService.getVisitStats(),
       playersByAge: this.managementService.getPlayersAgeStats(),
       playersByCity: this.managementService.getPlayersCityStats(),
       // playersPaymentModes: this.managementService.getPlayersPaymentModeStats()

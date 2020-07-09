@@ -7,6 +7,7 @@ import {GouvService} from '../../services/gouv/gouv.service';
 import Season from '../../models/entities/Season';
 import AppConstants from '../../AppConstants';
 import {forkJoin} from 'rxjs';
+import Price from '../../models/entities/Price';
 
 @Component({
   selector: 'app-subscription-form',
@@ -19,6 +20,7 @@ export class SubscriptionFormComponent implements OnInit {
   public activeStep: number;
 
   public currentSeason: Season;
+  public prices: Price[];
 
   public formLabelValues = {
     address: 'Adresse',
@@ -169,7 +171,6 @@ export class SubscriptionFormComponent implements OnInit {
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
     // remove after test :
-    /*
     firstStep.get('firstName').valueChanges
       .subscribe(
         firstName => {
@@ -178,7 +179,6 @@ export class SubscriptionFormComponent implements OnInit {
           }
         }
       );
-     */
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {
@@ -226,7 +226,8 @@ export class SubscriptionFormComponent implements OnInit {
       currentSeason: this.teamService.getCurrentSeason(),
       paymentModes: this.managementService.getAllPaymentModes(),
       subscriptionCategories: this.teamService.getAllSubscriptionCategories(),
-      clothingSizes: this.teamService.getAllClothingSizes()
+      clothingSizes: this.teamService.getAllClothingSizes(),
+      prices: this.managementService.getAllPrices()
     })
       .subscribe(
         (results: any) => {
@@ -249,6 +250,7 @@ export class SubscriptionFormComponent implements OnInit {
               value: clothingSize.id
             });
           });
+          this.prices = results.prices;
         },
         err => console.error(err)
       );

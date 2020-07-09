@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import localeFr from '@angular/common/locales/fr';
 import { map } from 'rxjs/operators';
-import { registerLocaleData } from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import { SafePipeModule } from 'safe-pipe';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -75,6 +75,7 @@ import { MatchDriveCardComponent } from './shared/components/match-drive-list/ma
 import { DynamicDialogTeamPlayerListEditComponent } from './shared/components/dynamic-dialog-team-player-list-edit/dynamic-dialog-team-player-list-edit.component';
 import { SubscriptionPaymentModeCardComponent } from './shared/components/subscription-payment-mode-card/subscription-payment-mode-card.component';
 import { PricesComponent } from './management/prices/prices.component';
+import { UserProfileComponent } from './management/user-profile/user-profile.component';
 
 registerLocaleData(localeFr);
 
@@ -127,7 +128,8 @@ registerLocaleData(localeFr);
     MatchDriveCardComponent,
     DynamicDialogTeamPlayerListEditComponent,
     SubscriptionPaymentModeCardComponent,
-    PricesComponent
+    PricesComponent,
+    UserProfileComponent
   ],
   imports: [
     HttpClientModule,
@@ -187,7 +189,8 @@ registerLocaleData(localeFr);
     },
     MessageService,
     ConfirmationService,
-    DialogService
+    DialogService,
+    DatePipe
   ],
   bootstrap: [
     AppComponent

@@ -13,7 +13,7 @@ export default class AppConstants {
       label: 'Gestion du site',
       items: [
         { label: 'Articles', route: 'articles', icon: 'fas fa-newspaper', privilege: 'ARTICLE_MANAGEMENT' },
-        { label: 'Prix', route: 'prices', icon: 'fas fa-euro-sign' },
+        { label: 'Prix', route: 'prices', icon: 'fas fa-euro-sign', privilege: 'SUBSCRIPTION_MANAGEMENT' },
         { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: 'USER_MANAGEMENT' }
       ]
     },

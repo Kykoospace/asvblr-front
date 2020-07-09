@@ -42,6 +42,7 @@ import { PermissionGuard } from './shared/guards/permission/permission.guard';
 import {PlayComponent} from './management/play/play.component';
 import {CoachComponent} from './management/coach/coach.component';
 import {PricesComponent} from './management/prices/prices.component';
+import {UserProfileComponent} from './management/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -110,6 +111,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'dev-tools', component: DevToolsComponent },
       { path: 'sandbox', component: SandboxComponent },
+      { path: 'user', component: UserProfileComponent },
       { path: '**', redirectTo: '/management' }
     ]
   }

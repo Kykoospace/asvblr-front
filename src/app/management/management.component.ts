@@ -46,8 +46,7 @@ export class ManagementComponent implements OnInit {
   ngOnInit() {
     this.userMenu = [
       { label: 'Retour au site', icon: 'fas fa-home', routerLink: ['/main'] },
-      { label: 'Compte utilisateur', icon: 'fas fa-user-edit' },
-      { label: 'Fiche de joueur', icon: 'fas fa-user' },
+      { label: 'Compte utilisateur', icon: 'fas fa-user-edit', routerLink: ['/management/user'] },
       { label: 'Déconnexion', icon: 'fas fa-sign-out-alt', routerLink: ['/login/sign-out'] }
     ];
   }
