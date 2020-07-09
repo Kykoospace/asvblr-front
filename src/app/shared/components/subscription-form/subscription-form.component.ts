@@ -344,6 +344,7 @@ export class SubscriptionFormComponent implements OnInit {
           this.cities = null;
         }
       }, err => {
+        console.error(err);
         cityControl.patchValue(null);
       });
   }
