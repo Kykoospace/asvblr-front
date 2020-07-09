@@ -6,6 +6,7 @@ import {ManagementService} from '../../services/api/management/management.servic
 import {GouvService} from '../../services/gouv/gouv.service';
 import Season from '../../models/entities/Season';
 import AppConstants from '../../AppConstants';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-subscription-form',
@@ -160,12 +161,22 @@ export class SubscriptionFormComponent implements OnInit {
       fourthStep: this.formBuilder.group({
         idsPaymentMode: [null, [ Validators.required ]]
       })
-    }, { validators: this.fileValidator(this.fileCNI, this.fileIdentityPhoto, this.fileMedicalCertificate) });
+    }, { validators: this.fileValidator });
 
     // Initialisation des custom validators :
     const firstStep: AbstractControl = this.subscriptionForm.get('firstStep');
-    const secondStep = this.subscriptionForm.get('secondStep');
+    const secondStep: AbstractControl = this.subscriptionForm.get('secondStep');
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
+
+    // TODO: remove after test :
+    firstStep.get('firstName').valueChanges
+      .subscribe(
+        firstName => {
+          if (firstName === 'Kyllian') {
+            this.test();
+          }
+        }
+      );
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {
@@ -208,56 +219,47 @@ export class SubscriptionFormComponent implements OnInit {
         pantsSize.updateValueAndValidity();
       });
 
-    // Récupération de la saison actuelle :
-    this.teamService.getCurrentSeason()
+    // Récupération des datasets et de la saison en cours:
+    forkJoin({
+      currentSeason: this.teamService.getCurrentSeason(),
+      paymentModes: this.managementService.getAllPaymentModes(),
+      subscriptionCategories: this.teamService.getAllSubscriptionCategories(),
+      clothingSizes: this.teamService.getAllClothingSizes()
+    })
       .subscribe(
-        season => this.currentSeason = season
-      )
-
-    // Récupération des datasets :
-    this.managementService.getAllPaymentModes()
-      .subscribe(paymentModes => {
-        paymentModes.forEach(paymentMode => {
-          this.paymentModesOptions.push({
-            label: paymentMode.name,
-            value: paymentMode.id
+        (results: any) => {
+          this.currentSeason = results.currentSeason;
+          results.paymentModes.forEach(paymentMode => {
+            this.paymentModesOptions.push({
+              label: paymentMode.name,
+              value: paymentMode.id
+            });
           });
-        });
-      });
-
-    this.teamService.getAllSubscriptionCategories()
-      .subscribe(categories => {
-        categories.forEach(category => {
-          this.categoryOptions.push({
-            label: category.name,
-            value: category.id
+          results.subscriptionCategories.forEach(category => {
+            this.categoryOptions.push({
+              label: category.name,
+              value: category.id
+            });
           });
-        });
-      });
-
-    this.teamService.getAllClothingSizes()
-      .subscribe(clothingSizes => {
-        clothingSizes.forEach(clothingSize => {
-          this.clothingSizesOptions.push({
-            label: clothingSize.name,
-            value: clothingSize.id
+          results.clothingSizes.forEach(clothingSize => {
+            this.clothingSizesOptions.push({
+              label: clothingSize.name,
+              value: clothingSize.id
+            });
           });
-        });
-      });
+        },
+        err => console.error(err)
+      );
   }
 
-  public fileValidator(
-    fileCNI: File,
-    fileIdentityPhoto: File,
-    fileMedicalCertificate: File
-  ) {
-    if (fileCNI === null) {
+  public fileValidator = () => {
+    if (this.fileCNI === undefined) {
       return { noCNI: true };
     }
-    if (fileIdentityPhoto === null) {
+    if (this.fileIdentityPhoto === undefined) {
       return { noIdentityPhoto: true };
     }
-    if (fileMedicalCertificate === null) {
+    if (this.fileMedicalCertificate === undefined) {
       return { noMedicalCertificate: true };
     }
     return null;
@@ -322,14 +324,17 @@ export class SubscriptionFormComponent implements OnInit {
 
   public cniFileHandler(event) {
     this.fileCNI = <File>event.target.files[0];
+    this.subscriptionForm.updateValueAndValidity();
   }
 
   public identityPhotoFileHandler(event) {
     this.fileIdentityPhoto = <File>event.target.files[0];
+    this.subscriptionForm.updateValueAndValidity();
   }
 
   public medicalCertificateFileHandler(event) {
     this.fileMedicalCertificate = <File>event.target.files[0];
+    this.subscriptionForm.updateValueAndValidity();
   }
 
   public updateCity(postcode: number) {
@@ -368,9 +373,8 @@ export class SubscriptionFormComponent implements OnInit {
     this.subscriptionForm.reset();
   }
 
-  test() {
+  public test() {
     const firstStep = this.subscriptionForm.get('firstStep');
-    firstStep.get('firstName').setValue('Kyllian');
     firstStep.get('lastName').setValue('Gautier');
     firstStep.get('gender').setValue(true);
     firstStep.get('birthDate').setValue(new Date('03/07/1997'));
@@ -379,6 +383,6 @@ export class SubscriptionFormComponent implements OnInit {
     firstStep.get('phoneNumber').setValue('0625131440');
     firstStep.get('address').setValue('21 av du Fort');
     firstStep.get('postcode').setValue(92120);
-    firstStep.get('comment').setValue('Je souhaite intégrer une équipe départementale');
+    firstStep.get('idSubscriptionCategory').setValue(25);
   }
 }

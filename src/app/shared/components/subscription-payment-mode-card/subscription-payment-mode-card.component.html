@@ -3,6 +3,18 @@
     <span class="global-legend">Type</span>
     <p class="subscription-payment-mode-card-name">{{ subscriptionPaymentMode.namePaymentMode }}</p>
   </div>
-  <p-button (click)="setPaymentModePaied()" label="Accepter" icon="fas fa-check"></p-button>
   <p>Statut: {{ subscriptionPaymentMode.paid ? 'Payé' : 'En attente' }}</p>
+  <p-button
+    (click)="setPaymentModePaied()"
+    label="Paiement reçu"
+    icon="fas fa-check"
+    *ngIf="!subscriptionPaymentMode.paid && enableEditOptions">
+  </p-button>
+  <p-button
+    (click)="setPaymentModeUnpaied()"
+    label="Annuler le paiement"
+    icon="fas fa-times"
+    class="ui-button-danger"
+    *ngIf="subscriptionPaymentMode.paid && enableEditOptions">
+  </p-button>
 </div>

@@ -162,10 +162,21 @@ export class SubscriptionComponent implements OnInit {
     });
   }
 
+  public allPaimentModesPaied(): boolean {
+    return this.paymentModes.filter(paimentMode => !paimentMode.paid).length === 0;
+  }
+
   public payPaymentMode(subscriptionPaymentMode: SubscriptionPaymentMode): void {
     this.teamService.paySubscriptionPaymentMode(this.subscription.id, subscriptionPaymentMode.idPaymentMode)
       .subscribe(
-        paymentModes => this.paymentModes = paymentModes,
+        paymentModes => {
+          this.paymentModes = paymentModes;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Paiement accepté',
+            detail: subscriptionPaymentMode.namePaymentMode
+          });
+        },
         err => console.error(err)
       );
   }
@@ -173,7 +184,14 @@ export class SubscriptionComponent implements OnInit {
   public unpayPaymentMode(subscriptionPaymentMode: SubscriptionPaymentMode): void {
     this.teamService.unpaySubscriptionPaymentMode(this.subscription.id, subscriptionPaymentMode.idPaymentMode)
       .subscribe(
-        paymentModes => this.paymentModes = paymentModes,
+        paymentModes => {
+          this.paymentModes = paymentModes;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Paiement annulé',
+            detail: subscriptionPaymentMode.namePaymentMode
+          });
+        },
         err => console.error(err)
       );
   }

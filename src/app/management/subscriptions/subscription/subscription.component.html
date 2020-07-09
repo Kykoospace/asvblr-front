@@ -11,7 +11,7 @@
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
       <p-button (click)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
-      <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" *ngIf="!subscription.validated"></p-button>
+      <p-button (click)="validateSubscription()" type="button" label="Valider l'inscription" class="ui-button-secondary" [disabled]="!allPaimentModesPaied()"></p-button>
       <p-button type="button" label="Validée le {{ subscription.validationDate | date: 'shortDate' }}" class="ui-button-secondary" *ngIf="subscription.validated" [disabled]="true"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
@@ -142,6 +142,7 @@
         class="p-col-6 p-offset-3"
         *ngFor="let paimentMode of paymentModes"
         [subscriptionPaymentMode]="paimentMode"
+        [enableEditOptions]="!subscription.validated"
         (payPaymentMode)="payPaymentMode($event)"
         (unpayPaymentMode)="unpayPaymentMode($event)">
       </app-subscription-payment-mode-card>

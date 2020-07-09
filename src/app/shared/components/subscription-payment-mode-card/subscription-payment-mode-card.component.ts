@@ -14,6 +14,9 @@ export class SubscriptionPaymentModeCardComponent implements OnInit {
   private unpayPaymentMode: EventEmitter<SubscriptionPaymentMode> = new EventEmitter();
 
   @Input()
+  public enableEditOptions: boolean = false;
+
+  @Input()
   public subscriptionPaymentMode: SubscriptionPaymentMode;
 
   constructor() { }
