@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from '../../config/config.service';
 import { Observable } from 'rxjs';
 import PaymentMode from '../../../models/entities/PaymentMode';
 import Article from '../../../models/entities/Article';
@@ -14,15 +13,10 @@ import User from '../../../models/entities/User';
 })
 export class ManagementService {
 
-  private apiBaseUrl: string;
-
   constructor(
-    private configService: ConfigService,
     private authService: AuthService,
     private http: HttpClient
-  ) {
-    this.apiBaseUrl = this.configService.getApiBaseUrl();
-  }
+  ) { }
 
   // ------------------------------------------------
   // User routes :
@@ -30,7 +24,7 @@ export class ManagementService {
 
   public getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(
-      this.apiBaseUrl + 'users',
+      'api/users',
       { headers: this.authService.getAuthorizationHeader()
       })
       .pipe(map((users) => {
@@ -41,7 +35,7 @@ export class ManagementService {
 
   public getUser(idUser: number): Observable<User> {
     return this.http.get<User>(
-      this.apiBaseUrl + 'users/' + idUser,
+      'api/users/' + idUser,
       { headers: this.authService.getAuthorizationHeader()}
       )
       .pipe(map((user) => {
@@ -51,16 +45,16 @@ export class ManagementService {
   }
 
   public createUser(userData: any): Observable<User> {
-    return this.http.post<User>(this.apiBaseUrl + 'auth/signup', userData, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.post<User>('api/auth/signup', userData, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteUser(idUser: number): Observable<any> {
-    return this.http.delete<any>(this.apiBaseUrl + 'users/' + idUser, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.delete<any>('api/users/' + idUser, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public giveManagerRole(idUser: number): Observable<User> {
     return this.http.patch<User>(
-      this.apiBaseUrl + 'users/' + idUser + '/give-manager-right',
+      'api/users/' + idUser + '/give-manager-right',
       {},
       { headers: this.authService.getAuthorizationHeader() }
       );
@@ -68,7 +62,7 @@ export class ManagementService {
 
   public removeManagerRole(idUser: number): Observable<User> {
     return this.http.patch<User>(
-      this.apiBaseUrl + 'users/' + idUser + '/remove-manager-right',
+      'api/users/' + idUser + '/remove-manager-right',
       {},
       { headers: this.authService.getAuthorizationHeader() }
       );
@@ -80,11 +74,11 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getAllPaymentModes(): Observable<PaymentMode[]> {
-    return this.http.get<PaymentMode[]>(this.apiBaseUrl + 'payment-modes');
+    return this.http.get<PaymentMode[]>('api/payment-modes');
   }
 
   public getPaymentMode(idPaymentMode: number): Observable<PaymentMode> {
-    return this.http.get<PaymentMode>(this.apiBaseUrl + 'payment-modes/' + idPaymentMode);
+    return this.http.get<PaymentMode>('api/payment-modes/' + idPaymentMode);
   }
 
 
@@ -94,11 +88,11 @@ export class ManagementService {
   // ------------------------------------------------
 
   public getArticle(idArticle: number): Observable<Article> {
-    return this.http.get<Article>(this.apiBaseUrl + 'articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<Article>('api/articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public getAllArticles(page: number = 1, pageSize: number = 10): Observable<Article[]> {
-    return this.http.get<Page<Article>>(this.apiBaseUrl + 'articles?page=' + (page - 1) + '&size=' + pageSize)
+    return this.http.get<Page<Article>>('api/articles?page=' + (page - 1) + '&size=' + pageSize)
       .pipe(map(
         pageable => {
           return pageable.content;
@@ -107,27 +101,27 @@ export class ManagementService {
   }
 
   public getArticleList(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiBaseUrl + 'articles/list', { headers: this.authService.getAuthorizationHeader() });
+    return this.http.get<Article[]>('api/articles/list', { headers: this.authService.getAuthorizationHeader() });
   }
 
   public createArticle(article: any): Observable<Article> {
-    return this.http.post<Article>(this.apiBaseUrl + 'articles', article, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.post<Article>('api/articles', article, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public updateArticle(article: Article): Observable<Article> {
-    return this.http.put<Article>(this.apiBaseUrl + 'articles/' + article.id, article, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.put<Article>('api/articles/' + article.id, article, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public deleteArticle(idArticle: number) {
-    return this.http.delete(this.apiBaseUrl + 'articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.delete('api/articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public setArticleVisible(idArticle: number): Observable<Article> {
-    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/visible', {}, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.patch<Article>('api/articles/' + idArticle + '/visible', {}, { headers: this.authService.getAuthorizationHeader() });
   }
 
   public setArticleInvisible(idArticle: number): Observable<Article> {
-    return this.http.patch<Article>(this.apiBaseUrl + 'articles/' + idArticle + '/invisible', {}, { headers: this.authService.getAuthorizationHeader() });
+    return this.http.patch<Article>('api/articles/' + idArticle + '/invisible', {}, { headers: this.authService.getAuthorizationHeader() });
   }
 
 
@@ -137,7 +131,7 @@ export class ManagementService {
 
   public sendMail(mail: any): Observable<any> {
     return this.http.post(
-      this.apiBaseUrl + 'mails/send-mail',
+      'api/mails/send-mail',
       mail,
       { headers: this.authService.getAuthorizationHeader() }
     );
@@ -145,7 +139,7 @@ export class ManagementService {
 
   public sendMailContact(mail: any): Observable<any> {
     return this.http.post(
-      this.apiBaseUrl + 'mails/contact-mail',
+      'api/mails/contact-mail',
       mail
     );
   }
@@ -157,33 +151,33 @@ export class ManagementService {
 
   public getPlayersPaymentModeStats(): Observable<any> {
     return this.http.get<any>(
-      this.apiBaseUrl + 'statistics/payments-mode',
+      'api/statistics/payments-mode',
       { headers: this.authService.getAuthorizationHeader() }
       );
   }
 
   public getPlayersAgeStats(): Observable<any> {
     return this.http.get<any>(
-      this.apiBaseUrl + 'statistics/players-by-age',
+      'api/statistics/players-by-age',
       { headers: this.authService.getAuthorizationHeader() }
       );
   }
 
   public getPlayersCityStats(): Observable<any> {
     return this.http.get<any>(
-      this.apiBaseUrl + 'statistics/players-city',
+      'api/statistics/players-city',
       { headers: this.authService.getAuthorizationHeader() }
       );
   }
 
   public getVisitStats(): Observable<any> {
     return this.http.get<any>(
-      this.apiBaseUrl + 'statistics/visits',
+      'api/statistics/visits',
       { headers: this.authService.getAuthorizationHeader() }
     );
   }
 
   public addVisitCount(pageCode: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'statistics/visits', { pageCode });
+    return this.http.post<any>('api/statistics/visits', { pageCode });
   }
 }

@@ -50,7 +50,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './login/logout/logout.component';
 
-import { ConfigService } from './shared/services/config/config.service';
 import { DevToolsComponent } from './management/dev-tools/dev-tools.component';
 import { ArticleComponent } from './management/articles/article/article.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
@@ -82,23 +81,6 @@ import { DynamicDialogTeamPlayerListEditComponent } from './shared/components/dy
 import { SubscriptionPaymentModeCardComponent } from './shared/components/subscription-payment-mode-card/subscription-payment-mode-card.component';
 
 registerLocaleData(localeFr);
-
-function loadConfiguration(
-  http: HttpClient,
-  configService: ConfigService
-) {
-  return (): Promise<boolean> => {
-    return new Promise<boolean>((resolve: (a: boolean) => void): void => {
-      http.get<any>('assets/config/config.json')
-        .pipe(
-          map(config => {
-            configService.apiBaseUrl = config.apiBaseUrl;
-            configService.apiGouvBaseUrl = config.apiGouvBaseUrl;
-            resolve(true);
-          })).subscribe();
-    });
-  };
-}
 
 @NgModule({
   declarations: [
@@ -197,15 +179,10 @@ function loadConfiguration(
     RatingModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr-FR' },
     {
-      provide: APP_INITIALIZER,
-      useFactory: loadConfiguration,
-      deps: [
-        HttpClient,
-        ConfigService
-      ],
-      multi: true },
+      provide: LOCALE_ID,
+      useValue: 'fr-FR'
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,

@@ -1,11 +1,12 @@
+// Angular imports :
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from '../../token-storage/token-storage.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { ConfigService } from '../../config/config.service';
+// Import entities :
 import SignInResponse from '../../../models/responses/SignInResponse';
 import User from '../../../models/entities/User';
 import Role from '../../../models/entities/Role';
@@ -23,16 +24,11 @@ export class AuthService {
     return userPrivileges.find(privilege => privilege === testedPrivilege) !== undefined;
   }
 
-  private apiBaseUrl: string;
-
   constructor(
-    private configService: ConfigService,
     private router: Router,
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
-  ) {
-    this.apiBaseUrl = this.configService.getApiBaseUrl();
-  }
+  ) { }
 
   public getAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders({ 'Authorization': 'Bearer ' + this.getToken() });
@@ -40,7 +36,7 @@ export class AuthService {
 
   public signIn(authCredentials: any): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(
-      this.apiBaseUrl + 'auth/signin', authCredentials
+      'api/auth/signin', authCredentials
       )
       .pipe(
         map(auth => {
@@ -81,12 +77,12 @@ export class AuthService {
   }
 
   public sendRequestResetPassword(email: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'auth/reset-password', { email });
+    return this.http.post<any>('api/auth/reset-password', { email });
   }
 
   public changePassword(oldPassword: string, password: string): Observable<any> {
     return this.http.post<any>(
-      this.apiBaseUrl + 'auth/update-password',
+      'api/auth/update-password',
       { oldPassword, password },
       { headers: this.getAuthorizationHeader() })
       .pipe(
@@ -99,18 +95,18 @@ export class AuthService {
   }
 
   public checkResetPasswordToken(token: string): Observable<any> {
-    return this.http.get<any>(this.apiBaseUrl + 'auth/change-password?token=' + token);
+    return this.http.get<any>('api/auth/change-password?token=' + token);
   }
 
   public resetPassword(password: string, token: string): Observable<any> {
-    return this.http.post<any>(this.apiBaseUrl + 'auth/save-password', { password, token });
+    return this.http.post<any>('api/auth/save-password', { password, token });
   }
 
   public getAllRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(this.apiBaseUrl + 'roles', { headers: this.getAuthorizationHeader() });
+    return this.http.get<Role[]>('api/roles', { headers: this.getAuthorizationHeader() });
   }
 
   public getRole(idRole: number): Observable<Role> {
-    return this.http.get<Role>(this.apiBaseUrl + 'roles/' + idRole);
+    return this.http.get<Role>('api/roles/' + idRole);
   }
 }
