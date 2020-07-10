@@ -1,4 +1,30 @@
 <p-confirmDialog header="Confirmation" icon="fas fa-exclamation-triangle"></p-confirmDialog>
+
+<p-dialog header="{{ selectedPlayer.fullName }}" [(visible)]="changeLicenceNumberToggle" *ngIf="selectedPlayer">
+  <div class="p-grid">
+    <span class="p-col-4 p-offset-2 global-legend">Numéro de tel</span>
+    <p class="p-col-4">{{ selectedPlayer.phoneNumber }}</p>
+
+    <span class="p-col-4 p-offset-2 global-legend">Adresse</span>
+    <p class="p-col-4">{{ selectedPlayer.address }}, {{ selectedPlayer.postcode }} {{ selectedPlayer.city }}</p>
+
+    <div class="p-col-4 p-offset-2">
+      <input #licenceNumberInput [value]="selectedPlayer.licenceNumber" type="text" pInputText>
+    </div>
+    <label class="global-form-label p-col-6">
+      Numéro de licence
+    </label>
+  </div>
+  <p-footer>
+    <p-toolbar>
+      <div class="ui-toolbar-group-right">
+        <p-button (click)="changeLicenceNumberToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (click)="updatePlayerLicenceNumber(licenceNumberInput.value)" label="Valider" icon="fas fa-check" [disabled]="!licenceNumberInput.value"></p-button>
+      </div>
+    </p-toolbar>
+  </p-footer>
+</p-dialog>
+
 <div class="module-container p-grid" *ngIf="team">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
@@ -15,6 +41,7 @@
     class="p-col-12"
     [enableEditionTools]="true"
     [idPlayerLeader]="team.idPlayerLeader"
-    [players]="teamPlayers">
+    [players]="teamPlayers"
+    (selectPlayer)="selectPlayer($event)">
   </app-team-players-list>
 </div>

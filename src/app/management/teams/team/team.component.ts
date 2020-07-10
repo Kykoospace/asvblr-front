@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TeamService} from '../../../shared/services/api/team/team.service';
 import {ConfirmationService, DialogService, DynamicDialogRef, MessageService} from 'primeng';
 import {DynamicDialogTeamSelectPlayersComponent} from '../../../shared/components/dynamic-dialog-team-select-players/dynamic-dialog-team-select-players.component';
-import {DynamicDialogTeamEventManagerComponent} from '../../../shared/components/dynamic-dialog-team-event-manager/dynamic-dialog-team-event-manager.component';
 import Player from '../../../shared/models/entities/Player';
 import {forkJoin} from 'rxjs';
 import TeamPlayer from '../../../shared/models/entities/TeamPlayer';
@@ -20,8 +19,11 @@ export class TeamComponent implements OnInit, OnDestroy {
   public playerSelectorDialogRef: DynamicDialogRef;
   public coachSelectorDialogRef: DynamicDialogRef;
 
+  public changeLicenceNumberToggle: boolean;
+
   public team: TeamList;
   public teamPlayers: TeamPlayer[];
+  public selectedPlayer: TeamPlayer;
 
   constructor(
     private router: Router,
@@ -30,7 +32,9 @@ export class TeamComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private teamService: TeamService,
     private dialogService: DialogService
-  ) { }
+  ) {
+    this.changeLicenceNumberToggle = false;
+  }
 
   ngOnInit(): void {
     this.refreshTeam();
@@ -202,6 +206,26 @@ export class TeamComponent implements OnInit, OnDestroy {
               );
           }
         }
+      );
+  }
+
+  public selectPlayer(player: TeamPlayer): void {
+    this.selectedPlayer = player;
+    this.changeLicenceNumberToggle = true;
+  }
+
+  public updatePlayerLicenceNumber(licenceNumber: string): void {
+    this.teamService.updatePlayer(this.selectedPlayer.idPlayer, licenceNumber)
+      .subscribe(
+        () => {
+          this.refreshPlayers();
+          this.changeLicenceNumberToggle = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Numéro de licence mis à jour'
+          });
+        },
+        err => console.error(err)
       );
   }
 }
