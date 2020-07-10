@@ -14,6 +14,12 @@ export class StatsComponent implements OnInit {
   public playersAgeStats: any;
   public playersCityStats: any;
 
+  public doughnutOptions = {
+    legend: {
+      position: 'right'
+    }
+  };
+
   constructor(
     private managementService: ManagementService,
     private messageService: MessageService

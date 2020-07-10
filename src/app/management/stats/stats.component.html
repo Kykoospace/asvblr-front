@@ -3,7 +3,7 @@
     <p-chart type="bar" [data]="playersAgeStats"></p-chart>
   </p-tabPanel>
   <p-tabPanel header="Localisation des joueurs">
-    <p-chart type="doughnut" [data]="playersCityStats"></p-chart>
+    <p-chart type="doughnut" [options]="doughnutOptions" [data]="playersCityStats"></p-chart>
   </p-tabPanel>
   <p-tabPanel header="Modes de paiement">
 
