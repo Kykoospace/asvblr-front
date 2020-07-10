@@ -22,6 +22,16 @@ export class SubscriptionComponent implements OnInit {
     detail: 'Le document a bien été téléversé'
   };
 
+  public pcLabels = {
+    pc_allowToLeaveAlone: 'Autorisé à quitter seul le lieu d\'entrainement ou de compétition',
+    pc_allowClubToRescue: 'Autorise les dirigeants du club à prendre toutes les mesures utiles en cas d\'incident',
+    pc_allowToTravelWithTeamMate: 'Autorisé à prendre place dans une voiture particulière afin ' +
+      'd\'effectuer les déplacements nécessités par les compétitions sportives officielles ou amicales ' +
+      'au cours de la saison',
+    pc_allowToPublish: 'Autorisé à paraître sur les publications du club',
+    pc_allowToWhatsapp: 'Autorisé à faire partie d\'un groupe Whatsapp pour l\'organisation des matchs'
+  };
+
   public subscription: Subscription;
 
   public paymentModes: SubscriptionPaymentMode[];
@@ -202,5 +212,11 @@ export class SubscriptionComponent implements OnInit {
         },
         err => console.error(err)
       );
+  }
+
+  public playerIsMinor() {
+    const date = new Date(this.subscription.birthDate);
+    date.setFullYear(date.getFullYear() + 18);
+    return date.getTime() > Date.now();
   }
 }

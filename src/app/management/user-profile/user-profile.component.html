@@ -1,1 +1,36 @@
-<p>user-profile works!</p>
+<p-tabView *ngIf="player">
+  <p-tabPanel header="Mon compte utilisateur">
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">Identifiant</span>
+      <span class="p-col-5">{{ loggedUser.username }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Nom</span>
+      <span class="p-col-5">{{ loggedUser.fullName }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Sexe</span>
+      <span class="p-col-5">{{ player.gender ? 'Homme' : 'Femme' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Date de naissance</span>
+      <span class="p-col-5">{{ player.birthDate | date: 'shortDate' }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Adresse mail</span>
+      <span class="p-col-5">{{ loggedUser.email }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Numéro de téléphone</span>
+      <span class="p-col-5">{{ player.phoneNumber }}</span>
+      <span class="p-col-4"></span>
+
+      <span class="p-col-3 global-legend">Adresse</span>
+      <span class="p-col-5">{{ player.address }}, {{ player.postCode }} {{ player.city }}</span>
+      <span class="p-col-4"></span>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel class="p-grid" header="Réinscription" [disabled]="!reSubscriptionAvailable()">
+
+  </p-tabPanel>
+</p-tabView>

@@ -100,6 +100,25 @@
       <span class="p-col-4"></span>
     </div>
   </p-tabPanel>
+  <p-tabPanel header="Autorisations parentales" *ngIf="playerIsMinor()">
+    <div class="p-grid">
+      <span class="p-col-3 global-legend">{{ pcLabels.pc_allowToLeaveAlone }}</span>
+      <span class="p-col-5">{{ subscription.pc_allowToLeaveAlone ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+      <span class="p-col-3 global-legend">{{ pcLabels.pc_allowClubToRescue }}</span>
+      <span class="p-col-5">{{ subscription.pc_allowClubToRescue ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+      <span class="p-col-3 global-legend">{{ pcLabels.pc_allowToTravelWithTeamMate }}</span>
+      <span class="p-col-5">{{ subscription.pc_allowToTravelWithTeamMate ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+      <span class="p-col-3 global-legend">{{ pcLabels.pc_allowToPublish }}</span>
+      <span class="p-col-5">{{ subscription.pc_allowToPublish ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+      <span class="p-col-3 global-legend">{{ pcLabels.pc_allowToWhatsapp }}</span>
+      <span class="p-col-5">{{ subscription.pc_allowToWhatsapp ? 'Oui' : 'Non' }}</span>
+      <span class="p-col-4"></span>
+    </div>
+  </p-tabPanel>
   <p-tabPanel header="Documents à joindre">
     <div class="p-grid">
       <span class="p-col-3 global-legend">Carte d'identité</span>

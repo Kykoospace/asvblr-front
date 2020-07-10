@@ -48,7 +48,6 @@ export class DynamicDialogTeamEventManagerComponent implements OnInit {
     this.teamService.getAllTeamMatches(this.idTeam)
       .subscribe(
         matches => {
-          matches.forEach(match => match.date = new Date(match.date));
           this.matches = matches;
         },
         err => console.error(err)

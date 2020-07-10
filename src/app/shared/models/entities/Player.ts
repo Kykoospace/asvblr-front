@@ -9,9 +9,9 @@ export default interface Player {
   email: string;
   phoneNumber: number;
   birthDate: Date;
-  birthCountry: string;
-  requestedJerseyNumber: number;
-  idUser: number;
-  idSubscriptionCategory: number;
   licenceNumber: string;
+  idTopSize: number;
+  idPantsSize: number;
+  idSubscriptionCategory: number;
+  requestedJerseyNumber: number;
 }

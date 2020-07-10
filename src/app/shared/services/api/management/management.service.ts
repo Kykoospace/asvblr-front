@@ -8,6 +8,7 @@ import Page from '../../../models/paging/Page';
 import {AuthService} from '../auth/auth.service';
 import User from '../../../models/entities/User';
 import Price from '../../../models/entities/Price';
+import Player from '../../../models/entities/Player';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,13 @@ export class ManagementService {
         user.fullName = user.firstName + ' ' + user.lastName.toUpperCase();
         return user;
       }));
+  }
+
+  public getUserPlayer(idUser): Observable<Player> {
+    return this.http.get<Player>(
+      'api/users/' + idUser + '/player',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
   public createUser(userData: any): Observable<User> {

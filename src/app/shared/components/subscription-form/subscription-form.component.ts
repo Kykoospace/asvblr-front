@@ -369,7 +369,7 @@ export class SubscriptionFormComponent implements OnInit {
   public isMinor(birthDate: Date = this.subscriptionForm.get('firstStep').get('birthDate').value) {
     const date = new Date(birthDate);
     date.setFullYear(date.getFullYear() + 18);
-    return date > new Date();
+    return date.getTime() > Date.now();
   }
 
   public resetForm() {

@@ -19,6 +19,13 @@
     Poste
   </label>
 
+  <div class="p-col-4 p-offset-2">
+    <input type="text" formControlName="licenceNumber" pInputText>
+  </div>
+  <label class="global-form-label p-col-6">
+    Numéro de licence
+  </label>
+
   <div class="p-col-4 p-offset-2 global-align-right">
     <p-button (click)="setLeader()" label="Capitaine" icon="fas fa-crown" [disabled]="player.idPlayer === team.idPlayerLeader"></p-button>
   </div>

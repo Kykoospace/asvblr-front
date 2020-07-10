@@ -4,6 +4,7 @@ import {TeamService} from '../../services/api/team/team.service';
 import TeamPlayer from '../../models/entities/TeamPlayer';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import TeamList from '../../models/responses/TeamList';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-dialog-team-player-list-edit',
@@ -46,7 +47,8 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
       );
     this.teamPlayerDetailForm = this.formBuilder.group({
       number: [this.player.jerseyNumber],
-      idPosition: [null, [ Validators.required ]]
+      idPosition: [null, [ Validators.required ]],
+      licenceNumber: [this.player.licenceNumber]
     });
   }
 
@@ -56,9 +58,24 @@ export class DynamicDialogTeamPlayerListEditComponent implements OnInit {
 
   public updatePlayer(): void {
     if (this.teamPlayerDetailForm.valid) {
-      this.teamService.updateTeamPlayer(this.team.id, this.player.idPlayer, this.teamPlayerDetailForm.value)
+      const requests: any = {
+        updatePlayerPosition: this.teamService.updateTeamPlayer(
+          this.team.id,
+          this.player.idPlayer,
+          {
+            number: this.teamPlayerDetailForm.get('number').value,
+            idPosition: this.teamPlayerDetailForm.get('idPosition').value
+          })
+      };
+
+      if (this.player.licenceNumber !== this.teamPlayerDetailForm.get('licenceNumber').value) {
+        requests.updateLicenceNumber
+          = this.teamService.updatePlayer(this.player.idPlayer, this.teamPlayerDetailForm.get('licenceNumber').value);
+      }
+
+      forkJoin(requests)
         .subscribe(
-            () => {
+          () => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Poste du joueur mis à jour'

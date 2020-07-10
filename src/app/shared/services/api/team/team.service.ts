@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {map, subscribeOn} from 'rxjs/operators';
 
 // Service import :
 import { AuthService } from '../auth/auth.service';
@@ -46,16 +46,26 @@ export class TeamService {
     return this.http.get<Player>('api/players/' + idPlayer);
   }
 
-  public updatePlayer(idPlayer: number, player: Player): Observable<Player> {
-    return this.http.put<Player>(
+  public updatePlayer(idPlayer: number, licenceNumber: string): Observable<Player> {
+    return this.http.patch<Player>(
       'api/players/' + idPlayer,
-      player,
+      { licenceNumber },
       { headers: this.authService.getAuthorizationHeader() }
     );
   }
 
-  public getAllPlayerNotInTeam(idTeam: number): Observable<Player[]> {
-    return this.http.get<Player[]>('api/teams/' + idTeam + '/add-player');
+  public getPlayerLastSubscription(idPlayer: number): Observable<Subscription> {
+    return this.http.get<Subscription>(
+      'api/players/' + idPlayer + '/last-subscription',
+      { headers: this.authService.getAuthorizationHeader() }
+    )
+      .pipe(map(
+        subscription => {
+          subscription.validationDate = new Date(subscription.validationDate);
+          subscription.creationDate = new Date(subscription.creationDate);
+          return subscription;
+        }
+      ));
   }
 
 
