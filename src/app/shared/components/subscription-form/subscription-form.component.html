@@ -5,9 +5,13 @@
       <h1 class="p-col-12 global-align-center">Inscription pour la saison {{ currentSeason.name }}</h1>
       <p class="p-col-12">Afin de vous inscrire, veillez à préparer les copies numériques des documents suivants :</p>
       <ul class="p-col-12 global-list">
-        <li>Carte d'identité (recto ET verso)</li>
-        <li>Certificat médical de moins de deux ans</li>
-        <li>Photo d'identité à jour</li>
+        <li><b>Carte d'identité</b> (recto ET verso)</li>
+        <li><b>Certificat médical</b> de moins de deux ans</li>
+        <li><b>Photo d'identité</b> à jour</li>
+      </ul>
+      <p class="p-col-12">Tarifs :</p>
+      <ul class="p-col-12 global-list">
+        <li *ngFor="let price of prices">{{ price.name }}: {{ price.price }}€</li>
       </ul>
       <p class="p-col-12">Une question ? <a [routerLink]="['/main/contact']">Contactez-nous !</a></p>
       <div class="p-col-12 global-align-center">
@@ -183,7 +187,7 @@
       <div class="p-col-4 p-offset-2 global-align-center">
         <p-checkbox formControlName="calendarRequested" [binary]="true"></p-checkbox>
       </div>
-      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }}</label>
+      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }} ({{ getPrice('CALENDAR_PRICE') }}€)</label>
 
       <!-- EQUIPMENT -->
       <div class="p-col-4 p-offset-2 global-align-center">
@@ -200,7 +204,7 @@
         <p-spinner formControlName="requestedJerseyNumber" [min]="1" [max]="40" [disabled]="!subscriptionForm.get('secondStep').value.equipment"></p-spinner>
       </div>
       <label class="global-form-label p-col-6">
-        {{ formLabelValues.requestedJerseyNumber }}
+        {{ formLabelValues.requestedJerseyNumber }} ({{ getPrice('EQUIPMENT_PRICE') }}€)
         <i class="far fa-question-circle global-tooltip-icon"
            [pTooltip]="requestedJerseyNumberTooltip"
            *ngIf="subscriptionForm.get('secondStep').value.equipment"></i>

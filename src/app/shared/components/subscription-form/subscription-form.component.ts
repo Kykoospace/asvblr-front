@@ -171,14 +171,14 @@ export class SubscriptionFormComponent implements OnInit {
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
     // remove after test :
-    // firstStep.get('firstName').valueChanges
-    //   .subscribe(
-    //     firstName => {
-    //       if (firstName === 'Kyllian') {
-    //         this.test();
-    //       }
-    //     }
-    //   );
+    firstStep.get('firstName').valueChanges
+      .subscribe(
+        firstName => {
+          if (firstName === 'Kyllian') {
+            this.test();
+          }
+        }
+      );
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {
@@ -390,5 +390,9 @@ export class SubscriptionFormComponent implements OnInit {
     firstStep.get('address').setValue('21 av du Fort');
     firstStep.get('postcode').setValue(92120);
     firstStep.get('idSubscriptionCategory').setValue(25);
+  }
+
+  public getPrice(priceCode: string): number {
+    return this.prices.find(price => price.code === priceCode).price;
   }
 }
