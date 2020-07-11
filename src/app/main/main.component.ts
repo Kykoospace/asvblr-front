@@ -80,6 +80,15 @@ export class MainComponent implements OnInit {
             case '/main/home':
               pageCode = 'HOME_PAGE';
               break;
+            case '/main/gymnasium':
+              pageCode = 'GYMNASIUM_PAGE';
+              break;
+            case '/main/club':
+              pageCode = 'CLUB_PAGE';
+              break;
+            case '/main/teams':
+              pageCode = 'TEAMS_PAGE';
+              break;
             case '/main/subscription':
               pageCode = 'SUBSCRIPTION_PAGE';
               break;
