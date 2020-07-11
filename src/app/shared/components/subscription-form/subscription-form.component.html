@@ -194,7 +194,7 @@
         <p-checkbox formControlName="equipment" [binary]="true"></p-checkbox>
       </div>
       <label class="global-form-label p-col-6">
-        {{ formLabelValues.equipment }}
+        {{ formLabelValues.equipment }} ({{ getPrice('EQUIPMENT_PRICE') }}€)
         <i class="fas fa-exclamation-triangle global-tooltip-icon-warning"
            [pTooltip]="requestedEquipmentTooltip"></i>
       </label>

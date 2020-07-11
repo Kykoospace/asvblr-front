@@ -35,6 +35,10 @@
   </p-tabPanel>
   <p-tabPanel class="p-grid" header="Réinscription" *ngIf="reSubscriptionAvailable()">
     <form class="p-grid" [formGroup]="reSubscriptionForm">
+      <p class="p-col-12">Tarifs :</p>
+      <ul class="p-col-12 global-list">
+        <li *ngFor="let price of prices">{{ price.name }}: {{ price.price }}€</li>
+      </ul>
       <h1 class="p-col-12">Informations générales</h1>
 
       <!-- FIRSTNAME -->
@@ -187,7 +191,7 @@
       <div class="p-col-4 p-offset-2 global-align-center">
         <p-checkbox formControlName="calendarRequested" [binary]="true"></p-checkbox>
       </div>
-      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }}</label>
+      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }} ({{ getPrice('CALENDAR_PRICE') }}€)</label>
 
       <!-- EQUIPMENT -->
       <div class="p-col-4 p-offset-2 global-align-center">

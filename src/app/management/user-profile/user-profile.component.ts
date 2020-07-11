@@ -326,4 +326,8 @@ export class UserProfileComponent implements OnInit {
   public equipmentRequested(): boolean {
     return this.reSubscriptionForm.get('equipment').value;
   }
+
+  public getPrice(priceCode: string): number {
+    return this.prices.find(price => price.code === priceCode).price;
+  }
 }
