@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
 import {TeamService} from '../../services/api/team/team.service';
 import Match from '../../models/entities/Match';
 import {DialogService, DynamicDialogRef} from 'primeng';
@@ -10,7 +10,7 @@ import {filter} from 'rxjs/operators';
   templateUrl: './team-match-list.component.html',
   styleUrls: ['./team-match-list.component.scss']
 })
-export class TeamMatchListComponent implements OnChanges {
+export class TeamMatchListComponent implements OnChanges, OnDestroy {
 
   @Output()
   public matchChange: EventEmitter<void> = new EventEmitter();
@@ -38,6 +38,12 @@ export class TeamMatchListComponent implements OnChanges {
     if (this.matches) {
       this.futuresMatches = this.matches.filter(match => match.date.getTime() > Date.now());
       this.passedMatches = this.matches.filter(match => match.date.getTime() < Date.now());
+    }
+  }
+
+  public ngOnDestroy(): void {
+    if (this.matchDetailDialogRef) {
+      this.matchDetailDialogRef.close();
     }
   }
 

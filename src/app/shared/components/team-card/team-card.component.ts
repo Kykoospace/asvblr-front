@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import TeamPlayer from '../../models/entities/TeamPlayer';
 import {TeamService} from '../../services/api/team/team.service';
 import {forkJoin} from 'rxjs';
@@ -15,7 +15,7 @@ import AppConstants from '../../AppConstants';
   templateUrl: './team-card.component.html',
   styleUrls: ['./team-card.component.scss']
 })
-export class TeamCardComponent implements AfterViewInit, OnChanges {
+export class TeamCardComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   public playerEditDialogRef: DynamicDialogRef;
   public eventManagerDialogRef: DynamicDialogRef;
@@ -48,6 +48,16 @@ export class TeamCardComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.refreshTeam();
+  }
+
+  ngOnDestroy(): void {
+    if (this.eventManagerDialogRef) {
+      this.eventManagerDialogRef.close();
+    }
+
+    if (this.playerEditDialogRef) {
+      this.playerEditDialogRef.close();
+    }
   }
 
   public refreshTeam() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ManagementService} from '../../shared/services/api/management/management.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DialogService, DynamicDialogRef, MessageService} from 'primeng';
@@ -10,7 +10,7 @@ import User from '../../shared/models/entities/User';
   templateUrl: './mailer.component.html',
   styleUrls: ['./mailer.component.scss']
 })
-export class MailerComponent implements OnInit {
+export class MailerComponent implements OnInit, OnDestroy {
 
   public receiversSelectorDialogRef: DynamicDialogRef;
 
@@ -29,6 +29,12 @@ export class MailerComponent implements OnInit {
       object: ['', [ Validators.required ]],
       content: ['', [ Validators.required ]]
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.receiversSelectorDialogRef) {
+      this.receiversSelectorDialogRef.close();
+    }
   }
 
   public getReceiversLabel(): string {

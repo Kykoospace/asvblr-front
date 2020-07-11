@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import User from '../../shared/models/entities/User';
 import {ManagementService} from '../../shared/services/api/management/management.service';
 import { ConfirmationService, DialogService, DynamicDialogRef, MessageService} from 'primeng';
@@ -13,7 +13,7 @@ import {DynamicDialogUsersSelectPresidentComponent} from '../../shared/component
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   public changePresidentDialogRef: DynamicDialogRef;
   public newUserDialogRef: DynamicDialogRef;
@@ -61,6 +61,15 @@ export class UsersComponent implements OnInit {
         },
         err => console.error(err)
       );
+  }
+
+  ngOnDestroy(): void {
+    if (this.newUserDialogRef) {
+      this.newUserDialogRef.close();
+    }
+    if (this.changePresidentDialogRef) {
+      this.changePresidentDialogRef.close();
+    }
   }
 
   private refreshUsers(): void {

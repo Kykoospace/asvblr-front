@@ -44,7 +44,9 @@ export class TeamComponent implements OnInit, OnDestroy {
     if (this.playerSelectorDialogRef) {
       this.playerSelectorDialogRef.close();
     }
-    // TODO: FERMER TOUTES les DialogRef dans tous les composants dans ngOnDestroy
+    if (this.coachSelectorDialogRef) {
+      this.coachSelectorDialogRef.close();
+    }
   }
 
   public backNavigate() {
