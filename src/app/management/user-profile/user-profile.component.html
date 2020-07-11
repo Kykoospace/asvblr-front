@@ -1,6 +1,7 @@
-<p-tabView *ngIf="player">
+<p-tabView>
   <p-tabPanel header="Mon compte utilisateur">
     <div class="p-grid">
+      <h1 class="p-col-12">Compte utilisateur</h1>
       <span class="p-col-3 global-legend">Identifiant</span>
       <span class="p-col-5">{{ loggedUser.username }}</span>
       <span class="p-col-4"></span>
@@ -9,16 +10,18 @@
       <span class="p-col-5">{{ loggedUser.fullName }}</span>
       <span class="p-col-4"></span>
 
+      <span class="p-col-3 global-legend">Adresse mail</span>
+      <span class="p-col-5">{{ loggedUser.email }}</span>
+      <span class="p-col-4"></span>
+    </div>
+    <div class="p-grid" *ngIf="player">
+      <h1 class="p-col-12">Informations joueur</h1>
       <span class="p-col-3 global-legend">Sexe</span>
       <span class="p-col-5">{{ player.gender ? 'Homme' : 'Femme' }}</span>
       <span class="p-col-4"></span>
 
       <span class="p-col-3 global-legend">Date de naissance</span>
       <span class="p-col-5">{{ player.birthDate | date: 'shortDate' }}</span>
-      <span class="p-col-4"></span>
-
-      <span class="p-col-3 global-legend">Adresse mail</span>
-      <span class="p-col-5">{{ loggedUser.email }}</span>
       <span class="p-col-4"></span>
 
       <span class="p-col-3 global-legend">Numéro de téléphone</span>
@@ -30,7 +33,311 @@
       <span class="p-col-4"></span>
     </div>
   </p-tabPanel>
-  <p-tabPanel class="p-grid" header="Réinscription" [disabled]="!reSubscriptionAvailable()">
+  <p-tabPanel class="p-grid" header="Réinscription" *ngIf="reSubscriptionAvailable()">
+    <form class="p-grid" [formGroup]="reSubscriptionForm">
+      <h1 class="p-col-12">Informations générales</h1>
 
+      <!-- FIRSTNAME -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="firstName" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.firstName }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- LASTNAME -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="lastName" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.lastName }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- GENDER -->
+      <div class="p-col-2 p-offset-2">
+        <p-radioButton name="gender" [value]="true" formControlName="gender" label="Homme"></p-radioButton>
+      </div>
+      <div class="p-col-2">
+        <p-radioButton name="gender" [value]="false" formControlName="gender" label="Femme"></p-radioButton>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.gender }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- BIRTHDATE -->
+      <div class="p-col-4 p-offset-2">
+        <p-calendar
+          formControlName="birthDate"
+          [readonlyInput]="true"
+          dateFormat="dd/mm/yy">
+        </p-calendar>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.birthDate }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- BIRTHCOUNTRY -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="nationality" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.nationality }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- EMAIL -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="email" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.email }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- PHONENUMBER -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="phoneNumber" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.phoneNumber }}
+      </label>
+
+
+      <!-- ADDRESS -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="address" type="text" pInputText />
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.address }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- POSTCODE -->
+      <div class="p-col-4 p-offset-2">
+        <p-spinner formControlName="postcode" [min]="1000" max="100000" [step]="10" (ngModelChange)="updateCity($event)"></p-spinner>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.postcode }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <div class="p-col-8 p-offset-2 global-section-fill" *ngIf="cities">
+        <p>Plusieurs villes correspondent à ce code postal</p>
+        <p-button
+          *ngFor="let city of cities"
+          (click)="setCity(city.nom)"
+          label="{{ city.nom }}"
+          class="ui-button-info ui-button-small global-margin-right global-margin-top"
+          type="button"></p-button>
+      </div>
+
+      <!-- CITY -->
+      <div class="p-col-4 p-offset-2">
+        <input formControlName="city" type="text" pInputText/>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.city }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <h1 class="p-col-12">Informations complémentaires</h1>
+
+      <!-- CATEGORY -->
+      <div class="p-col-4 p-offset-2">
+        <p-dropdown [options]="categoryOptions" formControlName="idSubscriptionCategory"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idSubscriptionCategory }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- COACH -->
+      <div class="p-col-4 p-offset-2 global-align-center">
+        <p-checkbox formControlName="coach" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.coach }}
+      </label>
+
+      <!-- REFEREE -->
+      <div class="p-col-4 p-offset-2 global-align-center">
+        <p-checkbox formControlName="referee" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.referee }}
+      </label>
+
+      <!-- INSURANCE -->
+      <div class="p-col-4 p-offset-2 global-align-center">
+        <p-checkbox formControlName="insuranceRequested" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.insuranceRequested }}
+        <a href="http://www.ffvb.org/la-ffvb/l-assurance/" target="_blank">En savoir plus ici</a>
+      </label>
+
+      <!-- CALENDAR -->
+      <div class="p-col-4 p-offset-2 global-align-center">
+        <p-checkbox formControlName="calendarRequested" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.calendarRequested }}</label>
+
+      <!-- EQUIPMENT -->
+      <div class="p-col-4 p-offset-2 global-align-center">
+        <p-checkbox formControlName="equipment" [binary]="true"></p-checkbox>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.equipment }}
+        <i class="fas fa-exclamation-triangle global-tooltip-icon-warning"
+           [pTooltip]="requestedEquipmentTooltip"></i>
+      </label>
+
+      <!-- REQUESTED JERSEY NUMBER -->
+      <div class="p-col-4 p-offset-2">
+        <p-spinner formControlName="requestedJerseyNumber" [min]="1" [max]="40" [disabled]="!equipmentRequested()"></p-spinner>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.requestedJerseyNumber }}
+        <i class="far fa-question-circle global-tooltip-icon"
+           [pTooltip]="requestedJerseyNumberTooltip"
+           *ngIf="equipmentRequested()"></i>
+      </label>
+
+      <!-- TOPSIZE -->
+      <div class="p-col-4 p-offset-2">
+        <p-dropdown [options]="clothingSizesOptions" formControlName="idTopSize" [disabled]="!equipmentRequested()"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idTopSize }}
+        <span class="global-form-required" *ngIf="equipmentRequested()">*</span>
+      </label>
+
+      <!-- PANTSIZE -->
+      <div class="p-col-4 p-offset-2">
+        <p-dropdown [options]="clothingSizesOptions" formControlName="idPantsSize" [disabled]="!equipmentRequested()"></p-dropdown>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.idPantsSize }}
+        <span class="global-form-required" *ngIf="equipmentRequested()">*</span>
+      </label>
+
+
+      <!-- COMMENT -->
+      <div class="p-col-4 p-offset-2">
+        <textarea formControlName="comment" pInputTextarea></textarea>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.comment }}
+      </label>
+
+      <div class="p-col-12 p-grid" *ngIf="isMinor()">
+        <h1 class="p-col-12">Autorisations parentales</h1>
+        <!-- ALLOW LEAVE ALONE -->
+        <div class="p-col-2 p-offset-2">
+          <p-radioButton name="pc_allowToLeaveAlone" [value]="true" formControlName="pc_allowToLeaveAlone" label="Oui"></p-radioButton>
+        </div>
+        <div class="p-col-2">
+          <p-radioButton name="pc_allowToLeaveAlone" [value]="false" formControlName="pc_allowToLeaveAlone" label="Non"></p-radioButton>
+        </div>
+        <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToLeaveAlone }}</label>
+
+        <!-- ALLOW CLUB RESCUE -->
+        <div class="p-col-2 p-offset-2">
+          <p-radioButton name="pc_allowClubToRescue" [value]="true" formControlName="pc_allowClubToRescue" label="Oui"></p-radioButton>
+        </div>
+        <div class="p-col-2">
+          <p-radioButton name="pc_allowClubToRescue" [value]="false" formControlName="pc_allowClubToRescue" label="Non"></p-radioButton>
+        </div>
+        <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowClubToRescue }}</label>
+
+        <!-- ALLOW TO TRAVEL -->
+        <div class="p-col-2 p-offset-2">
+          <p-radioButton name="pc_allowToTravelWithTeamMate" [value]="true" formControlName="pc_allowToTravelWithTeamMate" label="Oui"></p-radioButton>
+        </div>
+        <div class="p-col-2">
+          <p-radioButton name="pc_allowToTravelWithTeamMate" [value]="false" formControlName="pc_allowToTravelWithTeamMate" label="Non"></p-radioButton>
+        </div>
+        <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToTravelWithTeamMate }}</label>
+
+        <!-- ALLOW TO PUBLISH -->
+        <div class="p-col-2 p-offset-2">
+          <p-radioButton name="pc_allowToPublish" [value]="true" formControlName="pc_allowToPublish" label="Oui"></p-radioButton>
+        </div>
+        <div class="p-col-2">
+          <p-radioButton name="pc_allowToPublish" [value]="false" formControlName="pc_allowToPublish" label="Non"></p-radioButton>
+        </div>
+        <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToPublish }}</label>
+
+        <!-- ALLOW WHATSAPP -->
+        <div class="p-col-2 p-offset-2">
+          <p-radioButton name="pc_allowToWhatsapp" [value]="true" formControlName="pc_allowToWhatsapp" label="Oui"></p-radioButton>
+        </div>
+        <div class="p-col-2">
+          <p-radioButton name="pc_allowToWhatsapp" [value]="false" formControlName="pc_allowToWhatsapp" label="Non"></p-radioButton>
+        </div>
+        <label class="global-form-label p-col-6">{{ formLabelValues.pc_allowToWhatsapp }}</label>
+
+        <!-- UNACCOUNTABILITY -->
+        <div class="p-col-4 p-offset-2 global-align-center">
+          <p-checkbox formControlName="pc_unaccountability" [binary]="true"></p-checkbox>
+        </div>
+        <label class="global-form-label p-col-6">
+          {{ formLabelValues.pc_unaccountability }}
+          <span class="global-form-required">*</span>
+        </label>
+      </div>
+
+
+      <h1 class="p-col-12">Documents et règlement</h1>
+
+      <!-- CNI -->
+      <div class="p-col-4 p-offset-2">
+        <input type="file" (change)="cniFileHandler($event)" pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.cni }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- IDENTITY PHOTO -->
+      <div class="p-col-4 p-offset-2">
+        <input type="file" (change)="identityPhotoFileHandler($event)" pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.identityPhoto }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <!-- MEDICAL CERTIFICATE -->
+      <div class="p-col-4 p-offset-2">
+        <input type="file" (change)="medicalCertificateFileHandler($event)" pInputText>
+      </div>
+      <label class="global-form-label p-col-6">
+        {{ formLabelValues.medicalCertificate }}
+        <span class="global-form-required">*</span>
+      </label>
+
+
+      <!-- PAYMENT MODES -->
+      <div class="p-col-4 p-offset-2">
+        <p-multiSelect [options]="paymentModesOptions" formControlName="idsPaymentMode" defaultLabel="Choisir ..."></p-multiSelect>
+      </div>
+      <label class="global-form-label p-col-6">{{ formLabelValues.idsPaymentMode }}
+        <span class="global-form-required">*</span>
+      </label>
+
+      <p-toolbar class="p-col-12">
+        <div class="ui-toolbar-group-right">
+          <p-button (click)="sendSubscription()" label="Valider l'inscription" icon="fas fa-check" [disabled]="reSubscriptionForm.invalid"></p-button>
+        </div>
+      </p-toolbar>
+    </form>
   </p-tabPanel>
 </p-tabView>

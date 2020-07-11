@@ -171,24 +171,26 @@ export class SubscriptionFormComponent implements OnInit {
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
     // remove after test :
-    firstStep.get('firstName').valueChanges
-      .subscribe(
-        firstName => {
-          if (firstName === 'Kyllian') {
-            this.test();
-          }
-        }
-      );
+    // firstStep.get('firstName').valueChanges
+    //   .subscribe(
+    //     firstName => {
+    //       if (firstName === 'Kyllian') {
+    //         this.test();
+    //       }
+    //     }
+    //   );
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {
-        const controls: AbstractControl[] = [];
-        controls.push(thirdStep.get('pc_allowToLeaveAlone'));
-        controls.push(thirdStep.get('pc_allowClubToRescue'));
-        controls.push(thirdStep.get('pc_allowToTravelWithTeamMate'));
-        controls.push(thirdStep.get('pc_allowToPublish'));
-        controls.push(thirdStep.get('pc_allowToWhatsapp'));
+        const controls: AbstractControl[] = [
+          thirdStep.get('pc_allowToLeaveAlone'),
+          thirdStep.get('pc_allowClubToRescue'),
+          thirdStep.get('pc_allowToTravelWithTeamMate'),
+          thirdStep.get('pc_allowToPublish'),
+          thirdStep.get('pc_allowToWhatsapp')
+        ];
         const unaccountabilityControl = thirdStep.get('pc_unaccountability');
+
         if (this.isMinor(birthDate)) {
           controls.forEach(control => {
             control.setValidators(Validators.required);

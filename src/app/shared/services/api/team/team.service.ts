@@ -61,6 +61,7 @@ export class TeamService {
     )
       .pipe(map(
         subscription => {
+          subscription.birthDate = new Date(subscription.birthDate);
           subscription.validationDate = new Date(subscription.validationDate);
           subscription.creationDate = new Date(subscription.creationDate);
           return subscription;
@@ -248,6 +249,14 @@ export class TeamService {
 
   public createSubscription(subscription: any): Observable<Subscription> {
     return this.http.post<Subscription>('api/subscriptions', subscription);
+  }
+
+  public createReSubscription(subscription: any): Observable<Subscription> {
+    return this.http.post<Subscription>(
+      'api/subscriptions/re-subscription',
+      subscription,
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
   public updateSubscription(subscription: Subscription): Observable<Subscription> {
