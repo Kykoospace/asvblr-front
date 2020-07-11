@@ -8,7 +8,6 @@ import { HomeComponent } from './main/home/home.component';
 import { ClubComponent } from './main/club/club.component';
 import { TeamsComponent
     as TeamsMainComponent } from './main/teams/teams.component';
-import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 import { SubscriptionComponent
     as SubscriptionMainComponent } from './main/subscription/subscription.component';
@@ -39,10 +38,11 @@ import { MailerComponent } from './management/mailer/mailer.component';
 // Guards import :
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { PermissionGuard } from './shared/guards/permission/permission.guard';
-import {PlayComponent} from './management/play/play.component';
-import {CoachComponent} from './management/coach/coach.component';
-import {PricesComponent} from './management/prices/prices.component';
-import {UserProfileComponent} from './management/user-profile/user-profile.component';
+import { PlayComponent } from './management/play/play.component';
+import { CoachComponent } from './management/coach/coach.component';
+import { PricesComponent } from './management/prices/prices.component';
+import { UserProfileComponent } from './management/user-profile/user-profile.component';
+import { GymnasiumComponent } from './main/gymnasium/gymnasium.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -51,8 +51,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'club', component: ClubComponent },
+      { path: 'gymnasium', component: GymnasiumComponent },
       { path: 'teams', component: TeamsMainComponent },
-      { path: 'gallery', component: GalleryComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'subscription', component: SubscriptionMainComponent },
       { path: '**', redirectTo: 'home' }

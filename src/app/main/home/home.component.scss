@@ -9,9 +9,14 @@
     }
   }
 
+  .home-article-container-title {
+    margin-bottom: $global-spacing-large;
+  }
+
   .home-article-date {
     text-align: right;
     font-size: $global-font-size-small;
     color: $global-disabled-font-color;
+    margin-top: $global-spacing-large;
   }
 }

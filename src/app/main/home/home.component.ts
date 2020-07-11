@@ -10,28 +10,41 @@ import Article from '../../shared/models/entities/Article';
 export class HomeComponent implements OnInit {
 
   public articles: Article[];
-
-  public images = [
-    { source: 'assets/images/carousel_1.jpg', alt: '', title: 'Journée associations 2018' },
-    { source: 'assets/images/carousel_2.jpg', alt: '', title: 'Équipe M20 homme' },
-    { source: 'assets/images/carousel_3.jpg', alt: '', title: 'Équipe M20 F' },
-    { source: 'assets/images/carousel_4.jpg', alt: '', title: 'Équipe Dep 1 H' },
-    { source: 'assets/images/carousel_5.jpg', alt: '', title: 'Équipe Dep 2 H' },
-  ];
+  private maxPages: number;
+  private currentPage: number;
 
   constructor(
     private managementService: ManagementService
   ) {
-    this.managementService.getAllArticles()
+    this.currentPage = 1;
+    this.maxPages = 1;
+  }
+
+  ngOnInit() {
+    this.managementService.getAllArticles(this.currentPage)
       .subscribe(
         articles => {
-          this.articles = articles;
+          this.articles = articles.content;
+          this.maxPages = articles.totalPages;
         },
         err => { }
       );
   }
 
-  ngOnInit() {
+  public loadMoreArticles(): void {
+    const askedPage = this.currentPage + 1;
+    this.managementService.getAllArticles(askedPage)
+      .subscribe(
+        articles => {
+          this.currentPage = askedPage;
+          articles.content.forEach(article => this.articles.push(article));
+          this.maxPages = articles.totalPages;
+        },
+        err => console.error(err)
+      );
   }
 
+  public canAskMoreArticles(): boolean {
+    return this.currentPage < this.maxPages;
+  }
 }

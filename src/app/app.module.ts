@@ -16,7 +16,6 @@ import { HomeComponent } from './main/home/home.component';
 import { ClubComponent } from './main/club/club.component';
 import { SubscriptionComponent
     as SubscriptionMainComponent} from './main/subscription/subscription.component';
-import { GalleryComponent } from './main/gallery/gallery.component';
 import { ContactComponent } from './main/contact/contact.component';
 
 import { ManagementComponent } from './management/management.component';
@@ -77,6 +76,7 @@ import { SubscriptionPaymentModeCardComponent } from './shared/components/subscr
 import { PricesComponent } from './management/prices/prices.component';
 import { UserProfileComponent } from './management/user-profile/user-profile.component';
 import { DynamicDialogUsersSelectPresidentComponent } from './shared/components/dynamic-dialog-users-select-president/dynamic-dialog-users-select-president.component';
+import { GymnasiumComponent } from './main/gymnasium/gymnasium.component';
 
 registerLocaleData(localeFr);
 
@@ -87,7 +87,6 @@ registerLocaleData(localeFr);
     HomeComponent,
     ClubComponent,
     SubscriptionMainComponent,
-    GalleryComponent,
     ContactComponent,
     ManagementComponent,
     ArticlesComponent,
@@ -131,7 +130,8 @@ registerLocaleData(localeFr);
     SubscriptionPaymentModeCardComponent,
     PricesComponent,
     UserProfileComponent,
-    DynamicDialogUsersSelectPresidentComponent
+    DynamicDialogUsersSelectPresidentComponent,
+    GymnasiumComponent
   ],
   imports: [
     HttpClientModule,

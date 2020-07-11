@@ -9,6 +9,7 @@ import {AuthService} from '../auth/auth.service';
 import User from '../../../models/entities/User';
 import Price from '../../../models/entities/Price';
 import Player from '../../../models/entities/Player';
+import Pageable from '../../../models/paging/Pageable';
 
 @Injectable({
   providedIn: 'root'
@@ -108,11 +109,12 @@ export class ManagementService {
     return this.http.get<Article>('api/articles/' + idArticle, { headers: this.authService.getAuthorizationHeader() });
   }
 
-  public getAllArticles(page: number = 1, pageSize: number = 10): Observable<Article[]> {
+  public getAllArticles(page: number = 1, pageSize: number = 10): Observable<Page<Article>> {
     return this.http.get<Page<Article>>('api/articles?page=' + (page - 1) + '&size=' + pageSize)
       .pipe(map(
-        pageable => {
-          return pageable.content;
+        articles => {
+          console.log(articles);
+          return articles;
         }
       ));
   }

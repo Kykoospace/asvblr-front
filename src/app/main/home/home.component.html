@@ -1,16 +1,17 @@
 <div id="home-container">
-  <div class="main-site-layout-section">
-    <p-galleria [images]="images" [showCaption]="true" [panelWidth]="1000" [panelHeight]="500"></p-galleria>
-  </div>
-
   <div
     class="main-site-layout-section"
-    *ngFor="let article of articles; let i = index"
+    *ngFor="let article of articles"
   >
     <div class="main-site-layout-section-content home-article-container">
-      <h1>{{ article.title }}</h1>
+      <h1 class="home-article-container-title">{{ article.title }}</h1>
       <div [innerHTML]="article.content | safe: 'html'"></div>
-      <p class="home-article-date">Modifié le {{ article.lastModificationDate | date: 'shortDate' }}</p>
+      <p class="home-article-date">Modifié le {{ article.lastModificationDate | date: 'shortDate' }} à {{ article.lastModificationDate | date: 'shortTime' }}</p>
+    </div>
+  </div>
+  <div class="main-site-layout-section" *ngIf="canAskMoreArticles()">
+    <div class="main-site-layout-section-content global-align-center">
+      <p-button (click)="loadMoreArticles()" class="ui-button-info" label="Charger plus d'articles" icon="fas fa-undo"></p-button>
     </div>
   </div>
 </div>

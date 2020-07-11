@@ -48,7 +48,7 @@
       <p-button (click)="backNavigate()" label="Retour" icon="fas fa-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>
       <p-button (click)="saveArticle()" class="ui-button-success" label="Sauvegarder" icon="fas fa-save" *ngIf="article.content !== content"></p-button>
       <p-button (click)="renameArticleToggle = true" class="ui-button-secondary" label="Renommer l'article" icon="fas fa-pen"></p-button>
-      <p-button (click)="setVisibilityArticleToggle = true" class="ui-button-secondary" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye"></p-button>
+      <p-button (click)="setVisibilityArticleToggle = true" class="ui-button-secondary" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye" [disabled]="article.content !== content"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Créé le {{ article.creationDate | date: 'shortDate' }}</span>

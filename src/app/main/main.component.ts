@@ -17,21 +17,8 @@ export class MainComponent implements OnInit {
 
   public navItems: MenuItem[] = [
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
-    { label: 'La vie du club', icon: 'fas fa-volleyball-ball',
-      items: [
-        [
-          { label: 'Découvrir notre club',
-            items: [
-              { label: 'Horaires et gymnases', routerLink: '' },
-              { label: 'Histoire du club', routerLink: '' },
-              { label: 'Les entraîneurs', routerLink: '' },
-              { label: 'Nos partenaires', routerLink: '' },
-              { label: 'Le Bureau', routerLink: '' },
-            ]
-          }
-        ]
-      ]
-    },
+    { label: 'Le club', routerLink: 'club', icon: 'fas fa-volleyball-ball' },
+    { label: 'Les gymnases', routerLink: 'gymnasium', icon: 'fas fa-map-marker-alt' },
     { label: 'Nos équipes', icon: 'fas fa-users',
       items: [
         [
@@ -75,7 +62,6 @@ export class MainComponent implements OnInit {
       ]
     },
     { label: 'Inscription', routerLink: 'subscription', icon: 'fas fa-file-signature' },
-    { label: 'Gallerie', routerLink: 'gallery', icon: 'fas fa-images' },
     { label: 'Contact', routerLink: 'contact', icon: 'fas fa-envelope' },
   ]
 
