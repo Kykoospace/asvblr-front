@@ -25,6 +25,8 @@ export class UserProfileComponent implements OnInit {
   public currentSeason: Season;
   public lastSubscription: Subscription;
 
+  public changePasswordForm: FormGroup;
+
   public reSubscriptionForm: FormGroup;
   public fileCNI: File;
   public fileMedicalCertificate: File;
@@ -94,6 +96,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.changePasswordForm = this.formBuilder.group({
+      oldPassword: ['', [ Validators.required ]],
+      password: ['', [ Validators.required ]],
+      confirmation: ['', [ Validators.required ]]
+    }, { validators: this.checkPasswords });
+
     const requests: any = {
       currentSeason: this.teamService.getCurrentSeason()
     };
@@ -230,6 +238,35 @@ export class UserProfileComponent implements OnInit {
         pantsSize.updateValueAndValidity();
         requestedJerseyNumber.updateValueAndValidity();
       });
+  }
+
+  public checkPasswords(group: FormGroup) {
+    const pass = group.get('password').value;
+    const confirmPass = group.get('confirmation').value;
+
+    return pass === confirmPass ? null : { notSame: true };
+  }
+
+  public changePassword(): void {
+    if (this.changePasswordForm.valid) {
+      this.authService.changePassword(
+        this.changePasswordForm.get('oldPassword').value,
+        this.changePasswordForm.get('password').value
+      )
+        .subscribe(
+          () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Mot de passe changé'
+            });
+            this.changePasswordForm.reset();
+          },
+          err => this.messageService.add({
+            severity: 'error',
+            summary: 'Ancien mot de passe incorrect'
+          })
+        );
+    }
   }
 
   public sendSubscription(): void {

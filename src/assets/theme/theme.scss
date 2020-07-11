@@ -154,13 +154,13 @@ ul.global-list {
   margin-bottom: $global-spacing;
 }
 
-div.global-section {
+.global-section {
   border: 1px solid $global-border-color;
   border-radius: $global-border-radius;
   padding: $global-container-padding;
 }
 
-div.global-section-fill {
+.global-section-fill {
   background-color: $global-bkg-darker-color;
   border-radius: $global-border-radius;
   padding: $global-container-padding;

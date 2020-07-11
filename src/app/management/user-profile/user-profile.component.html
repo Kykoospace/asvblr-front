@@ -13,7 +13,43 @@
       <span class="p-col-3 global-legend">Adresse mail</span>
       <span class="p-col-5">{{ loggedUser.email }}</span>
       <span class="p-col-4"></span>
+
+      <div class="p-col-6 p-offset-1">
+        <form [formGroup]="changePasswordForm" class="p-grid global-section-fill">
+          <h3 class="p-col-12">Changement de mot de passe</h3>
+          <div class="p-col-4 p-offset-2">
+            <input formControlName="oldPassword" type="password" pInputText />
+          </div>
+          <label class="global-form-label p-col-6">
+            Ancien mot de passe
+            <span class="global-form-required">*</span>
+          </label>
+
+          <div class="p-col-4 p-offset-2">
+            <input formControlName="password" type="password" pInputText />
+          </div>
+          <label class="global-form-label p-col-6">
+            Mot de passe
+            <span class="global-form-required">*</span>
+          </label>
+
+          <div class="p-col-4 p-offset-2">
+            <input formControlName="confirmation" type="password" pInputText />
+          </div>
+          <label class="global-form-label p-col-6">
+            Confirmez le mot de passe
+            <span class="global-form-required">*</span>
+          </label>
+
+          <span class="p-col-3 global-legend"></span>
+          <div class="p-col-5">
+            <p-button (click)="changePassword()" label="Changer le mot de passe" icon="fas fa-check" [disabled]="changePasswordForm.invalid"></p-button>
+          </div>
+          <span class="p-col-4"></span>
+        </form>
+      </div>
     </div>
+
     <div class="p-grid" *ngIf="player">
       <h1 class="p-col-12">Informations joueur</h1>
       <span class="p-col-3 global-legend">Sexe</span>
