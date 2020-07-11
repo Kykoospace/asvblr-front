@@ -8,18 +8,35 @@ p-radiobutton {
 
 .ui-radiobutton {
   background-color: $global-bkg-color;
-  border: 1px solid $prime-ng-input-border-color;
   border-radius: 100%;
   margin: $prime-ng-input-padding;
   margin-right: $prime-ng-radiobutton-label-spacing !important;
 
-  &:hover {
-    border-color: $prime-ng-input-focus-color;
+  .ui-radiobutton-box {
+    cursor: pointer;
+    border: 1px solid $prime-ng-input-border-color;
+
+    &:hover {
+      border-color: $prime-ng-input-focus-color;
+    }
+
+    &.ui-state-disabled {
+      cursor: inherit;
+      background-color: $global-disabled-bkg-color;
+
+      .ui-radiobutton-icon {
+        color: $global-disabled-font-color;
+      }
+
+      &:hover {
+        border-color: transparent;
+      }
+    }
   }
 }
 
 .ui-radiobutton-label {
-  &:hover {
-    cursor: pointer;
+  &.ui-label-disabled {
+    color: $global-disabled-font-color;
   }
 }
