@@ -6,7 +6,7 @@ import {AuthService} from '../../shared/services/api/auth/auth.service';
 import AppConstants from '../../shared/AppConstants';
 import {DynamicDialogCreateUserComponent} from '../../shared/components/dynamic-dialog-create-user/dynamic-dialog-create-user.component';
 import {TeamService} from '../../shared/services/api/team/team.service';
-import {forkJoin} from 'rxjs';
+import {DynamicDialogUsersSelectPresidentComponent} from '../../shared/components/dynamic-dialog-users-select-president/dynamic-dialog-users-select-president.component';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +15,7 @@ import {forkJoin} from 'rxjs';
 })
 export class UsersComponent implements OnInit {
 
+  public changePresidentDialogRef: DynamicDialogRef;
   public newUserDialogRef: DynamicDialogRef;
   public userDetailToggle: boolean;
 
@@ -151,5 +152,14 @@ export class UsersComponent implements OnInit {
           err => console.error(err)
         );
     }
+  }
+
+  public openChangePresidentDialog(): void {
+    this.changePresidentDialogRef = this.dialogService.open(
+      DynamicDialogUsersSelectPresidentComponent,
+      {
+        header: 'Changement de président'
+      }
+    );
   }
 }

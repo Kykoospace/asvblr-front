@@ -77,6 +77,14 @@ export class ManagementService {
       );
   }
 
+  public givePresidentRole(idUser: number): Observable<User> {
+    return this.http.patch<User>(
+      'api/users/' + idUser + '/give-president-right',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
 
   // ------------------------------------------------
   // PaymentMode routes :

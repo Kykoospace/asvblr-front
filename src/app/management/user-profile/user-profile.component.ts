@@ -94,11 +94,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    forkJoin({
-      player: this.managementService.getUserPlayer(this.loggedUser.id),
-      currentSeason: this.teamService.getCurrentSeason(),
-      lastSubscription: this.teamService.getPlayerLastSubscription(this.loggedUser.idPlayer)
-    })
+    const requests: any = {
+      currentSeason: this.teamService.getCurrentSeason()
+    };
+
+    if (this.loggedUser.idPlayer) {
+      requests.player = this.managementService.getUserPlayer(this.loggedUser.id);
+      requests.lastSubscription = this.teamService.getPlayerLastSubscription(this.loggedUser.idPlayer);
+    }
+
+    forkJoin(requests)
       .subscribe(
         (results: any) => {
           this.player = results.player;
@@ -252,7 +257,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  private isMinor(birthDate: Date = this.reSubscriptionForm.get('birthDate').value) {
+  public isMinor(birthDate: Date = this.reSubscriptionForm.get('birthDate').value) {
     const date = new Date(birthDate);
     date.setFullYear(date.getFullYear() + 18);
     return date.getTime() > Date.now();

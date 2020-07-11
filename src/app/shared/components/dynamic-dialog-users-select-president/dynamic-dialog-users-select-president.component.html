@@ -1,0 +1,18 @@
+<div class="p-grid">
+
+  <span class="p-col-4 p-offset-2 global-legend">
+    Nouveau coach
+  </span>
+  <div class="p-col-4">
+    <p-dropdown #selectPresident appendTo="body" [options]="userOptions"></p-dropdown>
+  </div>
+  <div class="p-col-12 global-separation"></div>
+  <p-toolbar class="p-col-12">
+    <div class="ui-toolbar-group-left">
+      <p-button (click)="cancel()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+    </div>
+    <div class="ui-toolbar-group-right">
+      <p-button (click)="changePresident(selectPresident.value)" label="Donner les droits" icon="fas fa-check" [disabled]="!selectPresident.value"></p-button>
+    </div>
+  </p-toolbar>
+</div>

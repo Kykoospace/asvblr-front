@@ -76,6 +76,7 @@ import { DynamicDialogTeamPlayerListEditComponent } from './shared/components/dy
 import { SubscriptionPaymentModeCardComponent } from './shared/components/subscription-payment-mode-card/subscription-payment-mode-card.component';
 import { PricesComponent } from './management/prices/prices.component';
 import { UserProfileComponent } from './management/user-profile/user-profile.component';
+import { DynamicDialogUsersSelectPresidentComponent } from './shared/components/dynamic-dialog-users-select-president/dynamic-dialog-users-select-president.component';
 
 registerLocaleData(localeFr);
 
@@ -129,7 +130,8 @@ registerLocaleData(localeFr);
     DynamicDialogTeamPlayerListEditComponent,
     SubscriptionPaymentModeCardComponent,
     PricesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DynamicDialogUsersSelectPresidentComponent
   ],
   imports: [
     HttpClientModule,
