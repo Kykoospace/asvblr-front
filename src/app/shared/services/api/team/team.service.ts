@@ -377,7 +377,10 @@ export class TeamService {
   // ------------------------------------------------
 
   public getDocument(idDocument: number): Observable<Document> {
-    return this.http.get<Document>('api/documents/' + idDocument);
+    return this.http.get<Document>(
+      'api/documents/' + idDocument,
+      { headers: this.authService.getAuthorizationHeader() }
+    );
   }
 
 

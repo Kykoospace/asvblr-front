@@ -120,8 +120,11 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="Documents à joindre">
-    <p-lightbox [images]="documentsImages"></p-lightbox>
     <div class="p-grid">
+      <span class="p-col-3 global-legend">Documents</span>
+      <p-lightbox class="p-col-5" [images]="documentsImages"></p-lightbox>
+      <span class="p-col-4"></span>
+
       <span class="p-col-3 global-legend">Carte d'identité</span>
       <p-fileUpload
         class="p-col-5"
@@ -130,9 +133,7 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <div class="p-col-4">
-        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-      </div>
+      <span class="p-col-4"></span>
     </div>
     <div class="p-grid">
       <span class="p-col-3 global-legend">Certificat médical</span>
@@ -143,9 +144,7 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <div class="p-col-4">
-        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-      </div>
+      <span class="p-col-4"></span>
     </div>
     <div class="p-grid">
       <span class="p-col-3 global-legend">Photo d'identité</span>
@@ -156,9 +155,7 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <div class="p-col-4">
-        <p-button class="ui-button-secondary" label="Apperçu"></p-button>
-      </div>
+      <span class="p-col-4"></span>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Paiement">

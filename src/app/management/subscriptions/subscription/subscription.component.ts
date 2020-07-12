@@ -75,9 +75,9 @@ export class SubscriptionComponent implements OnInit {
           const requests: any = {
             paymentModes: this.teamService.getSubscriptionPaymentModes(this.subscription.id),
             category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
-            // cni: this.teamService.getDocument(this.subscription.idCNI),
-            // identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
-            // medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)
+            cni: this.teamService.getDocument(this.subscription.idCNI),
+            identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
+            medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)
           };
 
           if (this.subscription.equipment) {
@@ -89,9 +89,9 @@ export class SubscriptionComponent implements OnInit {
               (results: any) => {
                 this.paymentModes = results.paymentModes;
                 this.category = results.category;
-                // this.documentsImages.push({ title: 'Carte nationale d\'identité', source: 'api/document-repository/' + results.cni.name});
-                // this.documentsImages.push({ title: 'Photo d\'identité', source: 'api/document-repository/' + results.identityPhoto.name });
-                // this.documentsImages.push({ title: 'Certificat médical', source: 'api/document-repository/' + results.medicalCertificate.name });
+                this.documentsImages.push({ title: 'Carte nationale d\'identité', source: 'api/document-repository/' + results.cni.name});
+                this.documentsImages.push({ title: 'Photo d\'identité', source: 'api/document-repository/' + results.identityPhoto.name });
+                this.documentsImages.push({ title: 'Certificat médical', source: 'api/document-repository/' + results.medicalCertificate.name });
                 if (this.subscription.equipment) {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
