@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ManagementService} from '../../shared/services/api/management/management.service';
-import {forkJoin} from 'rxjs';
-import {MessageService} from 'primeng';
+import { ManagementService } from '../../shared/services/api/management/management.service';
+import { forkJoin } from 'rxjs';
+import { MessageService } from 'primeng';
 import AppConstants from '../../shared/AppConstants';
 
 @Component({

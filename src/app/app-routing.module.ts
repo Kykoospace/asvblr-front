@@ -117,6 +117,7 @@ const routes: Routes = [
       { path: 'dev-tools', component: DevToolsComponent },
       { path: 'sandbox', component: SandboxComponent },
       { path: 'user', component: UserProfileComponent },
+      { path: 'dev', component: SandboxComponent },
       { path: '**', redirectTo: '/management' }
     ]
   },

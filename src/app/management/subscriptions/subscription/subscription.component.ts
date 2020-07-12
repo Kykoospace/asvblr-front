@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../../../shared/services/api/team/team.service';
 import Subscription from '../../../shared/models/entities/Subscription';
-import { ConfirmationService, MessageService } from 'primeng';
+import {ConfirmationService, DialogService, DynamicDialogRef, MessageService} from 'primeng';
 import ClothingSize from '../../../shared/models/entities/ClothingSize';
 import {forkJoin} from 'rxjs';
 import SubscriptionCategory from '../../../shared/models/entities/SubscriptionCategory';
 import SubscriptionPaymentMode from '../../../shared/models/responses/SubscriptionPaymentMode';
 import {DatePipe} from '@angular/common';
 import {ManagementService} from '../../../shared/services/api/management/management.service';
+import {DynamicDialogPreviewDocumentComponent} from '../../../shared/components/dynamic-dialog-preview-document/dynamic-dialog-preview-document.component';
 
 @Component({
   selector: 'app-subscription',
   templateUrl: './subscription.component.html',
   styleUrls: ['./subscription.component.scss']
 })
-export class SubscriptionComponent implements OnInit {
+export class SubscriptionComponent implements OnInit, OnDestroy {
+
+  public previewDocumentDialogRef: DynamicDialogRef;
 
   private documentUploadedSuccessMessage = {
     severity: 'success',
@@ -40,7 +43,9 @@ export class SubscriptionComponent implements OnInit {
   public topSize: ClothingSize;
   public pantsSize: ClothingSize;
 
-  public documentsImages;
+  public cniDocument: Document;
+  public identityPhotoDocument: Document;
+  public medicalCertificateDocument: Document;
 
   constructor(
     private router: Router,
@@ -49,13 +54,18 @@ export class SubscriptionComponent implements OnInit {
     private managementService: ManagementService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private dialogService: DialogService,
     private datePipe: DatePipe
-  ) {
-    this.documentsImages = [];
-  }
+  ) { }
 
   ngOnInit(): void {
     this.refreshSubscription();
+  }
+
+  ngOnDestroy() {
+    if (this.previewDocumentDialogRef) {
+      this.previewDocumentDialogRef.close();
+    }
   }
 
   public backNavigate() {
@@ -89,9 +99,9 @@ export class SubscriptionComponent implements OnInit {
               (results: any) => {
                 this.paymentModes = results.paymentModes;
                 this.category = results.category;
-                this.documentsImages.push({ title: 'Carte nationale d\'identité', source: 'api/document-repository/' + results.cni.name});
-                this.documentsImages.push({ title: 'Photo d\'identité', source: 'api/document-repository/' + results.identityPhoto.name });
-                this.documentsImages.push({ title: 'Certificat médical', source: 'api/document-repository/' + results.medicalCertificate.name });
+                this.cniDocument = results.cni;
+                this.identityPhotoDocument = results.identityPhoto;
+                this.medicalCertificateDocument = results.medicalCertificate;
                 if (this.subscription.equipment) {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
@@ -230,5 +240,17 @@ export class SubscriptionComponent implements OnInit {
     const date = new Date(this.subscription.birthDate);
     date.setFullYear(date.getFullYear() + 18);
     return date.getTime() > Date.now();
+  }
+
+  public openPreviewDocumentDialog(title: string, document: Document): void {
+    this.dialogService.open(
+      DynamicDialogPreviewDocumentComponent,
+      {
+        header: title,
+        data: {
+          document
+        }
+      }
+    );
   }
 }

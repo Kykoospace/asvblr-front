@@ -77,6 +77,7 @@ import { PricesComponent } from './management/prices/prices.component';
 import { UserProfileComponent } from './management/user-profile/user-profile.component';
 import { DynamicDialogUsersSelectPresidentComponent } from './shared/components/dynamic-dialog-users-select-president/dynamic-dialog-users-select-president.component';
 import { GymnasiumComponent } from './main/gymnasium/gymnasium.component';
+import { DynamicDialogPreviewDocumentComponent } from './shared/components/dynamic-dialog-preview-document/dynamic-dialog-preview-document.component';
 
 registerLocaleData(localeFr);
 
@@ -132,7 +133,8 @@ registerLocaleData(localeFr);
     PricesComponent,
     UserProfileComponent,
     DynamicDialogUsersSelectPresidentComponent,
-    GymnasiumComponent
+    GymnasiumComponent,
+    DynamicDialogPreviewDocumentComponent
   ],
   imports: [
     HttpClientModule,

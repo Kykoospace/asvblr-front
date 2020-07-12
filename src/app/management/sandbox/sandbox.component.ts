@@ -9,36 +9,13 @@ import {TeamService} from '../../shared/services/api/team/team.service';
 })
 export class SandboxComponent implements OnInit {
 
-  public testForm: FormGroup;
-  public file: File;
+  public images: any[];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private teamService: TeamService
-  ) { }
+  constructor() {
+    this.images = [];
+  }
 
   ngOnInit(): void {
-    this.testForm = this.formBuilder.group({
-      idSubscription: [null, [ Validators.required ]]
-    });
-  }
 
-  public onSelectFile(event) {
-    this.file = <File>event.target.files[0];
-  }
-
-  public submit(): void {
-    if (this.testForm.valid) {
-      this.teamService.updateSubscriptionCNI(
-        this.testForm.get('idSubscription').value,
-        this.file
-      )
-        .subscribe(
-          () => {
-            console.log('success');
-          },
-          err => console.error(err)
-        );
-    }
   }
 }

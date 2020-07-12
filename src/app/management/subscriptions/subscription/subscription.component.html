@@ -121,10 +121,6 @@
   </p-tabPanel>
   <p-tabPanel header="Documents à joindre">
     <div class="p-grid">
-      <span class="p-col-3 global-legend">Documents</span>
-      <p-lightbox class="p-col-5" [images]="documentsImages"></p-lightbox>
-      <span class="p-col-4"></span>
-
       <span class="p-col-3 global-legend">Carte d'identité</span>
       <p-fileUpload
         class="p-col-5"
@@ -133,7 +129,9 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <span class="p-col-4"></span>
+      <div class="p-col-4">
+        <p-button (click)="openPreviewDocumentDialog('Carte d\'identité', cniDocument)" class="ui-button-secondary" label="Apperçu"></p-button>
+      </div>
     </div>
     <div class="p-grid">
       <span class="p-col-3 global-legend">Certificat médical</span>
@@ -144,7 +142,10 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <span class="p-col-4"></span>
+      <div class="p-col-4">
+        <p-button (click)="openPreviewDocumentDialog('Photo d\'identité', this.identityPhotoDocument)" class="ui-button-secondary" label="Apperçu"></p-button>
+        <p class="global-font-success global-margin-top"><i class="fas fa-check global-margin-right"></i>Ce document est bien une photo d'identité</p>
+      </div>
     </div>
     <div class="p-grid">
       <span class="p-col-3 global-legend">Photo d'identité</span>
@@ -155,7 +156,9 @@
         accept="image/*"
         maxFileSize="1000000">
       </p-fileUpload>
-      <span class="p-col-4"></span>
+      <div class="p-col-4">
+        <p-button (click)="openPreviewDocumentDialog('Certificat médical', this.medicalCertificateDocument)" class="ui-button-secondary" label="Apperçu"></p-button>
+      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Paiement">
