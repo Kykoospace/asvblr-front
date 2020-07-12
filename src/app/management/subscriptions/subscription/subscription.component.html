@@ -157,7 +157,8 @@
       </p-fileUpload>
       <div class="p-col-4">
         <p-button (click)="openPreviewDocumentDialog('Photo d\'identité', this.identityPhotoDocument)" class="ui-button-secondary" label="Apperçu"></p-button>
-        <p class="global-font-success global-margin-top"><i class="fas fa-check global-margin-right"></i>Ce document contient bien un visage</p>
+        <p class="global-font-success global-margin-top" *ngIf="identityPhotoValidity"><i class="fas fa-check global-margin-right"></i>Ce document contient bien un visage</p>
+        <p class="global-font-warning global-margin-top" *ngIf="identityPhotoValidity === false"><i class="fas fa-times global-margin-right"></i>Aucun visage reconnu</p>
       </div>
     </div>
   </p-tabPanel>

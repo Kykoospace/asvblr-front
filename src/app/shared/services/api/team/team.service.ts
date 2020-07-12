@@ -320,6 +320,14 @@ export class TeamService {
     );
   }
 
+  public checkPhotoValidity(idSubscription): Observable<any> {
+    return this.http.post<any>(
+      'api/subscriptions/' + idSubscription + '/check-validity-photo',
+      {},
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
 
   // ------------------------------------------------
   // Subscription category routes :

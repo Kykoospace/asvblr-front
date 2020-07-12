@@ -46,6 +46,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
   public cniDocument: Document;
   public identityPhotoDocument: Document;
   public medicalCertificateDocument: Document;
+  public identityPhotoValidity: boolean;
 
   constructor(
     private router: Router,
@@ -87,7 +88,8 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
             category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
             cni: this.teamService.getDocument(this.subscription.idCNI),
             identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
-            medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)
+            medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate),
+            validity: this.teamService.checkPhotoValidity(this.subscription.id)
           };
 
           if (this.subscription.equipment) {
@@ -102,6 +104,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
                 this.cniDocument = results.cni;
                 this.identityPhotoDocument = results.identityPhoto;
                 this.medicalCertificateDocument = results.medicalCertificate;
+                this.identityPhotoValidity = results.validity.validity;
                 if (this.subscription.equipment) {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;

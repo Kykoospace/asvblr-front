@@ -1,12 +1,6 @@
 {
-  "/api/document-repository": {
-    "target": "http://localhost:8443/documents",
-    "pathRewrite": {
-      "/api/document-repository": ""
-    }
-  },
   "/api": {
-    "target": "https://localhost:8443",
+    "target": "https://bourg-la-reine-volley-ball.fr/",
     "secure": false
   }
 }
