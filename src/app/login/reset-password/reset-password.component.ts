@@ -87,7 +87,19 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   public changePassword() {
-    console.log('Change password requested');
+    if (this.changePasswordForm.valid) {
+      this.authService.resetPassword(this.changePasswordForm.get('password').value, this.token)
+        .subscribe(
+          () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Le mot de passe a bien été changé'
+            });
+            this.router.navigate(['/login']);
+          },
+          err => console.log(err)
+        );
+    }
   }
 
   public backToConnexion() {
