@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, Inject, LOCALE_ID, NgModule} from '@angular/core';
+import { Inject, LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import localeFr from '@angular/common/locales/fr';
-import { map } from 'rxjs/operators';
 import {DatePipe, registerLocaleData} from '@angular/common';
 import { SafePipeModule } from 'safe-pipe';
 
@@ -24,7 +23,7 @@ import {
   CalendarModule, ChartModule, CheckboxModule, ConfirmationService, ConfirmDialogModule, DialogModule, DialogService,
   DropdownModule, DynamicDialogModule, EditorModule, FileUploadModule,
   GalleriaModule, InplaceModule, InputSwitchModule, InputTextareaModule,
-  InputTextModule,
+  InputTextModule, LightboxModule,
   MegaMenuModule, MenuModule, MessageService, MultiSelectModule, PickListModule, ProgressSpinnerModule,
   RadioButtonModule, RatingModule, SelectButtonModule, SpinnerModule, StepsModule,
   TableModule,
@@ -174,7 +173,8 @@ registerLocaleData(localeFr);
     MultiSelectModule,
     PickListModule,
     ChartModule,
-    RatingModule
+    RatingModule,
+    LightboxModule
   ],
   providers: [
     {

@@ -47,9 +47,9 @@ export class AuthService {
       );
   }
 
-  public signOut(returnUrl: string = null): void {
+  public signOut(): void {
     this.tokenStorageService.removeToken();
-    this.router.navigate(['login', { returnUrl: returnUrl ? returnUrl : this.router.routerState.snapshot.url }]);
+    this.router.navigate(['login']);
   }
 
   public userHasRole(testedRole: string): boolean {
