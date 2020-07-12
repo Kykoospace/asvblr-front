@@ -14,7 +14,6 @@ export class StatsComponent implements OnInit {
   public playersAgeStats: any;
   public playersCityStats: any;
   public playerPaymentModesStats: any;
-  public visitsStats: any;
 
   public doughnutOptions = {
     legend: {
@@ -29,7 +28,6 @@ export class StatsComponent implements OnInit {
 
   ngOnInit() {
     const requests = {
-      visits: this.managementService.getVisitStats(),
       playersByAge: this.managementService.getPlayersAgeStats(),
       playersByCity: this.managementService.getPlayersCityStats(),
       playersPaymentModes: this.managementService.getPlayersPaymentModeStats()
