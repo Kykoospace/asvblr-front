@@ -13,6 +13,8 @@ export class StatsComponent implements OnInit {
 
   public playersAgeStats: any;
   public playersCityStats: any;
+  public playerPaymentModesStats: any;
+  public visitsStats: any;
 
   public doughnutOptions = {
     legend: {
@@ -30,12 +32,13 @@ export class StatsComponent implements OnInit {
       visits: this.managementService.getVisitStats(),
       playersByAge: this.managementService.getPlayersAgeStats(),
       playersByCity: this.managementService.getPlayersCityStats(),
-      // playersPaymentModes: this.managementService.getPlayersPaymentModeStats()
+      playersPaymentModes: this.managementService.getPlayersPaymentModeStats()
     };
 
     forkJoin(requests)
       .subscribe(
         (stats: any) => {
+          console.log(stats);
           this.playersAgeStats = {
             labels: [
               '0 - 4',
@@ -66,19 +69,34 @@ export class StatsComponent implements OnInit {
             labels: [],
             datasets: []
           };
-          console.log(stats);
-          const dataset: { data: number[], backgroundColor: string[] } = {
+          const dataset1: { data: number[], backgroundColor: string[] } = {
             data: [],
             backgroundColor: []
           };
           stats.playersByCity.forEach(
             (city, index) => {
               this.playersCityStats.labels.push(city[1]);
-              dataset.data.push(city[0]);
-              dataset.backgroundColor.push(AppConstants.getColor(index));
+              dataset1.data.push(city[0]);
+              dataset1.backgroundColor.push(AppConstants.getColor(index));
             }
           );
-          this.playersCityStats.datasets.push(dataset);
+          this.playersCityStats.datasets.push(dataset1);
+          this.playerPaymentModesStats = {
+            labels: [],
+            datasets: []
+          };
+          const dataset2 = {
+            data: [],
+            backgroundColor: []
+          };
+          stats.playersPaymentModes.forEach(
+            (paymentMode, index) => {
+              this.playerPaymentModesStats.labels.push(paymentMode[1]);
+              dataset2.data.push(paymentMode[2]);
+              dataset2.backgroundColor.push(AppConstants.getColor(index));
+            }
+          );
+          this.playerPaymentModesStats.datasets.push(dataset2);
         },
         err => this.messageService.add({
           severity: 'error',
