@@ -8,6 +8,19 @@
       <span class="global-form-required">*</span>
     </label>
 
+    <div class="p-col-12 global-section-fill">
+      <p class="global-font-warning global-margin-bottom">
+        <i class="fas fa-exclamation-triangle"></i>
+        Attention : Le nom de l'équipe va apparaître sur le site publique, et sur l'espace des joueurs/coachs.
+      </p>
+      <p class="global-font-warning global-margin-bottom">
+        Veillez à ce qu'il contienne les informations suivantes : catégorie, sexe/mixité, numéro de l'équipe (si plusieurs dans la catégorie).
+      </p>
+      <p class="global-font-warning">
+        Exemples: "M20 Homme 1", "Départementale Femme"
+      </p>
+    </div>
+
     <div class="p-col-4 p-offset-2">
       <p-dropdown formControlName="idTeamCategory" appendTo="body" [options]="categoryOptions" [filter]="true"></p-dropdown>
     </div>
