@@ -8,6 +8,7 @@ import {forkJoin} from 'rxjs';
 import SubscriptionCategory from '../../../shared/models/entities/SubscriptionCategory';
 import SubscriptionPaymentMode from '../../../shared/models/responses/SubscriptionPaymentMode';
 import {DatePipe} from '@angular/common';
+import {ManagementService} from '../../../shared/services/api/management/management.service';
 
 @Component({
   selector: 'app-subscription',
@@ -39,14 +40,19 @@ export class SubscriptionComponent implements OnInit {
   public topSize: ClothingSize;
   public pantsSize: ClothingSize;
 
+  public documentsImages;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private teamService: TeamService,
+    private managementService: ManagementService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private datePipe: DatePipe
-  ) { }
+  ) {
+    this.documentsImages = [];
+  }
 
   ngOnInit(): void {
     this.refreshSubscription();
@@ -68,7 +74,11 @@ export class SubscriptionComponent implements OnInit {
           this.subscription = subscription;
           const requests: any = {
             paymentModes: this.teamService.getSubscriptionPaymentModes(this.subscription.id),
-            category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory)
+            category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
+            // TODO: get documents
+            // cni: this.teamService.getDocument(this.subscription.idCNI),
+            // identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
+            // medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)
           };
 
           if (this.subscription.equipment) {
@@ -80,6 +90,9 @@ export class SubscriptionComponent implements OnInit {
               (results: any) => {
                 this.paymentModes = results.paymentModes;
                 this.category = results.category;
+                // this.documentsImages.push({ title: 'Carte nationale d\'identité', source: 'api/document-repository/' + results.cni.name});
+                // this.documentsImages.push({ title: 'Photo d\'identité', source: 'api/document-repository/' + results.identityPhoto.name });
+                // this.documentsImages.push({ title: 'Certificat médical', source: 'api/document-repository/' + results.medicalCertificate.name });
                 if (this.subscription.equipment) {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
