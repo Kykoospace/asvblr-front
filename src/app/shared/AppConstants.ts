@@ -13,18 +13,18 @@ export default class AppConstants {
       label: 'Gestion du site',
       items: [
         { label: 'Articles', route: 'articles', icon: 'fas fa-newspaper', privilege: 'ARTICLE_MANAGEMENT' },
-        { label: 'Prix', route: 'prices', icon: 'fas fa-euro-sign', privilege: 'SUBSCRIPTION_MANAGEMENT' },
+        { label: 'Prix publics', route: 'prices', icon: 'fas fa-euro-sign', privilege: 'SUBSCRIPTION_MANAGEMENT' },
         { label: 'Utilisateurs', route: 'users', icon: 'fas fa-user-friends', privilege: 'USER_MANAGEMENT' }
       ]
     },
     {
       label: 'Gestion du club',
       items: [
+        { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: 'STATISTICS_READ' },
         { label: 'Inscriptions', route: 'subscriptions', icon: 'fas fa-file-signature', privilege: 'SUBSCRIPTION_MANAGEMENT' },
         { label: 'Équipes', route: 'teams', icon: 'fas fa-users', privilege: 'TEAM_MANAGEMENT' },
         { label: 'Email groupé', route: 'mailer', icon: 'far fa-envelope', privilege: 'MAIL_MANAGEMENT' },
-        { label: 'Saisons', route: 'seasons', icon: 'fas fa-newspaper', privilege: 'SEASON_MANAGEMENT' },
-        { label: 'Statistiques', route: 'stats', icon: 'fas fa-chart-bar', privilege: 'STATISTICS_READ' }
+        { label: 'Saisons', route: 'seasons', icon: 'fas fa-newspaper', privilege: 'SEASON_MANAGEMENT' }
       ]
     },
     /*

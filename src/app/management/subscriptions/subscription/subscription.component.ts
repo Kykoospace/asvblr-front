@@ -75,7 +75,6 @@ export class SubscriptionComponent implements OnInit {
           const requests: any = {
             paymentModes: this.teamService.getSubscriptionPaymentModes(this.subscription.id),
             category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
-            // TODO: get documents
             // cni: this.teamService.getDocument(this.subscription.idCNI),
             // identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
             // medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)

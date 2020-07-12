@@ -1,10 +1,20 @@
 <div class="p-grid">
 
   <span class="p-col-4 p-offset-2 global-legend">
-    Nouveau coach
+    Nouveau président
   </span>
   <div class="p-col-4">
     <p-dropdown #selectPresident appendTo="body" [options]="userOptions"></p-dropdown>
+  </div>
+
+  <div class="p-col-12 global-section-fill global-margin-bottom">
+    <p class="global-font-danger global-margin-bottom">
+      <i class="fas fa-exclamation-triangle"></i>
+      Attention : cette action vous retirera les droits de président et vos déconnectera.
+    </p>
+    <p class="global-font-danger">
+      Cette action est irréversible, vous ne pourrez pas revenir en arrière.
+    </p>
   </div>
   <div class="p-col-12 global-separation"></div>
   <p-toolbar class="p-col-12">

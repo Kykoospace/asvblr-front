@@ -204,7 +204,7 @@
         <p-spinner formControlName="requestedJerseyNumber" [min]="1" [max]="40" [disabled]="!subscriptionForm.get('secondStep').value.equipment"></p-spinner>
       </div>
       <label class="global-form-label p-col-6">
-        {{ formLabelValues.requestedJerseyNumber }} ({{ getPrice('EQUIPMENT_PRICE') }}€)
+        {{ formLabelValues.requestedJerseyNumber }}
         <i class="far fa-question-circle global-tooltip-icon"
            [pTooltip]="requestedJerseyNumberTooltip"
            *ngIf="subscriptionForm.get('secondStep').value.equipment"></i>

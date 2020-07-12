@@ -12,6 +12,9 @@ export class TeamPlayersListComponent implements OnInit {
   public enableEditionTools: boolean = false;
 
   @Input()
+  public hideLicenceNumbers: boolean = false;
+
+  @Input()
   public players: TeamPlayer[];
 
   @Input()

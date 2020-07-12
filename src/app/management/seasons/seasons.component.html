@@ -28,9 +28,9 @@
   <h1 class="p-col-12">Gestion des saisons</h1>
   <span class="p-col-4 global-legend">Saison actuelle</span>
   <span class="p-col-8">{{ (currentSeason) ? currentSeason.name : noSeasonMessage }}</span>
-  <div class="p-col-8 p-offset-2" *ngIf="currentSeason && nextSeasonName !== currentSeason?.name">
+  <div class="p-col-8 p-offset-2" *ngIf="!currentSeason || nextSeasonName !== currentSeason?.name">
     <div class="p-grid global-section">
-      <h1 class="p-col-12">Création d'une nouvelle saison</h1>
+      <h3 class="p-col-12">Création d'une nouvelle saison</h3>
       <span class="p-col-4 global-legend">Nom</span>
       <div class="p-col-4">
         <input type="text" [value]="nextSeasonName" pInputText disabled>

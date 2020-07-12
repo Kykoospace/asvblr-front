@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class DynamicDialogUsersSelectPresidentComponent implements OnInit {
 
   public userOptions = [
-    { label: "Président", value: null }
+    { label: 'Président', value: null }
   ];
 
   constructor(

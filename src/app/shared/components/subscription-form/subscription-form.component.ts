@@ -8,6 +8,7 @@ import Season from '../../models/entities/Season';
 import AppConstants from '../../AppConstants';
 import {forkJoin} from 'rxjs';
 import Price from '../../models/entities/Price';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-subscription-form',
@@ -170,15 +171,17 @@ export class SubscriptionFormComponent implements OnInit {
     const secondStep: AbstractControl = this.subscriptionForm.get('secondStep');
     const thirdStep: AbstractControl = this.subscriptionForm.get('thirdStep');
 
-    // remove after test :
-    firstStep.get('firstName').valueChanges
-      .subscribe(
-        firstName => {
-          if (firstName === 'Kyllian') {
-            this.test();
+    // TODO: remove after test :
+    if (!environment.production) {
+      firstStep.get('firstName').valueChanges
+        .subscribe(
+          firstName => {
+            if (firstName === 'Kyllian') {
+              this.test();
+            }
           }
-        }
-      );
+        );
+    }
 
     firstStep.get('birthDate').valueChanges
       .subscribe((birthDate: Date) => {

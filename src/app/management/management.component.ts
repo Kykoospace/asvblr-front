@@ -70,7 +70,7 @@ export class ManagementComponent implements OnInit {
                 route: 'play/' + team.id
               });
           }),
-          err => console.error(err)
+          err => {}
         );
       returnNavMenu.push(playMenu);
     }
