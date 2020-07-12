@@ -26,6 +26,9 @@ export class TeamCardComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input()
   public enableCoachOptions: boolean = false;
 
+  @Input()
+  public enableMatchCalendar: boolean = true;
+
   public players: TeamPlayer[] = [];
   public matches: Match[];
   public evolutionStats: any;

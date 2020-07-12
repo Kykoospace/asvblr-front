@@ -52,7 +52,12 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'club', component: ClubComponent },
       { path: 'gymnasium', component: GymnasiumComponent },
-      { path: 'teams', component: TeamsMainComponent },
+      { path: 'teams',
+        children: [
+          { path: '', component: TeamsMainComponent },
+          { path: ':id', component: TeamsMainComponent }
+        ]
+      },
       { path: 'contact', component: ContactComponent },
       { path: 'subscription', component: SubscriptionMainComponent },
       { path: '**', redirectTo: 'home' }
@@ -114,7 +119,8 @@ const routes: Routes = [
       { path: 'user', component: UserProfileComponent },
       { path: '**', redirectTo: '/management' }
     ]
-  }
+  },
+  { path: '**', redirectTo: '/main' }
 ];
 
 @NgModule({

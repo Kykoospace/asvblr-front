@@ -4,6 +4,8 @@ import {NavigationEnd, Router} from '@angular/router';
 import AppConstants from '../shared/AppConstants';
 import {filter} from 'rxjs/operators';
 import {ManagementService} from '../shared/services/api/management/management.service';
+import {TeamService} from '../shared/services/api/team/team.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -19,55 +21,15 @@ export class MainComponent implements OnInit {
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
     { label: 'Le club', routerLink: 'club', icon: 'fas fa-volleyball-ball' },
     { label: 'Les gymnases', routerLink: 'gymnasium', icon: 'fas fa-map-marker-alt' },
-    { label: 'Nos équipes', icon: 'fas fa-users',
-      items: [
-        [
-          { label: 'Enfant',
-            items: [
-              { label: 'Baby volley', routerLink: '' },
-            ]
-          },
-          { label: 'Loisir compétition',
-            items: [
-              { label: 'Équipe 1 mixte', routerLink: '' },
-              { label: 'Équipe 2 mixte', routerLink: '' },
-              { label: 'SANOFI Équipe 3', routerLink: '' },
-              { label: 'Équipe 4x4 F', routerLink: '' }
-            ]
-          }
-        ],
-        [
-          { label: 'Junior',
-            items: [
-              { label: 'Moins de 7/9 mixte', routerLink: '' },
-              { label: 'Moins de 11/13 mixte', routerLink: '' },
-              { label: 'Moins de 15/17 F', routerLink: '' },
-              { label: 'Moins de 20 F', routerLink: '' },
-              { label: 'Moins de 15 H', routerLink: '' },
-              { label: 'Moins de 17 H', routerLink: '' },
-              { label: 'Moins de 20 H', routerLink: '' }
-            ]
-          }
-        ],
-        [
-          { label: 'Sénior',
-            items: [
-              { label: 'Departementale 1 F', routerLink: '' },
-              { label: 'Departementale 1 H', routerLink: '' },
-              { label: 'Departementale 2 H', routerLink: '' },
-              { label: 'Pré-regionnale 1 H', routerLink: '' },
-            ]
-          }
-        ]
-      ]
-    },
+    { label: 'Nos équipes', routerLink: 'teams', icon: 'fas fa-users', items: [] },
     { label: 'Inscription', routerLink: 'subscription', icon: 'fas fa-file-signature' },
     { label: 'Contact', routerLink: 'contact', icon: 'fas fa-envelope' },
-  ]
+  ];
 
   constructor(
     private router: Router,
-    private managementService: ManagementService
+    private managementService: ManagementService,
+    private teamService: TeamService
   ) {
     this.title = AppConstants.APP_NAME_MAIN_TITLE;
     this.subTitle = AppConstants.APP_NAME_SUB_TITLE;
@@ -108,6 +70,34 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    forkJoin({
+      teamCategories: this.teamService.getAllTeamCategories(),
+      teams: this.teamService.getAllTeams()
+    })
+      .subscribe(
+        results => {
+          const items = [];
+          results.teamCategories.forEach(
+            category => {
+              const subItems = [];
+              results.teams.filter(team => team.idTeamCategory === category.id)
+                .forEach(
+                  team => subItems.push({
+                    label: team.name,
+                    routerLink: '/main/teams/' + team.id
+                  })
+                );
+              if (subItems.length > 0) {
+                items.push({
+                  label: category.name,
+                  items: subItems
+                });
+              }
+            }
+          );
+          this.navItems[3].items.push(items);
+        }
+      );
   }
 
   public accessMemberArea() {

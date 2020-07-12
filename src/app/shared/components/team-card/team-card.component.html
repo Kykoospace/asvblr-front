@@ -1,5 +1,5 @@
 <div class="team-card-container p-grid" *ngIf="team">
-  <div class="p-col-12 p-xl-8">
+  <div class="p-col-12" [class.p-xl-8]="enableMatchCalendar">
     <div class="p-grid global-section-fill">
       <h1 class="p-col-12">{{ team.teamName }}</h1>
       <span class="p-col-3 global-legend">Coach</span>
@@ -19,11 +19,13 @@
         </div>
       </p-tabPanel>
       <p-tabPanel header="Évolution">
-        <p-chart type="line" [options]="lineChartOptions" [data]="evolutionStats"></p-chart>
+        <div class="p-grid">
+          <p-chart class="p-col-12" type="line" [options]="lineChartOptions" [data]="evolutionStats"></p-chart>
+        </div>
       </p-tabPanel>
     </p-tabView>
   </div>
-  <div class="p-col-12 p-xl-4">
+  <div class="p-col-12 p-xl-4" *ngIf="enableMatchCalendar">
     <div class="p-grid global-section no-padding">
       <div class="p-col-12 p-lg-6 p-xl-12 p-grid no-padding">
         <h3 class="p-col-6">Dernier match</h3>

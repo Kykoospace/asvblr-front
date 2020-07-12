@@ -1,1 +1,12 @@
-<p>teams works!</p>
+<div class="main-site-layout-section p-grid" *ngIf="teams">
+  <ul class="global-list">
+    <li *ngFor="let team of teams"><a [routerLink]="['/main/teams/' + team.id]">{{ team.name }}</a></li>
+  </ul>
+</div>
+<div class="main-site-layout-section" *ngIf="team">
+  <app-team-card
+    [team]="team"
+    [enableCoachOptions]="false"
+    [enableMatchCalendar]="false">
+  </app-team-card>
+</div>

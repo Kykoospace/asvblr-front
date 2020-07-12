@@ -60,6 +60,7 @@ export default class AppConstants {
   public static LINE_CHART_OPTIONS = { };
 
   public static RADAR_CHART_OPTIONS = {
+    maintainAspectRatio: false,
     scale: {
       ticks: {
         suggestedMin: 0,

@@ -36,7 +36,8 @@ import { SubscriptionsComponent } from './management/subscriptions/subscriptions
 import { SubscriptionComponent
     as SubscriptionManagementComponent } from './management/subscriptions/subscription/subscription.component';
 import { PlayersComponent } from './management/players/players.component';
-import { TeamsComponent } from './management/teams/teams.component';
+import { TeamsComponent as TeamsMainComponent } from './main/teams/teams.component';
+import { TeamsComponent as TeamsManagementComponent } from './management/teams/teams.component';
 import { StatsComponent } from './management/stats/stats.component';
 import { SeasonsComponent } from './management/seasons/seasons.component';
 import { UsersComponent } from './management/users/users.component';
@@ -50,7 +51,7 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { SubscriptionFormComponent } from './shared/components/subscription-form/subscription-form.component';
 import { PlayerCardComponent } from './shared/components/player-card/player-card.component';
 import { UserCardComponent } from './shared/components/user-card/user-card.component';
-import {LoadingScreenInterceptor} from './shared/interceptors/loading-screen.interceptor';
+import { LoadingScreenInterceptor } from './shared/interceptors/loading-screen.interceptor';
 import { SandboxComponent } from './management/sandbox/sandbox.component';
 import { TeamComponent } from './management/teams/team/team.component';
 import { DynamicDialogTeamFormComponent } from './shared/components/dynamic-dialog-team-form/dynamic-dialog-team-form.component';
@@ -92,7 +93,8 @@ registerLocaleData(localeFr);
     ArticlesComponent,
     SubscriptionsComponent,
     PlayersComponent,
-    TeamsComponent,
+    TeamsMainComponent,
+    TeamsManagementComponent,
     StatsComponent,
     SeasonsComponent,
     UsersComponent,
