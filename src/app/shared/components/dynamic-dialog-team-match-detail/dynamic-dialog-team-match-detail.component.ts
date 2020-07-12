@@ -18,8 +18,8 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
   public createDriveToggle: boolean;
 
   public match: Match;
-  public enableCoachOptions: boolean = false;
-  public enableDriveOptions: boolean = false;
+  public enableCoachOptions = false;
+  public enableDriveOptions = false;
   public drives: Drive[];
   public driveForm: FormGroup;
   public coachCommentForm: FormGroup;
@@ -165,16 +165,6 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
           err => console.error(err)
         );
     }
-  }
-
-  public deleteDrive(idDrive: number): void {
-    this.teamService.deleteDrive(idDrive).subscribe(
-      () => this.messageService.add({
-        severity: 'success',
-        summary: 'Covoiturage annulé'
-      }),
-      err => console.error(err)
-    );
   }
 
   public resetForm(): void {

@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
   public title: string;
   public subTitle: string;
 
-  public navItems: MenuItem[] = [
+  public navItems = [
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
     { label: 'Le club', routerLink: 'club', icon: 'fas fa-volleyball-ball' },
     { label: 'Les gymnases', routerLink: 'gymnasium', icon: 'fas fa-map-marker-alt' },
