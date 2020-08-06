@@ -76,7 +76,7 @@ export class TeamCardComponent implements AfterViewInit, OnChanges, OnDestroy {
     forkJoin(requests)
       .subscribe(
         (results: any) => {
-          this.players = results.players;
+          this.players = results.players.sort((a, b) => a.jerseyNumber - b.jerseyNumber);
           this.matches = results.matches;
           if (results.lastMatch) {
             this.lastMatchStats = Match.getMatchData(results.lastMatch);
@@ -90,7 +90,7 @@ export class TeamCardComponent implements AfterViewInit, OnChanges, OnDestroy {
   public refreshPlayers(): void {
     this.teamService.getAllTeamPlayers(this.team.id)
       .subscribe(
-        players => this.players = players,
+        players => this.players = players.sort((a, b) => a.jerseyNumber - b.jerseyNumber),
         err => console.error(err)
       );
   }
