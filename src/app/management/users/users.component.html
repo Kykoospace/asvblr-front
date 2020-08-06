@@ -19,7 +19,7 @@
         #roleSelect
         [options]="roleSelectOptions"
         [(ngModel)]="selectedRole"
-        (onChange)="setManagerRole(selectedUser, selectedRole)">
+        (onChange)="setManagerRole(selectedUser, $event.value)">
       </p-selectButton>
       </span>
       <span class="p-col-4"></span>
@@ -27,7 +27,7 @@
   </div>
   <p-footer>
     <p-button (click)="userDetailToggle = false" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
-    <p-button (click)="deleteUser(selectedUser)" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button>
+    <!-- <p-button (click)="deleteUser(selectedUser)" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button> -->
   </p-footer>
 </p-dialog>
 

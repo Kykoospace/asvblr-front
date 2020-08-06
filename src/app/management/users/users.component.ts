@@ -130,6 +130,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public setManagerRole(user: User, value: boolean) {
+    console.log(value);
+    console.log(this.selectedRole);
     if (value) {
       this.confirmationService.confirm({
         message: 'Voulez-vous promouvoir l\'utilisateur ?',
