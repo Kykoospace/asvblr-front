@@ -16,8 +16,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(
         catchError(err => {
           if (err.status === 401) {
-            // TODO: uncomment after tests
-            // this.authService.signOut();
+            this.authService.signOut();
           }
           return throwError(err);
         })
