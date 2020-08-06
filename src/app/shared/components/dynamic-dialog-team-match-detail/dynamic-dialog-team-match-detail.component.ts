@@ -74,8 +74,7 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
             outWardDate.setValue(null);
           }
 
-          outwardPlace.updateValueAndValidity();
-          outWardDate.updateValueAndValidity();
+          this.driveForm.updateValueAndValidity();
         }
       );
 
@@ -92,7 +91,7 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
             returnPlace.disable();
           }
 
-          returnPlace.updateValueAndValidity();
+          this.driveForm.updateValueAndValidity();
         }
       );
 
@@ -162,7 +161,10 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
             this.resetForm();
             this.createDriveToggle = false;
           },
-          err => console.error(err)
+          err => this.messageService.add({
+            severity: 'error',
+            summary: 'Vous faites déjà parti(e) d\'un covoiturage'
+          })
         );
     }
   }
@@ -204,7 +206,11 @@ export class DynamicDialogTeamMatchDetailComponent implements OnInit {
             summary: 'Vous avez rejoint le covoiturage de ' + drive.firstNameDriver
           });
           this.refreshDrives();
-        }
+        },
+        err => this.messageService.add({
+          severity: 'error',
+          summary: 'Vous faite déjà parti(e) d\'un covoiturage'
+        })
       );
   }
 

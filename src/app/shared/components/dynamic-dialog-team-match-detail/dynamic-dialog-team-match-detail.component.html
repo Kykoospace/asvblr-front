@@ -120,7 +120,7 @@
     </form>
   </p-tabPanel>
 </p-tabView>
-<form class="p-grid" [formGroup]="driveForm" *ngIf="createDriveToggle">
+<form class="p-grid" (submit)="createDrive()" [formGroup]="driveForm" *ngIf="createDriveToggle">
   <!-- NBPLACES -->
   <div class="p-col-4 p-offset-2">
     <p-spinner formControlName="nbTotalPlaces" [min]="1" max="20"></p-spinner>
@@ -181,10 +181,10 @@
 
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="createDriveToggle = false; resetForm()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+      <p-button type="button" (click)="createDriveToggle = false; resetForm()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="createDrive()" label="Valider" icon="fas fa-check" [disabled]="driveForm.invalid"></p-button>
+      <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="driveForm.invalid"></p-button>
     </div>
   </p-toolbar>
 </form>

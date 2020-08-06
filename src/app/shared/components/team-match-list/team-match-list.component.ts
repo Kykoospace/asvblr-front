@@ -37,7 +37,10 @@ export class TeamMatchListComponent implements OnChanges, OnDestroy {
   public ngOnChanges(changes: SimpleChanges) {
     if (this.matches) {
       this.futuresMatches = this.matches.filter(match => match.date.getTime() > Date.now());
-      this.passedMatches = this.matches.filter(match => match.date.getTime() < Date.now());
+      this.passedMatches
+        = this.matches
+        .filter(match => match.date.getTime() < Date.now())
+        .sort((a, b) => b.date.getTime() - a.date.getTime());
     }
   }
 

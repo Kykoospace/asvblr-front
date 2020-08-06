@@ -88,14 +88,14 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
             category: this.teamService.getSubscriptionCategory(this.subscription.idSubscriptionCategory),
             cni: this.teamService.getDocument(this.subscription.idCNI),
             identityPhoto: this.teamService.getDocument(this.subscription.idIdentityPhoto),
-            medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate),
-            validity: this.teamService.checkPhotoValidity(this.subscription.id)
+            medicalCertificate: this.teamService.getDocument(this.subscription.idMedicalCertificate)
           };
 
           if (this.subscription.equipment) {
             requests.topSize = this.teamService.getClothingSize(this.subscription.idTopSize);
             requests.pantsSize = this.teamService.getClothingSize(this.subscription.idPantsSize);
           }
+
           forkJoin(requests)
             .subscribe(
               (results: any) => {
@@ -104,13 +104,18 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
                 this.cniDocument = results.cni;
                 this.identityPhotoDocument = results.identityPhoto;
                 this.medicalCertificateDocument = results.medicalCertificate;
-                this.identityPhotoValidity = results.validity.validity;
                 if (this.subscription.equipment) {
                   this.topSize = results.topSize;
                   this.pantsSize = results.pantsSize;
                 }
               },
               err => console.error(err)
+            );
+
+          this.teamService.checkPhotoValidity(this.subscription.id)
+            .subscribe(
+              validity => this.identityPhotoValidity = validity.validity,
+              err => this.identityPhotoValidity = null
             );
         },
         // If fail :
