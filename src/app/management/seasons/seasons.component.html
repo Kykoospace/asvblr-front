@@ -19,8 +19,8 @@
     </div>
   </div>
   <p-footer>
-    <p-button class="ui-button-info" (click)="validationDialogToggle = false" label="Annuler" icon="fas fa-times"></p-button>
-    <p-button class="ui-button-warning" (click)="createNewSeason()" label="Confirmer" icon="fas fa-exclamation-triangle" [disabled]="inputSentence.value !== validationSentence"></p-button>
+    <p-button class="ui-button-info" (onClick)="validationDialogToggle = false" label="Annuler" icon="fas fa-times"></p-button>
+    <p-button class="ui-button-warning" (onClick)="createNewSeason()" label="Confirmer" icon="fas fa-exclamation-triangle" [disabled]="inputSentence.value !== validationSentence"></p-button>
   </p-footer>
 </p-dialog>
 
@@ -39,7 +39,7 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-right">
-          <p-button (click)="validationDialogToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="fas fa-exclamation-triangle"></p-button>
+          <p-button (onClick)="validationDialogToggle = true" class="ui-button-warning" label="Ouvrir une nouvelle saison" icon="fas fa-exclamation-triangle"></p-button>
         </div>
       </p-toolbar>
     </div>

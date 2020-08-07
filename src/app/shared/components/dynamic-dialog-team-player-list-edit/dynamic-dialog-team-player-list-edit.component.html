@@ -27,7 +27,7 @@
   </label>
 
   <div class="p-col-4 p-offset-2 global-align-right">
-    <p-button (click)="setLeader()" label="Capitaine" icon="fas fa-crown" [disabled]="player.idPlayer === team.idPlayerLeader"></p-button>
+    <p-button (onClick)="setLeader()" label="Capitaine" icon="fas fa-crown" [disabled]="player.idPlayer === team.idPlayerLeader"></p-button>
   </div>
   <label class="global-form-label p-col-6">
     Promouvoir capitaine
@@ -36,10 +36,10 @@
   <div class="p-col-12 global-separation"></div>
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left global-align-right">
-      <p-button (click)="cancel()" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
+      <p-button (onClick)="cancel()" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="updatePlayer()" label="Valider" icon="fas fa-check" [disabled]="!teamPlayerDetailForm.dirty || teamPlayerDetailForm.invalid"></p-button>
+      <p-button (onClick)="updatePlayer()" label="Valider" icon="fas fa-check" [disabled]="!teamPlayerDetailForm.dirty || teamPlayerDetailForm.invalid"></p-button>
     </div>
   </p-toolbar>
 </form>

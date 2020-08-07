@@ -14,8 +14,8 @@
   <div class="global-separation p-col-12"></div>
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-right">
-      <p-button (click)="cancel()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
-      <p-button (click)="close()" label="Valider" icon="fas fa-check" [disabled]="!newCoach"></p-button>
+      <p-button (onClick)="cancel()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+      <p-button (onClick)="close()" label="Valider" icon="fas fa-check" [disabled]="!newCoach"></p-button>
     </div>
   </p-toolbar>
 </div>

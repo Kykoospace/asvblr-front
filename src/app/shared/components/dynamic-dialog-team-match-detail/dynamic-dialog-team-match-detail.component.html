@@ -26,7 +26,7 @@
     [disabled]="matchPassed()">
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="createDriveToggle = true" label="Proposer un covoiturage" icon="fas fa-car"></p-button>
+        <p-button (onClick)="createDriveToggle = true" label="Proposer un covoiturage" icon="fas fa-car"></p-button>
       </div>
     </p-toolbar>
     <app-match-drive-list (enterDrive)="onEnterDrive($event)" (leaveDrive)="onLeaveDrive($event)" (deleteDrive)="onDeleteDrive($event)" *ngIf="drives" [drives]="drives"></app-match-drive-list>
@@ -114,7 +114,7 @@
       </label>
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-right">
-          <p-button (click)="sendCoachComment()" label="Valider" icon="fas fa-check" [disabled]="coachCommentForm.invalid"></p-button>
+          <p-button (onClick)="sendCoachComment()" label="Valider" icon="fas fa-check" [disabled]="coachCommentForm.invalid"></p-button>
         </div>
       </p-toolbar>
     </form>
@@ -181,7 +181,7 @@
 
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button type="button" (click)="createDriveToggle = false; resetForm()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+      <p-button type="button" (onClick)="createDriveToggle = false; resetForm()" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="driveForm.invalid"></p-button>

@@ -26,8 +26,8 @@
     </div>
   </div>
   <p-footer>
-    <p-button (click)="userDetailToggle = false" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
-    <!-- <p-button (click)="deleteUser(selectedUser)" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button> -->
+    <p-button (onClick)="userDetailToggle = false" class="ui-button-info" label="Fermer" icon="fas fa-times"></p-button>
+    <!-- <p-button (onClick)="deleteUser(selectedUser)" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button> -->
   </p-footer>
 </p-dialog>
 
@@ -36,10 +36,10 @@
 <div class="p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="openNewUserDialog()" label="Utilisateur non joueur" icon="fas fa-plus"></p-button>
+      <p-button (onClick)="openNewUserDialog()" label="Utilisateur non joueur" icon="fas fa-plus"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="openChangePresidentDialog()" class="ui-button-warning" label="Changer de président"></p-button>
+      <p-button (onClick)="openChangePresidentDialog()" class="ui-button-warning" label="Changer de président"></p-button>
     </div>
   </p-toolbar>
   <p-table

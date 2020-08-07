@@ -8,7 +8,7 @@
       <span id="login-layout-return-link-label">Retour au site</span>
     </a>
     <div class="login-layout-main-content">
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (submit)="signIn()">
         <p
           class="login-layout-main-content-error-message"
           *ngIf="loginErrorToggle">
@@ -28,7 +28,6 @@
         >
         <button
           id="login-layout-main-content-connection-button"
-          (click)="signIn()"
           [disabled]="loginForm.invalid"
         >
           Connexion
