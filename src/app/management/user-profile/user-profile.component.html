@@ -43,7 +43,7 @@
 
           <span class="p-col-3 global-legend"></span>
           <div class="p-col-5">
-            <p-button (click)="changePassword()" label="Changer le mot de passe" icon="fas fa-check" [disabled]="changePasswordForm.invalid"></p-button>
+            <p-button (onClick)="changePassword()" label="Changer le mot de passe" icon="fas fa-check" [disabled]="changePasswordForm.invalid"></p-button>
           </div>
           <span class="p-col-4"></span>
         </form>
@@ -170,7 +170,7 @@
         <p>Plusieurs villes correspondent à ce code postal</p>
         <p-button
           *ngFor="let city of cities"
-          (click)="setCity(city.nom)"
+          (onClick)="setCity(city.nom)"
           label="{{ city.nom }}"
           class="ui-button-info ui-button-small global-margin-right global-margin-top"
           type="button"></p-button>
@@ -339,7 +339,7 @@
 
       <!-- CNI -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="cniFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="cniFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.cni }}
@@ -348,7 +348,7 @@
 
       <!-- IDENTITY PHOTO -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="identityPhotoFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="identityPhotoFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.identityPhoto }}
@@ -357,7 +357,7 @@
 
       <!-- MEDICAL CERTIFICATE -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="medicalCertificateFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="medicalCertificateFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.medicalCertificate }}
@@ -375,7 +375,7 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-right">
-          <p-button (click)="sendSubscription()" label="Valider l'inscription" icon="fas fa-check" [disabled]="reSubscriptionForm.invalid"></p-button>
+          <p-button (onClick)="sendSubscription()" label="Valider l'inscription" icon="fas fa-check" [disabled]="reSubscriptionForm.invalid"></p-button>
         </div>
       </p-toolbar>
     </form>

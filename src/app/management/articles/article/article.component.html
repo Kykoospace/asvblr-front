@@ -17,8 +17,8 @@
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="renameArticleToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
-        <p-button (click)="renameArticle(articleTitleInput.value)" label="Valider" icon="fas fa-check"></p-button>
+        <p-button (onClick)="renameArticleToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (onClick)="renameArticle(articleTitleInput.value)" label="Valider" icon="fas fa-check"></p-button>
       </div>
     </p-toolbar>
   </p-footer>
@@ -35,8 +35,8 @@
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="setVisibilityArticleToggle = false; newArticleVisibility = article.visible" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
-        <p-button (click)="setVisibilityArticle()" label="Valider" icon="fas fa-check"></p-button>
+        <p-button (onClick)="setVisibilityArticleToggle = false; newArticleVisibility = article.visible" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (onClick)="setVisibilityArticle()" label="Valider" icon="fas fa-check"></p-button>
       </div>
     </p-toolbar>
   </p-footer>
@@ -45,14 +45,14 @@
 <div class="module-container p-grid" *ngIf="article">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="backNavigate()" label="Retour" icon="fas fa-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>
-      <p-button (click)="saveArticle()" class="ui-button-success" label="Sauvegarder" icon="fas fa-save" *ngIf="article.content !== content"></p-button>
-      <p-button (click)="renameArticleToggle = true" class="ui-button-secondary" label="Renommer l'article" icon="fas fa-pen"></p-button>
-      <p-button (click)="setVisibilityArticleToggle = true" class="ui-button-secondary" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye" [disabled]="article.content !== content"></p-button>
+      <p-button (onClick)="backNavigate()" label="Retour" icon="fas fa-arrow-left" pTooltip="Retour à la liste des articles" tooltipPosition="bottom"></p-button>
+      <p-button (onClick)="saveArticle()" class="ui-button-success" label="Sauvegarder" icon="fas fa-save" *ngIf="article.content !== content"></p-button>
+      <p-button (onClick)="renameArticleToggle = true" class="ui-button-secondary" label="Renommer l'article" icon="fas fa-pen"></p-button>
+      <p-button (onClick)="setVisibilityArticleToggle = true" class="ui-button-secondary" [label]="article.visible ? 'Public' : 'Masqué'" icon="far fa-eye" [disabled]="article.content !== content"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
       <span class="global-legend">Créé le {{ article.creationDate | date: 'shortDate' }}</span>
-      <p-button (click)="deleteArticle()" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button>
+      <p-button (onClick)="deleteArticle()" class="ui-button-danger" label="Supprimer" icon="far fa-trash-alt"></p-button>
     </div>
   </p-toolbar>
   <div class="global-separation p-col-12"></div>

@@ -15,7 +15,7 @@
       </ul>
       <p class="p-col-12">Une question ? <a [routerLink]="['/main/contact']">Contactez-nous !</a></p>
       <div class="p-col-12 global-align-center">
-        <p-button (click)="activeStep = 0" label="Commencer !"></p-button>
+        <p-button (onClick)="activeStep = 0" label="Commencer !"></p-button>
       </div>
     </div>
 
@@ -119,7 +119,7 @@
         <p>Plusieurs villes correspondent à ce code postal</p>
         <p-button
           *ngFor="let city of cities"
-          (click)="setCity(city.nom)"
+          (onClick)="setCity(city.nom)"
           label="{{ city.nom }}"
           class="ui-button-info ui-button-small global-margin-right global-margin-top"
           type="button"></p-button>
@@ -148,10 +148,10 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = -1" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+          <p-button type="button" (onClick)="activeStep = -1" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
         </div>
         <div class="ui-toolbar-group-right">
-          <p-button type="button" (click)="activeStep = 1" label="Étape suivante" icon="fas fa-arrow-right" iconPos="right" [disabled]="subscriptionForm.get('firstStep').invalid"></p-button>
+          <p-button type="button" (onClick)="activeStep = 1" label="Étape suivante" icon="fas fa-arrow-right" iconPos="right" [disabled]="subscriptionForm.get('firstStep').invalid"></p-button>
         </div>
       </p-toolbar>
     </div>
@@ -195,8 +195,7 @@
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.equipment }} ({{ getPrice('EQUIPMENT_PRICE') }}€)
-        <i class="fas fa-exclamation-triangle global-tooltip-icon-warning"
-           [pTooltip]="requestedEquipmentTooltip"></i>
+<!--        <i class="fas fa-exclamation-triangle global-tooltip-icon-warning" [pTooltip]="requestedEquipmentTooltip"></i>-->
       </label>
 
       <!-- REQUESTED JERSEY NUMBER -->
@@ -241,12 +240,12 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = 0" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (onClick)="activeStep = 0" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button
             type="button"
-            (click)="activeStep = (isMinor() ? 2 : 3)"
+            (onClick)="activeStep = isMinor() ? 2 : 3"
             label="Étape suivante"
             icon="fas fa-arrow-right"
             iconPos="right"
@@ -317,12 +316,12 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = 1" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (onClick)="activeStep = 1" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button
             type="button"
-            (click)="activeStep = 3"
+            (onClick)="activeStep = 3"
             label="Étape suivante"
             icon="fas fa-arrow-right"
             iconPos="right"
@@ -335,7 +334,7 @@
     <div class="p-grid" formGroupName="fourthStep" *ngIf="activeStep === 3">
       <!-- CNI -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="cniFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="cniFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.cni }}
@@ -344,7 +343,7 @@
 
       <!-- IDENTITY PHOTO -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="identityPhotoFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="identityPhotoFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.identityPhoto }}
@@ -353,7 +352,7 @@
 
       <!-- MEDICAL CERTIFICATE -->
       <div class="p-col-4 p-offset-2">
-        <input type="file" (change)="medicalCertificateFileHandler($event)" pInputText>
+        <input type="file" accept="image/*" (change)="medicalCertificateFileHandler($event)" pInputText>
       </div>
       <label class="global-form-label p-col-6">
         {{ formLabelValues.medicalCertificate }}
@@ -373,7 +372,7 @@
 
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-left">
-          <p-button type="button" (click)="activeStep = (isMinor() ? 2 : 1)" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
+          <p-button type="button" (onClick)="activeStep = (isMinor() ? 2 : 1)" class="ui-button-info" label="Étape précédente" icon="fas fa-arrow-left" ></p-button>
         </div>
         <div class="ui-toolbar-group-right">
           <p-button type="submit" label="Valider l'inscription !" icon="fas fa-check" [disabled]="subscriptionForm.invalid"></p-button>
@@ -387,7 +386,7 @@
       <p class="p-col-12 global-align-center">Un email de confirmation a été envoyé à l'adresse {{ subscriptionForm.get('firstStep').get('email').value }}.</p>
       <p-toolbar class="p-col-12">
         <div class="ui-toolbar-group-right">
-          <p-button type="button" (click)="resetForm()" class="ui-button-info" label="Une autre inscription ?"></p-button>
+          <p-button type="button" (onClick)="resetForm()" class="ui-button-info" label="Une autre inscription ?"></p-button>
         </div>
       </p-toolbar>
     </div>

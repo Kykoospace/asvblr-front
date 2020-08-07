@@ -27,8 +27,8 @@
   <p-footer>
     <p-toolbar>
       <div class="ui-toolbar-group-right">
-        <p-button (click)="changeLicenceNumberToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
-        <p-button (click)="updatePlayerLicenceNumber(licenceNumberInput.value)" label="Valider" icon="fas fa-check" [disabled]="!licenceNumberInput.value"></p-button>
+        <p-button (onClick)="changeLicenceNumberToggle = false" class="ui-button-info" label="Annuler" icon="fas fa-times"></p-button>
+        <p-button (onClick)="updatePlayerLicenceNumber(licenceNumberInput.value)" label="Valider" icon="fas fa-check" [disabled]="!licenceNumberInput.value"></p-button>
       </div>
     </p-toolbar>
   </p-footer>
@@ -37,12 +37,12 @@
 <div class="module-container p-grid" *ngIf="team">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
-      <p-button (click)="openPlayerSelectorDialog()" class="ui-button-secondary" label="Gérer les joueurs"></p-button>
-      <p-button (click)="openCoachSelectorDialog()" class="ui-button-secondary" label="Changer le coach"></p-button>
+      <p-button (onClick)="backNavigate()" type="button" label="Retour" icon="fas fa-arrow-left"></p-button>
+      <p-button (onClick)="openPlayerSelectorDialog()" class="ui-button-secondary" label="Gérer les joueurs"></p-button>
+      <p-button (onClick)="openCoachSelectorDialog()" class="ui-button-secondary" label="Changer le coach"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="deleteTeam()" type="button" label="Supprimer" icon="far fa-trash-alt" class="ui-button-danger"></p-button>
+      <p-button (onClick)="deleteTeam()" type="button" label="Supprimer" icon="far fa-trash-alt" class="ui-button-danger"></p-button>
     </div>
   </p-toolbar>
   <h1 class="p-col-12">{{ team.teamName }}</h1>

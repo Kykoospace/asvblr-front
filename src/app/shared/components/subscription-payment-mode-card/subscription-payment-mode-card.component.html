@@ -5,13 +5,13 @@
   </div>
   <p>Statut: {{ subscriptionPaymentMode.paid ? 'Payé' : 'En attente' }}</p>
   <p-button
-    (click)="setPaymentModePaied()"
+    (onClick)="setPaymentModePaied()"
     label="Paiement reçu"
     icon="fas fa-check"
     *ngIf="!subscriptionPaymentMode.paid && enableEditOptions">
   </p-button>
   <p-button
-    (click)="setPaymentModeUnpaied()"
+    (onClick)="setPaymentModeUnpaied()"
     label="Annuler le paiement"
     icon="fas fa-times"
     class="ui-button-danger"

@@ -1,11 +1,11 @@
 <form [formGroup]="mailForm" class="p-grid">
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button type="button" (click)="sendMail()" label="Envoyer" icon="fas fa-paper-plane" [disabled]="mailForm.invalid"></p-button>
-      <p-button type="button" (click)="openReceiversSelectorDialog()" class="ui-button-secondary" [label]="getReceiversLabel()" icon="fas fa-users"></p-button>
+      <p-button type="button" (onClick)="sendMail()" label="Envoyer" icon="fas fa-paper-plane" [disabled]="mailForm.invalid"></p-button>
+      <p-button type="button" (onClick)="openReceiversSelectorDialog()" class="ui-button-secondary" [label]="getReceiversLabel()" icon="fas fa-users"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button type="button" (click)="resetForm()" class="ui-button-danger" label="Effacer" icon="far fa-trash-alt"></p-button>
+      <p-button type="button" (onClick)="resetForm()" class="ui-button-danger" label="Effacer" icon="far fa-trash-alt"></p-button>
     </div>
   </p-toolbar>
   <div class="global-separation p-col-12"></div>

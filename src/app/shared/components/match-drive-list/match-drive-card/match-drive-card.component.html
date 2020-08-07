@@ -20,7 +20,7 @@
       </div>
       <div class="p-col-1" *ngIf="drive.idDriver === loggedUser.id">
         <p-button
-          (click)="deleteThisDrive()"
+          (onClick)="deleteThisDrive()"
           pTooltip="Annuler le covoiturage"
           class="ui-button-danger"
           icon="far fa-trash-alt">
@@ -33,7 +33,7 @@
       </div>
       <div class="p-col-1" *ngIf="userCanEnter()">
         <p-button
-          (click)="enterThisDrive()"
+          (onClick)="enterThisDrive()"
           pTooltip="Rejoindre le covoiturage"
           icon="fas fa-sign-in-alt">
         </p-button>
@@ -41,7 +41,7 @@
       <div class="p-col-1" *ngIf="!userCanEnter() && drive.idDriver !== loggedUser.id">
         <p-button
           class="ui-button-danger"
-          (click)="leaveThisDrive()"
+          (onClick)="leaveThisDrive()"
           pTooltip="Quitter le covoiturage"
           icon="fas fa-sign-out-alt">
         </p-button>

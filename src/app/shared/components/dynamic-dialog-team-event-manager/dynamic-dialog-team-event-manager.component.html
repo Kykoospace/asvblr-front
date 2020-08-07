@@ -85,10 +85,10 @@
   <div class="global-separation p-col-12"></div>
   <p-toolbar class="p-col-12">
     <div class="ui-toolbar-group-left">
-      <p-button (click)="createToggle = true" class="ui-button-info" label="Nouvelle rencontre" icon="fas fa-plus"></p-button>
+      <p-button (onClick)="createToggle = true" class="ui-button-info" label="Nouvelle rencontre" icon="fas fa-plus"></p-button>
     </div>
     <div class="ui-toolbar-group-right">
-      <p-button (click)="close()" label="Terminer" icon="fas fa-check"></p-button>
+      <p-button (onClick)="close()" label="Terminer" icon="fas fa-check"></p-button>
     </div>
   </p-toolbar>
 </div>
@@ -147,7 +147,7 @@
     <div class="p-col-12 global-separation"></div>
     <p-toolbar class="p-col-12">
       <div class="ui-toolbar-group-left">
-        <p-button (click)="createToggle = false" type="button" class="ui-button-info" label="Retour" icon="fas fa-arrow-left"></p-button>
+        <p-button (onClick)="createToggle = false" type="button" class="ui-button-info" label="Retour" icon="fas fa-arrow-left"></p-button>
       </div>
       <div class="ui-toolbar-group-right">
         <p-button type="submit" label="Valider" icon="fas fa-check" [disabled]="matchForm.invalid"></p-button>
