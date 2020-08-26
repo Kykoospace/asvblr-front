@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
     { label: 'Le club', routerLink: 'club', icon: 'fas fa-volleyball-ball' },
     { label: 'Les gymnases', routerLink: 'gymnasium', icon: 'fas fa-map-marker-alt' },
-    { label: 'Nos équipes', routerLink: 'teams', icon: 'fas fa-users', items: [] },
+    { label: 'Nos équipes', routerLink: 'teams', icon: 'fas fa-users' },
     { label: 'Inscription', routerLink: 'subscription', icon: 'fas fa-file-signature' },
     { label: 'Contact', routerLink: 'contact', icon: 'fas fa-envelope' },
   ];
@@ -79,7 +79,7 @@ export class MainComponent implements OnInit {
           const items = [];
           results.teamCategories.forEach(
             category => {
-              const subItems = [];
+              const subItems: MenuItem[] = [];
               results.teams.filter(team => team.idTeamCategory === category.id)
                 .forEach(
                   team => subItems.push({
@@ -95,7 +95,7 @@ export class MainComponent implements OnInit {
               }
             }
           );
-          this.navItems[3].items.push(items);
+          this.navItems[3].items = [items];
         }
       );
   }
