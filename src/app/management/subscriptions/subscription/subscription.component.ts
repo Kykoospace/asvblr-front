@@ -10,6 +10,7 @@ import SubscriptionPaymentMode from '../../../shared/models/responses/Subscripti
 import {DatePipe} from '@angular/common';
 import {ManagementService} from '../../../shared/services/api/management/management.service';
 import {DynamicDialogPreviewDocumentComponent} from '../../../shared/components/dynamic-dialog-preview-document/dynamic-dialog-preview-document.component';
+import Document from "../../../shared/models/entities/Document";
 
 @Component({
   selector: 'app-subscription',
@@ -251,14 +252,21 @@ export class SubscriptionComponent implements OnInit, OnDestroy {
   }
 
   public openPreviewDocumentDialog(title: string, document: Document): void {
-    this.dialogService.open(
-      DynamicDialogPreviewDocumentComponent,
-      {
-        header: title,
-        data: {
-          document
+    if (document.name.endsWith('.pdf')) {
+      this.teamService.getDocumentUrl(document.id)
+        .subscribe(
+          url => window.open(url.url)
+        );
+    } else {
+      this.dialogService.open(
+        DynamicDialogPreviewDocumentComponent,
+        {
+          header: title,
+          data: {
+            document
+          }
         }
-      }
-    );
+      );
+    }
   }
 }

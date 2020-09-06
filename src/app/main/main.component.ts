@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
     { label: 'Accueil', routerLink: 'home', icon: 'fas fa-home' },
     { label: 'Le club', routerLink: 'club', icon: 'fas fa-volleyball-ball' },
     { label: 'Les gymnases', routerLink: 'gymnasium', icon: 'fas fa-map-marker-alt' },
-    { label: 'Nos équipes', routerLink: 'teams', icon: 'fas fa-users' },
+    { label: 'Nos équipes', routerLink: 'teams', icon: 'fas fa-users', items: [] },
     { label: 'Inscription', routerLink: 'subscription', icon: 'fas fa-file-signature' },
     { label: 'Contact', routerLink: 'contact', icon: 'fas fa-envelope' },
   ];

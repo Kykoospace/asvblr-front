@@ -391,6 +391,13 @@ export class TeamService {
     );
   }
 
+  public getDocumentUrl(idDocument: number): Observable<any> {
+    return this.http.get<any>(
+      'api/documents/' + idDocument + '/url',
+      { headers: this.authService.getAuthorizationHeader() }
+    );
+  }
+
 
   // ------------------------------------------------
   // Match routes :
