@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { TeamService } from '../../shared/services/api/team/team.service';
 import Subscription from '../../shared/models/entities/Subscription';
 import {Router} from '@angular/router';
@@ -26,7 +26,7 @@ export class SubscriptionsComponent implements OnInit {
     { column: 'Nom', field: 'lastName' },
     { column: 'Catégorie', field: 'idSubscriptionCategory' },
     { column: 'Numéro de tel', field: 'phoneNumber' },
-    { column: 'Date', field: 'creationDate' }
+    { column: 'Date de naissance', field: 'birthDate' }
   ];
 
   public subscriptionCategories: SubscriptionCategory[];
@@ -35,6 +35,7 @@ export class SubscriptionsComponent implements OnInit {
   ];
   public rowCountOptions = [15, 25, 50];
   public maxRowCount = this.rowCountOptions[0];
+
 
   constructor(
     private router: Router,
@@ -64,22 +65,7 @@ export class SubscriptionsComponent implements OnInit {
     this.router.navigate(['/management/subscriptions/', subscription.id]);
   }
 
-  public formatDate(date) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    if (day < 10) {
-      day = '0' + day;
-    }
-
-    return date.getFullYear() + '/' + month + '/' + day;
-  }
-
-  getCategoryName(idSubscriptionCategory): string {
+  public getCategoryName(idSubscriptionCategory): string {
     return this.subscriptionCategories
       .find(category => category.id === idSubscriptionCategory).name;
   }

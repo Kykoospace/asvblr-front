@@ -61,7 +61,7 @@ export class SubscriptionFormComponent implements OnInit {
     medicalCertificate: 'Certificat médical de moins de deux ans'
   };
 
-  public requestedEquipmentTooltip = 'Maillot obligatoire en compétition, short également obligatoire en régional et supérieur. Renseignez-vous auprès de votre entraîneur.';
+  // public requestedEquipmentTooltip = 'Maillot obligatoire en compétition, short également obligatoire en régional et supérieur. Renseignez-vous auprès de votre entraîneur.';
   public requestedJerseyNumberTooltip = 'Vous avez un numéro favori ? Nous ferons notre possible pour vous le procurer !';
 
   private confirmationMessage = {

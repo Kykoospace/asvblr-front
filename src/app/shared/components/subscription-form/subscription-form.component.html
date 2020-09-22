@@ -58,7 +58,7 @@
           [locale]="calendarLanguage"
           [monthNavigator]="true"
           [yearNavigator]="true"
-          yearRange="1900:{{ maxBirthDateValue.getFullYear() }}"
+          yearRange="{{ minBirthDateValue.getFullYear() }}:{{ maxBirthDateValue.getFullYear() }}"
           [minDate]="minBirthDateValue"
           [maxDate]="maxBirthDateValue"
           (onSelect)="isMinor($event)"
