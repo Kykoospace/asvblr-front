@@ -40,6 +40,12 @@
       <span class="p-col-5">{{ subscription.birthDate | date: 'shortDate' }}</span>
       <span class="p-col-4"></span>
 
+      <span class="p-col-3 global-legend">Adresse email</span>
+      <span class="p-col-5">
+        <a [href]="'mailto:' + subscription.email">{{ subscription.email }}</a>
+      </span>
+      <span class="p-col-4"></span>
+
       <span class="p-col-3 global-legend">Nationalité</span>
       <span class="p-col-5">{{ subscription.nationality }}</span>
       <span class="p-col-4"></span>
